@@ -3,6 +3,7 @@ const String _svgPath = 'assets/svgs';
 
 class ImageAssets {
   static const String splash = '$_imagePath/splash.png';
+  static const String logo = '$_imagePath/logo.png';
 }
 
 class SvgAssets {
