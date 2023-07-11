@@ -1,6 +1,14 @@
 const String _imagePath = 'assets/images';
 const String _svgPath = 'assets/svgs';
 
-class ImageAssets {}
+class ImageAssets {
+  static const String splash = '$_imagePath/splash.png';
+}
 
-class SvgAssets {}
+class SvgAssets {
+  static const String fullLogo = '$_svgPath/fullLogo.svg';
+  static const String logoMark = '$_svgPath/logoMark.svg';
+  static const String onBoardingOne = '$_svgPath/onBoardingOne.svg';
+  static const String onBoardingTwo = '$_svgPath/onBoardingTwo.svg';
+  static const String onBoardingThree = '$_svgPath/onBoardingThree.svg';
+}
