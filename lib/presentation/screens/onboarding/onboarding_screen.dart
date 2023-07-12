@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/assets_manager.dart';
+import 'package:naqaa/app/language_manager.dart';
 import 'package:naqaa/presentation/app_router.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
@@ -30,33 +31,46 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String currentLanguage = getChangeLangText(context).toUpperCase();
     return SafeArea(
-      child: IntroSlider(
-        backgroundColorAllTabs: AppColors.white,
-        listCustomTabs: const [
-          OnboardingPage(
-            title: AppStrings.onboardingOneTitle,
-            subtitle: AppStrings.onboardingOneSubtitle,
-            svgPath: SvgAssets.onBoardingOne,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: AppColors.white,
+          elevation: 0,
+          actions: [
+            TextButton(
+              onPressed: () => switchLanguage(context),
+              child: Text(currentLanguage),
+            ),
+          ],
+        ),
+        body: IntroSlider(
+          backgroundColorAllTabs: AppColors.white,
+          listCustomTabs: const [
+            OnboardingPage(
+              title: AppStrings.onboardingOneTitle,
+              subtitle: AppStrings.onboardingOneSubtitle,
+              svgPath: SvgAssets.onBoardingOne,
+            ),
+            OnboardingPage(
+              title: AppStrings.onboardingTwoTitle,
+              subtitle: AppStrings.onboardingTwoSubtitle,
+              svgPath: SvgAssets.onBoardingTwo,
+            ),
+            OnboardingPage(
+              title: AppStrings.onboardingThreeTitle,
+              subtitle: AppStrings.onboardingThreeSubtitle,
+              svgPath: SvgAssets.onBoardingThree,
+            ),
+          ],
+          onDonePress: () => _onIntroEnd(context),
+          renderDoneBtn: Text(AppStrings.done.tr().toUpperCase()),
+          renderSkipBtn: Text(AppStrings.skip.tr().toUpperCase()),
+          renderNextBtn: Text(AppStrings.next.tr().toUpperCase()),
+          indicatorConfig: IndicatorConfig(
+            activeIndicatorWidget: _indicator(AppColors.primary),
+            indicatorWidget: _indicator(AppColors.almostWhiteBlue),
           ),
-          OnboardingPage(
-            title: AppStrings.onboardingTwoTitle,
-            subtitle: AppStrings.onboardingTwoSubtitle,
-            svgPath: SvgAssets.onBoardingTwo,
-          ),
-          OnboardingPage(
-            title: AppStrings.onboardingThreeTitle,
-            subtitle: AppStrings.onboardingThreeSubtitle,
-            svgPath: SvgAssets.onBoardingThree,
-          ),
-        ],
-        onDonePress: () => _onIntroEnd(context),
-        renderDoneBtn: Text(AppStrings.done.tr().toUpperCase()),
-        renderSkipBtn: Text(AppStrings.skip.tr().toUpperCase()),
-        renderNextBtn: Text(AppStrings.next.tr().toUpperCase()),
-        indicatorConfig: IndicatorConfig(
-          activeIndicatorWidget: _indicator(AppColors.primary),
-          indicatorWidget: _indicator(AppColors.almostWhiteBlue),
         ),
       ),
     );

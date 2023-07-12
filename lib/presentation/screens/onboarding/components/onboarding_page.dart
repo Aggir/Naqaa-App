@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:naqaa/app/language_manager.dart';
 import '../../../theme/app_theme.dart';
 import '../../../theme/text_style_manager.dart';
 
@@ -19,20 +18,10 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String currentLanguage = getChangeLangText(context).toUpperCase();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppValues.large - 7),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              TextButton(
-                onPressed: () => switchLanguage(context),
-                child: Text(currentLanguage),
-              ),
-            ],
-          ),
           _onboardingDivider(),
           _onboardingDivider(),
           SvgPicture.asset(
