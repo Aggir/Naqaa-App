@@ -9,9 +9,10 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(
-      supportedLocales: const [arabicLocale, englishLocale],
+      startLocale: defaultLocale,
+      supportedLocales: appLocales,
       path: assetsPathLocalization,
-      fallbackLocale: englishLocale,
+      fallbackLocale: defaultLocale,
       saveLocale: true,
       child: MyApp(),
     ),

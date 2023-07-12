@@ -1,3 +1,13 @@
 {
-    
+    "no_route_found": "No route found",
+    "get_started": "Get started",
+    "onboarding_one_title": "Welcome to Naqaa!",
+    "onboarding_one_subtitle": "Ensure Safe Water for You and Your Loved Ones.",
+    "onboarding_two_title": "Water Quality Insights",
+    "onboarding_two_subtitle": "Stay Informed about Your Water Supply in real-time with Naqqa.",
+    "onboarding_three_title": "Test 1",
+    "onboarding_three_subtitle": "Test 2",
+    "next": "Next",
+    "skip": "Skip",
+    "done": "Done"
 }

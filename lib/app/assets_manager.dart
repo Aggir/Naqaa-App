@@ -9,7 +9,7 @@ class ImageAssets {
 class SvgAssets {
   static const String fullLogo = '$_svgPath/fullLogo.svg';
   static const String logoMark = '$_svgPath/logoMark.svg';
-  static const String onBoardingOne = '$_svgPath/onBoardingOne.svg';
-  static const String onBoardingTwo = '$_svgPath/onBoardingTwo.svg';
-  static const String onBoardingThree = '$_svgPath/onBoardingThree.svg';
+  static const String onBoardingOne = '$_svgPath/onboardingOne.svg';
+  static const String onBoardingTwo = '$_svgPath/onboardingTwo.svg';
+  static const String onBoardingThree = '$_svgPath/onboardingThree.svg';
 }

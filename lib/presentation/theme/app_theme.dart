@@ -9,10 +9,12 @@ ThemeData appThemeData() => ThemeData(
     );
 
 class AppValues {
-  // Decoration values:
+  // Padding and Margin
   static const double small = 8.0;
   static const double medium = 16.0;
   static const double large = 32.0;
+  // Radius
+  static const double primaryButtonRadius = 8;
 }
 
 class AppSizes {

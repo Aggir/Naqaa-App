@@ -1,3 +1,13 @@
 {
-    
-}
+    "no_route_found": "لم يتم العثور على المسار",
+    "get_started": "ابدأ",
+    "onboarding_one_title": "مرحبًا بك في نقاء!",
+    "onboarding_one_subtitle": "تأكد من مياه آمنة لك ولأحبائك.",
+    "onboarding_two_title": "تحليل جودة المياه",
+    "onboarding_two_subtitle": "ابق على اطلاع حول إمدادات المياه الخاصة بك في الوقت الحقيقي مع نقاء.",
+    "onboarding_three_title": "تجربة 1",
+    "onboarding_three_subtitle": "تجربة 2",
+    "next": "التالي",
+    "skip": "تخطى",
+    "done": "تم"
+    }

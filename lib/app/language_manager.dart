@@ -1,24 +1,54 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:restart_app/restart_app.dart';
 
 enum LanguageType {
   arabic,
   english,
 }
 
-const Locale arabicLocale = Locale('ar', 'SA');
-const Locale englishLocale = Locale('en', 'US');
+const Locale _arabicLocale = Locale('ar');
+const Locale _englishLocale = Locale('en');
 
-const List<Locale> locales = [arabicLocale, englishLocale];
-
+const List<Locale> appLocales = [_arabicLocale, _englishLocale];
+Locale get defaultLocale => _englishLocale;
 const String assetsPathLocalization = 'assets/localization';
 
 extension LanguageTypeExtension on LanguageType {
   Locale getLocale() {
     switch (this) {
       case LanguageType.arabic:
-        return arabicLocale;
+        return _arabicLocale;
       case LanguageType.english:
-        return englishLocale;
+        return _englishLocale;
     }
+  }
+}
+
+// Works only with two languages [AR, EN]
+String getChangeLangText(BuildContext context) {
+  Locale currentLocale = Localizations.localeOf(context);
+  switch (currentLocale) {
+    case _arabicLocale:
+      return _englishLocale.languageCode;
+    case _englishLocale:
+      return _arabicLocale.languageCode;
+    default:
+      return _englishLocale.languageCode;
+  }
+}
+
+// Works only with two languages [AR, EN]
+void switchLanguage(BuildContext context) {
+  Locale currentLocale = Localizations.localeOf(context);
+  switch (currentLocale) {
+    case _arabicLocale:
+      context.setLocale(_englishLocale).then((value) => Restart.restartApp());
+      break;
+    case _englishLocale:
+      context.setLocale(_arabicLocale).then((value) => Restart.restartApp());
+      break;
+    default:
+      context.setLocale(_englishLocale).then((value) => Restart.restartApp());
   }
 }
