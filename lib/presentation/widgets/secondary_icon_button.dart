@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
+import 'package:naqaa/presentation/theme/text_style_manager.dart';
 
-class PrimaryButton extends StatelessWidget {
-  const PrimaryButton({
+class SecondaryIconButton extends StatelessWidget {
+  const SecondaryIconButton({
     required this.onPressed,
-    required this.child,
+    required this.label,
+    required this.icon,
     super.key,
   });
 
   final void Function() onPressed;
-  final Widget child;
+  final Widget label;
+  final Widget icon;
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
+    return OutlinedButton.icon(
+      style: OutlinedButton.styleFrom(
+        textStyle: secondaryButtonTextStyle(),
+        side: BorderSide(color: AppColors.primary),
         minimumSize: AppValues.buttonMinSize,
         padding: const EdgeInsets.all(AppValues.small + (AppValues.small / 2)),
         shape: RoundedRectangleBorder(
@@ -22,7 +28,8 @@ class PrimaryButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: child,
+      label: label,
+      icon: icon,
     );
   }
 }

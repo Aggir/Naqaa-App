@@ -12,4 +12,7 @@ class SvgAssets {
   static const String onBoardingOne = '$_svgPath/onboardingOne.svg';
   static const String onBoardingTwo = '$_svgPath/onboardingTwo.svg';
   static const String onBoardingThree = '$_svgPath/onboardingThree.svg';
+  static const String google = '$_svgPath/google.svg';
+  static const String visible = '$_svgPath/visible.svg';
+  static const String invisible = '$_svgPath/invisible.svg';
 }

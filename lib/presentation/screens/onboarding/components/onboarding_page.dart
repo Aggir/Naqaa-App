@@ -19,7 +19,7 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppValues.large - 7),
+      padding: const EdgeInsets.symmetric(horizontal: AppValues.large - 5),
       child: Column(
         children: [
           _onboardingDivider(),
@@ -38,7 +38,7 @@ class OnboardingPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: AppValues.medium),
             child: Text(
               subtitle,
-              style: onboardingSubtitleStyle(),
+              style: descriptionTextStyle(),
               textAlign: TextAlign.center,
             ).tr(),
           ),

@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:naqaa/presentation/theme/text_style_manager.dart';
 
 import 'app_colors.dart';
 
 ThemeData appThemeData() => ThemeData(
+      scaffoldBackgroundColor: AppColors.white,
       colorScheme: ThemeData()
           .colorScheme
           .copyWith(primary: AppColors.primary, secondary: AppColors.secondary),
+      appBarTheme: AppBarTheme(
+          centerTitle: true,
+          elevation: 0,
+          color: AppColors.transparent,
+          titleTextStyle: appBarTitleTextStyle()),
     );
 
 class AppValues {
   // Padding and Margin
   static const double small = 8.0;
   static const double medium = 16.0;
-  static const double large = 32.0;
+  static const double large = 30.0;
   // Radius
   static const double primaryButtonRadius = 8;
+  static const double textFieldRadius = 6;
+  // Sizes
+  static const Size buttonMinSize = Size(25, 50);
 }
 
 class AppSizes {
@@ -27,6 +37,7 @@ class AppSizes {
   static const double s12 = 12;
   static const double s14 = 14;
   static const double s16 = 16;
+  static const double s18 = 18;
   static const double s24 = 24;
   static const double s25 = 25;
   static const double s26 = 25;

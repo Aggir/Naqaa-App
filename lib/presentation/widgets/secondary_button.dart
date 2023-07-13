@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 
-class PrimaryButton extends StatelessWidget {
-  const PrimaryButton({
+import '../theme/app_colors.dart';
+import '../theme/text_style_manager.dart';
+
+class SecondaryButton extends StatelessWidget {
+  const SecondaryButton({
     required this.onPressed,
     required this.child,
     super.key,
@@ -13,8 +16,10 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+        textStyle: secondaryButtonTextStyle(),
+        side: BorderSide(color: AppColors.primary),
         minimumSize: AppValues.buttonMinSize,
         padding: const EdgeInsets.all(AppValues.small + (AppValues.small / 2)),
         shape: RoundedRectangleBorder(
