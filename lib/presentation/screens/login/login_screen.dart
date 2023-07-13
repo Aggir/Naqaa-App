@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/assets_manager.dart';
 import 'package:naqaa/app/functions.dart';
+import 'package:naqaa/presentation/app_router.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
 import 'package:naqaa/presentation/widgets/connect_with_google_button.dart';
@@ -90,7 +92,9 @@ class LoginScreen extends StatelessWidget {
                     style: bodySmallTextStyle(),
                   ),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        GoRouter.of(context).push(Routes.signUpRoute);
+                      },
                       child: Text(AppStrings.createOneHere.tr()))
                 ],
               )

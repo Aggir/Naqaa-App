@@ -11,7 +11,7 @@ class AppColors {
   static Color almostWhiteBlue = const Color(0xFFCDDEFF);
   static Color almostWhite = const Color(0xFFFBFBFB);
 
-  static Color blackText = Colors.black; // todo: change color
+  static Color blackText = const Color(0xFF010F07);
   static Color darkGrayText = darkGray;
   static Color whiteText = Colors.white; // todo: change color
   static Color hintText = lightGray; // todo: change color

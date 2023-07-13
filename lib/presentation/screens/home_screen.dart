@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:naqaa/presentation/app_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,7 +12,12 @@ class HomeScreen extends StatelessWidget {
         title: Text('Naqaa\''),
       ),
       body: Center(
-        child: Text('HOME SCREEN'),
+        child: TextButton(
+          onPressed: () {
+            context.go(Routes.loginRoute);
+          },
+          child: Text('Login Screen'),
+        ),
       ),
     );
   }

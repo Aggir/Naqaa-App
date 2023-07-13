@@ -28,6 +28,7 @@ class AppStrings {
   static const alreadyHaveAnAccount = "already_have_an_account";
   static const fullName = "full_name";
   static const reenterPassword = "reenter_password";
+  static const signUp = "sign_up";
   static const bySigningUpYouAgreeToOur = "by_signing_up_you_agree_to_our";
   static const termsAndConditions = "terms_and_conditions";
   static const privacyAndPolicy = "privacy_and_policy";
