@@ -31,14 +31,11 @@ flutter_native_splash:
   android: true
   ios: true
   web: false
-  android_gravity: fill
-  ios_content_mode: scaleAspectFill
   color_dark: "#ffffff"
   image_dark: assets/images/splash.png
-  fullscreen: true
   android_12:
     color: "#ffffff"
-    image: assets/images/splash.png
+    image: assets/images/splash-android12.png
 # Todo: remove
 flutter_launcher_icons:
   android: "launcher_icon"
