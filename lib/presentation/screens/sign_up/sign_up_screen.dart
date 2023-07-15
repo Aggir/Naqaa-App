@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:naqaa/presentation/widgets/custom_back_button.dart';
 import 'package:naqaa/presentation/widgets/pressable_text.dart';
 
@@ -16,11 +17,17 @@ import '../../widgets/primary_button.dart';
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
+  void _signUpHandler() {}
+
+  void _termsOfUseHandler() {}
+
+  void _privacyAndPolicyHandler() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: CustomBackButton(),
+        leading: const CustomBackButton(),
         title: Text(capitalizeAllWord(AppStrings.getStarted.tr())),
       ),
       body: SingleChildScrollView(
@@ -42,7 +49,7 @@ class SignUpScreen extends StatelessWidget {
               ),
               PressableText(
                 text: AppStrings.alreadyHaveAnAccount.tr(),
-                onTap: () {},
+                onTap: () => context.pop(),
                 fontWeight: FontWeight.w600,
               ),
               largeSpacing(),
@@ -78,7 +85,7 @@ class SignUpScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: PrimaryButton(
-                  onPressed: () {},
+                  onPressed: _signUpHandler,
                   child: Text(
                     AppStrings.signUp.tr().toUpperCase(),
                   ),
@@ -100,7 +107,7 @@ class SignUpScreen extends StatelessWidget {
                       children: [
                         PressableText(
                           text: AppStrings.termsOfUse.tr(),
-                          onTap: () {},
+                          onTap: _termsOfUseHandler,
                         ),
                         Text(
                           ' & ',
@@ -108,7 +115,7 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         PressableText(
                           text: AppStrings.privacyAndPolicy.tr(),
-                          onTap: () {},
+                          onTap: _privacyAndPolicyHandler,
                         ),
                         Text(
                           '.',

@@ -18,6 +18,16 @@ import '../../widgets/custom_text_form_field.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
+  void _forgotPasswordHandler(BuildContext context) {
+    context.push(Routes.forgotPasswordRoute);
+  }
+
+  void _signInHandler() {}
+
+  void _createAccountHandler(BuildContext context) {
+    context.push(Routes.signUpRoute);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,18 +79,21 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               smallSpacing(),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  AppStrings.forgotPasswordQuestion.tr(),
-                  style: bodySmallTextStyle(),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  PressableText(
+                    onTap: () => _forgotPasswordHandler(context),
+                    text: AppStrings.forgotPasswordQuestion.tr(),
+                    fontSize: FontSize.s12,
+                  ),
+                ],
               ),
-              smallSpacing(),
+              largeSpacing(),
               SizedBox(
                 width: double.infinity,
                 child: PrimaryButton(
-                  onPressed: () {},
+                  onPressed: _signInHandler,
                   child: Text(
                     AppStrings.signIn.tr().toUpperCase(),
                   ),
@@ -95,9 +108,7 @@ class LoginScreen extends StatelessWidget {
                     style: bodySmallGrayTextStyle(),
                   ),
                   PressableText(
-                    onTap: () {
-                      GoRouter.of(context).push(Routes.signUpRoute);
-                    },
+                    onTap: () => _createAccountHandler(context),
                     text: AppStrings.createOneHere.tr(),
                     fontSize: FontSize.s12,
                     fontWeight: FontWeight.bold,

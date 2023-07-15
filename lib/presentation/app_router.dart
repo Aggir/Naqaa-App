@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:naqaa/presentation/screens/forgot_password/forgot_password_screen.dart';
 import 'package:naqaa/presentation/screens/login/login_screen.dart';
 import 'package:naqaa/presentation/screens/home_screen.dart';
 import 'package:naqaa/presentation/screens/onboarding/onboarding_screen.dart';
@@ -10,6 +11,7 @@ class Routes {
   static const String homeRoute = "/";
   static const String loginRoute = "/login";
   static const String signUpRoute = "/sign-up";
+  static const String forgotPasswordRoute = "/reset-password";
 }
 
 class AppRouter {
@@ -38,6 +40,12 @@ class AppRouter {
         path: Routes.signUpRoute,
         builder: (BuildContext context, GoRouterState state) {
           return const SignUpScreen();
+        },
+      ),
+      GoRoute(
+        path: Routes.forgotPasswordRoute,
+        builder: (BuildContext context, GoRouterState state) {
+          return const ForgotPasswordScreen();
         },
       ),
     ],

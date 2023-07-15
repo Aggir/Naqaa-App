@@ -1,2 +1,2 @@
-Add back button in SignUp screen
-Edit "Get started" translation
+Add back button in SignUp screen [DONE]
+Edit "Get started" translation 
