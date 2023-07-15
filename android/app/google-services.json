@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "498611243368",
+    "project_id": "naqaa-2023",
+    "storage_bucket": "naqaa-2023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:498611243368:android:7de1a5b0f795ea39a46edd",
+        "android_client_info": {
+          "package_name": "com.example.naqaa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "498611243368-1s8tl222ao5kjsq8s8blqjlnuna4hn4c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXzDYfCViC9NbwoZL50ut-oGQTH3QGq4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "498611243368-1s8tl222ao5kjsq8s8blqjlnuna4hn4c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "498611243368-vuokjdb1816o9i3utmsf40m22kbo4pav.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.naqaa"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
