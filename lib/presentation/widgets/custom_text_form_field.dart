@@ -40,37 +40,47 @@ class CustomTextFormField extends StatefulWidget {
 }
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
+  bool _visible = false;
+
+  Widget _suffixIconContainer({required Widget child}) {
+    return Padding(
+      padding: const EdgeInsets.all(AppValues.small),
+      child: child,
+    );
+  }
+
   Widget _visibilityIconButton(String svgPath) {
-    return Container(
-      width: AppSizes.s30,
-      height: AppSizes.s30,
+    return Padding(
       padding: const EdgeInsets.all(AppValues.small / 2),
       child: Material(
         borderRadius: BorderRadius.circular(100),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: _toggleVisible,
-          child: SvgPicture.asset(
-            svgPath,
-            height: AppSizes.s18,
-            width: AppSizes.s18,
+          child: Padding(
+            padding: const EdgeInsets.all(AppValues.small / 2),
+            child: SvgPicture.asset(svgPath),
           ),
         ),
       ),
     );
   }
 
-  Widget get passwordSuffixIconButton => _visible
+  Widget get _passwordSuffixIconButton => _visible
       ? _visibilityIconButton(SvgAssets.invisible)
       : _visibilityIconButton(SvgAssets.visible);
-
-  bool _visible = false;
 
   void _toggleVisible() {
     setState(() {
       _visible = !_visible;
     });
   }
+
+  Widget? get _suffixIcon => widget.isPassword
+      ? _passwordSuffixIconButton
+      : widget.suffixIcon != null
+          ? _suffixIconContainer(child: widget.suffixIcon!)
+          : null;
 
   @override
   Widget build(BuildContext context) {
@@ -87,8 +97,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       fillColor: AppColors.almostWhite,
       filled: true,
       counterText: '',
-      suffixIcon:
-          widget.isPassword ? passwordSuffixIconButton : widget.suffixIcon,
+      suffixIcon: _suffixIcon,
       hintText: widget.hintText ?? '',
       hintStyle: textFieldHintStyle(),
     );

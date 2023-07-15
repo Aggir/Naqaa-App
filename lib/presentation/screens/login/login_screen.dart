@@ -7,8 +7,10 @@ import 'package:naqaa/app/assets_manager.dart';
 import 'package:naqaa/app/functions.dart';
 import 'package:naqaa/presentation/app_router.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
+import 'package:naqaa/presentation/theme/font_manager.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
 import 'package:naqaa/presentation/widgets/connect_with_google_button.dart';
+import 'package:naqaa/presentation/widgets/pressable_text.dart';
 import 'package:naqaa/presentation/widgets/primary_button.dart';
 
 import '../../widgets/custom_text_form_field.dart';
@@ -55,6 +57,7 @@ class LoginScreen extends StatelessWidget {
                     CustomTextFormField(
                       keyboardType: TextInputType.emailAddress,
                       hintText: AppStrings.emailAddress.tr(),
+                      suffixIcon: SvgPicture.asset(SvgAssets.envelope),
                     ),
                     mediumSpacing(),
                     CustomTextFormField(
@@ -83,19 +86,22 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              smallSpacing(),
+              mediumSpacing(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    AppStrings.doNotHaveAnAccount.tr(),
-                    style: bodySmallTextStyle(),
+                    '${AppStrings.doNotHaveAnAccount.tr()} ',
+                    style: bodySmallGrayTextStyle(),
                   ),
-                  TextButton(
-                      onPressed: () {
-                        GoRouter.of(context).push(Routes.signUpRoute);
-                      },
-                      child: Text(AppStrings.createOneHere.tr()))
+                  PressableText(
+                    onTap: () {
+                      GoRouter.of(context).push(Routes.signUpRoute);
+                    },
+                    text: AppStrings.createOneHere.tr(),
+                    fontSize: FontSize.s12,
+                    fontWeight: FontWeight.bold,
+                  )
                 ],
               )
             ],

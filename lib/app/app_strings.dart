@@ -30,7 +30,7 @@ class AppStrings {
   static const reenterPassword = "reenter_password";
   static const signUp = "sign_up";
   static const bySigningUpYouAgreeToOur = "by_signing_up_you_agree_to_our";
-  static const termsAndConditions = "terms_and_conditions";
+  static const termsOfUse = "terms_of_use";
   static const privacyAndPolicy = "privacy_and_policy";
 
   static const forgotPassword = "forgot_password";

@@ -1,0 +1,30 @@
+import 'package:flutter/material.dart';
+
+import '../theme/text_style_manager.dart';
+
+class PressableText extends StatelessWidget {
+  const PressableText({
+    required this.text,
+    required this.onTap,
+    this.fontSize,
+    this.fontWeight,
+    this.textColor,
+    super.key,
+  });
+  final String text;
+  final void Function() onTap;
+  final double? fontSize;
+  final FontWeight? fontWeight;
+  final Color? textColor;
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Text(
+        text,
+        style: pressableTextStyle().copyWith(
+            fontSize: fontSize, fontWeight: fontWeight, color: textColor),
+      ),
+    );
+  }
+}

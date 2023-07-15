@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:naqaa/presentation/widgets/pressable_text.dart';
 
 import '../../../app/app_strings.dart';
+import '../../../app/assets_manager.dart';
 import '../../../app/functions.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/text_style_manager.dart';
@@ -35,12 +38,10 @@ class SignUpScreen extends StatelessWidget {
                 AppStrings.signUpScreenDescription.tr(),
                 style: bodyMediumTextStyle(),
               ),
-              InkWell(
+              PressableText(
+                text: AppStrings.alreadyHaveAnAccount.tr(),
                 onTap: () {},
-                child: Text(
-                  AppStrings.alreadyHaveAnAccount.tr(),
-                  style: pressableTextStyle(),
-                ),
+                fontWeight: FontWeight.w600,
               ),
               largeSpacing(),
               Form(
@@ -54,6 +55,7 @@ class SignUpScreen extends StatelessWidget {
                     CustomTextFormField(
                       keyboardType: TextInputType.emailAddress,
                       hintText: AppStrings.emailAddress.tr(),
+                      suffixIcon: SvgPicture.asset(SvgAssets.envelope),
                     ),
                     mediumSpacing(),
                     CustomTextFormField(
@@ -94,20 +96,21 @@ class SignUpScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        InkWell(
+                        PressableText(
+                          text: AppStrings.termsOfUse.tr(),
                           onTap: () {},
-                          child: Text(
-                            AppStrings.termsAndConditions.tr(),
-                            style: secondaryButtonTextStyle(),
-                          ),
                         ),
-                        Text(' & '),
-                        InkWell(
+                        Text(
+                          ' & ',
+                          style: bodyMediumTextStyle(),
+                        ),
+                        PressableText(
+                          text: AppStrings.privacyAndPolicy.tr(),
                           onTap: () {},
-                          child: Text(
-                            AppStrings.privacyAndPolicy.tr(),
-                            style: secondaryButtonTextStyle(),
-                          ),
+                        ),
+                        Text(
+                          '.',
+                          style: bodyMediumTextStyle(),
                         ),
                       ],
                     )

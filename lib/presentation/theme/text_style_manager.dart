@@ -33,6 +33,10 @@ TextStyle smallWithOpacityTextStyle() {
 }
 
 TextStyle bodySmallTextStyle() {
+  return getRegularStyle(fontSize: FontSize.s12, color: AppColors.blackText);
+}
+
+TextStyle bodySmallGrayTextStyle() {
   return getRegularStyle(fontSize: FontSize.s12, color: AppColors.lightGray);
 }
 
@@ -45,5 +49,5 @@ TextStyle bodyMediumTextStyle() {
 }
 
 TextStyle pressableTextStyle() {
-  return getSemiBoldStyle(fontSize: FontSize.s14, color: AppColors.primary);
+  return getRegularStyle(fontSize: FontSize.s14, color: AppColors.primary);
 }

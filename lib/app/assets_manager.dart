@@ -15,4 +15,5 @@ class SvgAssets {
   static const String google = '$_svgPath/google.svg';
   static const String visible = '$_svgPath/visible.svg';
   static const String invisible = '$_svgPath/invisible.svg';
+  static const String envelope = '$_svgPath/envelope.svg';
 }
