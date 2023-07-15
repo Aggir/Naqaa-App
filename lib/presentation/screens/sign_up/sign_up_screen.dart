@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:naqaa/presentation/widgets/custom_back_button.dart';
 import 'package:naqaa/presentation/widgets/pressable_text.dart';
 
 import '../../../app/app_strings.dart';
@@ -19,6 +20,7 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: CustomBackButton(),
         title: Text(capitalizeAllWord(AppStrings.getStarted.tr())),
       ),
       body: SingleChildScrollView(

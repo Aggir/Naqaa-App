@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:naqaa/app/assets_manager.dart';
+import 'package:naqaa/presentation/theme/app_theme.dart';
+
+class CustomBackButton extends StatelessWidget {
+  const CustomBackButton({this.onTap, super.key});
+  final void Function()? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: SizedBox(
+        height: AppSizes.s48,
+        width: AppSizes.s48,
+        child: InkWell(
+            borderRadius: BorderRadius.circular(100),
+            onTap: onTap ??
+                () {
+                  GoRouter.of(context).pop();
+                },
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: SvgPicture.asset(
+                Directionality.of(context) == TextDirection.rtl
+                    ? SvgAssets.chevronRight
+                    : SvgAssets.chevronLeft,
+                height: AppSizes.s24,
+                width: AppSizes.s24,
+              ),
+            )),
+      ),
+    );
+  }
+}

@@ -16,4 +16,6 @@ class SvgAssets {
   static const String visible = '$_svgPath/visible.svg';
   static const String invisible = '$_svgPath/invisible.svg';
   static const String envelope = '$_svgPath/envelope.svg';
+  static const String chevronLeft = '$_svgPath/chevron-left.svg';
+  static const String chevronRight = '$_svgPath/chevron-right.svg';
 }
