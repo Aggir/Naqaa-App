@@ -53,6 +53,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return Padding(
       padding: const EdgeInsets.all(AppValues.small / 2),
       child: Material(
+        color: AppColors.transparent,
         borderRadius: BorderRadius.circular(100),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
@@ -85,16 +86,17 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     final inputDecoration = InputDecoration(
+      errorMaxLines: 3,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(AppValues.textFieldRadius),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(AppValues.textFieldRadius),
-        borderSide: BorderSide(color: AppColors.almostWhiteBlue),
+        borderSide: BorderSide(color: AppColors.pastelBlue),
       ),
       contentPadding: const EdgeInsets.symmetric(
           vertical: AppValues.medium, horizontal: AppValues.medium),
-      fillColor: AppColors.almostWhite,
+      fillColor: AppColors.snowWhite,
       filled: true,
       counterText: '',
       suffixIcon: _suffixIcon,

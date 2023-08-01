@@ -1,28 +1,36 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/assets_manager.dart';
+import 'package:naqaa/app/enum.dart';
 import 'package:naqaa/app/functions.dart';
+import 'package:naqaa/app/validators.dart';
 import 'package:naqaa/presentation/app_router.dart';
+import 'package:naqaa/presentation/blocs/sign_in/sign_in_cubit.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:naqaa/presentation/theme/font_manager.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
 import 'package:naqaa/presentation/widgets/connect_with_google_button.dart';
+import 'package:naqaa/presentation/widgets/custom_spacers.dart';
+import 'package:naqaa/presentation/widgets/custom_toast.dart';
 import 'package:naqaa/presentation/widgets/pressable_text.dart';
 import 'package:naqaa/presentation/widgets/primary_button.dart';
 
 import '../../widgets/custom_text_form_field.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignInScreen extends StatelessWidget {
+  const SignInScreen({super.key});
 
   void _forgotPasswordHandler(BuildContext context) {
-    context.push(Routes.forgotPasswordRoute);
+    context.go(Routes.forgotPasswordRoute);
   }
 
-  void _signInHandler() {}
+  void _signInHandler(BuildContext context) {
+    BlocProvider.of<SignInCubit>(context).signIn();
+  }
 
   void _createAccountHandler(BuildContext context) {
     context.push(Routes.signUpRoute);
@@ -30,6 +38,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = BlocProvider.of<SignInCubit>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(capitalizeAllWord(AppStrings.getStarted.tr())),
@@ -41,44 +51,49 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              extraLargeSpacing(),
+              CustomSpacers.extraLarge(),
               SvgPicture.asset(
                 SvgAssets.fullLogo,
-                height: 173,
-                width: 115,
+                height: AppSizes.s173,
+                width: AppSizes.s115,
               ),
-              largeSpacing(),
+              CustomSpacers.large(),
               Text(
                 AppStrings.loginScreenDescription.tr(),
                 style: descriptionTextStyle(),
                 textAlign: TextAlign.center,
               ),
-              largeSpacing(),
+              CustomSpacers.large(),
               const ConnectWithGoogleButton(),
-              mediumSpacing(),
+              CustomSpacers.medium(),
               Text(
                 AppStrings.or.tr(),
                 style: descriptionTextStyle(),
               ),
-              mediumSpacing(),
+              CustomSpacers.medium(),
               Form(
+                key: cubit.formKey,
                 child: Column(
                   children: [
                     CustomTextFormField(
+                      controller: cubit.emailController,
                       keyboardType: TextInputType.emailAddress,
                       hintText: AppStrings.emailAddress.tr(),
                       suffixIcon: SvgPicture.asset(SvgAssets.envelope),
+                      validator: emailValidator,
                     ),
-                    mediumSpacing(),
+                    CustomSpacers.medium(),
                     CustomTextFormField(
+                      controller: cubit.passwordController,
                       keyboardType: TextInputType.visiblePassword,
                       hintText: AppStrings.password.tr(),
                       isPassword: true,
+                      validator: passwordValidator,
                     ),
                   ],
                 ),
               ),
-              smallSpacing(),
+              CustomSpacers.small(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -89,17 +104,22 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              largeSpacing(),
-              SizedBox(
-                width: double.infinity,
-                child: PrimaryButton(
-                  onPressed: _signInHandler,
-                  child: Text(
-                    AppStrings.signIn.tr().toUpperCase(),
-                  ),
-                ),
+              CustomSpacers.large(),
+              BlocConsumer<SignInCubit, SignInState>(
+                listener: (context, state) {
+                  if (state.signInStatus.isFailure) {
+                    CustomToast.error(context, state.errorMessage!);
+                  }
+                },
+                builder: (context, state) {
+                  return PrimaryButton.fullWidth(
+                    onPressed: () => _signInHandler(context),
+                    isLoading: state.signInStatus.isLoading,
+                    child: Text(AppStrings.signIn.tr().toUpperCase()),
+                  );
+                },
               ),
-              mediumSpacing(),
+              CustomSpacers.medium(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -112,41 +132,13 @@ class LoginScreen extends StatelessWidget {
                     text: AppStrings.createOneHere.tr(),
                     fontSize: FontSize.s12,
                     fontWeight: FontWeight.bold,
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  Widget extraLargeSpacing() {
-    return const SizedBox(
-      height: AppSizes.s40,
-      width: AppSizes.s40,
-    );
-  }
-
-  Widget largeSpacing() {
-    return const SizedBox(
-      height: AppValues.large,
-      width: AppValues.large,
-    );
-  }
-
-  Widget mediumSpacing() {
-    return const SizedBox(
-      height: AppValues.medium,
-      width: AppValues.medium,
-    );
-  }
-
-  Widget smallSpacing() {
-    return const SizedBox(
-      height: AppValues.small,
-      width: AppValues.small,
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:naqaa/presentation/app_router.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
@@ -16,8 +17,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  _setFirebaseAuthLanguage(BuildContext context) async {
+    await FirebaseAuth.instance.setLanguageCode(context.locale.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
+    _setFirebaseAuthLanguage(context);
     return MaterialApp.router(
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,

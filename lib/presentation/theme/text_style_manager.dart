@@ -37,7 +37,7 @@ TextStyle bodySmallTextStyle() {
 }
 
 TextStyle bodySmallGrayTextStyle() {
-  return getRegularStyle(fontSize: FontSize.s12, color: AppColors.lightGray);
+  return getRegularStyle(fontSize: FontSize.s12, color: AppColors.mediumGray);
 }
 
 TextStyle headlineTextStyle() {
@@ -45,9 +45,19 @@ TextStyle headlineTextStyle() {
 }
 
 TextStyle bodyMediumTextStyle() {
-  return getRegularStyle(fontSize: FontSize.s14, color: AppColors.lightGray);
+  return getRegularStyle(fontSize: FontSize.s14, color: AppColors.mediumGray);
 }
 
 TextStyle pressableTextStyle() {
   return getRegularStyle(fontSize: FontSize.s14, color: AppColors.primary);
+}
+
+// Refactor fonts
+
+TextStyle semiSmallGrayStyle() {
+  return getSemiBoldStyle(fontSize: FontSize.s14, color: AppColors.mediumGray);
+}
+
+TextStyle semiSmallPrimaryStyle() {
+  return getSemiBoldStyle(fontSize: FontSize.s14, color: AppColors.mediumGray);
 }

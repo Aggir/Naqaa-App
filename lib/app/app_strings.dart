@@ -1,5 +1,6 @@
 class AppStrings {
   static const noRouteFound = "no_route_found";
+  static const defaultErrorMessage = "default_error_message";
 
   static const onboardingOneTitle = "onboarding_one_title";
   static const onboardingOneSubtitle = "onboarding_one_subtitle";
@@ -11,6 +12,17 @@ class AppStrings {
   static const skip = "skip";
   static const done = "done";
 
+  static const thisFieldIsRequired = "this_field_is_required";
+  static const invalidEmail = "invalid_email";
+  static const shortPassword = "short_password";
+  static const longPassword = "long_password";
+  static const weakPassword = "weak_password";
+  static const emailAlreadyInUse = "email_already_in_use";
+  static const noUserFoundForThatEmail = "no_user_found_for_that_email";
+  static const invalidCredential = "invalid_credential";
+  static const tooManyRequests = "too_many_requests";
+  static const confirmPasswordValidation = "confirm_password_validation";
+
   static const getStarted = "get_started";
   static const loginScreenDescription = "login_screen_description";
   static const connectWithGoogle = "connect_with_google";
@@ -19,7 +31,6 @@ class AppStrings {
   static const password = "password";
   static const forgotPasswordQuestion = "forgot_password_question";
   static const signIn = "sign_in";
-  static const thisFieldIsRequired = "this_field_is_required";
   static const doNotHaveAnAccount = "do_not_have_an_account";
   static const createOneHere = "create_one_here";
 
@@ -37,13 +48,12 @@ class AppStrings {
   static const forgotPasswordPageDescription =
       "forgot_password_page_description";
   static const sendResetInstructions = "send_reset_instructions";
-
-  static const verifyYourEmail = 'verify_your_email';
-  static const verifyYourEmailPageDescription =
-      'verify_your_email_page_description';
+  static const sendResetInstructionsSuccessMessage =
+      "send_reset_instructions_success_message";
+  static const weHaveSentTheInstructionsEmailTo =
+      "we_have_sent_the_instructions_email_to";
+  static const didNotReceiveInstructions = 'did_not_receive_instructions';
   static const havingAProblem = 'having_a_problem';
-  static const confirm = 'confirm';
-  static const didNotReceiveCode = 'did_not_receive_code';
   static const sendAgain = 'send_again';
 
   static const resetPassword = 'reset_password';

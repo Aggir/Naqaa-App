@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: TextButton(
           onPressed: () {
-            context.go(Routes.loginRoute);
+            context.go(Routes.signInRoute);
           },
           child: Text('Login Screen'),
         ),

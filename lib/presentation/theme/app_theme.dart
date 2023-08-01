@@ -4,10 +4,9 @@ import 'package:naqaa/presentation/theme/text_style_manager.dart';
 import 'app_colors.dart';
 
 ThemeData appThemeData() => ThemeData(
-      scaffoldBackgroundColor: AppColors.white,
-      colorScheme: ThemeData()
-          .colorScheme
-          .copyWith(primary: AppColors.primary, secondary: AppColors.secondary),
+      scaffoldBackgroundColor: AppColors.cloudWhite,
+      colorScheme: ThemeData().colorScheme.copyWith(
+          primary: AppColors.primary, secondary: AppColors.cloudWhite),
       appBarTheme: AppBarTheme(
           centerTitle: true,
           elevation: 0,
@@ -17,10 +16,15 @@ ThemeData appThemeData() => ThemeData(
 
 class AppValues {
   // Padding and Margin
+  static const double extraSmall = 4.0;
   static const double small = 8.0;
+  static const double mediumSmall = 12.0;
   static const double medium = 16.0;
-  static const double large = 30.0;
+  static const double mediumLarge = 24.0;
+  static const double large = 32.0;
+  static const double extraLarge = 48.0;
   // Radius
+  static const double toastRadius = 10;
   static const double primaryButtonRadius = 8;
   static const double textFieldRadius = 6;
   // Sizes
@@ -52,9 +56,11 @@ class AppSizes {
   static const double s80 = 80;
   static const double s90 = 90;
   static const double s100 = 100;
+  static const double s115 = 115;
   static const double s120 = 120;
   static const double s130 = 130;
   static const double s150 = 150;
+  static const double s173 = 173;
   static const double s180 = 180;
   static const double s190 = 190;
   static const double s200 = 200;

@@ -15,7 +15,7 @@ class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
 
   void _onIntroEnd(context) {
-    GoRouter.of(context).go(Routes.loginRoute);
+    GoRouter.of(context).go(Routes.signInRoute);
   }
 
   Widget _indicator(Color color) {
@@ -35,7 +35,7 @@ class OnboardingScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: AppColors.white,
+          backgroundColor: AppColors.cloudWhite,
           elevation: 0,
           actions: [
             TextButton(
@@ -45,7 +45,7 @@ class OnboardingScreen extends StatelessWidget {
           ],
         ),
         body: IntroSlider(
-          backgroundColorAllTabs: AppColors.white,
+          backgroundColorAllTabs: AppColors.cloudWhite,
           listCustomTabs: const [
             OnboardingPage(
               title: AppStrings.onboardingOneTitle,
@@ -69,7 +69,7 @@ class OnboardingScreen extends StatelessWidget {
           renderNextBtn: Text(AppStrings.next.tr().toUpperCase()),
           indicatorConfig: IndicatorConfig(
             activeIndicatorWidget: _indicator(AppColors.primary),
-            indicatorWidget: _indicator(AppColors.almostWhiteBlue),
+            indicatorWidget: _indicator(AppColors.pastelBlue),
           ),
         ),
       ),
