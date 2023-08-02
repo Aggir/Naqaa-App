@@ -23,15 +23,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -55,6 +49,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '498611243368',
     projectId: 'naqaa-2023',
     authDomain: 'naqaa-2023.firebaseapp.com',
+    databaseURL: 'https://naqaa-2023-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'naqaa-2023.appspot.com',
     measurementId: 'G-JDEV9KH9ZH',
   );
@@ -64,6 +59,29 @@ class DefaultFirebaseOptions {
     appId: '1:498611243368:android:7de1a5b0f795ea39a46edd',
     messagingSenderId: '498611243368',
     projectId: 'naqaa-2023',
+    databaseURL: 'https://naqaa-2023-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'naqaa-2023.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyBAoyuHPTSedjvXQGca89DarMxLs86P3Ck',
+    appId: '1:498611243368:ios:ec3c8d828b0f3ddaa46edd',
+    messagingSenderId: '498611243368',
+    projectId: 'naqaa-2023',
+    databaseURL: 'https://naqaa-2023-default-rtdb.europe-west1.firebasedatabase.app',
+    storageBucket: 'naqaa-2023.appspot.com',
+    iosClientId: '498611243368-vuokjdb1816o9i3utmsf40m22kbo4pav.apps.googleusercontent.com',
+    iosBundleId: 'com.example.naqaa',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyBAoyuHPTSedjvXQGca89DarMxLs86P3Ck',
+    appId: '1:498611243368:ios:16f6a48fc31272dba46edd',
+    messagingSenderId: '498611243368',
+    projectId: 'naqaa-2023',
+    databaseURL: 'https://naqaa-2023-default-rtdb.europe-west1.firebasedatabase.app',
+    storageBucket: 'naqaa-2023.appspot.com',
+    iosClientId: '498611243368-50iqtiv6fchcl26hu8d2k6j3sjr4t7ke.apps.googleusercontent.com',
+    iosBundleId: 'com.example.naqaa.RunnerTests',
   );
 }

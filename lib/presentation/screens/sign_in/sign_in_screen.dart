@@ -25,14 +25,17 @@ class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
 
   void _forgotPasswordHandler(BuildContext context) {
+    FocusScope.of(context).unfocus();
     context.go(AppScreen.forgotPassword.toPath);
   }
 
   void _signInHandler(BuildContext context) {
+    FocusScope.of(context).unfocus();
     BlocProvider.of<SignInCubit>(context).signIn();
   }
 
   void _createAccountHandler(BuildContext context) {
+    FocusScope.of(context).unfocus();
     context.push(AppScreen.signUp.toPath);
   }
 
@@ -40,104 +43,114 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<SignInCubit>(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(capitalizeAllWord(AppStrings.getStarted.tr())),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: AppValues.large),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CustomSpacers.extraLarge(),
-              SvgPicture.asset(
-                SvgAssets.fullLogo,
-                height: AppSizes.s173,
-                width: AppSizes.s115,
-              ),
-              CustomSpacers.large(),
-              Text(
-                AppStrings.loginScreenDescription.tr(),
-                style: descriptionTextStyle(),
-                textAlign: TextAlign.center,
-              ),
-              CustomSpacers.large(),
-              const ConnectWithGoogleButton(),
-              CustomSpacers.medium(),
-              Text(
-                AppStrings.or.tr(),
-                style: descriptionTextStyle(),
-              ),
-              CustomSpacers.medium(),
-              Form(
-                key: cubit.formKey,
-                child: Column(
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(capitalizeAllWord(AppStrings.getStarted.tr())),
+        ),
+        body: SingleChildScrollView(
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: AppValues.large),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomSpacers.extraLarge(),
+                SvgPicture.asset(
+                  SvgAssets.fullLogo,
+                  height: AppSizes.s173,
+                  width: AppSizes.s115,
+                ),
+                CustomSpacers.large(),
+                Text(
+                  AppStrings.loginScreenDescription.tr(),
+                  style: descriptionTextStyle(),
+                  textAlign: TextAlign.center,
+                ),
+                CustomSpacers.large(),
+                const ConnectWithGoogleButton(),
+                CustomSpacers.medium(),
+                Text(
+                  AppStrings.or.tr(),
+                  style: descriptionTextStyle(),
+                ),
+                CustomSpacers.medium(),
+                Form(
+                  key: cubit.formKey,
+                  child: Column(
+                    children: [
+                      CustomTextFormField(
+                        controller: cubit.emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        hintText: AppStrings.emailAddress.tr(),
+                        suffixIcon: SvgPicture.asset(SvgAssets.envelope),
+                        validator: emailValidator,
+                        textInputAction: TextInputAction.next,
+                      ),
+                      CustomSpacers.medium(),
+                      CustomTextFormField(
+                        controller: cubit.passwordController,
+                        keyboardType: TextInputType.visiblePassword,
+                        hintText: AppStrings.password.tr(),
+                        isPassword: true,
+                        validator: passwordValidator,
+                        textInputAction: TextInputAction.done,
+                        onFieldSubmitted: (_) {
+                          _signInHandler(context);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                CustomSpacers.small(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    CustomTextFormField(
-                      controller: cubit.emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      hintText: AppStrings.emailAddress.tr(),
-                      suffixIcon: SvgPicture.asset(SvgAssets.envelope),
-                      validator: emailValidator,
-                    ),
-                    CustomSpacers.medium(),
-                    CustomTextFormField(
-                      controller: cubit.passwordController,
-                      keyboardType: TextInputType.visiblePassword,
-                      hintText: AppStrings.password.tr(),
-                      isPassword: true,
-                      validator: passwordValidator,
+                    PressableText(
+                      onTap: () => _forgotPasswordHandler(context),
+                      text: AppStrings.forgotPasswordQuestion.tr(),
+                      fontSize: FontSize.s12,
                     ),
                   ],
                 ),
-              ),
-              CustomSpacers.small(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  PressableText(
-                    onTap: () => _forgotPasswordHandler(context),
-                    text: AppStrings.forgotPasswordQuestion.tr(),
-                    fontSize: FontSize.s12,
-                  ),
-                ],
-              ),
-              CustomSpacers.large(),
-              BlocConsumer<SignInCubit, SignInState>(
-                listener: (context, state) {
-                  if (state.signInStatus.isFailure) {
-                    CustomToast.error(context, state.errorMessage!);
-                  } else if (state.signInStatus.isSuccess) {
-                    context.go(AppScreen.home.toPath);
-                  }
-                },
-                builder: (context, state) {
-                  return PrimaryButton.fullWidth(
-                    onPressed: () => _signInHandler(context),
-                    isLoading: state.signInStatus.isLoading,
-                    child: Text(AppStrings.signIn.tr().toUpperCase()),
-                  );
-                },
-              ),
-              CustomSpacers.medium(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '${AppStrings.doNotHaveAnAccount.tr()} ',
-                    style: bodySmallGrayTextStyle(),
-                  ),
-                  PressableText(
-                    onTap: () => _createAccountHandler(context),
-                    text: AppStrings.createOneHere.tr(),
-                    fontSize: FontSize.s12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ],
-              ),
-            ],
+                CustomSpacers.large(),
+                BlocConsumer<SignInCubit, SignInState>(
+                  listener: (context, state) {
+                    if (state.signInStatus.isFailure) {
+                      CustomToast.error(context, state.errorMessage!);
+                    } else if (state.signInStatus.isSuccess) {
+                      context.go(AppScreen.home.toPath);
+                    }
+                  },
+                  builder: (context, state) {
+                    return PrimaryButton.fullWidth(
+                      onPressed: () => _signInHandler(context),
+                      isLoading: state.signInStatus.isLoading,
+                      child: Text(AppStrings.signIn.tr().toUpperCase()),
+                    );
+                  },
+                ),
+                CustomSpacers.medium(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '${AppStrings.doNotHaveAnAccount.tr()} ',
+                      style: bodySmallGrayTextStyle(),
+                    ),
+                    PressableText(
+                      onTap: () => _createAccountHandler(context),
+                      text: AppStrings.createOneHere.tr(),
+                      fontSize: FontSize.s12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

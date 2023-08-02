@@ -23,6 +23,10 @@ class CustomTextFormField extends StatefulWidget {
     this.hintText,
     this.suffixIcon,
     this.isPassword = false,
+    this.textInputAction,
+    this.onFieldSubmitted,
+    this.onEditingComplete,
+    this.focusNode,
   });
   final TextInputType keyboardType;
   final String? Function(String? value)? validator;
@@ -35,6 +39,10 @@ class CustomTextFormField extends StatefulWidget {
   final String? hintText;
   final Widget? suffixIcon;
   final bool isPassword;
+  final TextInputAction? textInputAction;
+  final void Function(String)? onFieldSubmitted;
+  final void Function()? onEditingComplete;
+  final FocusNode? focusNode;
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
@@ -106,6 +114,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
     return TextFormField(
       controller: widget.controller,
+      focusNode: widget.focusNode,
+      onFieldSubmitted: widget.onFieldSubmitted,
+      onEditingComplete: widget.onEditingComplete,
+      textInputAction: widget.textInputAction,
       keyboardType: widget.keyboardType,
       maxLength: widget.maxLength,
       obscureText: widget.isPassword ? !_visible : false,

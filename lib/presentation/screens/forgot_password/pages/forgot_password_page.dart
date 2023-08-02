@@ -49,11 +49,15 @@ class ForgotPasswordPage extends StatelessWidget {
               Form(
                 key: cubit.formKey,
                 child: TextFormField(
+                  keyboardType: TextInputType.emailAddress,
                   controller: cubit.emailAddressController,
                   validator: emailValidator,
                   decoration: InputDecoration(
                     labelText: AppStrings.emailAddress.tr(),
                   ),
+                  textInputAction: TextInputAction.done,
+                  onFieldSubmitted: (_) =>
+                      _sendResetInstructionsHandler(context),
                 ),
               ),
               CustomSpacers.large(),

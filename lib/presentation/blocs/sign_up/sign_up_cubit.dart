@@ -17,6 +17,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+  final FocusNode confirmPasswordFocusNode = FocusNode();
 
   void signUp() async {
     if (formKey.currentState!.validate()) {
