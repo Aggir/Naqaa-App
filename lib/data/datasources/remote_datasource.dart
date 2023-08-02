@@ -8,6 +8,8 @@ abstract class RemoteDataSource {
 
   Future<SignUpResponse> signUp(SignUpRequest request);
 
+  Future<SignInResponse> connectWithGoogle();
+
   Future<ResetPasswordInstructionsResponse> sendResetPasswordInstructions(
       SendResetPasswordInstructionsRequest request);
 }

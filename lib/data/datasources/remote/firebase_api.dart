@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/enum.dart';
 import 'package:naqaa/data/datasources/remote_datasource.dart';
@@ -41,6 +42,28 @@ class FirebaseApi implements RemoteDataSource {
     }
     return const SignInResponse(
         Status.success, "Debug: sign-in success response");
+  }
+
+  @override
+  Future<SignInResponse> connectWithGoogle() async {
+    try {
+      final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
+      if (gUser != null) {
+        final GoogleSignInAuthentication gAuth = await gUser.authentication;
+        final credential = GoogleAuthProvider.credential(
+            accessToken: gAuth.accessToken, idToken: gAuth.idToken);
+        await _firebaseAuth.signInWithCredential(credential);
+        return const SignInResponse(
+            Status.success, "Debug: sign-in with Google success response");
+      }
+    } on FirebaseAuthException catch (e) {
+      return SignInResponse(
+          Status.failure, FirebaseAuthErrorHandler.getAuthErrorMessage(e));
+    } catch (e) {
+      return SignInResponse(Status.failure, e.toString());
+    }
+    return const SignInResponse(
+        Status.canceled, "Debug: sign-in with Google canceled response");
   }
 
   @override

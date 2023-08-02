@@ -34,6 +34,11 @@ class SignInScreen extends StatelessWidget {
     BlocProvider.of<SignInCubit>(context).signIn();
   }
 
+  void _connectWithGoogleHandler(BuildContext context) {
+    FocusScope.of(context).unfocus();
+    BlocProvider.of<SignInCubit>(context).connectWithGoogle();
+  }
+
   void _createAccountHandler(BuildContext context) {
     FocusScope.of(context).unfocus();
     context.push(AppScreen.signUp.toPath);
@@ -71,7 +76,8 @@ class SignInScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 CustomSpacers.large(),
-                const ConnectWithGoogleButton(),
+                ConnectWithGoogleButton(
+                    onPressed: () => _connectWithGoogleHandler(context)),
                 CustomSpacers.medium(),
                 Text(
                   AppStrings.or.tr(),

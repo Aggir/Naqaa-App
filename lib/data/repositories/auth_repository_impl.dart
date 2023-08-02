@@ -50,4 +50,14 @@ class AuthRepositoryImpl implements AuthRepository {
       return Right(response.message);
     }
   }
+
+  @override
+  Future<Either<Failure, void>> connectWithGoogle() async {
+    final response = await _remoteDataSource.connectWithGoogle();
+    if (response.status.isFailure) {
+      return Left(Failure(0, response.message));
+    } else {
+      return Right(response.message);
+    }
+  }
 }

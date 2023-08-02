@@ -17,8 +17,8 @@ class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
 
   void _onIntroEnd(context) {
-    GoRouter.of(context).go(AppScreen.signIn.toPath);
     instance<AppService>().onboarding = true;
+    GoRouter.of(context).go(AppScreen.signIn.toPath);
   }
 
   Widget _indicator(Color color) {

@@ -5,6 +5,7 @@ import 'package:naqaa/app/di/dependency_injection.dart';
 import 'package:naqaa/domain/usecases/index.dart';
 
 import '../../../app/enum.dart';
+import '../../../domain/usecases/connect_with_google.dart';
 
 part 'sign_up_state.dart';
 
@@ -40,5 +41,21 @@ class SignUpCubit extends Cubit<SignUpState> {
         },
       );
     }
+  }
+
+  void connectWithGoogle() async {
+    emit(state.copyWith(signUpStatus: Status.loading));
+    initConnectWithGoogle();
+    (await instance<ConnectWithGoogleUsecase>().execute(null)).fold(
+      (failure) {
+        emit(state.copyWith(
+          signUpStatus: Status.failure,
+          errorMessage: failure.message,
+        ));
+      },
+      (data) {
+        emit(state.copyWith(signUpStatus: Status.success));
+      },
+    );
   }
 }

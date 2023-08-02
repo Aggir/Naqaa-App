@@ -9,6 +9,8 @@ abstract class AuthRepository {
 
   Future<Either<Failure, void>> signOut();
 
+  Future<Either<Failure, void>> connectWithGoogle();
+
   Future<Either<Failure, String>> sendResetPasswordInstructions(
       SendResetPasswordInstructionsRequest input);
 }

@@ -37,6 +37,11 @@ class SignUpScreen extends StatelessWidget {
     _unFocus(context);
   }
 
+  void _signUpWithGoogleHandler(BuildContext context) {
+    _unFocus(context);
+    BlocProvider.of<SignUpCubit>(context).connectWithGoogle();
+  }
+
   void _unFocus(BuildContext context) {
     BlocProvider.of<SignUpCubit>(context).confirmPasswordFocusNode.unfocus();
     FocusScope.of(context).unfocus();
@@ -184,7 +189,8 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 CustomSpacers.medium(),
-                const ConnectWithGoogleButton(),
+                ConnectWithGoogleButton(
+                    onPressed: () => _signUpWithGoogleHandler(context)),
                 CustomSpacers.medium(),
               ],
             ),

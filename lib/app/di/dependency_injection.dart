@@ -6,6 +6,7 @@ import 'package:naqaa/data/datasources/remote_datasource.dart';
 import 'package:naqaa/data/repositories/auth_repository_impl.dart';
 import 'package:naqaa/domain/repositories/auth_repository.dart';
 import 'package:naqaa/domain/usecases/index.dart';
+import 'package:naqaa/domain/usecases/connect_with_google.dart';
 import 'package:naqaa/domain/usecases/sign_out_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -44,6 +45,13 @@ void initSignIn() async {
   if (!GetIt.I.isRegistered<SignInUsecase>()) {
     instance.registerFactory<SignInUsecase>(
         () => SignInUsecase(instance<AuthRepository>()));
+  }
+}
+
+void initConnectWithGoogle() async {
+  if (!GetIt.I.isRegistered<ConnectWithGoogleUsecase>()) {
+    instance.registerFactory<ConnectWithGoogleUsecase>(
+        () => ConnectWithGoogleUsecase(instance<AuthRepository>()));
   }
 }
 
