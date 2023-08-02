@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/enum.dart';
+import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/app/validators.dart';
-import 'package:naqaa/presentation/app_router.dart';
 import 'package:naqaa/presentation/blocs/forgot_password/forgot_password_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:naqaa/presentation/widgets/custom_spacers.dart';
@@ -62,7 +62,7 @@ class ForgotPasswordPage extends StatelessWidget {
                   if (state.sendResetInstructionsStatus.isFailure) {
                     CustomToast.error(context, state.errorMessage!);
                   } else if (state.sendResetInstructionsStatus.isSuccess) {
-                    context.go(Routes.forgotPasswordInstructionsSentRoute);
+                    context.go(AppScreen.forgotPasswordInstructionsSent.toPath);
                   }
                 },
                 builder: (context, state) {

@@ -7,6 +7,12 @@ class SignInResponse implements BaseResponse {
   const SignInResponse(this.status, this.message);
 }
 
+class SignOutResponse implements BaseResponse {
+  final Status status;
+  final String message;
+  const SignOutResponse(this.status, this.message);
+}
+
 class SignUpResponse implements BaseResponse {
   final Status status;
   final String message;

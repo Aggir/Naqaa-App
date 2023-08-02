@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:naqaa/presentation/app_router.dart';
+import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/presentation/widgets/custom_back_button.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -20,7 +20,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           if (widget.child.currentIndex > 0) {
             widget.child.goBranch(widget.child.currentIndex - 1);
           } else {
-            context.go(Routes.signInRoute);
+            context.go(AppScreen.signIn.toPath);
           }
         }),
       ),

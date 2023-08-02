@@ -7,6 +7,8 @@ abstract class AuthRepository {
 
   Future<Either<Failure, String>> signUp(SignUpRequest input);
 
+  Future<Either<Failure, void>> signOut();
+
   Future<Either<Failure, String>> sendResetPasswordInstructions(
       SendResetPasswordInstructionsRequest input);
 }

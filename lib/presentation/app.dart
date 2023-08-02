@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:naqaa/presentation/app_router.dart';
+import 'package:naqaa/app/router/app_router.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 
 import '../app/constants.dart';

@@ -6,6 +6,8 @@ import 'package:naqaa/data/datasources/remote_datasource.dart';
 import 'package:naqaa/data/requests/requests.dart';
 import 'package:naqaa/data/responses/responses.dart';
 
+import 'firebase_auth_error_handler.dart';
+
 class FirebaseApi implements RemoteDataSource {
   final FirebaseAuth _firebaseAuth;
   const FirebaseApi(this._firebaseAuth);
@@ -29,7 +31,6 @@ class FirebaseApi implements RemoteDataSource {
   @override
   Future<SignInResponse> signIn(SignInRequest request) async {
     try {
-      // UserCredential userCredential =
       await _firebaseAuth.signInWithEmailAndPassword(
           email: request.emailAddress, password: request.password);
     } on FirebaseAuthException catch (e) {
@@ -43,9 +44,22 @@ class FirebaseApi implements RemoteDataSource {
   }
 
   @override
+  Future<SignOutResponse> signOut() async {
+    try {
+      await _firebaseAuth.signOut();
+    } on FirebaseAuthException catch (e) {
+      return SignOutResponse(
+          Status.failure, FirebaseAuthErrorHandler.getAuthErrorMessage(e));
+    } catch (e) {
+      return SignOutResponse(Status.failure, e.toString());
+    }
+    return const SignOutResponse(
+        Status.success, "Debug: sign-out success response");
+  }
+
+  @override
   Future<SignUpResponse> signUp(SignUpRequest request) async {
     try {
-      // final UserCredential userCredential =
       await _firebaseAuth.createUserWithEmailAndPassword(
         email: request.emailAddress,
         password: request.password,
@@ -58,39 +72,5 @@ class FirebaseApi implements RemoteDataSource {
     }
     return const SignUpResponse(
         Status.success, "Debug: sign-up success response");
-  }
-}
-
-class FirebaseAuthErrorHandler {
-  static String getAuthErrorMessage(FirebaseAuthException exception) {
-    switch (exception.code) {
-      case 'weak-password':
-        return AppStrings.weakPassword.tr();
-      case 'email-already-in-use':
-        return AppStrings.emailAlreadyInUse.tr();
-      case 'invalid-email':
-        return AppStrings.invalidEmail.tr();
-      case 'user-not-found':
-        return AppStrings.invalidCredential.tr();
-      case 'wrong-password':
-        return AppStrings.invalidCredential.tr();
-      case 'too-many-requests':
-        return AppStrings.tooManyRequests.tr();
-      default:
-        return AppStrings.defaultErrorMessage.tr();
-    }
-  }
-
-  static String getResetPasswordErrorMessage(FirebaseAuthException exception) {
-    switch (exception.code) {
-      case 'invalid-email':
-        return AppStrings.invalidEmail.tr();
-      case 'user-not-found':
-        return AppStrings.noUserFoundForThatEmail.tr();
-      case 'too-many-requests':
-        return AppStrings.tooManyRequests.tr();
-      default:
-        return AppStrings.defaultErrorMessage.tr();
-    }
   }
 }

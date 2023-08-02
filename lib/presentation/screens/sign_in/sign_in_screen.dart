@@ -7,8 +7,8 @@ import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/assets_manager.dart';
 import 'package:naqaa/app/enum.dart';
 import 'package:naqaa/app/functions.dart';
+import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/app/validators.dart';
-import 'package:naqaa/presentation/app_router.dart';
 import 'package:naqaa/presentation/blocs/sign_in/sign_in_cubit.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:naqaa/presentation/theme/font_manager.dart';
@@ -25,7 +25,7 @@ class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
 
   void _forgotPasswordHandler(BuildContext context) {
-    context.go(Routes.forgotPasswordRoute);
+    context.go(AppScreen.forgotPassword.toPath);
   }
 
   void _signInHandler(BuildContext context) {
@@ -33,7 +33,7 @@ class SignInScreen extends StatelessWidget {
   }
 
   void _createAccountHandler(BuildContext context) {
-    context.push(Routes.signUpRoute);
+    context.push(AppScreen.signUp.toPath);
   }
 
   @override
@@ -109,6 +109,8 @@ class SignInScreen extends StatelessWidget {
                 listener: (context, state) {
                   if (state.signInStatus.isFailure) {
                     CustomToast.error(context, state.errorMessage!);
+                  } else if (state.signInStatus.isSuccess) {
+                    context.go(AppScreen.home.toPath);
                   }
                 },
                 builder: (context, state) {

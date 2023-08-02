@@ -32,6 +32,16 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<Either<Failure, void>> signOut() async {
+    final response = await _remoteDataSource.signOut();
+    if (response.status.isFailure) {
+      return Left(Failure(0, response.message));
+    } else {
+      return const Right(null);
+    }
+  }
+
+  @override
   Future<Either<Failure, String>> signUp(SignUpRequest input) async {
     final response = await _remoteDataSource.signUp(input);
     if (response.status.isFailure) {

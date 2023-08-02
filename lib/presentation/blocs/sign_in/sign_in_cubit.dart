@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:naqaa/app/dependency_injection.dart';
+import 'package:naqaa/app/di/dependency_injection.dart';
 import 'package:naqaa/app/enum.dart';
 import 'package:naqaa/domain/usecases/index.dart';
 

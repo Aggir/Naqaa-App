@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
+import 'package:naqaa/app/helpers/app_service.dart';
 import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/assets_manager.dart';
+import 'package:naqaa/app/di/dependency_injection.dart';
 import 'package:naqaa/app/language_manager.dart';
-import 'package:naqaa/presentation/app_router.dart';
+import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
@@ -15,7 +17,8 @@ class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
 
   void _onIntroEnd(context) {
-    GoRouter.of(context).go(Routes.signInRoute);
+    GoRouter.of(context).go(AppScreen.signIn.toPath);
+    instance<AppService>().onboarding = true;
   }
 
   Widget _indicator(Color color) {
@@ -76,62 +79,3 @@ class OnboardingScreen extends StatelessWidget {
     );
   }
 }
-
-/*
-Custom OnBoarding
-
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
-import 'package:naqaa/app/app_strings.dart';
-import 'package:naqaa/app/assets_manager.dart';
-import 'package:naqaa/presentation/screens/onboarding/components/get_started_button.dart';
-import 'package:naqaa/presentation/theme/app_colors.dart';
-import 'package:naqaa/presentation/theme/app_theme.dart';
-import 'package:naqaa/presentation/theme/text_style_manager.dart';
-
-class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({super.key});
-
-  @override
-  State<OnboardingScreen> createState() => _OnboardingScreenState();
-}
-
-class _OnboardingScreenState extends State<OnboardingScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppValues.large),
-          child: Column(
-            children: [
-              SvgPicture.asset(
-                SvgAssets.onBoardingOne,
-                height: 334,
-                width: 334,
-              ),
-              Text(
-                AppStrings.onboardingOneTitle,
-                style: onboardingTitleStyle(),
-              ).tr(),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppValues.medium),
-                child: Text(
-                  AppStrings.onboardingOneSubtitle,
-                  style: onboardingSubtitleStyle(),
-                  textAlign: TextAlign.center,
-                ).tr(),
-              ),
-              GetStartedButton()
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-*/
