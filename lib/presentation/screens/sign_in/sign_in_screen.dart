@@ -76,8 +76,14 @@ class SignInScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 CustomSpacers.large(),
-                ConnectWithGoogleButton(
-                    onPressed: () => _connectWithGoogleHandler(context)),
+                BlocBuilder<SignInCubit, SignInState>(
+                  builder: (context, state) {
+                    return ConnectWithGoogleButton(
+                      onPressed: () => _connectWithGoogleHandler(context),
+                      isLoading: state.signInStatus.isLoading,
+                    );
+                  },
+                ),
                 CustomSpacers.medium(),
                 Text(
                   AppStrings.or.tr(),

@@ -24,6 +24,7 @@ dependencies:
   intro_slider: ^4.2.0
   restart_app: ^1.2.1
   shared_preferences: ^2.2.0
+  shimmer: ^3.0.0
   validators: ^3.0.0
 
 dev_dependencies:

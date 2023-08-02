@@ -189,8 +189,14 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 CustomSpacers.medium(),
-                ConnectWithGoogleButton(
-                    onPressed: () => _signUpWithGoogleHandler(context)),
+                BlocBuilder<SignUpCubit, SignUpState>(
+                  builder: (context, state) {
+                    return ConnectWithGoogleButton(
+                      onPressed: () => _signUpWithGoogleHandler(context),
+                      isLoading: state.signUpStatus.isLoading,
+                    );
+                  },
+                ),
                 CustomSpacers.medium(),
               ],
             ),

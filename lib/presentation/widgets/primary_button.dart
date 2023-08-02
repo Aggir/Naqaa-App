@@ -19,6 +19,8 @@ class PrimaryButton extends StatelessWidget {
 
   static final customStyle = ElevatedButton.styleFrom(
     minimumSize: AppValues.buttonMinSize,
+    disabledBackgroundColor: AppColors.primary,
+    disabledForegroundColor: AppColors.snowWhite,
     padding: const EdgeInsets.all(AppValues.small + (AppValues.small / 2)),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(AppValues.primaryButtonRadius),
@@ -51,7 +53,7 @@ class PrimaryButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         style: style ?? customStyle,
-        onPressed: isLoading ? () {} : onPressed,
+        onPressed: isLoading ? null : onPressed,
         child: isLoading
             ? SizedBox(
                 height: AppSizes.s25,

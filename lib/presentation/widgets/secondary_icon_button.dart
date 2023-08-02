@@ -11,7 +11,7 @@ class SecondaryIconButton extends StatelessWidget {
     super.key,
   });
 
-  final void Function() onPressed;
+  final void Function()? onPressed;
   final Widget label;
   final Widget icon;
 
@@ -20,6 +20,7 @@ class SecondaryIconButton extends StatelessWidget {
     return OutlinedButton.icon(
       style: OutlinedButton.styleFrom(
         textStyle: secondaryButtonTextStyle(),
+        disabledForegroundColor: AppColors.primary,
         side: BorderSide(color: AppColors.primary),
         minimumSize: AppValues.buttonMinSize,
         padding: const EdgeInsets.all(AppValues.small + (AppValues.small / 2)),
