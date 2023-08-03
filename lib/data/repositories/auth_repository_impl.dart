@@ -57,7 +57,7 @@ class AuthRepositoryImpl implements AuthRepository {
     if (response.status.isFailure) {
       return Left(Failure(0, response.message));
     } else {
-      return Right(response.message);
+      return const Right(null);
     }
   }
 }

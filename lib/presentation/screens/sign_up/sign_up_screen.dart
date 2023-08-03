@@ -71,7 +71,7 @@ class SignUpScreen extends StatelessWidget {
                 CustomSpacers.large(),
                 Text(
                   AppStrings.signUpScreenDescription.tr(),
-                  style: bodyMediumTextStyle(),
+                  style: regularGrayStyle(),
                 ),
                 PressableText(
                   text: AppStrings.alreadyHaveAnAccount.tr(),
@@ -154,7 +154,7 @@ class SignUpScreen extends StatelessWidget {
                     children: [
                       Text(
                         AppStrings.bySigningUpYouAgreeToOur.tr(),
-                        style: bodyMediumTextStyle(),
+                        style: regularGrayStyle(),
                       ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -166,7 +166,7 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           Text(
                             ' & ',
-                            style: bodyMediumTextStyle(),
+                            style: regularGrayStyle(),
                           ),
                           PressableText(
                             text: AppStrings.privacyAndPolicy.tr(),
@@ -174,7 +174,7 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           Text(
                             '.',
-                            style: bodyMediumTextStyle(),
+                            style: regularGrayStyle(),
                           ),
                         ],
                       )

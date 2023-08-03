@@ -44,20 +44,32 @@ TextStyle headlineTextStyle() {
   return getBoldStyle(fontSize: FontSize.s30, color: AppColors.blackText);
 }
 
-TextStyle bodyMediumTextStyle() {
-  return getRegularStyle(fontSize: FontSize.s14, color: AppColors.mediumGray);
-}
-
 TextStyle pressableTextStyle() {
   return getRegularStyle(fontSize: FontSize.s14, color: AppColors.primary);
 }
 
 // Refactor fonts
 
-TextStyle semiSmallGrayStyle() {
+TextStyle semiGrayStyle() {
   return getSemiBoldStyle(fontSize: FontSize.s14, color: AppColors.mediumGray);
 }
 
-TextStyle semiSmallPrimaryStyle() {
+TextStyle semiPrimaryStyle() {
   return getSemiBoldStyle(fontSize: FontSize.s14, color: AppColors.mediumGray);
+}
+
+TextStyle boldPrimaryExtraSmallStyle() {
+  return getBoldStyle(fontSize: FontSize.s8, color: AppColors.primary);
+}
+
+TextStyle mediumBlackExtraLargeStyle() {
+  return getMediumStyle(fontSize: FontSize.s26, color: AppColors.blackText);
+}
+
+TextStyle regularGrayStyle() {
+  return getRegularStyle(fontSize: FontSize.s14, color: AppColors.mediumGray);
+}
+
+TextStyle regularBluishGrayMediumStyle() {
+  return getRegularStyle(fontSize: FontSize.s16, color: AppColors.bluishGray);
 }

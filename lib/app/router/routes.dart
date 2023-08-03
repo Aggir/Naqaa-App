@@ -1,17 +1,18 @@
 enum AppScreen {
-  home,
   onboarding,
   signIn,
   signUp,
   forgotPassword,
   forgotPasswordInstructionsSent,
+  home,
+  statistics,
+  notifications,
+  profile,
 }
 
 extension AppScreenExtension on AppScreen {
   String get toPath {
     switch (this) {
-      case AppScreen.home:
-        return "/";
       case AppScreen.onboarding:
         return "/start";
       case AppScreen.signIn:
@@ -22,6 +23,14 @@ extension AppScreenExtension on AppScreen {
         return "/forgot-password";
       case AppScreen.forgotPasswordInstructionsSent:
         return "/forgot-password-instructions-sent";
+      case AppScreen.home:
+        return "/";
+      case AppScreen.statistics:
+        return "/statistics";
+      case AppScreen.notifications:
+        return "/notifications";
+      case AppScreen.profile:
+        return "/profile";
       default:
         return "/";
     }
@@ -29,8 +38,6 @@ extension AppScreenExtension on AppScreen {
 
   String get toName {
     switch (this) {
-      case AppScreen.home:
-        return "HOME";
       case AppScreen.onboarding:
         return "START";
       case AppScreen.signIn:
@@ -41,6 +48,14 @@ extension AppScreenExtension on AppScreen {
         return "FORGOT PASSWORD";
       case AppScreen.forgotPasswordInstructionsSent:
         return "FORGOT PASSWORD INSTRUCTIONS SENT";
+      case AppScreen.home:
+        return "HOME";
+      case AppScreen.statistics:
+        return "STATISTICS";
+      case AppScreen.notifications:
+        return "NOTIFICATIONS";
+      case AppScreen.profile:
+        return "PROFILE";
       default:
         return "HOME";
     }

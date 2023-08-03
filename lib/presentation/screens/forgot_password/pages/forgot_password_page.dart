@@ -43,7 +43,7 @@ class ForgotPasswordPage extends StatelessWidget {
               CustomSpacers.mediumLarge(),
               Text(
                 AppStrings.signUpScreenDescription.tr(),
-                style: bodyMediumTextStyle(),
+                style: regularGrayStyle(),
               ),
               CustomSpacers.large(),
               Form(

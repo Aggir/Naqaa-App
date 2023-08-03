@@ -60,9 +60,30 @@ class AppStrings {
   static const resetPasswordPageDescription = 'reset_password_page_description';
   static const newPassword = 'new_password';
 
-  // static const home = "home";
-  // static const profile = "profile";
-  // static const profileDetails = "profile_details";
+  static const home = "home";
+  static const statistics = "statistics";
+  static const notifications = "notifications";
+  static const settings = "settings";
+
+  static const hi = "hi";
+  static const youDoNotHaveAnyDevicesYet = "you_do_not_have_any_devices_yet";
+  static const clickToAddADevice = "click_to_add_a_device";
+  static const yourDevicesAreWorkingHard = "click_to_add_a_device";
+  static const waterQuality = "water_quality";
+  static const great = "great";
+  static const good = "good";
+  static const average = "average";
+  static const bad = "bad";
+  static const veryBad = "very_bad";
+  static const danger = "danger";
+  static const details = "details";
+  static const deviceStatus = "device_status";
+  static const temp = "temp";
+  static const tempUnit = "temp_unit";
+  static const tds = "tds";
+  static const tdsUnit = "tds_unit";
+  static const ph = "ph";
+  static const phUnit = "ph_unit";
   // static const edit = "edit";
   // static const changeLanguage = "change_language";
   // static const contactUs = "contact_us";

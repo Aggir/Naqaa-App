@@ -72,14 +72,50 @@ class AppRoutes {
         ]),
       ]);
 
-  static final home = GoRoute(
-    redirect: _authenticatedRoute,
-    path: AppScreen.home.toPath,
-    name: AppScreen.home.toName,
-    builder: (BuildContext context, GoRouterState state) {
-      return const HomeScreen();
-    },
-  );
+  static final main = StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) => MainScreen(navigationShell),
+      branches: [
+        StatefulShellBranch(routes: [
+          GoRoute(
+            redirect: _authenticatedRoute,
+            path: AppScreen.home.toPath,
+            name: AppScreen.home.toName,
+            builder: (BuildContext context, GoRouterState state) {
+              return const HomePage();
+            },
+          ),
+        ]),
+        StatefulShellBranch(routes: [
+          GoRoute(
+            redirect: _authenticatedRoute,
+            path: AppScreen.statistics.toPath,
+            name: AppScreen.statistics.toName,
+            builder: (BuildContext context, GoRouterState state) {
+              return const StatisticsPage();
+            },
+          ),
+        ]),
+        StatefulShellBranch(routes: [
+          GoRoute(
+            redirect: _authenticatedRoute,
+            path: AppScreen.notifications.toPath,
+            name: AppScreen.notifications.toName,
+            builder: (BuildContext context, GoRouterState state) {
+              return const NotificationsPage();
+            },
+          ),
+        ]),
+        StatefulShellBranch(routes: [
+          GoRoute(
+            redirect: _authenticatedRoute,
+            path: AppScreen.profile.toPath,
+            name: AppScreen.profile.toName,
+            builder: (BuildContext context, GoRouterState state) {
+              return const SettingsPage();
+            },
+          ),
+        ]),
+      ]);
 
   static FutureOr<String?> _authenticatedRoute(
       BuildContext context, GoRouterState state) {

@@ -16,11 +16,11 @@ class AppRouter {
     initialLocation: AppScreen.home.toPath,
     redirect: _redirectToOnboarding,
     routes: <RouteBase>[
-      AppRoutes.home,
       AppRoutes.onboarding,
       AppRoutes.signIn,
       AppRoutes.signUp,
       AppRoutes.forgotPassword,
+      AppRoutes.main,
     ],
   );
 

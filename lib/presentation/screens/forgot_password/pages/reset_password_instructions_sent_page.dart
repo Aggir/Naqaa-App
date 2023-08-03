@@ -42,11 +42,11 @@ class ResetPasswordInstructionsSentScreen extends StatelessWidget {
               children: [
                 Text(
                   AppStrings.weHaveSentTheInstructionsEmailTo.tr(),
-                  style: bodyMediumTextStyle(),
+                  style: regularGrayStyle(),
                 ),
                 Text(
                   '${cubit.emailAddressController.text}.',
-                  style: semiSmallGrayStyle(),
+                  style: semiGrayStyle(),
                 ),
               ],
             ),

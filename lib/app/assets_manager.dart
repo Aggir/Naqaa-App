@@ -18,4 +18,14 @@ class SvgAssets {
   static const String envelope = '$_svgPath/envelope.svg';
   static const String chevronLeft = '$_svgPath/chevron-left.svg';
   static const String chevronRight = '$_svgPath/chevron-right.svg';
+  static const String plus = '$_svgPath/plus.svg';
+  static const String circlePlus = '$_svgPath/circle-plus.svg';
+  static const String home = '$_svgPath/home.svg';
+  static const String statistic = '$_svgPath/statistics.svg';
+  static const String notification = '$_svgPath/notification.svg';
+  static const String settings = '$_svgPath/settings.svg';
+  static const String homeFilled = '$_svgPath/home-filled.svg';
+  static const String statisticFilled = '$_svgPath/statistics-filled.svg';
+  static const String notificationFilled = '$_svgPath/notification-filled.svg';
+  static const String settingsFilled = '$_svgPath/settings-filled.svg';
 }
