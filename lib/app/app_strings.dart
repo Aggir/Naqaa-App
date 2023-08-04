@@ -84,15 +84,14 @@ class AppStrings {
   static const tdsUnit = "tds_unit";
   static const ph = "ph";
   static const phUnit = "ph_unit";
-  // static const edit = "edit";
-  // static const changeLanguage = "change_language";
-  // static const contactUs = "contact_us";
-  // static const login = "login";
-  // static const logout = "logout";
-  // static const name = 'name';
-  // static const add = 'add';
-  // static const thisFieldIsRequired = 'this_field_is_required';
-  // // Response messages:
-  // static const defaultError = "default_error";
-  // static const localDatabaseError = "local_database_error";
+
+  static const noActivityYet = "no_activity_yet";
+  static const yourNotificationsWillAppearHere =
+      "your_notifications_will_appear_here";
+  static const unread = "unread";
+  static const pastNotifications = "past_notifications";
+  static const settingUpDeviceNotificationMessage =
+      "setting_up_device_notification_message";
+  static const finishSettingUpAccountNotificationMessage =
+      "setting_up_device_notification_message";
 }

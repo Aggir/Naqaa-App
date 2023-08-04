@@ -72,5 +72,11 @@
     "tds": "TDS",
     "tds_unit": "PPM",
     "ph": "PH",
-    "ph_unit": "Level"
+    "ph_unit": "Level",
+    "no_activity_yet": "No activity yet!",
+    "your_notifications_will_appear_here": "Your notifications will appear here.",
+    "unread": "Unread",
+    "past_notifications": "Past notifications",
+    "setting_up_device_notification_message": "Welcome to Naqaa! Congratulations on setting up your device!",
+    "finish_setting_up_account_notification_message": "Finish setting up your Naqaa account using the user settings tab!"
 }

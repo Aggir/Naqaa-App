@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';
+import 'package:naqaa/presentation/widgets/custom_app_bar.dart';
 import 'package:naqaa/presentation/widgets/custom_spacers.dart';
 
 import '../../../app/app_strings.dart';
@@ -49,6 +50,9 @@ class _MainScreenState extends State<MainScreen> {
     int currentIndex = widget.child.currentIndex;
     // todo: Refactor it
     return Scaffold(
+      appBar: CustomAppBar.basic(
+        title: _navBarItems[currentIndex]['label'],
+      ),
       body: widget.child,
       floatingActionButton: FloatingActionButton(
         onPressed: () => _plusButtonFunction(context),

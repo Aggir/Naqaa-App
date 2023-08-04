@@ -70,6 +70,14 @@ TextStyle regularGrayStyle() {
   return getRegularStyle(fontSize: FontSize.s14, color: AppColors.mediumGray);
 }
 
+TextStyle regularDarkGrayMediumStyle() {
+  return getRegularStyle(fontSize: FontSize.s16, color: AppColors.darkGray);
+}
+
 TextStyle regularBluishGrayMediumStyle() {
   return getRegularStyle(fontSize: FontSize.s16, color: AppColors.bluishGray);
+}
+
+TextStyle regularBluishGraySmallStyle() {
+  return getRegularStyle(fontSize: FontSize.s12, color: AppColors.bluishGray);
 }
