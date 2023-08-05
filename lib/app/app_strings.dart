@@ -58,7 +58,6 @@ class AppStrings {
 
   static const resetPassword = 'reset_password';
   static const resetPasswordPageDescription = 'reset_password_page_description';
-  static const newPassword = 'new_password';
 
   static const home = "home";
   static const statistics = "statistics";
@@ -100,4 +99,16 @@ class AppStrings {
   static const appSettings = 'app_settings';
   static const checkForUpdates = 'check_for_updates';
   static const signOut = 'sign_out';
+
+  static const changePasswordDescription = 'change_password_description';
+  static const oldPassword = 'old_password';
+  static const newPassword = 'new_password';
+  static const enterPasswordYouHaveNotUsedBefore =
+      'enter_password_you_have_not_used_before';
+  static const save = 'save';
+  static const passwordChangedSuccessfully = 'password_changed_successfully';
+  static const wrongPassword = 'wrong_password';
+  static const connectedWithGoogle = 'connected_with_google';
+
+  static const soon = 'soon';
 }

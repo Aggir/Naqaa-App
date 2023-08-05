@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:naqaa/app/failure.dart';
 import 'package:naqaa/data/requests/requests.dart';
 
-import '../entites/user.dart';
+import '../entities/user.dart';
 
-abstract class AuthRepository {
+abstract class Repository {
   Future<Either<Failure, UserEntity>> signIn(SignInRequest input);
 
   Future<Either<Failure, UserEntity>> isSignedIn();
@@ -14,6 +14,8 @@ abstract class AuthRepository {
   Future<Either<Failure, void>> signOut();
 
   Future<Either<Failure, UserEntity>> connectWithGoogle();
+
+  Future<Either<Failure, void>> changePassword(ChangePasswordRequest input);
 
   Future<Either<Failure, String>> sendResetPasswordInstructions(
       SendResetPasswordInstructionsRequest input);

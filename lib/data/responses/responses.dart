@@ -9,14 +9,8 @@ class AuthResponse implements BaseResponse {
   const AuthResponse(this.status, {this.user, this.message});
 }
 
-class SignOutResponse implements BaseResponse {
+class BasicResponse implements BaseResponse {
   final Status status;
   final String message;
-  const SignOutResponse(this.status, this.message);
-}
-
-class ResetPasswordInstructionsResponse implements BaseResponse {
-  final Status status;
-  final String message;
-  const ResetPasswordInstructionsResponse(this.status, this.message);
+  const BasicResponse(this.status, this.message);
 }

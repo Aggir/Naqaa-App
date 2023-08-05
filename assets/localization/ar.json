@@ -41,7 +41,6 @@
     "send_again": "إعادة الإرسال",
     "reset_password": "إعادة تعيين كلمة المرور",
     "reset_password_page_description": "أدخل كلمة المرور الجديدة الخاصة بك لإكمال إعادة تعيين كلمة المرور.",
-    "new_password": "كلمة المرور الجديدة",
     "invalid_email": "الرجاء إدخال عنوان بريد إلكتروني صالح.",
     "short_password": "كلمة المرور قصيرة جداً (الحد الأدنى هو 8 أحرف).",
     "long_password": "كلمة المرور طويلة جداً (الحد الأقصى هو 24 حرفاً).",
@@ -84,5 +83,14 @@
     "change_password": "تغيير كلمة المرور",
     "app_settings": "اعدادات التطبيق",
     "check_for_updates": "البحث عن تحديثات",
-    "sign_out": "تسجيل الخروج"
+    "sign_out": "تسجيل الخروج",
+    "change_password_description": "الرجاء إدخال كلمة مرور لم تستخدمها من قبل.",
+    "old_password": "كلمة المرور القديمة",
+    "new_password": "كلمة المرور الجديدة",
+    "enter_password_you_have_not_used_before": "ادخل كلمة مرور لم تستخدمها من قبل.",
+    "save": "حفظ",
+    "password_changed_successfully": "تم تغيير كلمة المرور بنجاح.",
+    "wrong_password": "كلمة المرور خاطئة.",
+    "connected_with_google": "متصل بحساب الجوجل",
+    "soon": "قريبا"
 }

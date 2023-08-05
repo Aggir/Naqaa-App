@@ -4,15 +4,14 @@ import '../models/user.dart';
 import 'responses.dart';
 
 class FirebaseAuthResponse extends AuthResponse {
-  FirebaseAuthResponse(
+  const FirebaseAuthResponse(
     Status status, {
     String? message,
     UserModel? user,
   }) : super(status, message: message, user: user);
 }
 
-class FirebaseResetPasswordInstructionsResponse
-    extends ResetPasswordInstructionsResponse {
-  FirebaseResetPasswordInstructionsResponse(Status status, String message)
+class FirebaseBasicResponse extends BasicResponse {
+  const FirebaseBasicResponse(Status status, String message)
       : super(status, message);
 }

@@ -11,7 +11,7 @@ class CustomAppBar {
         ),
         leading: backButton != null
             ? CustomBackButton(
-                onTap: () {},
+                onTap: backButton,
               )
             : null,
       );

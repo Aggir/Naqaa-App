@@ -15,7 +15,8 @@ class PageContainer extends StatelessWidget {
             maxHeight: double.infinity,
           ),
           child: Padding(
-            padding: const EdgeInsets.all(AppValues.large),
+            padding: const EdgeInsets.symmetric(
+                vertical: AppValues.large, horizontal: AppValues.mediumLarge),
             child: IntrinsicHeight(child: child),
           ),
         ),

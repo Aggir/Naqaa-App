@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/assets_manager.dart';
+import 'package:naqaa/app/constants.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
 import 'package:naqaa/presentation/widgets/custom_spacers.dart';
 import 'package:naqaa/presentation/widgets/page_container.dart';
@@ -23,7 +24,7 @@ class HomePage extends StatelessWidget {
         BlocBuilder<AuthCubit, AuthState>(
           builder: (context, state) {
             return Text(
-              "${AppStrings.hi.tr()}${state.user?.name}",
+              "${AppStrings.hi.tr()}${state.user?.name ?? Constants.empty}",
               style: mediumBlackExtraLargeStyle(),
             );
           },

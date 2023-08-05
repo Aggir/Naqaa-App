@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/widgets/custom_app_bar.dart';
 import 'package:naqaa/presentation/widgets/custom_spacers.dart';
@@ -12,8 +13,9 @@ import '../../theme/app_theme.dart';
 import '../../theme/text_style_manager.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen(this.child, {super.key});
-  final StatefulNavigationShell child;
+  const MainScreen(this.child, this.location, {super.key});
+  final Widget child;
+  final Uri location;
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -27,32 +29,39 @@ class _MainScreenState extends State<MainScreen> {
       'label': AppStrings.home.tr(),
       'filledSvgPath': SvgAssets.homeFilled,
       "svgPath": SvgAssets.home,
+      "path": AppScreen.home.toPath,
     },
     {
       'label': AppStrings.statistics.tr(),
       'filledSvgPath': SvgAssets.statisticFilled,
       "svgPath": SvgAssets.statistic,
+      "path": AppScreen.statistics.toPath,
     },
     {
       'label': AppStrings.notifications.tr(),
       'filledSvgPath': SvgAssets.notificationFilled,
       "svgPath": SvgAssets.notification,
+      "path": AppScreen.notifications.toPath,
     },
     {
       'label': AppStrings.settings.tr(),
       'filledSvgPath': SvgAssets.personFilled,
       "svgPath": SvgAssets.person,
+      "path": AppScreen.settings.toPath,
     },
   ];
 
   @override
   Widget build(BuildContext context) {
-    int currentIndex = widget.child.currentIndex;
+    int currentIndex = _navBarItems
+        .indexWhere((element) => element['path'] == widget.location.toString());
     // todo: Refactor it
     return Scaffold(
       appBar: CustomAppBar.basic(
-        title: _navBarItems[currentIndex]['label'],
-      ),
+          title: _navBarItems[currentIndex]['label'],
+          backButton: widget.location.pathSegments.length > 1
+              ? () => context.pop()
+              : null),
       body: widget.child,
       floatingActionButton: FloatingActionButton(
         onPressed: () => _plusButtonFunction(context),
@@ -75,34 +84,34 @@ class _MainScreenState extends State<MainScreen> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 _navBar(
-                  label: _navBarItems[0]['label']!,
-                  filledSvgPath: _navBarItems[0]['filledSvgPath']!,
-                  svgPath: _navBarItems[0]['svgPath']!,
-                  index: 0,
-                  currentIndex: currentIndex,
-                ),
+                    label: _navBarItems[0]['label']!,
+                    filledSvgPath: _navBarItems[0]['filledSvgPath']!,
+                    svgPath: _navBarItems[0]['svgPath']!,
+                    index: 0,
+                    currentIndex: currentIndex,
+                    path: _navBarItems[0]['path']!),
                 _navBar(
-                  label: _navBarItems[1]['label']!,
-                  filledSvgPath: _navBarItems[1]['filledSvgPath']!,
-                  svgPath: _navBarItems[1]['svgPath']!,
-                  index: 1,
-                  currentIndex: currentIndex,
-                ),
+                    label: _navBarItems[1]['label']!,
+                    filledSvgPath: _navBarItems[1]['filledSvgPath']!,
+                    svgPath: _navBarItems[1]['svgPath']!,
+                    index: 1,
+                    currentIndex: currentIndex,
+                    path: _navBarItems[1]['path']!),
                 CustomSpacers.medium(),
                 _navBar(
-                  label: _navBarItems[2]['label']!,
-                  filledSvgPath: _navBarItems[2]['filledSvgPath']!,
-                  svgPath: _navBarItems[2]['svgPath']!,
-                  index: 2,
-                  currentIndex: currentIndex,
-                ),
+                    label: _navBarItems[2]['label']!,
+                    filledSvgPath: _navBarItems[2]['filledSvgPath']!,
+                    svgPath: _navBarItems[2]['svgPath']!,
+                    index: 2,
+                    currentIndex: currentIndex,
+                    path: _navBarItems[2]['path']!),
                 _navBar(
-                  label: _navBarItems[3]['label']!,
-                  filledSvgPath: _navBarItems[3]['filledSvgPath']!,
-                  svgPath: _navBarItems[3]['svgPath']!,
-                  index: 3,
-                  currentIndex: currentIndex,
-                ),
+                    label: _navBarItems[3]['label']!,
+                    filledSvgPath: _navBarItems[3]['filledSvgPath']!,
+                    svgPath: _navBarItems[3]['svgPath']!,
+                    index: 3,
+                    currentIndex: currentIndex,
+                    path: _navBarItems[3]['path']!),
               ]),
         ),
       ),
@@ -113,13 +122,14 @@ class _MainScreenState extends State<MainScreen> {
       {required String label,
       required String filledSvgPath,
       required String svgPath,
+      required String path,
       required int index,
       required int currentIndex}) {
     bool isSelected = index == currentIndex;
     return InkWell(
       borderRadius: BorderRadius.circular(AppValues.circleRadius),
       onTap: () {
-        widget.child.goBranch(index);
+        context.go(path);
       },
       child: SizedBox(
         width: AppSizes.s70,

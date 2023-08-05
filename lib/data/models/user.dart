@@ -6,6 +6,7 @@ class UserModel extends Equatable {
   final String? email;
   final int? birthDate;
   final String? gender;
+  final bool? isSignedInWithGoogle;
 
   const UserModel({
     this.name,
@@ -13,6 +14,7 @@ class UserModel extends Equatable {
     this.email,
     this.birthDate,
     this.gender,
+    this.isSignedInWithGoogle,
   });
 
   UserModel copyWith({
@@ -21,6 +23,7 @@ class UserModel extends Equatable {
     String? email,
     int? birthDate,
     String? gender,
+    bool? isSignedInWithGoogle,
   }) {
     return UserModel(
       name: name ?? this.name,
@@ -28,6 +31,7 @@ class UserModel extends Equatable {
       email: email ?? this.email,
       birthDate: birthDate ?? this.birthDate,
       gender: gender ?? this.gender,
+      isSignedInWithGoogle: isSignedInWithGoogle ?? this.isSignedInWithGoogle,
     );
   }
 
@@ -39,11 +43,7 @@ class UserModel extends Equatable {
       email,
       birthDate,
       gender,
+      isSignedInWithGoogle,
     ];
-  }
-
-  @override
-  String toString() {
-    return 'UserModel(name: $name, profilePictureUrl: $profilePictureUrl, email: $email, birthDate: $birthDate, gender: $gender)';
   }
 }

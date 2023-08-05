@@ -1,10 +1,14 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:naqaa/app/router/app_router.dart';
 import 'package:naqaa/app/router/routes.dart';
+import 'package:naqaa/presentation/blocs/change_password/change_password_cubit.dart';
+import 'package:naqaa/presentation/screens/change_password/change_password_screen.dart';
 import 'package:naqaa/presentation/screens/index.dart';
 import 'package:naqaa/presentation/blocs/index.dart';
 
@@ -72,50 +76,61 @@ class AppRoutes {
         ]),
       ]);
 
-  static final main = StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) => MainScreen(navigationShell),
-      branches: [
-        StatefulShellBranch(routes: [
-          GoRoute(
-            redirect: _authenticatedRoute,
-            path: AppScreen.home.toPath,
-            name: AppScreen.home.toName,
-            builder: (BuildContext context, GoRouterState state) {
-              return const HomePage();
-            },
-          ),
-        ]),
-        StatefulShellBranch(routes: [
-          GoRoute(
-            redirect: _authenticatedRoute,
-            path: AppScreen.statistics.toPath,
-            name: AppScreen.statistics.toName,
-            builder: (BuildContext context, GoRouterState state) {
-              return const StatisticsPage();
-            },
-          ),
-        ]),
-        StatefulShellBranch(routes: [
-          GoRoute(
-            redirect: _authenticatedRoute,
-            path: AppScreen.notifications.toPath,
-            name: AppScreen.notifications.toName,
-            builder: (BuildContext context, GoRouterState state) {
-              return const NotificationsPage();
-            },
-          ),
-        ]),
-        StatefulShellBranch(routes: [
-          GoRoute(
-            redirect: _authenticatedRoute,
-            path: AppScreen.settings.toPath,
-            name: AppScreen.settings.toName,
-            builder: (BuildContext context, GoRouterState state) {
-              return const SettingsPage();
-            },
-          ),
-        ]),
+  static final main = ShellRoute(
+      navigatorKey: AppRouter.mainShellNavigatorKey,
+      pageBuilder: (context, state, child) =>
+          NoTransitionPage(child: MainScreen(child, state.uri)),
+      routes: [
+        GoRoute(
+          parentNavigatorKey: AppRouter.mainShellNavigatorKey,
+          redirect: _authenticatedRoute,
+          path: AppScreen.home.toPath,
+          name: AppScreen.home.toName,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return const NoTransitionPage(child: HomePage());
+          },
+        ),
+        GoRoute(
+          parentNavigatorKey: AppRouter.mainShellNavigatorKey,
+          redirect: _authenticatedRoute,
+          path: AppScreen.statistics.toPath,
+          name: AppScreen.statistics.toName,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return const NoTransitionPage(child: StatisticsPage());
+          },
+        ),
+        GoRoute(
+          parentNavigatorKey: AppRouter.mainShellNavigatorKey,
+          redirect: _authenticatedRoute,
+          path: AppScreen.notifications.toPath,
+          name: AppScreen.notifications.toName,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return const NoTransitionPage(child: NotificationsPage());
+          },
+        ),
+        GoRoute(
+          parentNavigatorKey: AppRouter.mainShellNavigatorKey,
+          redirect: _authenticatedRoute,
+          path: AppScreen.settings.toPath,
+          name: AppScreen.settings.toName,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return const NoTransitionPage(child: SettingsPage());
+          },
+        ),
       ]);
+
+  static final changePassword = GoRoute(
+    parentNavigatorKey: AppRouter.appNavigatorKey,
+    redirect: _authenticatedRoute,
+    path: AppScreen.changePassword.toPath,
+    name: AppScreen.changePassword.toName,
+    pageBuilder: (context, state) => CupertinoPage(
+      child: BlocProvider(
+        create: (context) => ChangePasswordCubit(),
+        child: const ChangePasswordScreen(),
+      ),
+    ),
+  );
 
   // Todo: Refactor redirect functions.
   static FutureOr<String?> _authenticatedRoute(
@@ -138,3 +153,58 @@ class AppRoutes {
     }
   }
 }
+/*
+
+static final main = ShellRoute(
+      navigatorKey: AppRouter.mainShellNavigatorKey,
+      builder: (context, state, child) => child,
+      routes: [
+        StatefulShellRoute.indexedStack(
+            parentNavigatorKey: AppRouter.mainShellNavigatorKey,
+            builder: (context, state, navigationShell) =>
+                MainScreen(navigationShell, state.uri),
+            branches: [
+              StatefulShellBranch(routes: [
+                GoRoute(
+                  redirect: _authenticatedRoute,
+                  path: AppScreen.home.toPath,
+                  name: AppScreen.home.toName,
+                  builder: (BuildContext context, GoRouterState state) {
+                    return const HomePage();
+                  },
+                ),
+              ]),
+              StatefulShellBranch(routes: [
+                GoRoute(
+                  redirect: _authenticatedRoute,
+                  path: AppScreen.statistics.toPath,
+                  name: AppScreen.statistics.toName,
+                  builder: (BuildContext context, GoRouterState state) {
+                    return const StatisticsPage();
+                  },
+                ),
+              ]),
+              StatefulShellBranch(routes: [
+                GoRoute(
+                  redirect: _authenticatedRoute,
+                  path: AppScreen.notifications.toPath,
+                  name: AppScreen.notifications.toName,
+                  builder: (BuildContext context, GoRouterState state) {
+                    return const NotificationsPage();
+                  },
+                ),
+              ]),
+              StatefulShellBranch(routes: [
+                GoRoute(
+                  redirect: _authenticatedRoute,
+                  path: AppScreen.settings.toPath,
+                  name: AppScreen.settings.toName,
+                  builder: (BuildContext context, GoRouterState state) {
+                    return const SettingsPage();
+                  },
+                ),
+              ]),
+            ])
+      ]);
+
+ */

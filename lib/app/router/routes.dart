@@ -8,6 +8,7 @@ enum AppScreen {
   statistics,
   notifications,
   settings,
+  changePassword,
 }
 
 extension AppScreenExtension on AppScreen {
@@ -31,6 +32,8 @@ extension AppScreenExtension on AppScreen {
         return "/notifications";
       case AppScreen.settings:
         return "/settings";
+      case AppScreen.changePassword:
+        return "/change-password";
       default:
         return "/";
     }
@@ -56,8 +59,19 @@ extension AppScreenExtension on AppScreen {
         return "NOTIFICATIONS";
       case AppScreen.settings:
         return "SETTINGS";
+      case AppScreen.changePassword:
+        return "CHANGE PASSWORD";
       default:
         return "HOME";
     }
   }
+
+  // String get asSubPath {
+  //   switch (this) {
+  //     case AppScreen.changePassword:
+  //       return "change-password";
+  //     default:
+  //       return "";
+  //   }
+  // }
 }

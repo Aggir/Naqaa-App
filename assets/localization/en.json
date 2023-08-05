@@ -40,7 +40,6 @@
     "send_again": "Send Again",
     "reset_password": "Reset password",
     "reset_password_page_description": "Enter your new password to finish resetting your password.",
-    "new_password": "New Password",
     "invalid_email": "Please enter a valid email address.",
     "short_password": "Password is too short (minimum is 8 characters).",
     "long_password": "Password is too long (maximum is 24 characters).",
@@ -83,5 +82,14 @@
     "change_password": "Change Password",
     "app_settings": "App Settings",
     "check_for_updates": "Check for Updates",
-    "sign_out": "Sign Out"
+    "sign_out": "Sign Out",
+    "change_password_description": "Please enter a password you haven’t used before.",
+    "old_password": "Old Password",
+    "new_password": "New Password",
+    "enter_password_you_have_not_used_before": "Enter a password you haven’t used before.",
+    "save": "Save",
+    "password_changed_successfully": "Your password has changed successfully.",
+    "wrong_password": "Wrong password.",
+    "connected_with_google": "Connected with Google",
+    "soon":"Soon"
 }

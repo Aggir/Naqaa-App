@@ -19,7 +19,9 @@ class CustomToast {
     );
   }
 
-  static void info(BuildContext context, String message) {}
+  static void info(BuildContext context, String message) {
+    _toast(context, message, AppColors.mediumGray);
+  }
 
   static void warning(BuildContext context, String message) {}
 

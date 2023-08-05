@@ -6,12 +6,14 @@ class UserEntity extends Equatable {
   final DateTime? dateOfBirth;
   final String email;
   final String profilePictureUrl;
+  final bool isSignedInWithGoogle;
   const UserEntity({
     required this.name,
     required this.gender,
     this.dateOfBirth,
     required this.email,
     required this.profilePictureUrl,
+    required this.isSignedInWithGoogle,
   });
 
   @override
@@ -22,6 +24,7 @@ class UserEntity extends Equatable {
       dateOfBirth,
       email,
       profilePictureUrl,
+      isSignedInWithGoogle,
     ];
   }
 }

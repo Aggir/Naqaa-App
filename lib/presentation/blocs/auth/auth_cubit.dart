@@ -2,10 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:naqaa/app/di/dependency_injection.dart';
 
-import 'package:naqaa/domain/entites/user.dart';
-import 'package:naqaa/domain/usecases/connect_with_google.dart';
+import 'package:naqaa/domain/entities/user.dart';
+import 'package:naqaa/domain/usecases/connect_with_google_usecase.dart';
 import 'package:naqaa/domain/usecases/index.dart';
-import 'package:naqaa/domain/usecases/is_signed_in.dart';
+import 'package:naqaa/domain/usecases/is_signed_in_usecase.dart';
 import 'package:naqaa/domain/usecases/sign_out_usecase.dart';
 
 import '../../../app/enum.dart';

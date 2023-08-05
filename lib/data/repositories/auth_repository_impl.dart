@@ -3,13 +3,13 @@ import 'package:naqaa/app/enum.dart';
 import 'package:naqaa/app/failure.dart';
 import 'package:naqaa/data/datasources/remote_datasource.dart';
 import 'package:naqaa/data/requests/requests.dart';
-import 'package:naqaa/domain/entites/user.dart';
-import 'package:naqaa/domain/repositories/auth_repository.dart';
+import 'package:naqaa/domain/entities/user.dart';
+import 'package:naqaa/domain/repositories/repository.dart';
 import 'package:naqaa/data/mappers/user_mapper.dart';
 
-class AuthRepositoryImpl implements AuthRepository {
+class RepositoryImpl implements Repository {
   final RemoteDataSource _remoteDataSource;
-  const AuthRepositoryImpl(this._remoteDataSource);
+  const RepositoryImpl(this._remoteDataSource);
 
   @override
   Future<Either<Failure, String>> sendResetPasswordInstructions(
@@ -70,6 +70,17 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(Failure(0, response.message!));
     } else {
       return Right(response.user!.toDomain());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> changePassword(
+      ChangePasswordRequest input) async {
+    final response = await _remoteDataSource.changePassword(input);
+    if (response.status.isFailure) {
+      return Left(Failure(0, response.message));
+    } else {
+      return const Right(null);
     }
   }
 }

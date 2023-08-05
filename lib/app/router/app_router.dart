@@ -14,6 +14,8 @@ class AppRouter {
       GlobalKey(debugLabel: 'root');
   static GlobalKey<NavigatorState> appNavigatorKey =
       GlobalKey(debugLabel: 'app');
+  static GlobalKey<NavigatorState> mainShellNavigatorKey =
+      GlobalKey(debugLabel: 'mainShell');
 
   static final GoRouter appRouter = GoRouter(
     navigatorKey: rootNavigatorKey,
@@ -28,6 +30,7 @@ class AppRouter {
           AppRoutes.signUp,
           AppRoutes.forgotPassword,
           AppRoutes.main,
+          AppRoutes.changePassword,
         ],
         builder: (context, state, child) => BlocProvider(
           create: (context) => instance<AuthCubit>()..onAppStart(),

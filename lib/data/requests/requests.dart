@@ -20,6 +20,15 @@ class SignUpRequest implements BaseRequest {
   });
 }
 
+class ChangePasswordRequest implements BaseRequest {
+  final String oldPassword;
+  final String newPassword;
+  const ChangePasswordRequest({
+    required this.oldPassword,
+    required this.newPassword,
+  });
+}
+
 class SendResetPasswordInstructionsRequest implements BaseRequest {
   final String emailAddress;
   const SendResetPasswordInstructionsRequest({

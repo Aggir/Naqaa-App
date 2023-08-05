@@ -7,7 +7,6 @@ import 'package:naqaa/data/datasources/remote_datasource.dart';
 import 'package:naqaa/data/models/user.dart';
 import 'package:naqaa/data/requests/requests.dart';
 import 'package:naqaa/data/responses/firebase_responses.dart';
-import 'package:naqaa/data/responses/responses.dart';
 
 import 'firebase_auth_error_handler.dart';
 
@@ -16,20 +15,18 @@ class FirebaseApi implements RemoteDataSource {
   const FirebaseApi(this._firebaseAuth);
 
   @override
-  Future<FirebaseResetPasswordInstructionsResponse>
-      sendResetPasswordInstructions(
-          SendResetPasswordInstructionsRequest request) async {
+  Future<FirebaseBasicResponse> sendResetPasswordInstructions(
+      SendResetPasswordInstructionsRequest request) async {
     try {
       // Todo: add url to navigate you from reset password web page to the app.
       await _firebaseAuth.sendPasswordResetEmail(email: request.emailAddress);
     } on FirebaseAuthException catch (e) {
-      return FirebaseResetPasswordInstructionsResponse(Status.failure,
+      return FirebaseBasicResponse(Status.failure,
           FirebaseAuthErrorHandler.getResetPasswordErrorMessage(e));
     } catch (e) {
-      return FirebaseResetPasswordInstructionsResponse(
-          Status.failure, e.toString());
+      return FirebaseBasicResponse(Status.failure, e.toString());
     }
-    return FirebaseResetPasswordInstructionsResponse(
+    return FirebaseBasicResponse(
         Status.success, AppStrings.sendResetInstructionsSuccessMessage.tr());
   }
 
@@ -66,7 +63,8 @@ class FirebaseApi implements RemoteDataSource {
         UserModel userModel = UserModel(
             name: user?.displayName,
             email: user?.email,
-            profilePictureUrl: user?.photoURL);
+            profilePictureUrl: user?.photoURL,
+            isSignedInWithGoogle: true);
         return FirebaseAuthResponse(Status.success, user: userModel);
       }
       throw Exception();
@@ -79,16 +77,16 @@ class FirebaseApi implements RemoteDataSource {
   }
 
   @override
-  Future<SignOutResponse> signOut() async {
+  Future<FirebaseBasicResponse> signOut() async {
     try {
       await _firebaseAuth.signOut();
     } on FirebaseAuthException catch (e) {
-      return SignOutResponse(
+      return FirebaseBasicResponse(
           Status.failure, FirebaseAuthErrorHandler.getAuthErrorMessage(e));
     } catch (e) {
-      return SignOutResponse(Status.failure, e.toString());
+      return FirebaseBasicResponse(Status.failure, e.toString());
     }
-    return const SignOutResponse(
+    return const FirebaseBasicResponse(
         Status.success, "Debug: sign-out success response");
   }
 
@@ -124,10 +122,31 @@ class FirebaseApi implements RemoteDataSource {
       name: user?.displayName,
       email: user?.email,
       profilePictureUrl: user?.photoURL,
+      isSignedInWithGoogle: user?.providerData[0].providerId == 'google.com',
     );
     return FirebaseAuthResponse(
       Status.success,
       user: userModel,
     );
+  }
+
+  @override
+  Future<FirebaseBasicResponse> changePassword(
+      ChangePasswordRequest input) async {
+    try {
+      final user = _firebaseAuth.currentUser;
+      final cred = EmailAuthProvider.credential(
+          email: user!.email!, password: input.oldPassword);
+
+      await user.reauthenticateWithCredential(cred);
+      user.updatePassword(input.newPassword);
+      return const FirebaseBasicResponse(
+          Status.success, "Debug: change password success response");
+    } on FirebaseAuthException catch (e) {
+      return FirebaseBasicResponse(Status.failure,
+          FirebaseAuthErrorHandler.getChangePasswordErrorMessage(e));
+    } catch (e) {
+      return FirebaseBasicResponse(Status.failure, e.toString());
+    }
   }
 }

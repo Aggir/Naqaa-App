@@ -35,4 +35,15 @@ class FirebaseAuthErrorHandler {
         return AppStrings.defaultErrorMessage.tr();
     }
   }
+
+  static String getChangePasswordErrorMessage(FirebaseAuthException exception) {
+    switch (exception.code) {
+      case 'wrong-password':
+        return AppStrings.wrongPassword.tr();
+      case 'too-many-requests':
+        return AppStrings.tooManyRequests.tr();
+      default:
+        return AppStrings.defaultErrorMessage.tr();
+    }
+  }
 }

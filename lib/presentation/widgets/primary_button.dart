@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
+import 'package:naqaa/presentation/theme/text_style_manager.dart';
 
 import '../theme/app_colors.dart';
 
@@ -18,6 +19,7 @@ class PrimaryButton extends StatelessWidget {
   final bool isLoading;
 
   static final customStyle = ElevatedButton.styleFrom(
+    textStyle: primaryButtonTextStyle(),
     minimumSize: AppValues.buttonMinSize,
     disabledBackgroundColor: AppColors.primary,
     disabledForegroundColor: AppColors.snowWhite,

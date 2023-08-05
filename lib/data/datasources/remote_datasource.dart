@@ -4,7 +4,7 @@ import 'package:naqaa/data/responses/responses.dart';
 abstract class RemoteDataSource {
   Future<AuthResponse> signIn(SignInRequest request);
 
-  Future<SignOutResponse> signOut();
+  Future<BasicResponse> signOut();
 
   Future<AuthResponse> signUp(SignUpRequest request);
 
@@ -12,6 +12,8 @@ abstract class RemoteDataSource {
 
   Future<AuthResponse> isSignedIn();
 
-  Future<ResetPasswordInstructionsResponse> sendResetPasswordInstructions(
+  Future<BasicResponse> changePassword(ChangePasswordRequest request);
+
+  Future<BasicResponse> sendResetPasswordInstructions(
       SendResetPasswordInstructionsRequest request);
 }

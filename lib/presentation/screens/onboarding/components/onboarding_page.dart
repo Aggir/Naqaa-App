@@ -32,7 +32,7 @@ class OnboardingPage extends StatelessWidget {
           _onboardingDivider(),
           Text(
             title,
-            style: onboardingTitleStyle(),
+            style: boldBlackExtraLargeStyle(),
           ).tr(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: AppValues.medium),

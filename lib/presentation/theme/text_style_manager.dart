@@ -3,10 +3,6 @@ import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/theme/font_manager.dart';
 import 'package:naqaa/presentation/theme/styles_manager.dart';
 
-TextStyle onboardingTitleStyle() {
-  return getBoldStyle(fontSize: FontSize.s26, color: AppColors.blackText);
-}
-
 TextStyle descriptionTextStyle() {
   return getRegularStyle(fontSize: FontSize.s16, color: AppColors.darkGrayText);
 }
@@ -92,4 +88,12 @@ TextStyle boldDarkBlueLargeStyle() {
 
 TextStyle boldWhiteHugeStyle() {
   return getBoldStyle(fontSize: FontSize.s46, color: AppColors.snowWhite);
+}
+
+TextStyle boldBlackExtraLargeStyle() {
+  return getBoldStyle(fontSize: FontSize.s26, color: AppColors.blackText);
+}
+
+TextStyle regularGrayExtrasSmallStyle() {
+  return getRegularStyle(fontSize: FontSize.s10, color: AppColors.mediumGray);
 }
