@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -8,7 +9,6 @@ import 'package:naqaa/presentation/screens/index.dart';
 import 'package:naqaa/presentation/blocs/index.dart';
 
 import '../di/dependency_injection.dart';
-import '../helpers/app_service.dart';
 
 class AppRoutes {
   static final onboarding = GoRoute(
@@ -108,8 +108,8 @@ class AppRoutes {
         StatefulShellBranch(routes: [
           GoRoute(
             redirect: _authenticatedRoute,
-            path: AppScreen.profile.toPath,
-            name: AppScreen.profile.toName,
+            path: AppScreen.settings.toPath,
+            name: AppScreen.settings.toName,
             builder: (BuildContext context, GoRouterState state) {
               return const SettingsPage();
             },
@@ -117,10 +117,11 @@ class AppRoutes {
         ]),
       ]);
 
+  // Todo: Refactor redirect functions.
   static FutureOr<String?> _authenticatedRoute(
       BuildContext context, GoRouterState state) {
-    final AppService appService = instance<AppService>();
-    if (!appService.loginState) {
+    final auth = instance<FirebaseAuth>();
+    if (auth.currentUser == null) {
       return state.namedLocation(AppScreen.signIn.toName);
     } else {
       return null;
@@ -129,8 +130,8 @@ class AppRoutes {
 
   static FutureOr<String?> _nonAuthenticatedRoute(
       BuildContext context, GoRouterState state) {
-    final AppService appService = instance<AppService>();
-    if (appService.loginState) {
+    final auth = instance<FirebaseAuth>();
+    if (auth.currentUser != null) {
       return state.namedLocation(AppScreen.home.toName);
     } else {
       return null;

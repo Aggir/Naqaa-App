@@ -23,7 +23,7 @@ class SecondaryButton extends StatelessWidget {
         minimumSize: AppValues.buttonMinSize,
         padding: const EdgeInsets.all(AppValues.small + (AppValues.small / 2)),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppValues.primaryButtonRadius),
+          borderRadius: BorderRadius.circular(AppValues.mediumSmallRadius),
         ),
       ),
       onPressed: onPressed,

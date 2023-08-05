@@ -1,11 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:naqaa/app/di/dependency_injection.dart';
-import 'package:naqaa/domain/usecases/index.dart';
-
-import '../../../app/enum.dart';
-import '../../../domain/usecases/connect_with_google.dart';
 
 part 'sign_up_state.dart';
 
@@ -20,42 +15,9 @@ class SignUpCubit extends Cubit<SignUpState> {
       TextEditingController();
   final FocusNode confirmPasswordFocusNode = FocusNode();
 
-  void signUp() async {
-    if (formKey.currentState!.validate()) {
-      emit(state.copyWith(signUpStatus: Status.loading));
-      initSignUp();
-      (await instance<SignUpUsecase>().execute(SignUpUsecaseInput(
-        fullName: fullNameController.text,
-        emailAddress: emailController.text,
-        password: passwordController.text,
-      )))
-          .fold(
-        (failure) {
-          emit(state.copyWith(
-            signUpStatus: Status.failure,
-            errorMessage: failure.message,
-          ));
-        },
-        (data) {
-          emit(state.copyWith(signUpStatus: Status.success));
-        },
-      );
-    }
-  }
+  String get name => fullNameController.text;
+  String get email => emailController.text;
+  String get password => passwordController.text;
 
-  void connectWithGoogle() async {
-    emit(state.copyWith(signUpStatus: Status.loading));
-    initConnectWithGoogle();
-    (await instance<ConnectWithGoogleUsecase>().execute(null)).fold(
-      (failure) {
-        emit(state.copyWith(
-          signUpStatus: Status.failure,
-          errorMessage: failure.message,
-        ));
-      },
-      (data) {
-        emit(state.copyWith(signUpStatus: Status.success));
-      },
-    );
-  }
+  bool get isFormValid => formKey.currentState?.validate() ?? false;
 }

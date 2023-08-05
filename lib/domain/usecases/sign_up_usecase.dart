@@ -4,12 +4,14 @@ import 'package:naqaa/data/requests/requests.dart';
 import 'package:naqaa/domain/repositories/auth_repository.dart';
 import 'package:naqaa/domain/usecases/base_usecase.dart';
 
-class SignUpUsecase implements BaseUsecase<SignUpUsecaseInput, String> {
+import '../entites/user.dart';
+
+class SignUpUsecase implements BaseUsecase<SignUpUsecaseInput, UserEntity> {
   final AuthRepository _repository;
   const SignUpUsecase(this._repository);
   @override
-  Future<Either<Failure, String>> execute(SignUpUsecaseInput input) async {
-    return _repository.signUp(SignUpRequest(
+  Future<Either<Failure, UserEntity>> execute(SignUpUsecaseInput input) async {
+    return await _repository.signUp(SignUpRequest(
         fullName: input.fullName,
         emailAddress: input.emailAddress,
         password: input.password));

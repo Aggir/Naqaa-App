@@ -11,7 +11,7 @@ class CustomToast {
       child: Text(message),
       context: context,
       backgroundColor: backgroundColor,
-      borderRadius: BorderRadius.circular(AppValues.textFieldRadius),
+      borderRadius: BorderRadius.circular(AppValues.smallRadius),
       contentPadding: const EdgeInsets.symmetric(
           horizontal: AppValues.medium, vertical: AppValues.medium),
       margin: const EdgeInsets.symmetric(

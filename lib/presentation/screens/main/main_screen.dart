@@ -40,8 +40,8 @@ class _MainScreenState extends State<MainScreen> {
     },
     {
       'label': AppStrings.settings.tr(),
-      'filledSvgPath': SvgAssets.settingsFilled,
-      "svgPath": SvgAssets.settings,
+      'filledSvgPath': SvgAssets.personFilled,
+      "svgPath": SvgAssets.person,
     },
   ];
 

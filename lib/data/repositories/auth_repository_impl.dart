@@ -3,7 +3,9 @@ import 'package:naqaa/app/enum.dart';
 import 'package:naqaa/app/failure.dart';
 import 'package:naqaa/data/datasources/remote_datasource.dart';
 import 'package:naqaa/data/requests/requests.dart';
+import 'package:naqaa/domain/entites/user.dart';
 import 'package:naqaa/domain/repositories/auth_repository.dart';
+import 'package:naqaa/data/mappers/user_mapper.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final RemoteDataSource _remoteDataSource;
@@ -22,12 +24,12 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, String>> signIn(SignInRequest input) async {
+  Future<Either<Failure, UserEntity>> signIn(SignInRequest input) async {
     final response = await _remoteDataSource.signIn(input);
     if (response.status.isFailure) {
-      return Left(Failure(0, response.message));
+      return Left(Failure(0, response.message!));
     } else {
-      return Right(response.message);
+      return Right(response.user!.toDomain());
     }
   }
 
@@ -42,22 +44,32 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, String>> signUp(SignUpRequest input) async {
+  Future<Either<Failure, UserEntity>> signUp(SignUpRequest input) async {
     final response = await _remoteDataSource.signUp(input);
     if (response.status.isFailure) {
-      return Left(Failure(0, response.message));
+      return Left(Failure(0, response.message!));
     } else {
-      return Right(response.message);
+      return Right(response.user!.toDomain());
     }
   }
 
   @override
-  Future<Either<Failure, void>> connectWithGoogle() async {
+  Future<Either<Failure, UserEntity>> connectWithGoogle() async {
     final response = await _remoteDataSource.connectWithGoogle();
     if (response.status.isFailure) {
-      return Left(Failure(0, response.message));
+      return Left(Failure(0, response.message!));
     } else {
-      return const Right(null);
+      return Right(response.user!.toDomain());
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> isSignedIn() async {
+    final response = await _remoteDataSource.isSignedIn();
+    if (response.status.isFailure) {
+      return Left(Failure(0, response.message!));
+    } else {
+      return Right(response.user!.toDomain());
     }
   }
 }

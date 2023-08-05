@@ -32,14 +32,15 @@ class AppValues {
   static const double extraLarge = 48.0;
   // Radius
   static const double circleRadius = 100;
-  static const double toastRadius = 10;
-  static const double primaryButtonRadius = 8;
-  static const double textFieldRadius = 6;
+  static const double mediumRadius = 10;
+  static const double mediumSmallRadius = 8;
+  static const double smallRadius = 6;
   // Sizes
   static const Size buttonMinSize = Size(25, 50);
 }
 
 class AppSizes {
+  static const double s1 = 1;
   static const double s2 = 2;
   static const double s4 = 4;
   static const double s5 = 5;

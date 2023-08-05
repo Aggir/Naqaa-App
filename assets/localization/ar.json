@@ -79,5 +79,10 @@
     "unread": "غير مقروء",
     "past_notifications": "الإشعارات السابقة",
     "setting_up_device_notification_message": "مرحبًا بك في نقاء! تهانينا على إعداد جهازك!",
-    "finish_setting_up_account_notification_message": "أكمل إعداد حساب نقاء الخاص بك باستخدام علامة إعدادات المستخدم!"
+    "finish_setting_up_account_notification_message": "أكمل إعداد حساب نقاء الخاص بك باستخدام علامة إعدادات المستخدم!",
+    "edit_profile": "تعديل الحساب",
+    "change_password": "تغيير كلمة المرور",
+    "app_settings": "اعدادات التطبيق",
+    "check_for_updates": "البحث عن تحديثات",
+    "sign_out": "تسجيل الخروج"
 }

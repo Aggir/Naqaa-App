@@ -9,6 +9,7 @@ import 'package:naqaa/app/enum.dart';
 import 'package:naqaa/app/functions.dart';
 import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/app/validators.dart';
+import 'package:naqaa/presentation/blocs/auth/auth_cubit.dart';
 import 'package:naqaa/presentation/blocs/sign_in/sign_in_cubit.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:naqaa/presentation/theme/font_manager.dart';
@@ -31,12 +32,18 @@ class SignInScreen extends StatelessWidget {
 
   void _signInHandler(BuildContext context) {
     FocusScope.of(context).unfocus();
-    BlocProvider.of<SignInCubit>(context).signIn();
+    final signInCubit = BlocProvider.of<SignInCubit>(context);
+    if (signInCubit.isFormValid) {
+      BlocProvider.of<AuthCubit>(context).signIn(
+        signInCubit.email,
+        signInCubit.password,
+      );
+    }
   }
 
   void _connectWithGoogleHandler(BuildContext context) {
     FocusScope.of(context).unfocus();
-    BlocProvider.of<SignInCubit>(context).connectWithGoogle();
+    BlocProvider.of<AuthCubit>(context).connectWithGoogle();
   }
 
   void _createAccountHandler(BuildContext context) {
@@ -76,11 +83,11 @@ class SignInScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 CustomSpacers.large(),
-                BlocBuilder<SignInCubit, SignInState>(
+                BlocBuilder<AuthCubit, AuthState>(
                   builder: (context, state) {
                     return ConnectWithGoogleButton(
                       onPressed: () => _connectWithGoogleHandler(context),
-                      isLoading: state.signInStatus.isLoading,
+                      isLoading: state.authStatus.isLoading,
                     );
                   },
                 ),
@@ -129,18 +136,18 @@ class SignInScreen extends StatelessWidget {
                   ],
                 ),
                 CustomSpacers.large(),
-                BlocConsumer<SignInCubit, SignInState>(
+                BlocConsumer<AuthCubit, AuthState>(
                   listener: (context, state) {
-                    if (state.signInStatus.isFailure) {
-                      CustomToast.error(context, state.errorMessage!);
-                    } else if (state.signInStatus.isSuccess) {
+                    if (state.authStatus.isFailure) {
+                      CustomToast.error(context, state.authErrorMessage!);
+                    } else if (state.authStatus.isSuccess) {
                       context.go(AppScreen.home.toPath);
                     }
                   },
                   builder: (context, state) {
                     return PrimaryButton.fullWidth(
                       onPressed: () => _signInHandler(context),
-                      isLoading: state.signInStatus.isLoading,
+                      isLoading: state.authStatus.isLoading,
                       child: Text(AppStrings.signIn.tr().toUpperCase()),
                     );
                   },

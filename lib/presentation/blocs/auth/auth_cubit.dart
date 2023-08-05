@@ -1,0 +1,89 @@
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:naqaa/app/di/dependency_injection.dart';
+
+import 'package:naqaa/domain/entites/user.dart';
+import 'package:naqaa/domain/usecases/connect_with_google.dart';
+import 'package:naqaa/domain/usecases/index.dart';
+import 'package:naqaa/domain/usecases/is_signed_in.dart';
+import 'package:naqaa/domain/usecases/sign_out_usecase.dart';
+
+import '../../../app/enum.dart';
+
+part 'auth_state.dart';
+
+class AuthCubit extends Cubit<AuthState> {
+  AuthCubit() : super(const AuthState());
+
+  onAppStart() async {
+    initIsSignedIn();
+    (await instance<IsSignedInUsecase>().execute(null)).fold(
+      (l) => emit(state.copyWith(user: null, authStatus: Status.initial)),
+      (r) => emit(state.copyWith(user: r, authStatus: Status.success)),
+    );
+  }
+
+  signOut() async {
+    initSignOut();
+    await instance<SignOutUsecase>().execute(null);
+    emit(const AuthState());
+  }
+
+  void signIn(String email, String password) async {
+    emit(state.copyWith(authStatus: Status.loading));
+    initSignIn();
+    (await instance<SignInUsecase>().execute(
+            SignInUsecaseInput(emailAddress: email, password: password)))
+        .fold(
+      (failure) {
+        emit(state.copyWith(
+          authStatus: Status.failure,
+          authErrorMessage: failure.message,
+        ));
+      },
+      (data) {
+        emit(state.copyWith(authStatus: Status.success, user: data));
+      },
+    );
+  }
+
+  void connectWithGoogle() async {
+    emit(state.copyWith(authStatus: Status.loading));
+    initConnectWithGoogle();
+    (await instance<ConnectWithGoogleUsecase>().execute(null)).fold(
+      (failure) {
+        emit(state.copyWith(
+          authStatus: Status.failure,
+          authErrorMessage: failure.message,
+        ));
+      },
+      (data) {
+        emit(state.copyWith(authStatus: Status.success, user: data));
+      },
+    );
+  }
+
+  void signUp(String name, String email, String password) async {
+    emit(state.copyWith(authStatus: Status.loading));
+    initSignUp();
+    (await instance<SignUpUsecase>().execute(SignUpUsecaseInput(
+      fullName: name,
+      emailAddress: email,
+      password: password,
+    )))
+        .fold(
+      (failure) {
+        emit(state.copyWith(
+          authStatus: state.authStatus,
+          authErrorMessage: failure.message,
+        ));
+      },
+      (data) {
+        emit(state.copyWith(
+          user: data,
+          authStatus: Status.success,
+        ));
+      },
+    );
+  }
+}

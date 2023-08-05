@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/enum.dart';
 import 'package:naqaa/app/validators.dart';
+import 'package:naqaa/presentation/blocs/auth/auth_cubit.dart';
 import 'package:naqaa/presentation/blocs/sign_up/sign_up_cubit.dart';
 
 import 'package:naqaa/presentation/widgets/custom_back_button.dart';
@@ -26,7 +27,11 @@ class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
   void _signUpHandler(BuildContext context) {
     _unFocus(context);
-    BlocProvider.of<SignUpCubit>(context).signUp();
+    final signUpCubit = BlocProvider.of<SignUpCubit>(context);
+    if (signUpCubit.isFormValid) {
+      BlocProvider.of<AuthCubit>(context)
+          .signUp(signUpCubit.name, signUpCubit.email, signUpCubit.password);
+    }
   }
 
   void _termsOfUseHandler(BuildContext context) {
@@ -39,7 +44,7 @@ class SignUpScreen extends StatelessWidget {
 
   void _signUpWithGoogleHandler(BuildContext context) {
     _unFocus(context);
-    BlocProvider.of<SignUpCubit>(context).connectWithGoogle();
+    BlocProvider.of<AuthCubit>(context).connectWithGoogle();
   }
 
   void _unFocus(BuildContext context) {
@@ -130,16 +135,16 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 CustomSpacers.medium(),
-                BlocConsumer<SignUpCubit, SignUpState>(
+                BlocConsumer<AuthCubit, AuthState>(
                   listener: (context, state) {
-                    if (state.signUpStatus.isFailure) {
-                      CustomToast.error(context, state.errorMessage!);
+                    if (state.authStatus.isFailure) {
+                      CustomToast.error(context, state.authErrorMessage!);
                     }
                   },
                   builder: (context, state) {
                     return PrimaryButton.fullWidth(
                       onPressed: () => _signUpHandler(context),
-                      isLoading: state.signUpStatus.isLoading,
+                      isLoading: state.authStatus.isLoading,
                       child: Text(
                         AppStrings.signUp.tr().toUpperCase(),
                       ),
@@ -189,11 +194,11 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 CustomSpacers.medium(),
-                BlocBuilder<SignUpCubit, SignUpState>(
+                BlocBuilder<AuthCubit, AuthState>(
                   builder: (context, state) {
                     return ConnectWithGoogleButton(
                       onPressed: () => _signUpWithGoogleHandler(context),
-                      isLoading: state.signUpStatus.isLoading,
+                      isLoading: state.authStatus.isLoading,
                     );
                   },
                 ),

@@ -94,4 +94,10 @@ class AppStrings {
       "setting_up_device_notification_message";
   static const finishSettingUpAccountNotificationMessage =
       "setting_up_device_notification_message";
+
+  static const editProfile = 'edit_profile';
+  static const changePassword = 'change_password';
+  static const appSettings = 'app_settings';
+  static const checkForUpdates = 'check_for_updates';
+  static const signOut = 'sign_out';
 }

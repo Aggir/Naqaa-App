@@ -7,7 +7,7 @@ enum AppScreen {
   home,
   statistics,
   notifications,
-  profile,
+  settings,
 }
 
 extension AppScreenExtension on AppScreen {
@@ -29,8 +29,8 @@ extension AppScreenExtension on AppScreen {
         return "/statistics";
       case AppScreen.notifications:
         return "/notifications";
-      case AppScreen.profile:
-        return "/profile";
+      case AppScreen.settings:
+        return "/settings";
       default:
         return "/";
     }
@@ -54,8 +54,8 @@ extension AppScreenExtension on AppScreen {
         return "STATISTICS";
       case AppScreen.notifications:
         return "NOTIFICATIONS";
-      case AppScreen.profile:
-        return "PROFILE";
+      case AppScreen.settings:
+        return "SETTINGS";
       default:
         return "HOME";
     }

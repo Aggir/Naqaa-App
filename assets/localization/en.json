@@ -78,5 +78,10 @@
     "unread": "Unread",
     "past_notifications": "Past notifications",
     "setting_up_device_notification_message": "Welcome to Naqaa! Congratulations on setting up your device!",
-    "finish_setting_up_account_notification_message": "Finish setting up your Naqaa account using the user settings tab!"
+    "finish_setting_up_account_notification_message": "Finish setting up your Naqaa account using the user settings tab!",
+    "edit_profile": "Edit Profile",
+    "change_password": "Change Password",
+    "app_settings": "App Settings",
+    "check_for_updates": "Check for Updates",
+    "sign_out": "Sign Out"
 }

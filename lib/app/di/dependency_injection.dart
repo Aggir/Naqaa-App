@@ -7,7 +7,9 @@ import 'package:naqaa/data/repositories/auth_repository_impl.dart';
 import 'package:naqaa/domain/repositories/auth_repository.dart';
 import 'package:naqaa/domain/usecases/index.dart';
 import 'package:naqaa/domain/usecases/connect_with_google.dart';
+import 'package:naqaa/domain/usecases/is_signed_in.dart';
 import 'package:naqaa/domain/usecases/sign_out_usecase.dart';
+import 'package:naqaa/presentation/blocs/auth/auth_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final instance = GetIt.instance;
@@ -32,6 +34,8 @@ Future<void> initAppModule() async {
   // Repositories
   instance.registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(instance<RemoteDataSource>()));
+  // Auth Cubit
+  instance.registerFactory(() => AuthCubit());
 }
 
 void initSendResetInstructions() async {
@@ -66,5 +70,12 @@ void initSignUp() async {
   if (!GetIt.I.isRegistered<SignUpUsecase>()) {
     instance.registerFactory<SignUpUsecase>(
         () => SignUpUsecase(instance<AuthRepository>()));
+  }
+}
+
+void initIsSignedIn() async {
+  if (!GetIt.I.isRegistered<IsSignedInUsecase>()) {
+    instance.registerFactory<IsSignedInUsecase>(
+        () => IsSignedInUsecase(instance<AuthRepository>()));
   }
 }

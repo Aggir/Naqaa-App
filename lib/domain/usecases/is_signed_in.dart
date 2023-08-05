@@ -5,11 +5,11 @@ import 'package:naqaa/domain/usecases/base_usecase.dart';
 
 import '../entites/user.dart';
 
-class ConnectWithGoogleUsecase implements BaseUsecase<void, UserEntity> {
+class IsSignedInUsecase implements BaseUsecase<void, UserEntity> {
   final AuthRepository _repository;
-  const ConnectWithGoogleUsecase(this._repository);
+  const IsSignedInUsecase(this._repository);
   @override
   Future<Either<Failure, UserEntity>> execute(input) async {
-    return _repository.connectWithGoogle();
+    return await _repository.isSignedIn();
   }
 }

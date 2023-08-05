@@ -4,7 +4,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/enum.dart';
 import 'package:naqaa/data/datasources/remote_datasource.dart';
+import 'package:naqaa/data/models/user.dart';
 import 'package:naqaa/data/requests/requests.dart';
+import 'package:naqaa/data/responses/firebase_responses.dart';
 import 'package:naqaa/data/responses/responses.dart';
 
 import 'firebase_auth_error_handler.dart';
@@ -14,56 +16,66 @@ class FirebaseApi implements RemoteDataSource {
   const FirebaseApi(this._firebaseAuth);
 
   @override
-  Future<ResetPasswordInstructionsResponse> sendResetPasswordInstructions(
-      SendResetPasswordInstructionsRequest request) async {
+  Future<FirebaseResetPasswordInstructionsResponse>
+      sendResetPasswordInstructions(
+          SendResetPasswordInstructionsRequest request) async {
     try {
       // Todo: add url to navigate you from reset password web page to the app.
       await _firebaseAuth.sendPasswordResetEmail(email: request.emailAddress);
     } on FirebaseAuthException catch (e) {
-      return ResetPasswordInstructionsResponse(Status.failure,
+      return FirebaseResetPasswordInstructionsResponse(Status.failure,
           FirebaseAuthErrorHandler.getResetPasswordErrorMessage(e));
     } catch (e) {
-      return ResetPasswordInstructionsResponse(Status.failure, e.toString());
+      return FirebaseResetPasswordInstructionsResponse(
+          Status.failure, e.toString());
     }
-    return ResetPasswordInstructionsResponse(
+    return FirebaseResetPasswordInstructionsResponse(
         Status.success, AppStrings.sendResetInstructionsSuccessMessage.tr());
   }
 
   @override
-  Future<SignInResponse> signIn(SignInRequest request) async {
+  Future<FirebaseAuthResponse> signIn(SignInRequest request) async {
+    User? user;
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
-          email: request.emailAddress, password: request.password);
+      user = (await _firebaseAuth.signInWithEmailAndPassword(
+              email: request.emailAddress, password: request.password))
+          .user;
+      UserModel userModel = UserModel(
+          name: user?.displayName,
+          email: user?.email,
+          profilePictureUrl: user?.photoURL);
+      return FirebaseAuthResponse(Status.success, user: userModel);
     } on FirebaseAuthException catch (e) {
-      return SignInResponse(
-          Status.failure, FirebaseAuthErrorHandler.getAuthErrorMessage(e));
+      return FirebaseAuthResponse(Status.failure,
+          message: FirebaseAuthErrorHandler.getAuthErrorMessage(e));
     } catch (e) {
-      return SignInResponse(Status.failure, e.toString());
+      return FirebaseAuthResponse(Status.failure, message: e.toString());
     }
-    return const SignInResponse(
-        Status.success, "Debug: sign-in success response");
   }
 
   @override
-  Future<SignInResponse> connectWithGoogle() async {
+  Future<FirebaseAuthResponse> connectWithGoogle() async {
+    User? user;
     try {
       final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
       if (gUser != null) {
         final GoogleSignInAuthentication gAuth = await gUser.authentication;
         final credential = GoogleAuthProvider.credential(
             accessToken: gAuth.accessToken, idToken: gAuth.idToken);
-        await _firebaseAuth.signInWithCredential(credential);
-        return const SignInResponse(
-            Status.success, "Debug: sign-in with Google success response");
+        user = (await _firebaseAuth.signInWithCredential(credential)).user;
+        UserModel userModel = UserModel(
+            name: user?.displayName,
+            email: user?.email,
+            profilePictureUrl: user?.photoURL);
+        return FirebaseAuthResponse(Status.success, user: userModel);
       }
+      throw Exception();
     } on FirebaseAuthException catch (e) {
-      return SignInResponse(
-          Status.failure, FirebaseAuthErrorHandler.getAuthErrorMessage(e));
+      return FirebaseAuthResponse(Status.failure,
+          message: FirebaseAuthErrorHandler.getAuthErrorMessage(e));
     } catch (e) {
-      return SignInResponse(Status.failure, e.toString());
+      return FirebaseAuthResponse(Status.failure, message: e.toString());
     }
-    return const SignInResponse(
-        Status.canceled, "Debug: sign-in with Google canceled response");
   }
 
   @override
@@ -81,19 +93,41 @@ class FirebaseApi implements RemoteDataSource {
   }
 
   @override
-  Future<SignUpResponse> signUp(SignUpRequest request) async {
+  Future<FirebaseAuthResponse> signUp(SignUpRequest request) async {
+    User? user;
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      user = (await _firebaseAuth.createUserWithEmailAndPassword(
         email: request.emailAddress,
         password: request.password,
+      ))
+          .user;
+      await user?.updateDisplayName(request.fullName);
+      UserModel userModel = UserModel(
+        name: request.fullName,
+        email: user?.email,
+        profilePictureUrl: user?.photoURL,
       );
+      return FirebaseAuthResponse(Status.success, user: userModel);
     } on FirebaseAuthException catch (e) {
-      return SignUpResponse(
-          Status.failure, FirebaseAuthErrorHandler.getAuthErrorMessage(e));
+      return FirebaseAuthResponse(Status.failure,
+          message: FirebaseAuthErrorHandler.getAuthErrorMessage(e));
     } catch (e) {
-      return SignUpResponse(Status.failure, e.toString());
+      return FirebaseAuthResponse(Status.failure, message: e.toString());
     }
-    return const SignUpResponse(
-        Status.success, "Debug: sign-up success response");
+  }
+
+  @override
+  Future<FirebaseAuthResponse> isSignedIn() async {
+    User? user;
+    user = _firebaseAuth.currentUser;
+    UserModel userModel = UserModel(
+      name: user?.displayName,
+      email: user?.email,
+      profilePictureUrl: user?.photoURL,
+    );
+    return FirebaseAuthResponse(
+      Status.success,
+      user: userModel,
+    );
   }
 }

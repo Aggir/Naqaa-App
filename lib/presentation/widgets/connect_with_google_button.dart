@@ -31,7 +31,7 @@ class ConnectWithGoogleButton extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: AppColors.snowWhite,
                     borderRadius:
-                        BorderRadius.circular(AppValues.primaryButtonRadius)),
+                        BorderRadius.circular(AppValues.mediumSmallRadius)),
               ),
             ),
           ),

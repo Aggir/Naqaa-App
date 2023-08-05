@@ -96,10 +96,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     final inputDecoration = InputDecoration(
       errorMaxLines: 3,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppValues.textFieldRadius),
+        borderRadius: BorderRadius.circular(AppValues.smallRadius),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppValues.textFieldRadius),
+        borderRadius: BorderRadius.circular(AppValues.smallRadius),
         borderSide: BorderSide(color: AppColors.pastelBlue),
       ),
       contentPadding: const EdgeInsets.symmetric(

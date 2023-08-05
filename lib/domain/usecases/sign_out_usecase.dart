@@ -8,6 +8,6 @@ class SignOutUsecase implements BaseUsecase<void, void> {
   const SignOutUsecase(this._repository);
   @override
   Future<Either<Failure, void>> execute(input) async {
-    return _repository.signOut();
+    return await _repository.signOut();
   }
 }
