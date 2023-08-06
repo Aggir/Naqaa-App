@@ -19,7 +19,10 @@ import 'package:naqaa/presentation/widgets/page_container.dart';
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
-  void _editProfileButtonFunction(BuildContext context) async {}
+  void _editProfileButtonFunction(BuildContext context) async {
+    context.push(AppScreen.editProfile.toPath);
+  }
+
   void _changePasswordButtonFunction(BuildContext context) async {
     context.push(AppScreen.changePassword.toPath);
   }
@@ -87,31 +90,7 @@ class SettingsPage extends StatelessWidget {
                       svgPath: SvgAssets.lock,
                     );
                   } else {
-                    return Container(
-                      color: AppColors.snowWhite,
-                      padding: const EdgeInsets.all(AppValues.medium),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            radius: AppSizes.s16,
-                            backgroundColor:
-                                AppColors.primary.withOpacity(0.10),
-                            child: Opacity(
-                              opacity: 0.5,
-                              child: SvgPicture.asset(
-                                SvgAssets.google,
-                                height: AppSizes.s16,
-                              ),
-                            ),
-                          ),
-                          CustomSpacers.medium(),
-                          Text(
-                            AppStrings.connectWithGoogle.tr(),
-                            style: semiGrayStyle(),
-                          ),
-                        ],
-                      ),
-                    );
+                    return _connectedWithGoogle();
                   }
                 },
               ),
@@ -202,6 +181,36 @@ class SettingsPage extends StatelessWidget {
         child: Column(
           children: children,
         ),
+      ),
+    );
+  }
+
+  Widget _connectedWithGoogle() {
+    return Container(
+      color: AppColors.snowWhite,
+      padding: const EdgeInsets.all(AppValues.medium),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: AppSizes.s16,
+            backgroundColor: AppColors.primary.withOpacity(0.10),
+            child: Opacity(
+              opacity: 0.5,
+              child: SvgPicture.asset(
+                SvgAssets.google,
+                height: AppSizes.s16,
+              ),
+            ),
+          ),
+          CustomSpacers.medium(),
+          Opacity(
+            opacity: 0.7,
+            child: Text(
+              AppStrings.connectedWithGoogle.tr(),
+              style: semiGrayStyle(),
+            ),
+          ),
+        ],
       ),
     );
   }

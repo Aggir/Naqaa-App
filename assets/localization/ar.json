@@ -92,5 +92,15 @@
     "password_changed_successfully": "تم تغيير كلمة المرور بنجاح.",
     "wrong_password": "كلمة المرور خاطئة.",
     "connected_with_google": "متصل بحساب الجوجل",
-    "soon": "قريبا"
+    "soon": "قريبًا",
+    "name": "الاسم",
+    "gender": "الجنس",
+    "date_of_birth": "تاريخ الميلاد",
+    "email": "البريد الإلكتروني",
+    "address": "العنوان",
+    "male": "ذكر",
+    "female": "أنثى",
+    "gender_field_hint": "اختر الجنس",
+    "date_of_birth_field_hint": "سنة/شهر/يوم",
+    "edit_profile_success_message": "تم تحديث الملف الشخصي بنجاح."
 }

@@ -9,6 +9,7 @@ enum AppScreen {
   notifications,
   settings,
   changePassword,
+  editProfile,
 }
 
 extension AppScreenExtension on AppScreen {
@@ -34,6 +35,8 @@ extension AppScreenExtension on AppScreen {
         return "/settings";
       case AppScreen.changePassword:
         return "/change-password";
+      case AppScreen.editProfile:
+        return "/edit-profile";
       default:
         return "/";
     }
@@ -61,6 +64,8 @@ extension AppScreenExtension on AppScreen {
         return "SETTINGS";
       case AppScreen.changePassword:
         return "CHANGE PASSWORD";
+      case AppScreen.editProfile:
+        return "EDIT PROFILE";
       default:
         return "HOME";
     }

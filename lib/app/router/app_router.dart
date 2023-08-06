@@ -31,12 +31,15 @@ class AppRouter {
           AppRoutes.forgotPassword,
           AppRoutes.main,
           AppRoutes.changePassword,
+          AppRoutes.editProfile,
         ],
         builder: (context, state, child) => BlocProvider(
           create: (context) => instance<AuthCubit>()..onAppStart(),
           child: Builder(builder: (context) {
             return BlocListener<AuthCubit, AuthState>(
-              listenWhen: (previous, current) => previous.user != current.user,
+              listenWhen: (previous, current) =>
+                  previous.user != current.user &&
+                  previous.authStatus != current.authStatus,
               listener: (context, state) {
                 if (state.user == null) {
                   context.go(AppScreen.signIn.toPath);

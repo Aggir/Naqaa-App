@@ -16,4 +16,6 @@ abstract class RemoteDataSource {
 
   Future<BasicResponse> sendResetPasswordInstructions(
       SendResetPasswordInstructionsRequest request);
+
+  Future<AuthResponse> editProfile(EditProfileRequest request);
 }

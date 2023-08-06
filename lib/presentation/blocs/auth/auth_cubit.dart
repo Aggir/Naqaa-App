@@ -1,9 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:naqaa/app/di/dependency_injection.dart';
 
 import 'package:naqaa/domain/entities/user.dart';
 import 'package:naqaa/domain/usecases/connect_with_google_usecase.dart';
+import 'package:naqaa/domain/usecases/edit_profile_usecase.dart';
 import 'package:naqaa/domain/usecases/index.dart';
 import 'package:naqaa/domain/usecases/is_signed_in_usecase.dart';
 import 'package:naqaa/domain/usecases/sign_out_usecase.dart';
@@ -82,6 +84,32 @@ class AuthCubit extends Cubit<AuthState> {
         emit(state.copyWith(
           user: data,
           authStatus: Status.success,
+        ));
+      },
+    );
+  }
+
+  void editProfile(String name, String? genderId, String dateOfBirth) async {
+    emit(state.copyWith(editProfileStatus: Status.loading));
+    initEditProfile();
+    (await instance<EditProfileUsecase>().execute(EditProfileUsecaseInput(
+      fullName: name,
+      dateOfBirth: dateOfBirth.isNotEmpty
+          ? DateFormat('dd/MM/yyyy').parse(dateOfBirth).millisecondsSinceEpoch
+          : null,
+      genderId: genderId,
+    )))
+        .fold(
+      (failure) {
+        emit(state.copyWith(
+          editProfileStatus: state.authStatus,
+          editProfileErrorMessage: failure.message,
+        ));
+      },
+      (data) {
+        emit(state.copyWith(
+          user: data,
+          editProfileStatus: Status.success,
         ));
       },
     );

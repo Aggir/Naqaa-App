@@ -19,4 +19,6 @@ abstract class Repository {
 
   Future<Either<Failure, String>> sendResetPasswordInstructions(
       SendResetPasswordInstructionsRequest input);
+
+  Future<Either<Failure, UserEntity>> editProfile(EditProfileRequest input);
 }

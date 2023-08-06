@@ -83,4 +83,15 @@ class RepositoryImpl implements Repository {
       return const Right(null);
     }
   }
+
+  @override
+  Future<Either<Failure, UserEntity>> editProfile(
+      EditProfileRequest input) async {
+    final response = await _remoteDataSource.editProfile(input);
+    if (response.status.isFailure) {
+      return Left(Failure(0, response.message!));
+    } else {
+      return Right(response.user!.toDomain());
+    }
+  }
 }

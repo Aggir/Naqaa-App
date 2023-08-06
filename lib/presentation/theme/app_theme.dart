@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:naqaa/presentation/theme/font_manager.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
 
 import 'app_colors.dart';
 
 ThemeData appThemeData() => ThemeData(
       scaffoldBackgroundColor: AppColors.cloudWhite,
+      fontFamily: FontConstants.fontFamily,
       colorScheme: ThemeData().colorScheme.copyWith(
           primary: AppColors.primary, secondary: AppColors.cloudWhite),
       appBarTheme: AppBarTheme(
@@ -22,6 +24,8 @@ ThemeData appThemeData() => ThemeData(
     );
 
 class AppValues {
+  static const double textFieldHeight = 48.0;
+
   // Padding and Margin
   static const double extraSmall = 4.0;
   static const double small = 8.0;
@@ -59,6 +63,7 @@ class AppSizes {
   static const double s28 = 28;
   static const double s30 = 30;
   static const double s40 = 40;
+  static const double s45 = 45;
   static const double s48 = 48;
   static const double s50 = 50;
   static const double s60 = 60;

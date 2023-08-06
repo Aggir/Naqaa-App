@@ -16,7 +16,7 @@ TextStyle secondaryButtonTextStyle() {
 }
 
 TextStyle textFieldHintStyle() {
-  return getRegularStyle(fontSize: FontSize.s16, color: AppColors.hintText);
+  return getRegularStyle(fontSize: FontSize.s14, color: AppColors.hintText);
 }
 
 TextStyle appBarTitleTextStyle() {
@@ -70,6 +70,10 @@ TextStyle regularGrayStyle() {
   return getRegularStyle(fontSize: FontSize.s14, color: AppColors.mediumGray);
 }
 
+TextStyle regularBlackStyle() {
+  return getRegularStyle(fontSize: FontSize.s14, color: AppColors.blackText);
+}
+
 TextStyle regularDarkGrayMediumStyle() {
   return getRegularStyle(fontSize: FontSize.s16, color: AppColors.darkGray);
 }
@@ -96,4 +100,8 @@ TextStyle boldBlackExtraLargeStyle() {
 
 TextStyle regularGrayExtrasSmallStyle() {
   return getRegularStyle(fontSize: FontSize.s10, color: AppColors.mediumGray);
+}
+
+TextStyle regularRedExtrasSmallStyle() {
+  return getRegularStyle(fontSize: FontSize.s10, color: AppColors.red);
 }

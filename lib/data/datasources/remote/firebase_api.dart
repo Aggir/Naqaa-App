@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -12,7 +13,8 @@ import 'firebase_auth_error_handler.dart';
 
 class FirebaseApi implements RemoteDataSource {
   final FirebaseAuth _firebaseAuth;
-  const FirebaseApi(this._firebaseAuth);
+  final FirebaseFirestore _firebaseFirestore;
+  const FirebaseApi(this._firebaseAuth, this._firebaseFirestore);
 
   @override
   Future<FirebaseBasicResponse> sendResetPasswordInstructions(
@@ -118,10 +120,18 @@ class FirebaseApi implements RemoteDataSource {
   Future<FirebaseAuthResponse> isSignedIn() async {
     User? user;
     user = _firebaseAuth.currentUser;
+    final response =
+        await _firebaseFirestore.collection('users').doc(user?.uid).get();
+    EditProfileRequest? data;
+    if (response.data() != null) {
+      data = EditProfileRequest.fromMap(response.data()!);
+    }
     UserModel userModel = UserModel(
       name: user?.displayName,
       email: user?.email,
       profilePictureUrl: user?.photoURL,
+      gender: data?.genderId,
+      birthDate: data?.dateOfBirth,
       isSignedInWithGoogle: user?.providerData[0].providerId == 'google.com',
     );
     return FirebaseAuthResponse(
@@ -147,6 +157,35 @@ class FirebaseApi implements RemoteDataSource {
           FirebaseAuthErrorHandler.getChangePasswordErrorMessage(e));
     } catch (e) {
       return FirebaseBasicResponse(Status.failure, e.toString());
+    }
+  }
+
+  @override
+  Future<FirebaseAuthResponse> editProfile(EditProfileRequest request) async {
+    try {
+      final User? user = _firebaseAuth.currentUser;
+      await user?.updateDisplayName(request.fullName);
+      await _firebaseFirestore
+          .collection('users')
+          .doc(user?.uid)
+          .set(request.toMap());
+
+      UserModel userModel = UserModel(
+        name: request.fullName,
+        email: user?.email,
+        profilePictureUrl: user?.photoURL,
+        gender: request.genderId,
+        birthDate: request.dateOfBirth,
+      );
+      return FirebaseAuthResponse(
+        Status.success,
+        user: userModel,
+      );
+    } on FirebaseAuthException catch (e) {
+      return FirebaseAuthResponse(Status.failure,
+          message: FirebaseAuthErrorHandler.getAuthErrorMessage(e));
+    } catch (e) {
+      return FirebaseAuthResponse(Status.failure, message: e.toString());
     }
   }
 }

@@ -19,6 +19,7 @@ class CustomTextFormField extends StatefulWidget {
     this.defaultValidator = true,
     this.enabled = true,
     this.readOnly = false,
+    this.focusedStyleEnabled = true,
     this.initialValue,
     this.hintText,
     this.suffixIcon,
@@ -26,6 +27,8 @@ class CustomTextFormField extends StatefulWidget {
     this.textInputAction,
     this.onFieldSubmitted,
     this.onEditingComplete,
+    this.onChanged,
+    this.onTap,
     this.focusNode,
   });
   final TextInputType keyboardType;
@@ -35,6 +38,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool defaultValidator;
   final bool enabled;
   final bool readOnly;
+  final bool focusedStyleEnabled;
   final String? initialValue;
   final String? hintText;
   final Widget? suffixIcon;
@@ -42,6 +46,8 @@ class CustomTextFormField extends StatefulWidget {
   final TextInputAction? textInputAction;
   final void Function(String)? onFieldSubmitted;
   final void Function()? onEditingComplete;
+  final void Function(String)? onChanged;
+  final void Function()? onTap;
   final FocusNode? focusNode;
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -102,9 +108,17 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         borderRadius: BorderRadius.circular(AppValues.smallRadius),
         borderSide: BorderSide(color: AppColors.pastelBlue),
       ),
-      contentPadding: const EdgeInsets.symmetric(
-          vertical: AppValues.medium, horizontal: AppValues.medium),
-      fillColor: AppColors.snowWhite,
+      focusedBorder: widget.focusedStyleEnabled
+          ? null
+          : OutlineInputBorder(
+              borderRadius: BorderRadius.circular(AppValues.smallRadius),
+              borderSide: BorderSide(color: AppColors.pastelBlue),
+            ),
+      contentPadding:
+          const EdgeInsets.symmetric(vertical: 0, horizontal: AppValues.medium),
+      fillColor: widget.enabled
+          ? AppColors.snowWhite
+          : AppColors.snowWhite.withOpacity(0.20),
       filled: true,
       counterText: '',
       suffixIcon: _suffixIcon,
@@ -112,22 +126,28 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       hintStyle: textFieldHintStyle(),
     );
 
-    return TextFormField(
-      controller: widget.controller,
-      focusNode: widget.focusNode,
-      onFieldSubmitted: widget.onFieldSubmitted,
-      onEditingComplete: widget.onEditingComplete,
-      textInputAction: widget.textInputAction,
-      keyboardType: widget.keyboardType,
-      maxLength: widget.maxLength,
-      obscureText: widget.isPassword ? !_visible : false,
-      enabled: widget.enabled,
-      readOnly: widget.readOnly,
-      initialValue: widget.initialValue,
-      inputFormatters: getFormatters(),
-      validator: widget.validator ??
-          (widget.defaultValidator ? _defaultValidator : null),
-      decoration: inputDecoration,
+    return SizedBox(
+      height: AppValues.textFieldHeight,
+      child: TextFormField(
+        controller: widget.controller,
+        focusNode: widget.focusNode,
+        onFieldSubmitted: widget.onFieldSubmitted,
+        onEditingComplete: widget.onEditingComplete,
+        textInputAction: widget.textInputAction,
+        keyboardType: widget.keyboardType,
+        maxLength: widget.maxLength,
+        obscureText: widget.isPassword ? !_visible : false,
+        enabled: widget.enabled,
+        readOnly: widget.readOnly,
+        initialValue: widget.initialValue,
+        onChanged: widget.onChanged,
+        onTap: widget.onTap,
+        style: widget.enabled ? regularBlackStyle() : textFieldHintStyle(),
+        inputFormatters: getFormatters(),
+        validator: widget.validator ??
+            (widget.defaultValidator ? _defaultValidator : null),
+        decoration: inputDecoration,
+      ),
     );
   }
 

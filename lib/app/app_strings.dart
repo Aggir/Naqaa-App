@@ -111,4 +111,15 @@ class AppStrings {
   static const connectedWithGoogle = 'connected_with_google';
 
   static const soon = 'soon';
+
+  static const name = 'name';
+  static const gender = 'gender';
+  static const dateOfBirth = 'date_of_birth';
+  static const email = 'email';
+  static const address = 'address';
+  static const male = 'male';
+  static const female = 'female';
+  static const genderFieldHint = 'gender_field_hint';
+  static const dateOfBirthFieldHint = 'date_of_birth_field_hint';
+  static const editProfileSuccessMessage = 'edit_profile_success_message';
 }

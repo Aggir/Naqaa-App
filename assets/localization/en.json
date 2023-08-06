@@ -91,5 +91,15 @@
     "password_changed_successfully": "Your password has changed successfully.",
     "wrong_password": "Wrong password.",
     "connected_with_google": "Connected with Google",
-    "soon":"Soon"
+    "soon": "Soon",
+    "name": "Name",
+    "gender": "Gender",
+    "date_of_birth": "Date of birth",
+    "email": "Email",
+    "address": "Address",
+    "male": "Male",
+    "female": "Female",
+    "gender_field_hint": "Choose your gender",
+    "date_of_birth_field_hint": "DD/MM/YYYY",
+    "edit_profile_success_message": "Profile has been successfully updated."
 }

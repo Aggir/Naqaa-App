@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:naqaa/app/helpers/app_service.dart';
@@ -6,6 +7,7 @@ import 'package:naqaa/data/datasources/remote_datasource.dart';
 import 'package:naqaa/data/repositories/auth_repository_impl.dart';
 import 'package:naqaa/domain/repositories/repository.dart';
 import 'package:naqaa/domain/usecases/change_password_usecase.dart';
+import 'package:naqaa/domain/usecases/edit_profile_usecase.dart';
 import 'package:naqaa/domain/usecases/index.dart';
 import 'package:naqaa/domain/usecases/connect_with_google_usecase.dart';
 import 'package:naqaa/domain/usecases/is_signed_in_usecase.dart';
@@ -28,9 +30,13 @@ Future<void> initAppModule() async {
   // remote FirebaseAuth instance
   instance.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 
+  // remote FirebaseFirestore instance
+  instance.registerLazySingleton<FirebaseFirestore>(
+      () => FirebaseFirestore.instance);
+
   // remote database instance (Firebase Package)
-  instance.registerLazySingleton<RemoteDataSource>(
-      () => FirebaseApi(instance<FirebaseAuth>()));
+  instance.registerLazySingleton<RemoteDataSource>(() =>
+      FirebaseApi(instance<FirebaseAuth>(), instance<FirebaseFirestore>()));
 
   // Repositories
   instance.registerLazySingleton<Repository>(
@@ -85,5 +91,12 @@ void initChangePassword() async {
   if (!GetIt.I.isRegistered<ChangePasswordUsecase>()) {
     instance.registerFactory<ChangePasswordUsecase>(
         () => ChangePasswordUsecase(instance<Repository>()));
+  }
+}
+
+void initEditProfile() async {
+  if (!GetIt.I.isRegistered<EditProfileUsecase>()) {
+    instance.registerFactory<EditProfileUsecase>(
+        () => EditProfileUsecase(instance<Repository>()));
   }
 }
