@@ -176,6 +176,7 @@ class FirebaseApi implements RemoteDataSource {
         profilePictureUrl: user?.photoURL,
         gender: request.genderId,
         birthDate: request.dateOfBirth,
+        isSignedInWithGoogle: user?.providerData[0].providerId == 'google.com',
       );
       return FirebaseAuthResponse(
         Status.success,
