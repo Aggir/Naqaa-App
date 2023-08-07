@@ -102,5 +102,7 @@
     "female": "أنثى",
     "gender_field_hint": "اختر الجنس",
     "date_of_birth_field_hint": "سنة/شهر/يوم",
-    "edit_profile_success_message": "تم تحديث الملف الشخصي بنجاح."
+    "edit_profile_success_message": "تم تحديث الملف الشخصي بنجاح.",
+    "take_picture": "التقاط صورة",
+    "choose_from_gallery": "اختيار من الالبوم"
 }

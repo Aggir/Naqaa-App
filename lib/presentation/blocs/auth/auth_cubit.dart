@@ -1,5 +1,6 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:naqaa/app/di/dependency_injection.dart';
 
@@ -89,16 +90,11 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  void editProfile(String name, String? genderId, String dateOfBirth) async {
+  void editProfile(UserEntity newUser, {File? pickedImage}) async {
     emit(state.copyWith(editProfileStatus: Status.loading));
     initEditProfile();
     (await instance<EditProfileUsecase>().execute(EditProfileUsecaseInput(
-      fullName: name,
-      dateOfBirth: dateOfBirth.isNotEmpty
-          ? DateFormat('dd/MM/yyyy').parse(dateOfBirth).millisecondsSinceEpoch
-          : null,
-      genderId: genderId,
-    )))
+            newUser: newUser, pickedImage: pickedImage)))
         .fold(
       (failure) {
         emit(state.copyWith(

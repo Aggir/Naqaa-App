@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 
 import 'package:naqaa/app/failure.dart';
@@ -15,19 +17,12 @@ class EditProfileUsecase
   Future<Either<Failure, UserEntity>> execute(
       EditProfileUsecaseInput input) async {
     return await _repository.editProfile(EditProfileRequest(
-        fullName: input.fullName,
-        genderId: input.genderId,
-        dateOfBirth: input.dateOfBirth));
+        newUser: input.newUser, pickedImage: input.pickedImage));
   }
 }
 
 class EditProfileUsecaseInput {
-  final String fullName;
-  final String? genderId;
-  final int? dateOfBirth;
-  EditProfileUsecaseInput({
-    required this.fullName,
-    this.genderId,
-    this.dateOfBirth,
-  });
+  final UserEntity newUser;
+  final File? pickedImage;
+  const EditProfileUsecaseInput({required this.newUser, this.pickedImage});
 }

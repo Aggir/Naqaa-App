@@ -26,12 +26,12 @@ class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
 
   void _forgotPasswordHandler(BuildContext context) {
-    FocusScope.of(context).unfocus();
+    _unfocusFields(context);
     context.go(AppScreen.forgotPassword.toPath);
   }
 
   void _signInHandler(BuildContext context) {
-    FocusScope.of(context).unfocus();
+    _unfocusFields(context);
     final signInCubit = BlocProvider.of<SignInCubit>(context);
     if (signInCubit.isFormValid) {
       BlocProvider.of<AuthCubit>(context).signIn(
@@ -42,13 +42,19 @@ class SignInScreen extends StatelessWidget {
   }
 
   void _connectWithGoogleHandler(BuildContext context) {
-    FocusScope.of(context).unfocus();
+    _unfocusFields(context);
     BlocProvider.of<AuthCubit>(context).connectWithGoogle();
   }
 
   void _createAccountHandler(BuildContext context) {
-    FocusScope.of(context).unfocus();
+    _unfocusFields(context);
     context.push(AppScreen.signUp.toPath);
+  }
+
+  void _unfocusFields(BuildContext context) {
+    final cubit = BlocProvider.of<SignInCubit>(context);
+    cubit.emailFocusNode.unfocus();
+    cubit.passwordFocusNode.unfocus();
   }
 
   @override
@@ -57,7 +63,7 @@ class SignInScreen extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        FocusScope.of(context).unfocus();
+        _unfocusFields(context);
       },
       child: Scaffold(
         appBar: AppBar(
@@ -102,6 +108,7 @@ class SignInScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       CustomTextFormField(
+                        focusNode: cubit.emailFocusNode,
                         controller: cubit.emailController,
                         keyboardType: TextInputType.emailAddress,
                         hintText: AppStrings.emailAddress.tr(),
@@ -111,6 +118,7 @@ class SignInScreen extends StatelessWidget {
                       ),
                       CustomSpacers.medium(),
                       CustomTextFormField(
+                        focusNode: cubit.passwordFocusNode,
                         controller: cubit.passwordController,
                         keyboardType: TextInputType.visiblePassword,
                         hintText: AppStrings.password.tr(),

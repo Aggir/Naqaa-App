@@ -101,5 +101,7 @@
     "female": "Female",
     "gender_field_hint": "Choose your gender",
     "date_of_birth_field_hint": "DD/MM/YYYY",
-    "edit_profile_success_message": "Profile has been successfully updated."
+    "edit_profile_success_message": "Profile has been successfully updated.",
+    "take_picture": "Take a Picture",
+    "choose_from_gallery": "Choose from Gallery"
 }

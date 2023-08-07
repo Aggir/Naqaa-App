@@ -42,33 +42,7 @@ class SettingsPage extends StatelessWidget {
       child: Column(
         children: [
           CustomSpacers.large(),
-          BlocBuilder<AuthCubit, AuthState>(
-            builder: (context, state) {
-              return Column(
-                children: [
-                  CircleAvatar(
-                    radius: AppSizes.s60,
-                    foregroundImage:
-                        state.user?.profilePictureUrl.isNotEmpty ?? false
-                            ? NetworkImage(state.user!.profilePictureUrl)
-                            : null,
-                    child: state.user?.profilePictureUrl.isEmpty ?? false
-                        ? Text(
-                            (state.user?.name[0] ?? Constants.empty)
-                                .toUpperCase(),
-                            style: boldWhiteHugeStyle(),
-                          )
-                        : null,
-                  ),
-                  CustomSpacers.medium(),
-                  Text(
-                    state.user?.name ?? Constants.empty,
-                    style: boldDarkBlueLargeStyle(),
-                  )
-                ],
-              );
-            },
-          ),
+          _profilePicture(context),
           CustomSpacers.large(),
           _customListView(
             children: [
@@ -167,6 +141,34 @@ class SettingsPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _profilePicture(BuildContext context) {
+    return BlocBuilder<AuthCubit, AuthState>(
+      builder: (context, state) {
+        return Column(
+          children: [
+            CircleAvatar(
+              radius: AppSizes.s60,
+              foregroundImage: state.user?.profilePictureUrl.isNotEmpty ?? false
+                  ? NetworkImage(state.user!.profilePictureUrl)
+                  : null,
+              child: state.user?.profilePictureUrl.isEmpty ?? false
+                  ? Text(
+                      (state.user?.name[0] ?? Constants.empty).toUpperCase(),
+                      style: boldWhiteHugeStyle(),
+                    )
+                  : null,
+            ),
+            CustomSpacers.medium(),
+            Text(
+              state.user?.name ?? Constants.empty,
+              style: boldDarkBlueLargeStyle(),
+            )
+          ],
+        );
+      },
     );
   }
 

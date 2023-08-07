@@ -11,6 +11,9 @@ class SignInCubit extends Cubit<SignInState> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  FocusNode emailFocusNode = FocusNode();
+  FocusNode passwordFocusNode = FocusNode();
+
   String get email => emailController.text;
   String get password => passwordController.text;
   bool get isFormValid => formKey.currentState?.validate() ?? false;

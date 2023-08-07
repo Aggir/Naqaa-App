@@ -54,6 +54,10 @@ TextStyle semiBlackStyle() {
   return getSemiBoldStyle(fontSize: FontSize.s14, color: AppColors.blackText);
 }
 
+TextStyle semiBlackMediumStyle() {
+  return getSemiBoldStyle(fontSize: FontSize.s18, color: AppColors.blackText);
+}
+
 TextStyle semiPrimaryStyle() {
   return getSemiBoldStyle(fontSize: FontSize.s14, color: AppColors.mediumGray);
 }

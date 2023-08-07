@@ -1,10 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:naqaa/app/assets_manager.dart';
 import 'package:naqaa/app/enum.dart';
+import 'package:naqaa/app/extensions.dart';
 import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/presentation/blocs/edit_profile/edit_profile_cubit.dart';
+import 'package:naqaa/presentation/screens/edit_profile/components/image_picker_bottom_sheet.dart';
+import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/widgets/custom_drop_down_field.dart';
 import 'package:naqaa/presentation/widgets/custom_form_field_date_picker.dart';
 import 'package:naqaa/presentation/widgets/custom_text_form_field.dart';
@@ -28,12 +33,28 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  void _saveButtonFunction(BuildContext context) {
+  void _saveButtonFunction(BuildContext context, AuthState state) {
     final cubit = BlocProvider.of<EditProfileCubit>(context);
     if (cubit.isFormValid) {
-      BlocProvider.of<AuthCubit>(context).editProfile(cubit.nameController.text,
-          cubit.genderController.text, cubit.dateOfBirthController.text);
+      BlocProvider.of<AuthCubit>(context).editProfile(
+          state.user!.copyWith(
+            name: cubit.name,
+            genderId: cubit.gender,
+            dateOfBirth: cubit.dateOfBirth.asNullableDate,
+          ),
+          pickedImage:
+              BlocProvider.of<EditProfileCubit>(context).state.selectedPicture);
     }
+  }
+
+  _editProfilePhotoFunction(BuildContext context) async {
+    BlocProvider.of<EditProfileCubit>(context).imagePickerMode(
+      await showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (bottomSheetContext) => const ImagePickerBottomSheet(),
+      ),
+    );
   }
 
   String? value;
@@ -55,8 +76,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       body: PageContainer(
           child: Column(
         children: [
-          // CustomSpacers.large(),
-          _profilePicture(),
+          _profilePicture(context),
           CustomSpacers.large(),
           _form(context),
           CustomSpacers.large(),
@@ -74,7 +94,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             builder: (context, state) {
               return PrimaryButton.fullWidth(
                 isLoading: state.editProfileStatus.isLoading,
-                onPressed: () => _saveButtonFunction(context),
+                onPressed: () => _saveButtonFunction(context, state),
                 child: Text(AppStrings.save.tr().toUpperCase()),
               );
             },
@@ -84,20 +104,65 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  Widget _profilePicture() {
+  ImageProvider? getProfilePictureWidget(
+    EditProfileState editState,
+    AuthState authState,
+  ) {
+    if (editState.selectedPicture != null) {
+      return FileImage(editState.selectedPicture!);
+    } else if (authState.user?.profilePictureUrl.isNotEmpty ?? false) {
+      return NetworkImage(authState.user!.profilePictureUrl);
+    } else {
+      return null;
+    }
+  }
+
+  Widget _profilePicture(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
-        return CircleAvatar(
-          radius: AppSizes.s45,
-          foregroundImage: state.user?.profilePictureUrl.isNotEmpty ?? false
-              ? NetworkImage(state.user!.profilePictureUrl)
-              : null,
-          child: state.user?.profilePictureUrl.isEmpty ?? false
-              ? Text(
-                  (state.user?.name[0] ?? Constants.empty).toUpperCase(),
-                  style: boldWhiteHugeStyle(),
-                )
-              : null,
+        return BlocBuilder<EditProfileCubit, EditProfileState>(
+          builder: (context, editState) {
+            return Stack(
+              clipBehavior: Clip.none,
+              children: [
+                CircleAvatar(
+                  radius: AppSizes.s45,
+                  foregroundImage: getProfilePictureWidget(editState, state),
+                  child: state.user?.profilePictureUrl.isEmpty ?? false
+                      ? Text(
+                          (state.user?.name[0] ?? Constants.empty)
+                              .toUpperCase(),
+                          style: boldWhiteHugeStyle(),
+                        )
+                      : null,
+                ),
+                // Todo: RTL / LTR
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: SizedBox(
+                    height: AppSizes.s30,
+                    width: AppSizes.s30,
+                    child: Material(
+                      borderRadius:
+                          BorderRadius.circular(AppValues.circleRadius),
+                      clipBehavior: Clip.antiAlias,
+                      color: AppColors.primary,
+                      child: InkWell(
+                        onTap: () => _editProfilePhotoFunction(context),
+                        child: SvgPicture.asset(
+                          SvgAssets.pen,
+                          height: AppSizes.s14,
+                          width: AppSizes.s14,
+                          fit: BoxFit.scaleDown,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
         );
       },
     );

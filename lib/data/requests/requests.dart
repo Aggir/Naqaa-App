@@ -1,4 +1,6 @@
-import 'dart:convert';
+import 'dart:io';
+
+import 'package:naqaa/domain/entities/user.dart';
 
 import 'base_request.dart';
 
@@ -39,33 +41,10 @@ class SendResetPasswordInstructionsRequest implements BaseRequest {
 }
 
 class EditProfileRequest implements BaseRequest {
-  final String fullName;
-  final String? genderId;
-  final int? dateOfBirth;
+  final UserEntity newUser;
+  final File? pickedImage;
   const EditProfileRequest({
-    required this.fullName,
-    this.genderId,
-    this.dateOfBirth,
+    required this.newUser,
+    this.pickedImage,
   });
-
-  Map<String, dynamic> toMap() {
-    return {
-      'fullName': fullName,
-      'genderId': genderId,
-      'dateOfBirth': dateOfBirth,
-    };
-  }
-
-  factory EditProfileRequest.fromMap(Map<String, dynamic> map) {
-    return EditProfileRequest(
-      fullName: map['fullName'] ?? '',
-      genderId: map['genderId'],
-      dateOfBirth: map['dateOfBirth']?.toInt(),
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory EditProfileRequest.fromJson(String source) =>
-      EditProfileRequest.fromMap(json.decode(source));
 }

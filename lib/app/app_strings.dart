@@ -122,4 +122,6 @@ class AppStrings {
   static const genderFieldHint = 'gender_field_hint';
   static const dateOfBirthFieldHint = 'date_of_birth_field_hint';
   static const editProfileSuccessMessage = 'edit_profile_success_message';
+  static const takePicture = 'take_picture';
+  static const chooseFromGallery = 'choose_from_gallery';
 }

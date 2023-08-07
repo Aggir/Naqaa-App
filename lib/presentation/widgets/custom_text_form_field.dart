@@ -27,6 +27,7 @@ class CustomTextFormField extends StatefulWidget {
     this.textInputAction,
     this.onFieldSubmitted,
     this.onEditingComplete,
+    this.hideErrorMessage = false,
     this.onChanged,
     this.onTap,
     this.focusNode,
@@ -43,6 +44,7 @@ class CustomTextFormField extends StatefulWidget {
   final String? hintText;
   final Widget? suffixIcon;
   final bool isPassword;
+  final bool hideErrorMessage;
   final TextInputAction? textInputAction;
   final void Function(String)? onFieldSubmitted;
   final void Function()? onEditingComplete;
@@ -55,6 +57,8 @@ class CustomTextFormField extends StatefulWidget {
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   bool _visible = false;
+  bool _showError = false;
+  String _errorMessage = '';
 
   Widget _suffixIconContainer({required Widget child}) {
     return Padding(
@@ -100,7 +104,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     final inputDecoration = InputDecoration(
-      errorMaxLines: 3,
+      errorStyle: const TextStyle(height: 0),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(AppValues.smallRadius),
       ),
@@ -126,36 +130,86 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       hintStyle: textFieldHintStyle(),
     );
 
-    return SizedBox(
-      height: AppValues.textFieldHeight,
-      child: TextFormField(
-        controller: widget.controller,
-        focusNode: widget.focusNode,
-        onFieldSubmitted: widget.onFieldSubmitted,
-        onEditingComplete: widget.onEditingComplete,
-        textInputAction: widget.textInputAction,
-        keyboardType: widget.keyboardType,
-        maxLength: widget.maxLength,
-        obscureText: widget.isPassword ? !_visible : false,
-        enabled: widget.enabled,
-        readOnly: widget.readOnly,
-        initialValue: widget.initialValue,
-        onChanged: widget.onChanged,
-        onTap: widget.onTap,
-        style: widget.enabled ? regularBlackStyle() : textFieldHintStyle(),
-        inputFormatters: getFormatters(),
-        validator: widget.validator ??
-            (widget.defaultValidator ? _defaultValidator : null),
-        decoration: inputDecoration,
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: AppValues.textFieldHeight,
+          child: TextFormField(
+            controller: widget.controller,
+            focusNode: widget.focusNode,
+            onFieldSubmitted: widget.onFieldSubmitted,
+            onEditingComplete: widget.onEditingComplete,
+            textInputAction: widget.textInputAction,
+            keyboardType: widget.keyboardType,
+            maxLength: widget.maxLength,
+            obscureText: widget.isPassword ? !_visible : false,
+            enabled: widget.enabled,
+            readOnly: widget.readOnly,
+            initialValue: widget.initialValue,
+            onChanged: widget.onChanged,
+            onTap: widget.onTap,
+            style: widget.enabled ? regularBlackStyle() : textFieldHintStyle(),
+            inputFormatters: getFormatters(),
+            validator: (value) => (widget.defaultValidator
+                ? _defaultValidator(value, widget.validator)
+                : null),
+            decoration: inputDecoration,
+          ),
+        ),
+        if (_showError)
+          Padding(
+            padding: const EdgeInsets.only(top: AppValues.extraSmall),
+            child: Text(
+              _errorMessage,
+              style: regularRedExtrasSmallStyle(),
+            ),
+          )
+      ],
     );
   }
 
-  String? _defaultValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return AppStrings.thisFieldIsRequired.tr();
+  String? _defaultValidator(
+      String? value, String? Function(String? value)? validator) {
+    // check if there is a custom Validator
+    if (validator != null) {
+      String? errorMessage = validator(value);
+      if (errorMessage != null) {
+        if (!widget.hideErrorMessage) {
+          setState(() {
+            _showError = true;
+            _errorMessage = errorMessage;
+          });
+        }
+        return '';
+      } else {
+        if (!widget.hideErrorMessage) {
+          setState(() {
+            _showError = false;
+            _errorMessage = '';
+          });
+        }
+        return null;
+      }
     } else {
-      return null;
+      // use the default validator
+      if (value == null || value.isEmpty) {
+        if (!widget.hideErrorMessage) {
+          setState(() {
+            _showError = true;
+            _errorMessage = AppStrings.thisFieldIsRequired.tr();
+          });
+        }
+        return '';
+      } else {
+        if (!widget.hideErrorMessage) {
+          setState(() {
+            _showError = false;
+            _errorMessage = '';
+          });
+        }
+        return null;
+      }
     }
   }
 
