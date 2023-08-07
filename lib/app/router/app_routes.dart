@@ -2,15 +2,12 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/router/app_router.dart';
 import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/presentation/blocs/change_password/change_password_cubit.dart';
 import 'package:naqaa/presentation/blocs/edit_profile/edit_profile_cubit.dart';
-import 'package:naqaa/presentation/screens/change_password/change_password_screen.dart';
-import 'package:naqaa/presentation/screens/edit_profile/edit_profile_screen.dart';
 import 'package:naqaa/presentation/screens/index.dart';
 import 'package:naqaa/presentation/blocs/index.dart';
 
@@ -149,6 +146,16 @@ class AppRoutes {
           );
         },
       ),
+    ),
+  );
+
+  static final appSettings = GoRoute(
+    parentNavigatorKey: AppRouter.appNavigatorKey,
+    redirect: _authenticatedRoute,
+    path: AppScreen.appSettings.toPath,
+    name: AppScreen.appSettings.toName,
+    pageBuilder: (context, state) => const CupertinoPage(
+      child: AppSettingsScreen(),
     ),
   );
 

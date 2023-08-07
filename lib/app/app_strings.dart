@@ -124,4 +124,17 @@ class AppStrings {
   static const editProfileSuccessMessage = 'edit_profile_success_message';
   static const takePicture = 'take_picture';
   static const chooseFromGallery = 'choose_from_gallery';
+
+  static const preferences = 'preferences';
+  static const changeLanguage = 'change_language';
+  static const notificationsSettings = 'notifications_settings';
+  static const general = 'general';
+  static const aboutUs = 'about_us';
+  static const appVersion = 'app_version';
+  static const aboutUsDescription = 'about_us_description';
+  static const naqaaTeam = 'naqaa_team';
+  static const hussinSherif = 'hussin_sherif';
+  static const abdussalamAlmajdoub = 'abdussalam_almajdoub';
+  static const ar = 'ar';
+  static const en = 'en';
 }

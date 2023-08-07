@@ -9,3 +9,6 @@ export 'main/pages/home_page.dart';
 export 'main/pages/statistics_page.dart';
 export 'main/pages/notifications_page.dart';
 export 'main/pages/settings_page.dart';
+export 'change_password/change_password_screen.dart';
+export 'edit_profile/edit_profile_screen.dart';
+export 'app_settings/app_settings_screen.dart';

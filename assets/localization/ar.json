@@ -104,5 +104,17 @@
     "date_of_birth_field_hint": "سنة/شهر/يوم",
     "edit_profile_success_message": "تم تحديث الملف الشخصي بنجاح.",
     "take_picture": "التقاط صورة",
-    "choose_from_gallery": "اختيار من الالبوم"
+    "choose_from_gallery": "اختيار من الالبوم",
+    "preferences": "التفضيلات",
+    "change_language": "تغيير اللغة: ",
+    "notifications_settings": "إعدادات الإشعارات",
+    "general": "عام",
+    "about_us": "من نحن",
+    "app_version": "نسخة التطبيق",
+    "about_us_description": "تم إنشاؤها وتطويرها بعناية من قبل ",
+    "naqaa_team": "فريق نقاء",
+    "hussin_sherif": "حسين الشريف",
+    "abdussalam_almajdoub": "عبد السلام المجدوب",
+    "ar": "AR - عربي",
+    "en": "EN - انجليزي"
 }

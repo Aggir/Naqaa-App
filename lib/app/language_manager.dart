@@ -30,11 +30,11 @@ String getChangeLangText(BuildContext context) {
   Locale currentLocale = Localizations.localeOf(context);
   switch (currentLocale) {
     case _arabicLocale:
-      return _englishLocale.languageCode;
+      return _englishLocale.languageCode.toLowerCase();
     case _englishLocale:
-      return _arabicLocale.languageCode;
+      return _arabicLocale.languageCode.toLowerCase();
     default:
-      return _englishLocale.languageCode;
+      return _englishLocale.languageCode.toLowerCase();
   }
 }
 

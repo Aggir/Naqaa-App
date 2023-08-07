@@ -27,7 +27,10 @@ class SettingsPage extends StatelessWidget {
     context.push(AppScreen.changePassword.toPath);
   }
 
-  void _appSettingsFunction(BuildContext context) async {}
+  void _appSettingsFunction(BuildContext context) async {
+    context.push(AppScreen.appSettings.toPath);
+  }
+
   void _checkForUpdatesFunction(BuildContext context) async {
     CustomToast.info(context, AppStrings.soon.tr());
   }

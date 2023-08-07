@@ -10,6 +10,10 @@ enum AppScreen {
   settings,
   changePassword,
   editProfile,
+  appSettings,
+  termsOfUse,
+  privacyPolicy,
+  aboutUs,
 }
 
 extension AppScreenExtension on AppScreen {
@@ -37,6 +41,14 @@ extension AppScreenExtension on AppScreen {
         return "/change-password";
       case AppScreen.editProfile:
         return "/edit-profile";
+      case AppScreen.appSettings:
+        return "/app-settings";
+      case AppScreen.termsOfUse:
+        return "/terms-of-use";
+      case AppScreen.privacyPolicy:
+        return "/privacy-policy";
+      case AppScreen.aboutUs:
+        return "/about-us";
       default:
         return "/";
     }
@@ -66,6 +78,14 @@ extension AppScreenExtension on AppScreen {
         return "CHANGE PASSWORD";
       case AppScreen.editProfile:
         return "EDIT PROFILE";
+      case AppScreen.appSettings:
+        return "APP SETTINGS";
+      case AppScreen.termsOfUse:
+        return "TERMS OF USE";
+      case AppScreen.privacyPolicy:
+        return "PRIVACY POLICY";
+      case AppScreen.aboutUs:
+        return "ABOUT US";
       default:
         return "HOME";
     }

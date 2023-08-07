@@ -103,5 +103,17 @@
     "date_of_birth_field_hint": "DD/MM/YYYY",
     "edit_profile_success_message": "Profile has been successfully updated.",
     "take_picture": "Take a Picture",
-    "choose_from_gallery": "Choose from Gallery"
+    "choose_from_gallery": "Choose from Gallery",
+    "preferences": "Preferences",
+    "change_language": "Change Language: ",
+    "notifications_settings": "Notifications Settings",
+    "general": "General",
+    "about_us": "About Us",
+    "app_version": "App Version",
+    "about_us_description": "Heartfully created and developed by ",
+    "naqaa_team": "Naqaa Team",
+    "hussin_sherif": "Hussin Sherif",
+    "abdussalam_almajdoub": "Abdussalam Almajdoub",
+    "ar": "AR - عربي",
+    "en": "EN - انجليزي"
 }

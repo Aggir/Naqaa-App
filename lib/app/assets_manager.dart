@@ -36,4 +36,10 @@ class SvgAssets {
   static const String chevronDown = '$_svgPath/chevron-down.svg';
   static const String camera = '$_svgPath/camera.svg';
   static const String image = '$_svgPath/image.svg';
+  static const String globe = '$_svgPath/globe.svg';
+  static const String document = '$_svgPath/document.svg';
+  static const String shield = '$_svgPath/shield.svg';
+  static const String star = '$_svgPath/star.svg';
+  static const String linkedIn = '$_svgPath/linkedin.svg';
+  static const String gitHub = '$_svgPath/github.svg';
 }

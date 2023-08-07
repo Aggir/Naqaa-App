@@ -32,6 +32,7 @@ class AppRouter {
           AppRoutes.main,
           AppRoutes.changePassword,
           AppRoutes.editProfile,
+          AppRoutes.appSettings,
         ],
         builder: (context, state, child) => BlocProvider(
           create: (context) => instance<AuthCubit>()..onAppStart(),
