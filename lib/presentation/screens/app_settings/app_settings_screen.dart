@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,7 +8,6 @@ import 'package:naqaa/app/assets_manager.dart';
 import 'package:naqaa/app/constants.dart';
 import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/presentation/widgets/custom_app_bar.dart';
-import 'package:naqaa/presentation/widgets/custom_toast.dart';
 
 import '../../../app/language_manager.dart';
 import '../../theme/app_colors.dart';
@@ -25,7 +25,7 @@ class AppSettingsScreen extends StatelessWidget {
   }
 
   void _notificationsSettingsFunction(BuildContext context) {
-    CustomToast.info(context, AppStrings.soon.tr());
+    AppSettings.openAppSettings(type: AppSettingsType.notification);
   }
 
   void _termsOfUseFunction(BuildContext context) {
