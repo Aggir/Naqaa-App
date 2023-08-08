@@ -161,7 +161,6 @@ class AppRoutes {
 
   static final termsOfUse = GoRoute(
     parentNavigatorKey: AppRouter.appNavigatorKey,
-    redirect: _authenticatedRoute,
     path: AppScreen.termsOfUse.toPath,
     name: AppScreen.termsOfUse.toName,
     pageBuilder: (context, state) => const CupertinoPage(
@@ -171,7 +170,6 @@ class AppRoutes {
 
   static final privacyPolicy = GoRoute(
     parentNavigatorKey: AppRouter.appNavigatorKey,
-    redirect: _authenticatedRoute,
     path: AppScreen.privacyPolicy.toPath,
     name: AppScreen.privacyPolicy.toName,
     pageBuilder: (context, state) => const CupertinoPage(
