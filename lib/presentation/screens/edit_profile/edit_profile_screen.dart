@@ -128,17 +128,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             borderRadius: BorderRadius.circular(AppValues.circleRadius)),
         height: AppSizes.s120,
         width: AppSizes.s120,
-        child: CachedNetworkImage(
-          placeholder: (context, url) => SizedBox(
-            width: AppSizes.s20,
-            height: AppSizes.s20,
-            child: CircularProgressIndicator(
-              color: AppColors.snowWhite,
-            ),
-          ),
-          imageUrl: authState.user!.profilePictureUrl,
-          fit: BoxFit.fitWidth,
-        ),
+        child: authState.user != null
+            ? CachedNetworkImage(
+                placeholder: (context, url) => SizedBox(
+                  width: AppSizes.s20,
+                  height: AppSizes.s20,
+                  child: CircularProgressIndicator(
+                    color: AppColors.snowWhite,
+                  ),
+                ),
+                imageUrl: authState.user!.profilePictureUrl,
+                fit: BoxFit.fitWidth,
+              )
+            : null,
       );
     } else {
       return null;

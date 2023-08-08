@@ -167,17 +167,19 @@ class SettingsPage extends StatelessWidget {
                               BorderRadius.circular(AppValues.circleRadius)),
                       height: AppSizes.s120,
                       width: AppSizes.s120,
-                      child: CachedNetworkImage(
-                        placeholder: (context, url) => SizedBox(
-                          width: AppSizes.s20,
-                          height: AppSizes.s20,
-                          child: CircularProgressIndicator(
-                            color: AppColors.snowWhite,
-                          ),
-                        ),
-                        imageUrl: state.user!.profilePictureUrl,
-                        fit: BoxFit.fitWidth,
-                      ),
+                      child: state.user != null
+                          ? CachedNetworkImage(
+                              placeholder: (context, url) => SizedBox(
+                                width: AppSizes.s20,
+                                height: AppSizes.s20,
+                                child: CircularProgressIndicator(
+                                  color: AppColors.snowWhite,
+                                ),
+                              ),
+                              imageUrl: state.user!.profilePictureUrl,
+                              fit: BoxFit.fitWidth,
+                            )
+                          : null,
                     ),
             ),
             CustomSpacers.medium(),
