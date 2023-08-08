@@ -6,6 +6,14 @@ class Constants {
   static const String privacyPolicyUpdateDate = '2023/08/04';
   static const String termsOfUseUpdateDate = '2023/08/04';
 
+  // DEVELOPERS CONTACTS
+  static const String hussinGithubUrl = 'https://github.com/Aggir';
+  static const String hussinLinkedinUrl =
+      'https://www.linkedin.com/in/hussinsh/';
+  static const String abdussalamGithubUrl = 'https://github.com/Tearfy';
+  static const String abdussalamLinkedinUrl =
+      'https://www.linkedin.com/in/abdulsalam-almajdoob/';
+
   static const String empty = "";
 
   static const Gender male = Gender(id: '1', name: 'male');

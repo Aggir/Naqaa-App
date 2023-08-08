@@ -177,6 +177,15 @@ class AppRoutes {
     ),
   );
 
+  static final aboutUs = GoRoute(
+    parentNavigatorKey: AppRouter.appNavigatorKey,
+    path: AppScreen.aboutUs.toPath,
+    name: AppScreen.aboutUs.toName,
+    pageBuilder: (context, state) => const CupertinoPage(
+      child: AboutUsScreen(),
+    ),
+  );
+
   // Todo: Refactor redirect functions.
   static FutureOr<String?> _authenticatedRoute(
       BuildContext context, GoRouterState state) {

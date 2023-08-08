@@ -35,6 +35,7 @@ class AppRouter {
           AppRoutes.appSettings,
           AppRoutes.termsOfUse,
           AppRoutes.privacyPolicy,
+          AppRoutes.aboutUs,
         ],
         builder: (context, state, child) => BlocProvider(
           create: (context) => instance<AuthCubit>()..onAppStart(),
