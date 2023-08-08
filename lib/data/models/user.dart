@@ -11,6 +11,7 @@ class UserModel extends Equatable {
   final bool? isSignedInWithGoogle;
   final int? modificationDate;
   final int? creationDate;
+  final bool? isNewUser;
 
   const UserModel({
     this.name,
@@ -21,6 +22,7 @@ class UserModel extends Equatable {
     this.isSignedInWithGoogle,
     this.modificationDate,
     this.creationDate,
+    this.isNewUser,
   });
 
   UserModel copyWith({
@@ -32,6 +34,7 @@ class UserModel extends Equatable {
     bool? isSignedInWithGoogle,
     int? modificationDate,
     int? creationDate,
+    bool? isNewUser,
   }) {
     return UserModel(
       name: name ?? this.name,
@@ -42,6 +45,7 @@ class UserModel extends Equatable {
       isSignedInWithGoogle: isSignedInWithGoogle ?? this.isSignedInWithGoogle,
       modificationDate: modificationDate ?? this.modificationDate,
       creationDate: creationDate ?? this.creationDate,
+      isNewUser: isNewUser ?? this.isNewUser,
     );
   }
 
@@ -56,6 +60,7 @@ class UserModel extends Equatable {
       isSignedInWithGoogle,
       modificationDate,
       creationDate,
+      isNewUser,
     ];
   }
 
@@ -69,6 +74,7 @@ class UserModel extends Equatable {
       'isSignedInWithGoogle': isSignedInWithGoogle,
       'modificationDate': modificationDate,
       'creationDate': creationDate,
+      'isNewUser': isNewUser,
     };
   }
 
@@ -82,6 +88,7 @@ class UserModel extends Equatable {
       isSignedInWithGoogle: map?['isSignedInWithGoogle'],
       modificationDate: map?['modificationDate']?.toInt(),
       creationDate: map?['creationDate']?.toInt(),
+      isNewUser: map?['isNewUser'],
     );
   }
 

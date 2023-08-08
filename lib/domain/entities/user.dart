@@ -11,6 +11,7 @@ class UserEntity extends Equatable {
   final bool isSignedInWithGoogle;
   final DateTime? modificationDate;
   final DateTime? creationDate;
+  final bool isNewUser;
   const UserEntity({
     required this.name,
     required this.genderId,
@@ -20,6 +21,7 @@ class UserEntity extends Equatable {
     required this.isSignedInWithGoogle,
     this.modificationDate,
     this.creationDate,
+    required this.isNewUser,
   });
 
   @override
@@ -33,6 +35,7 @@ class UserEntity extends Equatable {
       isSignedInWithGoogle,
       modificationDate,
       creationDate,
+      isNewUser,
     ];
   }
 
@@ -46,26 +49,27 @@ class UserEntity extends Equatable {
       'isSignedInWithGoogle': isSignedInWithGoogle,
       'modificationDate': modificationDate?.millisecondsSinceEpoch,
       'creationDate': creationDate?.millisecondsSinceEpoch,
+      'isNewUser': isNewUser,
     };
   }
 
   factory UserEntity.fromMap(Map<String, dynamic> map) {
     return UserEntity(
-      name: map['name'] ?? '',
-      genderId: map['genderId'] ?? '',
-      dateOfBirth: map['dateOfBirth'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['dateOfBirth'])
-          : null,
-      email: map['email'] ?? '',
-      profilePictureUrl: map['profilePictureUrl'] ?? '',
-      isSignedInWithGoogle: map['isSignedInWithGoogle'] ?? false,
-      modificationDate: map['modificationDate'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['modificationDate'])
-          : null,
-      creationDate: map['creationDate'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['creationDate'])
-          : null,
-    );
+        name: map['name'] ?? '',
+        genderId: map['genderId'] ?? '',
+        dateOfBirth: map['dateOfBirth'] != null
+            ? DateTime.fromMillisecondsSinceEpoch(map['dateOfBirth'])
+            : null,
+        email: map['email'] ?? '',
+        profilePictureUrl: map['profilePictureUrl'] ?? '',
+        isSignedInWithGoogle: map['isSignedInWithGoogle'] ?? false,
+        modificationDate: map['modificationDate'] != null
+            ? DateTime.fromMillisecondsSinceEpoch(map['modificationDate'])
+            : null,
+        creationDate: map['creationDate'] != null
+            ? DateTime.fromMillisecondsSinceEpoch(map['creationDate'])
+            : null,
+        isNewUser: map['isNewUser'] ?? true);
   }
 
   String toJson() => json.encode(toMap());
@@ -82,6 +86,7 @@ class UserEntity extends Equatable {
     bool? isSignedInWithGoogle,
     DateTime? creationDate,
     DateTime? modificationDate,
+    bool? isNewUser,
   }) {
     return UserEntity(
       name: name ?? this.name,
@@ -92,11 +97,12 @@ class UserEntity extends Equatable {
       isSignedInWithGoogle: isSignedInWithGoogle ?? this.isSignedInWithGoogle,
       creationDate: creationDate ?? this.creationDate,
       modificationDate: modificationDate ?? this.modificationDate,
+      isNewUser: isNewUser ?? this.isNewUser,
     );
   }
 
   @override
   String toString() {
-    return 'UserEntity(name: $name, genderId: $genderId, dateOfBirth: $dateOfBirth, email: $email, profilePictureUrl: $profilePictureUrl, isSignedInWithGoogle: $isSignedInWithGoogle, modificationDate: $modificationDate, creationDate: $creationDate)';
+    return 'UserEntity(name: $name, genderId: $genderId, dateOfBirth: $dateOfBirth, email: $email, profilePictureUrl: $profilePictureUrl, isSignedInWithGoogle: $isSignedInWithGoogle, modificationDate: $modificationDate, creationDate: $creationDate, isNewUser: $isNewUser)';
   }
 }

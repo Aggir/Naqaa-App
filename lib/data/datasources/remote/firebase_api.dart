@@ -47,8 +47,14 @@ class FirebaseApi implements RemoteDataSource {
           .collection(FirebaseConstants.users)
           .doc(user?.uid)
           .get();
-      print(response.data()?['creationDate']);
       UserModel userModel = UserModel.fromMap(response.data());
+      if (userModel.isNewUser == true) {
+        userModel = userModel.copyWith(isNewUser: false);
+        await _firebaseFirestore
+            .collection(FirebaseConstants.users)
+            .doc(user?.uid)
+            .set(userModel.toMap());
+      }
 
       return FirebaseAuthResponse(Status.success, user: userModel);
     } on FirebaseAuthException catch (e) {
@@ -61,7 +67,6 @@ class FirebaseApi implements RemoteDataSource {
 
   @override
   Future<FirebaseAuthResponse> connectWithGoogle() async {
-    User? user;
     try {
       final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
       if (gUser != null) {
@@ -70,7 +75,7 @@ class FirebaseApi implements RemoteDataSource {
             accessToken: gAuth.accessToken, idToken: gAuth.idToken);
         UserCredential userCredential =
             await _firebaseAuth.signInWithCredential(credential);
-        user = userCredential.user;
+        User? user = userCredential.user;
         late UserModel userModel;
         if (userCredential.additionalUserInfo?.isNewUser ?? true) {
           userModel = UserModel(
@@ -81,6 +86,7 @@ class FirebaseApi implements RemoteDataSource {
             creationDate: user?.metadata.creationTime?.millisecondsSinceEpoch,
             modificationDate:
                 user?.metadata.creationTime?.millisecondsSinceEpoch,
+            isNewUser: userCredential.additionalUserInfo?.isNewUser,
           );
           await _firebaseFirestore
               .collection(FirebaseConstants.users)
@@ -92,6 +98,16 @@ class FirebaseApi implements RemoteDataSource {
               .doc(user?.uid)
               .get();
           userModel = UserModel.fromMap(response.data());
+          if (userModel.isNewUser !=
+              userCredential.additionalUserInfo?.isNewUser) {
+            userModel = userModel.copyWith(
+              isNewUser: userCredential.additionalUserInfo?.isNewUser,
+            );
+            await _firebaseFirestore
+                .collection(FirebaseConstants.users)
+                .doc(user?.uid)
+                .set(userModel.toMap());
+          }
         }
         return FirebaseAuthResponse(Status.success, user: userModel);
       }
@@ -134,6 +150,8 @@ class FirebaseApi implements RemoteDataSource {
         profilePictureUrl: user?.photoURL,
         creationDate: user?.metadata.creationTime?.millisecondsSinceEpoch,
         modificationDate: user?.metadata.creationTime?.millisecondsSinceEpoch,
+        isNewUser: true,
+        isSignedInWithGoogle: false,
       );
       await _firebaseFirestore
           .collection(FirebaseConstants.users)
@@ -156,18 +174,15 @@ class FirebaseApi implements RemoteDataSource {
         .collection(FirebaseConstants.users)
         .doc(user?.uid)
         .get();
-    UserModel? data;
-    if (response.data() != null) {
-      data = UserModel.fromMap(response.data()!);
+    UserModel userModel = UserModel.fromMap(response.data());
+    if (userModel.isNewUser == true) {
+      userModel = userModel.copyWith(isNewUser: false);
+      await _firebaseFirestore
+          .collection(FirebaseConstants.users)
+          .doc(user?.uid)
+          .set(userModel.toMap());
     }
-    UserModel userModel = UserModel(
-      name: data?.name,
-      email: data?.email,
-      profilePictureUrl: data?.profilePictureUrl,
-      genderId: data?.genderId,
-      dateOfBirth: data?.dateOfBirth,
-      isSignedInWithGoogle: data?.isSignedInWithGoogle,
-    );
+
     return FirebaseAuthResponse(
       Status.success,
       user: userModel,
