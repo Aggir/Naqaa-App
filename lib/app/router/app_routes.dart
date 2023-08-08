@@ -159,6 +159,16 @@ class AppRoutes {
     ),
   );
 
+  static final termsOfUse = GoRoute(
+    parentNavigatorKey: AppRouter.appNavigatorKey,
+    redirect: _authenticatedRoute,
+    path: AppScreen.termsOfUse.toPath,
+    name: AppScreen.termsOfUse.toName,
+    pageBuilder: (context, state) => const CupertinoPage(
+      child: TermsOfUseScreen(),
+    ),
+  );
+
   // Todo: Refactor redirect functions.
   static FutureOr<String?> _authenticatedRoute(
       BuildContext context, GoRouterState state) {

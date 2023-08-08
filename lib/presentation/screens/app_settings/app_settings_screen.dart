@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/assets_manager.dart';
 import 'package:naqaa/app/constants.dart';
+import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/presentation/widgets/custom_app_bar.dart';
 import 'package:naqaa/presentation/widgets/custom_toast.dart';
 
@@ -27,7 +28,9 @@ class AppSettingsScreen extends StatelessWidget {
     CustomToast.info(context, AppStrings.soon.tr());
   }
 
-  void _termsOfUseFunction(BuildContext context) {}
+  void _termsOfUseFunction(BuildContext context) {
+    context.push(AppScreen.termsOfUse.toPath);
+  }
 
   void _privacyPolicyFunction(BuildContext context) {}
 

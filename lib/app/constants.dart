@@ -1,8 +1,10 @@
 import 'package:naqaa/domain/entities/gender.dart';
 
 class Constants {
-  static const String appName = "Naqaa`";
-  static const String appVersion = "0.1.0";
+  static const String appName = 'Naqaa`';
+  static const String appVersion = '0.1.0';
+  static const String privacyPolicyUpdateDate = '2023/08/04';
+  static const String termsOfUseUpdateDate = '2023/08/04';
 
   static const String empty = "";
 

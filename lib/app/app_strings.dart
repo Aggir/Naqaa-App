@@ -137,4 +137,76 @@ class AppStrings {
   static const abdussalamAlmajdoub = 'abdussalam_almajdoub';
   static const ar = 'ar';
   static const en = 'en';
+
+  static const lastUpdated = 'last_updated';
+  static const termsOfUsePrefix = 'terms_of_use_prefix';
+  static const termSectionOne = 'term_section_one';
+  static const termSectionOneDescription = 'term_section_one_description';
+  static const termSectionTwo = 'term_section_two';
+  static const termSectionTwoSubsectionOne = 'term_section_two_subsection_one';
+  static const termSectionTwoSubsectionOneDescription =
+      'term_section_two_subsection_one_description';
+  static const termSectionTwoSubsectionTwo = 'term_section_two_subsection_two';
+  static const termSectionTwoSubsectionTwoDescription =
+      'term_section_two_subsection_two_description';
+  static const termSectionThree = 'term_section_three';
+  static const termSectionThreeSubsectionOne =
+      'term_section_three_subsection_one';
+  static const termSectionThreeSubsectionOneDescription =
+      'term_section_three_subsection_one_description';
+  static const termSectionThreeSubsectionTwo =
+      'term_section_three_subsection_two';
+  static const termSectionThreeSubsectionTwoDescription =
+      'term_section_three_subsection_two_description';
+  static const termSectionThreeSubsectionThree =
+      'term_section_three_subsection_three';
+  static const termSectionThreeSubsectionThreeDescription =
+      'term_section_three_subsection_three_description';
+  static const termSectionFour = 'term_section_four';
+  static const termSectionFourSubsectionOne =
+      'term_section_four_subsection_one';
+  static const termSectionFourSubsectionOneDescription =
+      'term_section_four_subsection_one_description';
+  static const termSectionFive = 'term_section_five';
+  static const termSectionFiveSubsectionOne =
+      'term_section_five_subsection_one';
+  static const termSectionFiveSubsectionOneDescription =
+      'term_section_five_subsection_one_description';
+  static const termSectionFiveSubsectionTwo =
+      'term_section_five_subsection_two';
+  static const termSectionFiveSubsectionTwoDescription =
+      'term_section_five_subsection_two_description';
+  static const termSectionSix = 'term_section_six';
+  static const termSectionSixSubsectionOne = 'term_section_six_subsection_one';
+  static const termSectionSixSubsectionOneDescription =
+      'term_section_six_subsection_one_description';
+  static const termSectionSixSubsectionTwo = 'term_section_six_subsection_two';
+  static const termSectionSixSubsectionTwoDescription =
+      'term_section_six_subsection_two_description';
+  static const termSectionSeven = 'term_section_seven';
+  static const termSectionSevenSubsectionOne =
+      'term_section_seven_subsection_one';
+  static const termSectionSevenSubsectionOneDescription =
+      'term_section_seven_subsection_one_description';
+  static const termSectionSevenSubsectionTwo =
+      'term_section_seven_subsection_two';
+  static const termSectionSevenSubsectionTwoDescription =
+      'term_section_seven_subsection_two_description';
+  static const termSectionEight = 'term_section_eight';
+  static const termSectionEightSubsectionOne =
+      'term_section_eight_subsection_one';
+  static const termSectionEightSubsectionOneDescription =
+      'term_section_eight_subsection_one_description';
+  static const termSectionNine = 'term_section_nine';
+  static const termSectionNineSubsectionOne =
+      'term_section_nine_subsection_one';
+  static const termSectionNineSubsectionOneDescription =
+      'term_section_nine_subsection_one_description';
+  static const termSectionTen = 'term_section_ten';
+  static const termSectionTenSubsectionOne = 'term_section_ten_subsection_one';
+  static const termSectionTenSubsectionOneDescription =
+      'term_section_ten_subsection_one_description';
+  static const termSectionEleven = 'term_section_eleven';
+  static const termSectionElevenDescription = 'term_section_eleven_description';
+  static const iAcceptTheTermsOfUse = 'i_accept_the_terms_of_use';
 }
