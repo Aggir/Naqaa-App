@@ -32,7 +32,9 @@ class AppSettingsScreen extends StatelessWidget {
     context.push(AppScreen.termsOfUse.toPath);
   }
 
-  void _privacyPolicyFunction(BuildContext context) {}
+  void _privacyPolicyFunction(BuildContext context) {
+    context.push(AppScreen.privacyPolicy.toPath);
+  }
 
   void _aboutUsFunction(BuildContext context) {}
 

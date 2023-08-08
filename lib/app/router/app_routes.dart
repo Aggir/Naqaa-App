@@ -169,6 +169,16 @@ class AppRoutes {
     ),
   );
 
+  static final privacyPolicy = GoRoute(
+    parentNavigatorKey: AppRouter.appNavigatorKey,
+    redirect: _authenticatedRoute,
+    path: AppScreen.privacyPolicy.toPath,
+    name: AppScreen.privacyPolicy.toName,
+    pageBuilder: (context, state) => const CupertinoPage(
+      child: PrivacyPolicyScreen(),
+    ),
+  );
+
   // Todo: Refactor redirect functions.
   static FutureOr<String?> _authenticatedRoute(
       BuildContext context, GoRouterState state) {

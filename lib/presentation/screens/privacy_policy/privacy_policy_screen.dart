@@ -12,8 +12,8 @@ import '../../../app/app_strings.dart';
 import '../../widgets/custom_spacers.dart';
 import '../../widgets/primary_button.dart';
 
-class TermsOfUseScreen extends StatelessWidget {
-  const TermsOfUseScreen({super.key});
+class PrivacyPolicyScreen extends StatelessWidget {
+  const PrivacyPolicyScreen({super.key});
 
   void _acceptButtonFunction(BuildContext context) {
     context.pop();
@@ -61,12 +61,12 @@ class TermsOfUseScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                AppStrings.termsOfUse.tr(),
+                AppStrings.privacyAndPolicy.tr(),
                 style: boldDarkBlueLargeStyle(),
               ),
               CustomSpacers.small(),
               Text(
-                AppStrings.lastUpdated.tr() + Constants.termsOfUseUpdateDate,
+                AppStrings.lastUpdated.tr() + Constants.privacyPolicyUpdateDate,
                 style: regularGraySmallStyle(),
               ),
             ],
@@ -83,103 +83,86 @@ class TermsOfUseScreen extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: AppValues.small),
       shrinkWrap: true,
       children: [
-        _sectionBody(AppStrings.termsOfUsePrefix.tr()),
+        _sectionBody(AppStrings.privacyPolicyPrefix.tr()),
         _sectionSpacer(),
-        _sectionTitle(AppStrings.termSectionOne.tr()),
-        _inSectionSpacer(),
-        _sectionBody(AppStrings.termSectionOneDescription.tr()),
-        _sectionSpacer(),
-        _sectionTitle(AppStrings.termSectionTwo.tr()),
+        _sectionTitle(AppStrings.privacySectionOne.tr()),
         _inSectionSpacer(),
         _subsection(
-          AppStrings.termSectionTwoSubsectionOne.tr(),
-          AppStrings.termSectionTwoSubsectionOneDescription.tr(),
+          AppStrings.privacySectionOneSubsectionOne.tr(),
+          AppStrings.privacySectionOneSubsectionOneDescription.tr(),
         ),
         _inSectionSpacer(),
         _subsection(
-          AppStrings.termSectionTwoSubsectionTwo.tr(),
-          AppStrings.termSectionTwoSubsectionTwoDescription.tr(),
-        ),
-        _sectionSpacer(),
-        _sectionTitle(AppStrings.termSectionThree.tr()),
-        _inSectionSpacer(),
-        _subsection(
-          AppStrings.termSectionThreeSubsectionOne.tr(),
-          AppStrings.termSectionThreeSubsectionOneDescription.tr(),
+          AppStrings.privacySectionOneSubsectionTwo.tr(),
+          AppStrings.privacySectionOneSubsectionTwoDescription.tr(),
         ),
         _inSectionSpacer(),
         _subsection(
-          AppStrings.termSectionThreeSubsectionTwo.tr(),
-          AppStrings.termSectionThreeSubsectionTwoDescription.tr(),
-        ),
-        _inSectionSpacer(),
-        _subsection(
-          AppStrings.termSectionThreeSubsectionThree.tr(),
-          AppStrings.termSectionThreeSubsectionThreeDescription.tr(),
+          AppStrings.privacySectionOneSubsectionThree.tr(),
+          AppStrings.privacySectionOneSubsectionThreeDescription.tr(),
         ),
         _sectionSpacer(),
-        _sectionTitle(AppStrings.termSectionFour.tr()),
+        _sectionTitle(AppStrings.privacySectionTwo.tr()),
         _inSectionSpacer(),
         _subsection(
-          AppStrings.termSectionFourSubsectionOne.tr(),
-          AppStrings.termSectionFourSubsectionOneDescription.tr(),
+          AppStrings.privacySectionTwoSubsectionOne.tr(),
+          AppStrings.privacySectionTwoSubsectionOneDescription.tr(),
+        ),
+        _inSectionSpacer(),
+        _subsection(
+          AppStrings.privacySectionTwoSubsectionTwo.tr(),
+          AppStrings.privacySectionTwoSubsectionTwoDescription.tr(),
         ),
         _sectionSpacer(),
-        _sectionTitle(AppStrings.termSectionFive.tr()),
+        _sectionTitle(AppStrings.privacySectionThree.tr()),
         _inSectionSpacer(),
         _subsection(
-          AppStrings.termSectionFiveSubsectionOne.tr(),
-          AppStrings.termSectionFiveSubsectionOneDescription.tr(),
+          AppStrings.privacySectionThreeSubsectionOne.tr(),
+          AppStrings.privacySectionThreeSubsectionOneDescription.tr(),
         ),
         _inSectionSpacer(),
         _subsection(
-          AppStrings.termSectionFiveSubsectionTwo.tr(),
-          AppStrings.termSectionFiveSubsectionTwoDescription.tr(),
-        ),
-        _sectionSpacer(),
-        _sectionTitle(AppStrings.termSectionSix.tr()),
-        _inSectionSpacer(),
-        _subsection(
-          AppStrings.termSectionSixSubsectionOne.tr(),
-          AppStrings.termSectionSixSubsectionOneDescription.tr(),
-        ),
-        _inSectionSpacer(),
-        _subsection(
-          AppStrings.termSectionSixSubsectionTwo.tr(),
-          AppStrings.termSectionSixSubsectionTwoDescription.tr(),
+          AppStrings.privacySectionThreeSubsectionTwo.tr(),
+          AppStrings.privacySectionThreeSubsectionTwoDescription.tr(),
         ),
         _sectionSpacer(),
-        _sectionTitle(AppStrings.termSectionSeven.tr()),
+        _sectionTitle(AppStrings.privacySectionFour.tr()),
         _inSectionSpacer(),
         _subsection(
-          AppStrings.termSectionSevenSubsectionOne.tr(),
-          AppStrings.termSectionSevenSubsectionOneDescription.tr(),
+          AppStrings.privacySectionFourSubsectionOne.tr(),
+          AppStrings.privacySectionFourSubsectionOneDescription.tr(),
         ),
         _inSectionSpacer(),
         _subsection(
-          AppStrings.termSectionSevenSubsectionTwo.tr(),
-          AppStrings.termSectionSevenSubsectionTwoDescription.tr(),
-        ),
-        _sectionSpacer(),
-        _sectionTitle(AppStrings.termSectionEight.tr()),
-        _inSectionSpacer(),
-        _subsection(
-          AppStrings.termSectionEightSubsectionOne.tr(),
-          AppStrings.termSectionEightSubsectionOneDescription.tr(),
+          AppStrings.privacySectionFourSubsectionTwo.tr(),
+          AppStrings.privacySectionFourSubsectionTwoDescription.tr(),
         ),
         _sectionSpacer(),
-        _sectionTitle(AppStrings.termSectionNine.tr()),
+        _sectionTitle(AppStrings.privacySectionFive.tr()),
         _inSectionSpacer(),
         _subsection(
-          AppStrings.termSectionNineSubsectionOne.tr(),
-          AppStrings.termSectionNineSubsectionOneDescription.tr(),
+          AppStrings.privacySectionFiveSubsectionOne.tr(),
+          AppStrings.privacySectionFiveSubsectionOneDescription.tr(),
+        ),
+        _inSectionSpacer(),
+        _subsection(
+          AppStrings.privacySectionFiveSubsectionTwo.tr(),
+          AppStrings.privacySectionFiveSubsectionTwoDescription.tr(),
         ),
         _sectionSpacer(),
-        _sectionTitle(AppStrings.termSectionEleven.tr()),
+        _sectionTitle(AppStrings.privacySectionSix.tr()),
         _inSectionSpacer(),
-        _sectionBody(
-          AppStrings.termSectionElevenDescription.tr(),
-        )
+        _subsection(
+          AppStrings.privacySectionSixSubsectionOne.tr(),
+          AppStrings.privacySectionSixSubsectionOneDescription.tr(),
+        ),
+        _sectionSpacer(),
+        _sectionTitle(AppStrings.privacySectionSeven.tr()),
+        _inSectionSpacer(),
+        _subsection(
+          AppStrings.privacySectionSevenSubsectionOne.tr(),
+          AppStrings.privacySectionSevenSubsectionOneDescription.tr(),
+        ),
       ],
     ));
   }

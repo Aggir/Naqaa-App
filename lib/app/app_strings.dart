@@ -139,6 +139,7 @@ class AppStrings {
   static const en = 'en';
 
   static const lastUpdated = 'last_updated';
+
   static const termsOfUsePrefix = 'terms_of_use_prefix';
   static const termSectionOne = 'term_section_one';
   static const termSectionOneDescription = 'term_section_one_description';
@@ -208,5 +209,70 @@ class AppStrings {
       'term_section_ten_subsection_one_description';
   static const termSectionEleven = 'term_section_eleven';
   static const termSectionElevenDescription = 'term_section_eleven_description';
-  static const iAcceptTheTermsOfUse = 'i_accept_the_terms_of_use';
+  static const accept = 'accept';
+
+  static const privacyPolicyPrefix = 'privacy_policy_prefix';
+  static const privacySectionOne = 'privacy_policy_section_one';
+  static const privacySectionOneSubsectionOne =
+      'privacy_section_one_subsection_one';
+  static const privacySectionOneSubsectionOneDescription =
+      'privacy_section_one_subsection_one_description';
+  static const privacySectionOneSubsectionTwo =
+      'privacy_section_one_subsection_two';
+  static const privacySectionOneSubsectionTwoDescription =
+      'privacy_section_one_subsection_two_description';
+  static const privacySectionOneSubsectionThree =
+      'privacy_section_one_subsection_three';
+  static const privacySectionOneSubsectionThreeDescription =
+      'privacy_section_one_subsection_three_description';
+  static const privacySectionTwo = 'privacy_policy_section_two';
+  static const privacySectionTwoSubsectionOne =
+      'privacy_section_two_subsection_one';
+  static const privacySectionTwoSubsectionOneDescription =
+      'privacy_section_two_subsection_one_description';
+  static const privacySectionTwoSubsectionTwo =
+      'privacy_section_two_subsection_two';
+  static const privacySectionTwoSubsectionTwoDescription =
+      'privacy_section_two_subsection_two_description';
+  static const privacySectionTwoSubsectionThree =
+      'privacy_section_two_subsection_three';
+  static const privacySectionTwoSubsectionThreeDescription =
+      'privacy_section_two_subsection_three_description';
+  static const privacySectionThree = 'privacy_policy_section_three';
+  static const privacySectionThreeSubsectionOne =
+      'privacy_section_three_subsection_one';
+  static const privacySectionThreeSubsectionOneDescription =
+      'privacy_section_three_subsection_one_description';
+  static const privacySectionThreeSubsectionTwo =
+      'privacy_section_three_subsection_two';
+  static const privacySectionThreeSubsectionTwoDescription =
+      'privacy_section_three_subsection_two_description';
+  static const privacySectionFour = 'privacy_policy_section_four';
+  static const privacySectionFourSubsectionOne =
+      'privacy_section_four_subsection_one';
+  static const privacySectionFourSubsectionOneDescription =
+      'privacy_section_four_subsection_one_description';
+  static const privacySectionFourSubsectionTwo =
+      'privacy_section_four_subsection_two';
+  static const privacySectionFourSubsectionTwoDescription =
+      'privacy_section_four_subsection_two_description';
+  static const privacySectionFive = 'privacy_policy_section_five';
+  static const privacySectionFiveSubsectionOne =
+      'privacy_section_five_subsection_one';
+  static const privacySectionFiveSubsectionOneDescription =
+      'privacy_section_five_subsection_one_description';
+  static const privacySectionFiveSubsectionTwo =
+      'privacy_section_five_subsection_two';
+  static const privacySectionFiveSubsectionTwoDescription =
+      'privacy_section_five_subsection_two_description';
+  static const privacySectionSix = 'privacy_policy_section_six';
+  static const privacySectionSixSubsectionOne =
+      'privacy_section_six_subsection_one';
+  static const privacySectionSixSubsectionOneDescription =
+      'privacy_section_six_subsection_one_description';
+  static const privacySectionSeven = 'privacy_policy_section_seven';
+  static const privacySectionSevenSubsectionOne =
+      'privacy_section_seven_subsection_one';
+  static const privacySectionSevenSubsectionOneDescription =
+      'privacy_section_seven_subsection_one_description';
 }

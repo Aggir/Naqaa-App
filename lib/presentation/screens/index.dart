@@ -13,3 +13,4 @@ export 'change_password/change_password_screen.dart';
 export 'edit_profile/edit_profile_screen.dart';
 export 'app_settings/app_settings_screen.dart';
 export 'terms_of_use/terms_of_use_screen.dart';
+export 'privacy_policy/privacy_policy_screen.dart';

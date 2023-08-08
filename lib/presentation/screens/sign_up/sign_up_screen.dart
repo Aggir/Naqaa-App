@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/enum.dart';
+import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/app/validators.dart';
 import 'package:naqaa/presentation/blocs/auth/auth_cubit.dart';
 import 'package:naqaa/presentation/blocs/sign_up/sign_up_cubit.dart';
@@ -36,10 +37,12 @@ class SignUpScreen extends StatelessWidget {
 
   void _termsOfUseHandler(BuildContext context) {
     _unFocus(context);
+    context.push(AppScreen.termsOfUse.toPath);
   }
 
   void _privacyAndPolicyHandler(BuildContext context) {
     _unFocus(context);
+    context.push(AppScreen.privacyPolicy.toPath);
   }
 
   void _signUpWithGoogleHandler(BuildContext context) {
