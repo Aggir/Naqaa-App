@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -104,14 +105,41 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  ImageProvider? getProfilePictureWidget(
+  Widget? getProfilePictureWidget(
     EditProfileState editState,
     AuthState authState,
   ) {
     if (editState.selectedPicture != null) {
-      return FileImage(editState.selectedPicture!);
+      return Container(
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(AppValues.circleRadius)),
+        height: AppSizes.s120,
+        width: AppSizes.s120,
+        child: Image.file(
+          editState.selectedPicture!,
+          fit: BoxFit.fitWidth,
+        ),
+      );
     } else if (authState.user?.profilePictureUrl.isNotEmpty ?? false) {
-      return NetworkImage(authState.user!.profilePictureUrl);
+      return Container(
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(AppValues.circleRadius)),
+        height: AppSizes.s120,
+        width: AppSizes.s120,
+        child: CachedNetworkImage(
+          placeholder: (context, url) => SizedBox(
+            width: AppSizes.s20,
+            height: AppSizes.s20,
+            child: CircularProgressIndicator(
+              color: AppColors.snowWhite,
+            ),
+          ),
+          imageUrl: authState.user!.profilePictureUrl,
+          fit: BoxFit.fitWidth,
+        ),
+      );
     } else {
       return null;
     }
@@ -127,14 +155,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               children: [
                 CircleAvatar(
                   radius: AppSizes.s45,
-                  foregroundImage: getProfilePictureWidget(editState, state),
                   child: state.user?.profilePictureUrl.isEmpty ?? false
                       ? Text(
                           (state.user?.name[0] ?? Constants.empty)
                               .toUpperCase(),
                           style: boldWhiteHugeStyle(),
                         )
-                      : null,
+                      : getProfilePictureWidget(editState, state),
                 ),
                 // Todo: RTL / LTR
                 Positioned(

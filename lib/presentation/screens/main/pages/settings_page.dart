@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -154,15 +155,30 @@ class SettingsPage extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: AppSizes.s60,
-              foregroundImage: state.user?.profilePictureUrl.isNotEmpty ?? false
-                  ? NetworkImage(state.user!.profilePictureUrl)
-                  : null,
               child: state.user?.profilePictureUrl.isEmpty ?? false
                   ? Text(
                       (state.user?.name[0] ?? Constants.empty).toUpperCase(),
                       style: boldWhiteHugeStyle(),
                     )
-                  : null,
+                  : Container(
+                      clipBehavior: Clip.antiAlias,
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(AppValues.circleRadius)),
+                      height: AppSizes.s120,
+                      width: AppSizes.s120,
+                      child: CachedNetworkImage(
+                        placeholder: (context, url) => SizedBox(
+                          width: AppSizes.s20,
+                          height: AppSizes.s20,
+                          child: CircularProgressIndicator(
+                            color: AppColors.snowWhite,
+                          ),
+                        ),
+                        imageUrl: state.user!.profilePictureUrl,
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
             ),
             CustomSpacers.medium(),
             Text(
