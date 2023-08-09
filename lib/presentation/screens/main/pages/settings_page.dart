@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/app_strings.dart';
@@ -43,6 +44,9 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PageContainer(
+      padding: const EdgeInsets.symmetric(
+              horizontal: AppValues.mediumLarge, vertical: AppValues.medium)
+          .r,
       child: Column(
         children: [
           CustomSpacers.large(),
@@ -55,9 +59,10 @@ class SettingsPage extends StatelessWidget {
                 title: AppStrings.editProfile.tr(),
                 svgPath: SvgAssets.person,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: AppValues.medium),
-                child: CustomDivider(),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: AppValues.medium).r,
+                child: const CustomDivider(),
               ),
               BlocBuilder<AuthCubit, AuthState>(
                 builder: (context, state) {
@@ -82,9 +87,10 @@ class SettingsPage extends StatelessWidget {
                 title: AppStrings.appSettings.tr(),
                 svgPath: SvgAssets.gear,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: AppValues.medium),
-                child: CustomDivider(),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: AppValues.medium).r,
+                child: const CustomDivider(),
               ),
               _customListTile(
                 onTap: () => _checkForUpdatesFunction(context),
@@ -120,16 +126,16 @@ class SettingsPage extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Container(
-          padding: const EdgeInsets.all(AppValues.medium),
+          padding: const EdgeInsets.all(AppValues.medium).r,
           child: Row(
             children: [
               CircleAvatar(
-                radius: AppSizes.s16,
+                radius: AppSizes.s16.r,
                 backgroundColor: themeColor?.withOpacity(0.10) ??
                     AppColors.primary.withOpacity(0.10),
                 child: SvgPicture.asset(
                   svgPath,
-                  height: AppSizes.s16,
+                  height: AppSizes.s16.r,
                   colorFilter: ColorFilter.mode(
                     themeColor ?? AppColors.primary,
                     BlendMode.srcIn,
@@ -154,7 +160,7 @@ class SettingsPage extends StatelessWidget {
         return Column(
           children: [
             CircleAvatar(
-              radius: AppSizes.s60,
+              radius: AppSizes.s60.r,
               child: state.user?.profilePictureUrl.isEmpty ?? false
                   ? Text(
                       (state.user?.name[0] ?? Constants.empty).toUpperCase(),
@@ -165,13 +171,13 @@ class SettingsPage extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius:
                               BorderRadius.circular(AppValues.circleRadius)),
-                      height: AppSizes.s120,
-                      width: AppSizes.s120,
+                      height: AppSizes.s120.r,
+                      width: AppSizes.s120.r,
                       child: state.user != null
                           ? CachedNetworkImage(
                               placeholder: (context, url) => SizedBox(
-                                width: AppSizes.s20,
-                                height: AppSizes.s20,
+                                width: AppSizes.s20.r,
+                                height: AppSizes.s20.r,
                                 child: CircularProgressIndicator(
                                   color: AppColors.snowWhite,
                                 ),
@@ -198,9 +204,9 @@ class SettingsPage extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
           color: AppColors.snowWhite,
-          borderRadius: BorderRadius.circular(AppValues.mediumSmallRadius)),
+          borderRadius: BorderRadius.circular(AppValues.mediumSmallRadius.r)),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(AppValues.mediumSmallRadius),
+        borderRadius: BorderRadius.circular(AppValues.mediumSmallRadius.r),
         child: Column(
           children: children,
         ),
@@ -211,17 +217,17 @@ class SettingsPage extends StatelessWidget {
   Widget _connectedWithGoogle() {
     return Container(
       color: AppColors.snowWhite,
-      padding: const EdgeInsets.all(AppValues.medium),
+      padding: const EdgeInsets.all(AppValues.medium).r,
       child: Row(
         children: [
           CircleAvatar(
-            radius: AppSizes.s16,
+            radius: AppSizes.s16.r,
             backgroundColor: AppColors.primary.withOpacity(0.10),
             child: Opacity(
               opacity: 0.5,
               child: SvgPicture.asset(
                 SvgAssets.google,
-                height: AppSizes.s16,
+                height: AppSizes.s16.r,
               ),
             ),
           ),

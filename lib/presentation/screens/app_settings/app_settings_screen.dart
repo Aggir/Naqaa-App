@@ -1,6 +1,7 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/app_strings.dart';
@@ -107,9 +108,9 @@ class AppSettingsScreen extends StatelessWidget {
   }
 
   Widget _listDivider() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppValues.medium),
-      child: CustomDivider(),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppValues.medium).r,
+      child: const CustomDivider(),
     );
   }
 
@@ -133,7 +134,7 @@ class AppSettingsScreen extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Container(
-          padding: const EdgeInsets.all(AppValues.medium),
+          padding: const EdgeInsets.all(AppValues.medium).r,
           child: Row(
             children: [
               CircleAvatar(
@@ -182,9 +183,9 @@ class AppSettingsScreen extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
           color: AppColors.snowWhite,
-          borderRadius: BorderRadius.circular(AppValues.mediumSmallRadius)),
+          borderRadius: BorderRadius.circular(AppValues.mediumSmallRadius.r)),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(AppValues.mediumSmallRadius),
+        borderRadius: BorderRadius.circular(AppValues.mediumSmallRadius.r),
         child: Column(
           children: children,
         ),

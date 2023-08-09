@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:naqaa/app/router/app_router.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 
@@ -24,14 +25,18 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     _setFirebaseAuthLanguage(context);
-    return MaterialApp.router(
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      title: Constants.appName,
-      debugShowCheckedModeBanner: false,
-      theme: appThemeData(),
-      routerConfig: AppRouter.appRouter,
+    return ScreenUtilInit(
+      designSize: const Size(360, 800),
+      minTextAdapt: true,
+      builder: (context, child) => MaterialApp.router(
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        title: Constants.appName,
+        debugShowCheckedModeBanner: false,
+        theme: appThemeData(),
+        routerConfig: AppRouter.appRouter,
+      ),
     );
   }
 }

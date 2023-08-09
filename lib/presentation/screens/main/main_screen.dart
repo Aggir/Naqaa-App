@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/router/routes.dart';
@@ -70,13 +71,13 @@ class _MainScreenState extends State<MainScreen> {
         elevation: 1.0,
         child: SvgPicture.asset(
           SvgAssets.plus,
-          height: AppSizes.s22,
-          width: AppSizes.s22,
+          height: AppSizes.s22.r,
+          width: AppSizes.s22.r,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: SizedBox(
-        height: AppSizes.s72,
+        height: AppSizes.s72.r,
         child: BottomAppBar(
           shape: const CircularNotchedRectangle(),
           child: Row(
@@ -132,12 +133,12 @@ class _MainScreenState extends State<MainScreen> {
         context.go(path);
       },
       child: SizedBox(
-        width: AppSizes.s70,
-        height: AppSizes.s70,
+        width: AppSizes.s70.r,
+        height: AppSizes.s70.r,
         child: AnimatedContainer(
           alignment: Alignment.center,
-          width: AppSizes.s70,
-          height: isSelected ? AppSizes.s50 : AppSizes.s30,
+          width: AppSizes.s70.r,
+          height: isSelected ? AppSizes.s50.r : AppSizes.s30.r,
           duration: const Duration(milliseconds: 150),
           child: SingleChildScrollView(
             child: Column(
@@ -146,8 +147,8 @@ class _MainScreenState extends State<MainScreen> {
               children: [
                 SvgPicture.asset(
                   isSelected ? filledSvgPath : svgPath,
-                  height: isSelected ? AppSizes.s22 : AppSizes.s20,
-                  width: isSelected ? AppSizes.s22 : AppSizes.s20,
+                  height: isSelected ? AppSizes.s22.r : AppSizes.s20.r,
+                  width: isSelected ? AppSizes.s22.r : AppSizes.s20.r,
                   colorFilter: isSelected
                       ? null
                       : ColorFilter.mode(

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
@@ -58,7 +59,7 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
       children: [
         SizedBox(
           width: double.infinity,
-          height: AppValues.textFieldHeight,
+          height: AppValues.textFieldHeight.r,
           child: DropdownButtonFormField(
             onTap: widget.onTap,
             validator: (value) => (widget.defaultValidator
@@ -66,7 +67,7 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
                 : null),
             icon: SvgPicture.asset(
               SvgAssets.chevronDown,
-              width: AppSizes.s12,
+              width: AppSizes.s12.r,
             ),
             items: widget.items,
             value: widget.value ?? selectedValue,
@@ -81,21 +82,22 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
             decoration: InputDecoration(
               errorMaxLines: 3,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(AppValues.smallRadius),
+                borderRadius: BorderRadius.circular(AppValues.smallRadius.r),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(AppValues.smallRadius),
+                borderRadius: BorderRadius.circular(AppValues.smallRadius.r),
                 borderSide: BorderSide(color: AppColors.pastelBlue),
               ),
               focusedBorder: widget.focusedStyleEnabled
                   ? null
                   : OutlineInputBorder(
                       borderRadius:
-                          BorderRadius.circular(AppValues.smallRadius),
+                          BorderRadius.circular(AppValues.smallRadius.r),
                       borderSide: BorderSide(color: AppColors.pastelBlue),
                     ),
               contentPadding: const EdgeInsets.symmetric(
-                  vertical: 0, horizontal: AppValues.medium),
+                      vertical: 0, horizontal: AppValues.medium)
+                  .r,
               fillColor: widget.enabled
                   ? AppColors.snowWhite
                   : AppColors.snowWhite.withOpacity(0.20),
@@ -108,7 +110,7 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
         ),
         if (_showError)
           Padding(
-            padding: const EdgeInsets.only(top: AppValues.extraSmall),
+            padding: const EdgeInsets.only(top: AppValues.extraSmall).r,
             child: Text(
               _errorMessage,
               style: regularRedExtrasSmallStyle(),

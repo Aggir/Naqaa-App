@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../theme/app_theme.dart';
 import '../../../theme/text_style_manager.dart';
@@ -19,7 +20,7 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppValues.large - 5),
+      padding: const EdgeInsets.symmetric(horizontal: AppValues.large - 5).r,
       child: Column(
         children: [
           _onboardingDivider(),
@@ -35,7 +36,7 @@ class OnboardingPage extends StatelessWidget {
             style: boldBlackExtraLargeStyle(),
           ).tr(),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppValues.medium),
+            padding: const EdgeInsets.symmetric(horizontal: AppValues.medium).r,
             child: Text(
               subtitle,
               style: descriptionTextStyle(),
@@ -48,6 +49,6 @@ class OnboardingPage extends StatelessWidget {
   }
 
   Widget _onboardingDivider() {
-    return const SizedBox(height: AppSizes.s50, width: AppSizes.s50);
+    return SizedBox(height: AppSizes.s50.r, width: AppSizes.s50.r);
   }
 }

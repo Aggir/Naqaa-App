@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/constants.dart';
@@ -25,13 +26,13 @@ class AboutUsScreen extends StatelessWidget {
         backButton: () => context.pop(),
       ),
       body: PageContainer(
-        padding: const EdgeInsets.symmetric(horizontal: AppValues.large),
+        padding: const EdgeInsets.symmetric(horizontal: AppValues.large).r,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset(
               SvgAssets.fullLogo,
-              height: AppSizes.s173,
+              height: AppSizes.s173.r,
             ),
             CustomSpacers.large(),
             Text.rich(
@@ -95,10 +96,10 @@ class AboutUsScreen extends StatelessWidget {
                 }
               },
               child: Container(
-                padding: const EdgeInsets.all(AppValues.extraSmall),
+                padding: const EdgeInsets.all(AppValues.extraSmall).r,
                 child: SvgPicture.asset(
                   SvgAssets.gitHub,
-                  height: AppSizes.s24,
+                  height: AppSizes.s24.r,
                 ),
               ),
             ),
@@ -112,10 +113,10 @@ class AboutUsScreen extends StatelessWidget {
                 }
               },
               child: Container(
-                padding: const EdgeInsets.all(AppValues.extraSmall),
+                padding: const EdgeInsets.all(AppValues.extraSmall).r,
                 child: SvgPicture.asset(
                   SvgAssets.linkedIn,
-                  height: AppSizes.s24,
+                  height: AppSizes.s24.r,
                 ),
               ),
             ),

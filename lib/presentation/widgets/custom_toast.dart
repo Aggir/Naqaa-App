@@ -1,5 +1,6 @@
 import 'package:fl_toast/fl_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
@@ -11,11 +12,13 @@ class CustomToast {
       child: Text(message),
       context: context,
       backgroundColor: backgroundColor,
-      borderRadius: BorderRadius.circular(AppValues.smallRadius),
+      borderRadius: BorderRadius.circular(AppValues.smallRadius.r),
       contentPadding: const EdgeInsets.symmetric(
-          horizontal: AppValues.medium, vertical: AppValues.medium),
+              horizontal: AppValues.medium, vertical: AppValues.medium)
+          .r,
       margin: const EdgeInsets.symmetric(
-          vertical: AppValues.extraLarge, horizontal: AppValues.mediumLarge),
+              vertical: AppValues.extraLarge, horizontal: AppValues.mediumLarge)
+          .r,
     );
   }
 

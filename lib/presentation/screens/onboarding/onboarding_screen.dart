@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:naqaa/app/helpers/app_service.dart';
 import 'package:naqaa/app/app_strings.dart';
@@ -23,10 +24,10 @@ class OnboardingScreen extends StatelessWidget {
 
   Widget _indicator(Color color) {
     return Container(
-      width: AppSizes.s8,
-      height: AppSizes.s5,
+      width: AppSizes.s8.r,
+      height: AppSizes.s5.r,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(AppSizes.s10),
+        borderRadius: BorderRadius.circular(AppSizes.s10.r),
         color: color,
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/assets_manager.dart';
@@ -31,7 +32,7 @@ class ConnectWithGoogleButton extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: AppColors.snowWhite,
                     borderRadius:
-                        BorderRadius.circular(AppValues.mediumSmallRadius)),
+                        BorderRadius.circular(AppValues.mediumSmallRadius.r)),
               ),
             ),
           ),
@@ -41,8 +42,8 @@ class ConnectWithGoogleButton extends StatelessWidget {
             onPressed: isLoading ? null : onPressed,
             icon: SvgPicture.asset(
               SvgAssets.google,
-              height: AppSizes.s24,
-              width: AppSizes.s24,
+              height: AppSizes.s24.r,
+              width: AppSizes.s24.r,
             ),
             label: Text(
               AppStrings.connectWithGoogle.tr().toUpperCase(),

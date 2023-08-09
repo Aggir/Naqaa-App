@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:naqaa/presentation/theme/font_manager.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
 
@@ -40,7 +41,7 @@ class AppValues {
   static const double mediumSmallRadius = 8;
   static const double smallRadius = 6;
   // Sizes
-  static const Size buttonMinSize = Size(25, 50);
+  static Size buttonMinSize = Size(25.r, 50.r);
 }
 
 class AppSizes {
@@ -60,7 +61,7 @@ class AppSizes {
   static const double s22 = 22;
   static const double s24 = 24;
   static const double s25 = 25;
-  static const double s26 = 25;
+  static const double s26 = 26;
   static const double s28 = 28;
   static const double s30 = 30;
   static const double s40 = 40;

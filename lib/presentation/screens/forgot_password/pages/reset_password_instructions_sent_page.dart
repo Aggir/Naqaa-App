@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:naqaa/app/enum.dart';
 import 'package:naqaa/presentation/widgets/pressable_text.dart';
 
@@ -28,7 +29,7 @@ class ResetPasswordInstructionsSentScreen extends StatelessWidget {
     final cubit = BlocProvider.of<ForgotPasswordCubit>(context);
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppValues.large),
+        padding: const EdgeInsets.symmetric(horizontal: AppValues.large).r,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

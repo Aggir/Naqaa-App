@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../theme/app_theme.dart';
 
@@ -18,8 +19,9 @@ class PageContainer extends StatelessWidget {
           child: Padding(
             padding: padding ??
                 const EdgeInsets.symmetric(
-                    vertical: AppValues.large,
-                    horizontal: AppValues.mediumLarge),
+                        vertical: AppValues.large,
+                        horizontal: AppValues.mediumLarge)
+                    .r,
             child: IntrinsicHeight(child: child),
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
@@ -23,9 +24,10 @@ class SecondaryIconButton extends StatelessWidget {
         disabledForegroundColor: AppColors.primary,
         side: BorderSide(color: AppColors.primary),
         minimumSize: AppValues.buttonMinSize,
-        padding: const EdgeInsets.all(AppValues.small + (AppValues.small / 2)),
+        padding:
+            const EdgeInsets.all(AppValues.small + (AppValues.small / 2)).r,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppValues.mediumSmallRadius),
+          borderRadius: BorderRadius.circular(AppValues.mediumSmallRadius.r),
         ),
       ),
       onPressed: onPressed,

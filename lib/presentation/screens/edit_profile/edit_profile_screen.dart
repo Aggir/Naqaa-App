@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/assets_manager.dart';
@@ -114,8 +115,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppValues.circleRadius)),
-        height: AppSizes.s120,
-        width: AppSizes.s120,
+        height: AppSizes.s120.r,
+        width: AppSizes.s120.r,
         child: Image.file(
           editState.selectedPicture!,
           fit: BoxFit.fitWidth,
@@ -126,13 +127,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppValues.circleRadius)),
-        height: AppSizes.s120,
-        width: AppSizes.s120,
+        height: AppSizes.s120.r,
+        width: AppSizes.s120.r,
         child: authState.user != null
             ? CachedNetworkImage(
                 placeholder: (context, url) => SizedBox(
-                  width: AppSizes.s20,
-                  height: AppSizes.s20,
+                  width: AppSizes.s20.r,
+                  height: AppSizes.s20.r,
                   child: CircularProgressIndicator(
                     color: AppColors.snowWhite,
                   ),
@@ -156,7 +157,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               clipBehavior: Clip.none,
               children: [
                 CircleAvatar(
-                  radius: AppSizes.s45,
+                  radius: AppSizes.s45.r,
                   child: state.user?.profilePictureUrl.isEmpty ?? false
                       ? Text(
                           (state.user?.name[0] ?? Constants.empty)
@@ -170,8 +171,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   bottom: 0,
                   right: 0,
                   child: SizedBox(
-                    height: AppSizes.s30,
-                    width: AppSizes.s30,
+                    height: AppSizes.s30.r,
+                    width: AppSizes.s30.r,
                     child: Material(
                       borderRadius:
                           BorderRadius.circular(AppValues.circleRadius),
@@ -181,8 +182,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         onTap: () => _editProfilePhotoFunction(context),
                         child: SvgPicture.asset(
                           SvgAssets.pen,
-                          height: AppSizes.s14,
-                          width: AppSizes.s14,
+                          height: AppSizes.s14.r,
+                          width: AppSizes.s14.r,
                           fit: BoxFit.scaleDown,
                         ),
                       ),

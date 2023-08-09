@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
@@ -25,7 +26,7 @@ class ImagePickerBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.symmetric(vertical: AppValues.large),
+      padding: const EdgeInsets.symmetric(vertical: AppValues.large).r,
       shrinkWrap: true,
       children: [
         _customListTile(
@@ -49,7 +50,7 @@ class ImagePickerBottomSheet extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Container(
-          padding: const EdgeInsets.all(AppValues.medium),
+          padding: const EdgeInsets.all(AppValues.medium).r,
           child: Row(
             children: [
               CircleAvatar(

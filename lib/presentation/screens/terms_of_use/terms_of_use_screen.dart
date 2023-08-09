@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/assets_manager.dart';
@@ -25,7 +26,7 @@ class TermsOfUseScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: AppValues.mediumLarge),
+                const EdgeInsets.symmetric(horizontal: AppValues.mediumLarge).r,
             child: Column(
               children: [
                 _headerWidget(context),
@@ -48,13 +49,13 @@ class TermsOfUseScreen extends StatelessWidget {
 
   Widget _headerWidget(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppValues.mediumLarge),
+      padding: const EdgeInsets.symmetric(vertical: AppValues.mediumLarge).r,
       child: Row(
         children: [
           SvgPicture.asset(
             SvgAssets.logoMark,
-            height: AppSizes.s64,
-            width: AppSizes.s64,
+            height: AppSizes.s64.r,
+            width: AppSizes.s64.r,
           ),
           CustomSpacers.medium(),
           Column(
@@ -80,7 +81,7 @@ class TermsOfUseScreen extends StatelessWidget {
   Widget _contentWidget() {
     return Expanded(
         child: ListView(
-      padding: const EdgeInsets.only(bottom: AppValues.small),
+      padding: const EdgeInsets.only(bottom: AppValues.small).r,
       shrinkWrap: true,
       children: [
         _sectionBody(AppStrings.termsOfUsePrefix.tr()),
