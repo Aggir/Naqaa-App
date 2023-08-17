@@ -33,6 +33,7 @@ dependencies:
   shimmer: ^3.0.0
   url_launcher: ^6.1.12
   validators: ^3.0.0
+  wifi_scan: ^0.4.0+1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1

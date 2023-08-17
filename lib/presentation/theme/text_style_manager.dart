@@ -3,15 +3,11 @@ import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/theme/font_manager.dart';
 import 'package:naqaa/presentation/theme/styles_manager.dart';
 
-TextStyle descriptionTextStyle() {
-  return getRegularStyle(fontSize: FontSize.s16, color: AppColors.darkGrayText);
-}
-
 TextStyle primaryButtonTextStyle() {
   return getSemiBoldStyle(fontSize: FontSize.s14, color: AppColors.whiteText);
 }
 
-TextStyle secondaryButtonTextStyle() {
+TextStyle regularPrimaryStyle() {
   return getRegularStyle(fontSize: FontSize.s14, color: AppColors.primary);
 }
 
@@ -36,15 +32,15 @@ TextStyle bodySmallGrayTextStyle() {
   return getRegularStyle(fontSize: FontSize.s12, color: AppColors.mediumGray);
 }
 
-TextStyle headlineTextStyle() {
-  return getBoldStyle(fontSize: FontSize.s30, color: AppColors.blackText);
-}
-
 TextStyle pressableTextStyle() {
   return getRegularStyle(fontSize: FontSize.s14, color: AppColors.primary);
 }
 
 // Refactor fonts
+
+TextStyle boldBlackHugeStyle() {
+  return getBoldStyle(fontSize: FontSize.s30, color: AppColors.blackText);
+}
 
 TextStyle semiGrayStyle() {
   return getSemiBoldStyle(fontSize: FontSize.s14, color: AppColors.mediumGray);
@@ -72,6 +68,10 @@ TextStyle semiBluishGrayExtraSmallStyle() {
 
 TextStyle boldPrimaryExtraSmallStyle() {
   return getBoldStyle(fontSize: FontSize.s8, color: AppColors.primary);
+}
+
+TextStyle boldPrimaryMediumStyle() {
+  return getBoldStyle(fontSize: FontSize.s16, color: AppColors.primary);
 }
 
 TextStyle mediumBlackExtraLargeStyle() {
@@ -102,6 +102,10 @@ TextStyle regularPrimaryMediumStyle() {
   return getRegularStyle(fontSize: FontSize.s16, color: AppColors.primary);
 }
 
+TextStyle regularPrimarySmallStyle() {
+  return getRegularStyle(fontSize: FontSize.s12, color: AppColors.primary);
+}
+
 TextStyle regularBluishGraySmallStyle() {
   return getRegularStyle(fontSize: FontSize.s12, color: AppColors.bluishGray);
 }
@@ -122,11 +126,15 @@ TextStyle boldBlackExtraLargeStyle() {
   return getBoldStyle(fontSize: FontSize.s26, color: AppColors.blackText);
 }
 
-TextStyle regularGrayExtrasSmallStyle() {
+TextStyle regularGrayExtraSmallStyle() {
   return getRegularStyle(fontSize: FontSize.s10, color: AppColors.mediumGray);
 }
 
-TextStyle regularRedExtrasSmallStyle() {
+TextStyle regularBluishGrayExtraSmallStyle() {
+  return getRegularStyle(fontSize: FontSize.s10, color: AppColors.mediumGray);
+}
+
+TextStyle regularRedExtraSmallStyle() {
   return getRegularStyle(fontSize: FontSize.s10, color: AppColors.red);
 }
 

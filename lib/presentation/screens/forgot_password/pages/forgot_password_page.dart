@@ -39,7 +39,7 @@ class ForgotPasswordPage extends StatelessWidget {
               CustomSpacers.extraLarge(),
               Text(
                 capitalizeAllWord(AppStrings.forgotPassword.tr()),
-                style: headlineTextStyle(),
+                style: boldBlackHugeStyle(),
               ),
               CustomSpacers.mediumLarge(),
               Text(

@@ -14,6 +14,8 @@ enum AppScreen {
   termsOfUse,
   privacyPolicy,
   aboutUs,
+  setupDeviceOnboarding,
+  setupDeviceSelectNetwork,
 }
 
 extension AppScreenExtension on AppScreen {
@@ -49,6 +51,10 @@ extension AppScreenExtension on AppScreen {
         return "/privacy-policy";
       case AppScreen.aboutUs:
         return "/about-us";
+      case AppScreen.setupDeviceOnboarding:
+        return "/setup-device-onboarding";
+      case AppScreen.setupDeviceSelectNetwork:
+        return "/setup-device-select-network";
       default:
         return "/";
     }
@@ -86,6 +92,10 @@ extension AppScreenExtension on AppScreen {
         return "PRIVACY POLICY";
       case AppScreen.aboutUs:
         return "ABOUT US";
+      case AppScreen.setupDeviceOnboarding:
+        return "SETUP DEVICE ONBOARDING";
+      case AppScreen.setupDeviceSelectNetwork:
+        return "SETUP DEVICE SELECT NETWORK";
       default:
         return "HOME";
     }

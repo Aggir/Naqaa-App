@@ -23,7 +23,9 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  void _plusButtonFunction(BuildContext context) {}
+  void _plusButtonFunction(BuildContext context) {
+    context.push(AppScreen.setupDeviceOnboarding.toPath);
+  }
 
   final List<Map<String, String>> _navBarItems = [
     {

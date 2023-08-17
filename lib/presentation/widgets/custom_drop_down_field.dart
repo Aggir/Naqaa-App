@@ -113,7 +113,7 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
             padding: const EdgeInsets.only(top: AppValues.extraSmall).r,
             child: Text(
               _errorMessage,
-              style: regularRedExtrasSmallStyle(),
+              style: regularRedExtraSmallStyle(),
             ),
           )
       ],

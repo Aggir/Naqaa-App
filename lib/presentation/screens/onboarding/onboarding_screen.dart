@@ -12,7 +12,7 @@ import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
 
-import 'components/onboarding_page.dart';
+import '../../widgets/onboarding_page.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});

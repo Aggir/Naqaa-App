@@ -42,4 +42,13 @@ class SvgAssets {
   static const String star = '$_svgPath/star.svg';
   static const String linkedIn = '$_svgPath/linkedin.svg';
   static const String gitHub = '$_svgPath/github.svg';
+  static const String setupDialog = '$_svgPath/setup-dialog.svg';
+  static const String device = '$_svgPath/device.svg';
+  static const String setupOnboardingOne = '$_svgPath/setup-onboarding-one.svg';
+  static const String setupOnboardingTwo = '$_svgPath/setup-onboarding-two.svg';
+  static const String setupOnboardingThree =
+      '$_svgPath/setup-onboarding-three.svg';
+  static const String wifiFull = '$_svgPath/wifi-full.svg';
+  static const String wifiHalf = '$_svgPath/wifi-half.svg';
+  static const String refresh = '$_svgPath/refresh.svg';
 }

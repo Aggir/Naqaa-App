@@ -36,7 +36,7 @@ class ResetPasswordInstructionsSentScreen extends StatelessWidget {
             CustomSpacers.extraLarge(),
             Text(
               capitalizeAllWord(AppStrings.forgotPassword.tr()),
-              style: headlineTextStyle(),
+              style: boldBlackHugeStyle(),
             ),
             CustomSpacers.mediumLarge(),
             Wrap(

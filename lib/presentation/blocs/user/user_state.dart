@@ -1,7 +1,7 @@
-part of 'auth_cubit.dart';
+part of 'user_cubit.dart';
 
-class AuthState extends Equatable {
-  const AuthState({
+class UserState extends Equatable {
+  const UserState({
     this.user,
     this.authStatus = Status.initial,
     this.authErrorMessage,
@@ -24,14 +24,14 @@ class AuthState extends Equatable {
         editProfileErrorMessage,
       ];
 
-  AuthState copyWith({
+  UserState copyWith({
     UserEntity? user,
     Status? authStatus,
     String? authErrorMessage,
     Status? editProfileStatus,
     String? editProfileErrorMessage,
   }) {
-    return AuthState(
+    return UserState(
       user: user ?? this.user,
       authStatus: authStatus ?? this.authStatus,
       authErrorMessage: authErrorMessage ?? this.authErrorMessage,

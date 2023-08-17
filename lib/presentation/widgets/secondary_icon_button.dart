@@ -20,7 +20,7 @@ class SecondaryIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton.icon(
       style: OutlinedButton.styleFrom(
-        textStyle: secondaryButtonTextStyle(),
+        textStyle: regularPrimaryStyle(),
         disabledForegroundColor: AppColors.primary,
         side: BorderSide(color: AppColors.primary),
         minimumSize: AppValues.buttonMinSize,

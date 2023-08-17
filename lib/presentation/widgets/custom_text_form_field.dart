@@ -164,7 +164,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             padding: const EdgeInsets.only(top: AppValues.extraSmall).r,
             child: Text(
               _errorMessage,
-              style: regularRedExtrasSmallStyle(),
+              style: regularRedExtraSmallStyle(),
             ),
           )
       ],

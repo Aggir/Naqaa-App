@@ -275,4 +275,37 @@ class AppStrings {
       'privacy_section_seven_subsection_one';
   static const privacySectionSevenSubsectionOneDescription =
       'privacy_section_seven_subsection_one_description';
+
+  static const thatIsAnEmptyPlace = 'that_is_an_empty_place';
+  static const itSeemsYouHaveNotSetUpAny = 'it_seems_you_have_not_set_up_any';
+  static const devices = 'devices';
+  static const yetLetUsDoThatNow = 'yet_let_us_do_that_now';
+  static const setupNow = 'setup_now';
+  static const setupLater = 'setup_later';
+
+  static const setupYourDevice = 'setup_your_device';
+  static const inOrderToConnectYourDevice = 'in_order_to_connect_your_device';
+  static const back = 'back';
+  static const locationPermission = 'location_permission';
+  static const nowChooseYour = 'now_choose_your';
+  static const network = 'network';
+  static const andEnterThe = 'and_enter_the';
+  static const toConnectYourNaqaaDevice = 'to_connect_your_naqaa_device';
+  static const chooseANetwork = 'choose_a_network';
+  static const chooseOneOfTheNetworks = 'choose_one_of_the_networks';
+  static const ifYourNetworkIsHidden = 'if_your_network_is_hidden';
+  static const device = 'device';
+  static const protected = 'protected';
+  static const open = 'open';
+  static const addNetwork = 'addNetwork';
+  static const connectToTheNetwork = 'connect_to_the_network';
+  static const connect = 'connect';
+  static const cancel = 'cancel';
+  static const chooseName = 'choose_name';
+  static const enterNameForYour = 'enter_name_for_your';
+  static const soYouCanEasilyRemember = 'so_you_can_easily_remember';
+  static const deviceName = 'device_name';
+  static const congratulations = 'congratulations';
+  static const everythingIsSetupAndYouAreReadyToGo =
+      'everything_is_setup_and_you_are_ready_to_go';
 }

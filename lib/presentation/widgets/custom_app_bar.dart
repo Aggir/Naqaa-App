@@ -6,11 +6,16 @@ import 'package:naqaa/presentation/widgets/custom_back_button.dart';
 import '../../app/app_strings.dart';
 
 class CustomAppBar {
-  static AppBar basic({String? title, void Function()? backButton}) => AppBar(
+  static AppBar basic(
+          {String? title,
+          void Function()? backButton,
+          List<Widget>? actions}) =>
+      AppBar(
         title: Text(
           (title ?? AppStrings.noRouteFound.tr()).toUpperCase(),
           style: semiBlackStyle(),
         ),
+        actions: actions,
         leading: backButton != null
             ? CustomBackButton(
                 onTap: backButton,

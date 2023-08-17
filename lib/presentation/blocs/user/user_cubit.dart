@@ -13,10 +13,10 @@ import 'package:naqaa/domain/usecases/sign_out_usecase.dart';
 
 import '../../../app/enum.dart';
 
-part 'auth_state.dart';
+part 'user_state.dart';
 
-class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(const AuthState());
+class UserCubit extends Cubit<UserState> {
+  UserCubit() : super(const UserState());
 
   onAppStart() async {
     initIsSignedIn();
@@ -29,7 +29,7 @@ class AuthCubit extends Cubit<AuthState> {
   signOut() async {
     initSignOut();
     await instance<SignOutUsecase>().execute(null);
-    emit(const AuthState());
+    emit(const UserState());
   }
 
   void signIn(String email, String password) async {

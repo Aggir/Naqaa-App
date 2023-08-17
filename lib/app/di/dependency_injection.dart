@@ -12,8 +12,9 @@ import 'package:naqaa/domain/usecases/index.dart';
 import 'package:naqaa/domain/usecases/connect_with_google_usecase.dart';
 import 'package:naqaa/domain/usecases/is_signed_in_usecase.dart';
 import 'package:naqaa/domain/usecases/sign_out_usecase.dart';
-import 'package:naqaa/presentation/blocs/auth/auth_cubit.dart';
+import 'package:naqaa/presentation/blocs/user/user_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wifi_scan/wifi_scan.dart';
 
 final instance = GetIt.instance;
 
@@ -34,6 +35,9 @@ Future<void> initAppModule() async {
   instance.registerLazySingleton<FirebaseFirestore>(
       () => FirebaseFirestore.instance);
 
+  // remote WiFi-Scan instance
+  instance.registerLazySingleton<WiFiScan>(() => WiFiScan.instance);
+
   // remote database instance (Firebase Package)
   instance.registerLazySingleton<RemoteDataSource>(() =>
       FirebaseApi(instance<FirebaseAuth>(), instance<FirebaseFirestore>()));
@@ -42,7 +46,7 @@ Future<void> initAppModule() async {
   instance.registerLazySingleton<Repository>(
       () => RepositoryImpl(instance<RemoteDataSource>()));
   // Auth Cubit
-  instance.registerFactory(() => AuthCubit());
+  instance.registerFactory(() => UserCubit());
 }
 
 void initSendResetInstructions() async {
