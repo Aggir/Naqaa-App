@@ -1,6 +1,6 @@
 class FirebaseConstants {
   // Firestore
-  static const String users = 'users';
+  static const String user = 'user';
   static const String email = 'email';
   static const String name = 'name';
   static const String dateOfBirth = 'dateOfBirth';

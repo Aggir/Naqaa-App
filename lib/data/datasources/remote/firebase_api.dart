@@ -44,14 +44,14 @@ class FirebaseApi implements RemoteDataSource {
               email: request.emailAddress, password: request.password))
           .user;
       final response = await _firebaseFirestore
-          .collection(FirebaseConstants.users)
+          .collection(FirebaseConstants.user)
           .doc(user?.uid)
           .get();
       UserModel userModel = UserModel.fromMap(response.data());
       if (userModel.isNewUser == true) {
         userModel = userModel.copyWith(isNewUser: false);
         await _firebaseFirestore
-            .collection(FirebaseConstants.users)
+            .collection(FirebaseConstants.user)
             .doc(user?.uid)
             .set(userModel.toMap());
       }
@@ -89,12 +89,12 @@ class FirebaseApi implements RemoteDataSource {
             isNewUser: userCredential.additionalUserInfo?.isNewUser,
           );
           await _firebaseFirestore
-              .collection(FirebaseConstants.users)
+              .collection(FirebaseConstants.user)
               .doc(user?.uid)
               .set(userModel.toMap());
         } else {
           final response = await _firebaseFirestore
-              .collection(FirebaseConstants.users)
+              .collection(FirebaseConstants.user)
               .doc(user?.uid)
               .get();
           userModel = UserModel.fromMap(response.data());
@@ -104,7 +104,7 @@ class FirebaseApi implements RemoteDataSource {
               isNewUser: userCredential.additionalUserInfo?.isNewUser,
             );
             await _firebaseFirestore
-                .collection(FirebaseConstants.users)
+                .collection(FirebaseConstants.user)
                 .doc(user?.uid)
                 .set(userModel.toMap());
           }
@@ -154,7 +154,7 @@ class FirebaseApi implements RemoteDataSource {
         isSignedInWithGoogle: false,
       );
       await _firebaseFirestore
-          .collection(FirebaseConstants.users)
+          .collection(FirebaseConstants.user)
           .doc(user?.uid)
           .set(userModel.toMap());
       return FirebaseAuthResponse(Status.success, user: userModel);
@@ -171,14 +171,14 @@ class FirebaseApi implements RemoteDataSource {
     User? user;
     user = _firebaseAuth.currentUser;
     final response = await _firebaseFirestore
-        .collection(FirebaseConstants.users)
+        .collection(FirebaseConstants.user)
         .doc(user?.uid)
         .get();
     UserModel userModel = UserModel.fromMap(response.data());
     if (userModel.isNewUser == true) {
       userModel = userModel.copyWith(isNewUser: false);
       await _firebaseFirestore
-          .collection(FirebaseConstants.users)
+          .collection(FirebaseConstants.user)
           .doc(user?.uid)
           .set(userModel.toMap());
     }
@@ -232,7 +232,7 @@ class FirebaseApi implements RemoteDataSource {
 
       await user?.updateDisplayName(updatedUser.name);
       await _firebaseFirestore
-          .collection(FirebaseConstants.users)
+          .collection(FirebaseConstants.user)
           .doc(user?.uid)
           .set(updatedUser.toMap());
       return FirebaseAuthResponse(

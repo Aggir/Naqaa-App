@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/router/app_router.dart';
@@ -15,9 +16,10 @@ import 'package:naqaa/presentation/blocs/index.dart';
 import '../../presentation/blocs/user/user_cubit.dart';
 import '../di/dependency_injection.dart';
 
+// TODO: refactor it.
 class AppRoutes {
   static final onboarding = GoRoute(
-    redirect: _nonAuthenticatedRoute,
+    //redirect: _nonAuthenticatedRoute,
     path: AppScreen.onboarding.toPath,
     name: AppScreen.onboarding.toName,
     builder: (BuildContext context, GoRouterState state) {
@@ -26,7 +28,7 @@ class AppRoutes {
   );
 
   static final signIn = GoRoute(
-    redirect: _nonAuthenticatedRoute,
+    //redirect: _nonAuthenticatedRoute,
     path: AppScreen.signIn.toPath,
     name: AppScreen.signIn.toName,
     builder: (BuildContext context, GoRouterState state) {
@@ -38,7 +40,7 @@ class AppRoutes {
   );
 
   static final signUp = GoRoute(
-    redirect: _nonAuthenticatedRoute,
+    //redirect: _nonAuthenticatedRoute,
     path: AppScreen.signUp.toPath,
     name: AppScreen.signUp.toName,
     builder: (BuildContext context, GoRouterState state) {
@@ -57,7 +59,7 @@ class AppRoutes {
       branches: [
         StatefulShellBranch(routes: [
           GoRoute(
-            redirect: _nonAuthenticatedRoute,
+            //redirect: _nonAuthenticatedRoute,
             path: AppScreen.forgotPassword.toPath,
             name: AppScreen.forgotPassword.toName,
             builder: (BuildContext context, GoRouterState state) {
@@ -67,7 +69,7 @@ class AppRoutes {
         ]),
         StatefulShellBranch(routes: [
           GoRoute(
-            redirect: _nonAuthenticatedRoute,
+            //redirect: _nonAuthenticatedRoute,
             path: AppScreen.forgotPasswordInstructionsSent.toPath,
             name: AppScreen.forgotPasswordInstructionsSent.toName,
             builder: (BuildContext context, GoRouterState state) {
@@ -83,8 +85,8 @@ class AppRoutes {
           NoTransitionPage(child: MainScreen(child, state.uri)),
       routes: [
         GoRoute(
-          parentNavigatorKey: AppRouter.mainShellKey,
-          redirect: _authenticatedRoute,
+          //parentNavigatorKey: AppRouter.mainShellKey,
+          //redirect: _authenticatedRoute,
           path: AppScreen.home.toPath,
           name: AppScreen.home.toName,
           pageBuilder: (BuildContext context, GoRouterState state) {
@@ -92,8 +94,8 @@ class AppRoutes {
           },
         ),
         GoRoute(
-          parentNavigatorKey: AppRouter.mainShellKey,
-          redirect: _authenticatedRoute,
+          //parentNavigatorKey: AppRouter.mainShellKey,
+          //redirect: _authenticatedRoute,
           path: AppScreen.statistics.toPath,
           name: AppScreen.statistics.toName,
           pageBuilder: (BuildContext context, GoRouterState state) {
@@ -101,8 +103,8 @@ class AppRoutes {
           },
         ),
         GoRoute(
-          parentNavigatorKey: AppRouter.mainShellKey,
-          redirect: _authenticatedRoute,
+          //parentNavigatorKey: AppRouter.mainShellKey,
+          //redirect: _authenticatedRoute,
           path: AppScreen.notifications.toPath,
           name: AppScreen.notifications.toName,
           pageBuilder: (BuildContext context, GoRouterState state) {
@@ -110,8 +112,8 @@ class AppRoutes {
           },
         ),
         GoRoute(
-          parentNavigatorKey: AppRouter.mainShellKey,
-          redirect: _authenticatedRoute,
+          //parentNavigatorKey: AppRouter.mainShellKey,
+          //redirect: _authenticatedRoute,
           path: AppScreen.settings.toPath,
           name: AppScreen.settings.toName,
           pageBuilder: (BuildContext context, GoRouterState state) {
@@ -121,8 +123,8 @@ class AppRoutes {
       ]);
 
   static final changePassword = GoRoute(
-    parentNavigatorKey: AppRouter.appNavigatorKey,
-    redirect: _authenticatedRoute,
+    //parentNavigatorKey: AppRouter.appNavigatorKey,
+    //redirect: _authenticatedRoute,
     path: AppScreen.changePassword.toPath,
     name: AppScreen.changePassword.toName,
     pageBuilder: (context, state) => CupertinoPage(
@@ -134,8 +136,8 @@ class AppRoutes {
   );
 
   static final editProfile = GoRoute(
-    parentNavigatorKey: AppRouter.appNavigatorKey,
-    redirect: _authenticatedRoute,
+    //parentNavigatorKey: AppRouter.appNavigatorKey,
+    //redirect: _authenticatedRoute,
     path: AppScreen.editProfile.toPath,
     name: AppScreen.editProfile.toName,
     pageBuilder: (context, state) => CupertinoPage(
@@ -151,8 +153,8 @@ class AppRoutes {
   );
 
   static final appSettings = GoRoute(
-    parentNavigatorKey: AppRouter.appNavigatorKey,
-    redirect: _authenticatedRoute,
+    //parentNavigatorKey: AppRouter.appNavigatorKey,
+    //redirect: _authenticatedRoute,
     path: AppScreen.appSettings.toPath,
     name: AppScreen.appSettings.toName,
     pageBuilder: (context, state) => const CupertinoPage(
@@ -161,7 +163,7 @@ class AppRoutes {
   );
 
   static final termsOfUse = GoRoute(
-    parentNavigatorKey: AppRouter.appNavigatorKey,
+    //parentNavigatorKey: AppRouter.appNavigatorKey,
     path: AppScreen.termsOfUse.toPath,
     name: AppScreen.termsOfUse.toName,
     pageBuilder: (context, state) => const CupertinoPage(
@@ -170,7 +172,7 @@ class AppRoutes {
   );
 
   static final privacyPolicy = GoRoute(
-    parentNavigatorKey: AppRouter.appNavigatorKey,
+    //parentNavigatorKey: AppRouter.appNavigatorKey,
     path: AppScreen.privacyPolicy.toPath,
     name: AppScreen.privacyPolicy.toName,
     pageBuilder: (context, state) => const CupertinoPage(
@@ -179,7 +181,7 @@ class AppRoutes {
   );
 
   static final aboutUs = GoRoute(
-    parentNavigatorKey: AppRouter.appNavigatorKey,
+    //parentNavigatorKey: AppRouter.appNavigatorKey,
     path: AppScreen.aboutUs.toPath,
     name: AppScreen.aboutUs.toName,
     pageBuilder: (context, state) => const CupertinoPage(
@@ -188,8 +190,8 @@ class AppRoutes {
   );
 
   static final setupDeviceOnboarding = GoRoute(
-    parentNavigatorKey: AppRouter.appNavigatorKey,
-    redirect: _authenticatedRoute,
+    parentNavigatorKey: AppRouter.rootNavigatorKey,
+    //redirect: _authenticatedRoute,
     path: AppScreen.setupDeviceOnboarding.toPath,
     name: AppScreen.setupDeviceOnboarding.toName,
     pageBuilder: (context, state) => const CupertinoPage(
@@ -197,12 +199,21 @@ class AppRoutes {
     ),
   );
 
+  static final setupDeviceSteps = ShellRoute(
+    // parentNavigatorKey: AppRouter.rootNavigatorKey,
+    pageBuilder: (context, state, child) => CupertinoPage(child: child),
+    routes: [setupDeviceSelectNetwork],
+    navigatorKey: AppRouter.setupDeviceStepsShellKey,
+  );
+  // );
+
   static final setupDeviceSelectNetwork = GoRoute(
     // parentNavigatorKey: AppRouter.setupDeviceStepsShellKey,
-    parentNavigatorKey: AppRouter.appNavigatorKey,
-    redirect: _authenticatedRoute,
+    // //parentNavigatorKey: AppRouter.appNavigatorKey,
+    //redirect: _authenticatedRoute,
     path: AppScreen.setupDeviceSelectNetwork.toPath,
     name: AppScreen.setupDeviceSelectNetwork.toName,
+    // builder: (context, state) => Scaffold(),
     pageBuilder: (context, state) => CupertinoPage(
       child: BlocProvider(
         create: (context) => SetupDeviceSelectNetworkCubit(),
@@ -210,34 +221,9 @@ class AppRoutes {
       ),
     ),
   );
-
-  // static final setupDeviceSteps = ShellRoute(
-  //   parentNavigatorKey: AppRouter.appNavigatorKey,
-  //   navigatorKey: AppRouter.setupDeviceStepsShellKey,
   //   pageBuilder: (context, state, child) => NoTransitionPage(
   //     child: child,
   //   ),
   //   routes: [setupDeviceSelectNetwork],
   // );
-
-  // Todo: Refactor redirect functions.
-  static FutureOr<String?> _authenticatedRoute(
-      BuildContext context, GoRouterState state) {
-    final auth = instance<FirebaseAuth>();
-    if (auth.currentUser == null) {
-      return state.namedLocation(AppScreen.signIn.toName);
-    } else {
-      return null;
-    }
-  }
-
-  static FutureOr<String?> _nonAuthenticatedRoute(
-      BuildContext context, GoRouterState state) {
-    final auth = instance<FirebaseAuth>();
-    if (auth.currentUser != null) {
-      return state.namedLocation(AppScreen.home.toName);
-    } else {
-      return null;
-    }
-  }
 }

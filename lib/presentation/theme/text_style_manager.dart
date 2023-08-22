@@ -62,6 +62,10 @@ TextStyle semiBluishGrayStyle() {
   return getSemiBoldStyle(fontSize: FontSize.s14, color: AppColors.bluishGray);
 }
 
+TextStyle semiPrimarySmallStyle() {
+  return getSemiBoldStyle(fontSize: FontSize.s12, color: AppColors.primary);
+}
+
 TextStyle semiBluishGrayExtraSmallStyle() {
   return getSemiBoldStyle(fontSize: FontSize.s10, color: AppColors.bluishGray);
 }
@@ -84,6 +88,10 @@ TextStyle regularGrayStyle() {
 
 TextStyle regularGraySmallStyle() {
   return getRegularStyle(fontSize: FontSize.s12, color: AppColors.mediumGray);
+}
+
+TextStyle regularWhiteSmallStyle() {
+  return getRegularStyle(fontSize: FontSize.s12, color: AppColors.whiteText);
 }
 
 TextStyle regularBlackStyle() {

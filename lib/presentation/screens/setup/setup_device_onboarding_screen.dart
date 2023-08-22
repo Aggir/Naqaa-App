@@ -44,11 +44,12 @@ class _SetupDeviceOnboardingScreenState
 
   void _onNext(BuildContext context) async {
     if (currentIndex == 1) {
-      bool setupSuccess =
-          await context.push(AppScreen.setupDeviceSelectNetwork.toPath) as bool;
-      if (setupSuccess) {
-        navigateTo(currentIndex + 1);
-      }
+      // bool setupSuccess =
+      //     await context.push(AppScreen.setupDeviceSelectNetwork.toPath) as bool;
+      // if (setupSuccess) {
+      //   navigateTo(currentIndex + 1);
+      // }
+      context.push(AppScreen.setupDeviceSelectNetwork.toPath);
     } else {
       navigateTo(currentIndex + 1);
     }

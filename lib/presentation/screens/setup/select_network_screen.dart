@@ -7,17 +7,19 @@ import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/assets_manager.dart';
 import 'package:naqaa/app/constants.dart';
+import 'package:naqaa/app/enum.dart';
 import 'package:naqaa/presentation/blocs/setup_device_select_network/setup_device_select_network_cubit.dart';
+import 'package:naqaa/presentation/screens/setup/components/network_data_form_dailog.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
 import 'package:naqaa/presentation/widgets/custom_app_bar.dart';
 import 'package:naqaa/presentation/widgets/custom_spacers.dart';
-import 'package:naqaa/presentation/widgets/custom_text_form_field.dart';
+import 'package:naqaa/presentation/widgets/custom_toast.dart';
 import 'package:naqaa/presentation/widgets/dialog_service.dart';
 import 'package:wifi_scan/wifi_scan.dart';
 
-import '../../../widgets/page_container.dart';
+import '../../widgets/page_container.dart';
 
 class SetupDeviceSelectNetworkScreen extends StatefulWidget {
   const SetupDeviceSelectNetworkScreen({super.key});
@@ -34,6 +36,22 @@ class _SetupDeviceSelectNetworkScreenState
     super.initState();
     BlocProvider.of<SetupDeviceSelectNetworkCubit>(context)
         .startListeningToScanResults();
+  }
+
+  void openNetworkFormFunction(
+      BuildContext context, WiFiAccessPoint accessPoint) {
+    final cubit = BlocProvider.of<SetupDeviceSelectNetworkCubit>(context);
+    cubit.ssidController.text = accessPoint.ssid;
+    cubit.selectNetwork(accessPoint.bssid);
+    DialogService.load(
+      context,
+      isDismissible: false,
+      backgroundColor: AppColors.cloudWhite,
+      content: BlocProvider.value(
+        value: cubit,
+        child: const NetworkDataFormDialog(),
+      ),
+    );
   }
 
   @override
@@ -64,41 +82,57 @@ class _SetupDeviceSelectNetworkScreenState
           context.pop(false);
         },
       ),
-      body: PageContainer(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              AppStrings.chooseANetwork.tr(),
-              style: boldBlackHugeStyle(),
-            ),
-            CustomSpacers.mediumLarge(),
-            Text(
-              AppStrings.chooseOneOfTheNetworks.tr(),
-              style: regularGrayStyle(),
-            ),
-            Text(
-              AppStrings.ifYourNetworkIsHidden.tr(),
-              style: regularPrimaryStyle(),
-            ),
-            CustomSpacers.mediumLarge(),
-            BlocBuilder<SetupDeviceSelectNetworkCubit,
-                SetupDeviceSelectNetworkState>(
-              builder: (context, state) {
-                if (state.accessPoints?.isEmpty ?? true) {
-                  return Container();
-                } else {
-                  return Column(
-                    children: [
-                      ...state.accessPoints!
-                          .map((e) => _wifiListTile(e))
-                          .toList()
-                    ],
-                  );
-                }
-              },
-            )
-          ],
+      body: BlocListener<SetupDeviceSelectNetworkCubit,
+          SetupDeviceSelectNetworkState>(
+        listenWhen: (previous, current) =>
+            previous.connectStatus != current.connectStatus,
+        listener: (context, state) {
+          if (state.connectStatus.isFailure) {
+            CustomToast.error(context, state.connectErrorMessage!);
+          } else if (state.connectStatus.isSuccess) {
+            DialogService.dispose();
+            BlocProvider.of<SetupDeviceSelectNetworkCubit>(context)
+                .passwordController
+                .clear();
+            // TODO: go to the next step.
+          }
+        },
+        child: PageContainer(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                AppStrings.chooseANetwork.tr(),
+                style: boldBlackHugeStyle(),
+              ),
+              CustomSpacers.mediumLarge(),
+              Text(
+                AppStrings.chooseOneOfTheNetworks.tr(),
+                style: regularGrayStyle(),
+              ),
+              Text(
+                AppStrings.ifYourNetworkIsHidden.tr(),
+                style: regularPrimaryStyle(),
+              ),
+              CustomSpacers.mediumLarge(),
+              BlocBuilder<SetupDeviceSelectNetworkCubit,
+                  SetupDeviceSelectNetworkState>(
+                builder: (context, state) {
+                  if (state.accessPoints?.isEmpty ?? true) {
+                    return Container();
+                  } else {
+                    return Column(
+                      children: [
+                        ...state.accessPoints!
+                            .map((e) => _wifiListTile(e))
+                            .toList()
+                      ],
+                    );
+                  }
+                },
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -116,31 +150,7 @@ class _SetupDeviceSelectNetworkScreenState
         borderRadius: BorderRadius.circular(AppValues.smallRadius.r),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
-          onTap: () {
-            DialogService.load(
-              context,
-              backgroundColor: AppColors.cloudWhite,
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    AppStrings.connectToTheNetwork.tr(),
-                    style: boldBlackMediumStyle(),
-                  ),
-                  CustomSpacers.mediumLarge(),
-                  CustomTextFormField(
-                    hintText: AppStrings.network.tr(),
-                    readOnly: true,
-                  ),
-                  CustomSpacers.medium(),
-                  CustomTextFormField(
-                    hintText: AppStrings.password.tr(),
-                    isPassword: true,
-                  ),
-                ],
-              ),
-            );
-          },
+          onTap: () => openNetworkFormFunction(context, accessPoint),
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(
