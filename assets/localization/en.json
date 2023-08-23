@@ -227,5 +227,6 @@
     "so_you_can_easily_remember": ", so you can easily remember it. For example, 'Well' or 'Water Tank'.",
     "device_name": "Device name",
     "congratulations": "Congratulations",
-    "everything_is_setup_and_you_are_ready_to_go": "Everything is set-up and you are ready to go!"
+    "everything_is_setup_and_you_are_ready_to_go": "Everything is set-up and you are ready to go!",
+    "connect_error_message": "Something went wrong, please check your password and ensure the device is nearby, then try again."
 }

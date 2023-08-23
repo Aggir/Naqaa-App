@@ -308,4 +308,5 @@ class AppStrings {
   static const congratulations = 'congratulations';
   static const everythingIsSetupAndYouAreReadyToGo =
       'everything_is_setup_and_you_are_ready_to_go';
+  static const connectErrorMessage = 'connect_error_message';
 }

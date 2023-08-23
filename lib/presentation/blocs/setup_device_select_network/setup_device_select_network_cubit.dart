@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:esp_smartconfig/esp_smartconfig.dart';
 import 'package:flutter/material.dart';
+import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/di/dependency_injection.dart';
 import 'package:naqaa/app/enum.dart';
 import 'package:wifi_scan/wifi_scan.dart';
@@ -18,6 +20,7 @@ class SetupDeviceSelectNetworkCubit
   final GlobalKey<FormState> networkDataForm = GlobalKey<FormState>();
   final TextEditingController ssidController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final FocusNode passwordFocusNode = FocusNode();
 
   final GlobalKey<FormState> deviceNameForm = GlobalKey<FormState>();
   final TextEditingController deviceNameController = TextEditingController();
@@ -85,6 +88,9 @@ class SetupDeviceSelectNetworkCubit
       final provisioner = Provisioner.espTouch();
       provisioner.listen((response) {
         print("Device ${response.bssidText} connected to WiFi!");
+        if (response.bssidText.isNotEmpty) {
+          deviceMacController.text = response.bssidText;
+        }
         emit(state.copyWith(connectStatus: Status.success));
       });
 
@@ -100,7 +106,11 @@ class SetupDeviceSelectNetworkCubit
             connectStatus: Status.failure, connectErrorMessage: e.toString()));
       }
       provisioner.stop();
-      emit(state.copyWith(connectStatus: Status.success));
+      emit(
+        state.copyWith(
+            connectStatus: Status.failure,
+            connectErrorMessage: AppStrings.connectErrorMessage.tr()),
+      );
     }
   }
 

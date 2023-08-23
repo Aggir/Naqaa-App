@@ -38,9 +38,21 @@ class NetworkDataFormDialog extends StatelessWidget {
           CustomTextFormField(
             hintText: AppStrings.password.tr(),
             controller: cubit.passwordController,
+            focusNode: cubit.passwordFocusNode,
             isPassword: true,
             validator: passwordValidator,
           ),
+          BlocBuilder<SetupDeviceSelectNetworkCubit,
+              SetupDeviceSelectNetworkState>(builder: (context, state) {
+            if (state.connectStatus.isFailure) {
+              return Text(
+                state.connectErrorMessage!,
+                style: regularRedExtraSmallStyle(),
+              );
+            } else {
+              return Container();
+            }
+          }),
           CustomSpacers.mediumLarge(),
           BlocBuilder<SetupDeviceSelectNetworkCubit,
               SetupDeviceSelectNetworkState>(

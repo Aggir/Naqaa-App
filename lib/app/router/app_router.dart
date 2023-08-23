@@ -39,7 +39,7 @@ class AppRouter {
           AppRoutes.privacyPolicy,
           AppRoutes.aboutUs,
           AppRoutes.setupDeviceOnboarding,
-          AppRoutes.setupDeviceSelectNetwork,
+
           // AppRoutes.setupDeviceSteps,
         ],
         builder: (context, state, child) => BlocProvider(

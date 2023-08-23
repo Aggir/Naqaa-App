@@ -16,6 +16,7 @@ enum AppScreen {
   aboutUs,
   setupDeviceOnboarding,
   setupDeviceSelectNetwork,
+  setupDeviceAddDeviceName,
 }
 
 extension AppScreenExtension on AppScreen {
@@ -52,9 +53,11 @@ extension AppScreenExtension on AppScreen {
       case AppScreen.aboutUs:
         return "/about-us";
       case AppScreen.setupDeviceOnboarding:
-        return "/setup-device-onboarding";
+        return "/setup-device";
       case AppScreen.setupDeviceSelectNetwork:
-        return "/setup-device-select-network";
+        return "/setup-device/select-network";
+      case AppScreen.setupDeviceAddDeviceName:
+        return "/setup-device/add-device-name";
       default:
         return "/";
     }
@@ -96,17 +99,21 @@ extension AppScreenExtension on AppScreen {
         return "SETUP DEVICE ONBOARDING";
       case AppScreen.setupDeviceSelectNetwork:
         return "SETUP DEVICE SELECT NETWORK";
+      case AppScreen.setupDeviceAddDeviceName:
+        return "SETUP DEVICE ADD DEVICE NAME";
       default:
         return "HOME";
     }
   }
 
-  // String get asSubPath {
-  //   switch (this) {
-  //     case AppScreen.changePassword:
-  //       return "change-password";
-  //     default:
-  //       return "";
-  //   }
-  // }
+  String get asSubPath {
+    switch (this) {
+      case AppScreen.setupDeviceSelectNetwork:
+        return "select-network";
+      case AppScreen.setupDeviceAddDeviceName:
+        return "add-device-name";
+      default:
+        return "";
+    }
+  }
 }

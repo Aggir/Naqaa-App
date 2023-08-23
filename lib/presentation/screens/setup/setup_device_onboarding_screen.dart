@@ -49,7 +49,7 @@ class _SetupDeviceOnboardingScreenState
       // if (setupSuccess) {
       //   navigateTo(currentIndex + 1);
       // }
-      context.push(AppScreen.setupDeviceSelectNetwork.toPath);
+      context.go(AppScreen.setupDeviceSelectNetwork.toPath);
     } else {
       navigateTo(currentIndex + 1);
     }
@@ -61,7 +61,7 @@ class _SetupDeviceOnboardingScreenState
       appBar: CustomAppBar.basic(
         title: Constants.empty,
         backButton: () {
-          context.pop();
+          context.go(AppScreen.home.toPath);
         },
       ),
       body: IntroSlider(

@@ -188,45 +188,40 @@ class AppRoutes {
   );
 
   static final setupDeviceOnboarding = GoRoute(
-    parentNavigatorKey: AppRouter.appNavigatorKey,
-    redirect: _authenticatedRoute,
-    path: AppScreen.setupDeviceOnboarding.toPath,
-    name: AppScreen.setupDeviceOnboarding.toName,
-    pageBuilder: (context, state) => const CupertinoPage(
-      child: SetupDeviceOnboardingScreen(),
-    ),
-  );
+      parentNavigatorKey: AppRouter.appNavigatorKey,
+      redirect: _authenticatedRoute,
+      path: AppScreen.setupDeviceOnboarding.toPath,
+      name: AppScreen.setupDeviceOnboarding.toName,
+      pageBuilder: (context, state) => const CupertinoPage(
+            child: SetupDeviceOnboardingScreen(),
+          ),
+      routes: [setupDeviceSteps]);
 
-  static final setupDeviceSteps = ShellRoute(
-    // parentNavigatorKey: AppRouter.rootNavigatorKey,
-    pageBuilder: (context, state, child) => CupertinoPage(child: child),
-    routes: [setupDeviceSelectNetwork],
-    navigatorKey: AppRouter.setupDeviceStepsShellKey,
-  );
-  // );
+  static final setupDeviceSteps = StatefulShellRoute.indexedStack(
+      // parentNavigatorKey: AppRouter.rootNavigatorKey,
+      builder: (context, state, child) => BlocProvider(
+          create: (context) => SetupDeviceSelectNetworkCubit(),
+          child: SetupDeviceScreen(child)),
+      branches: setupBranches);
+
+  static final setupBranches = [
+    StatefulShellBranch(routes: [setupDeviceSelectNetwork, addDeviceName]),
+  ];
 
   static final setupDeviceSelectNetwork = GoRoute(
-    // parentNavigatorKey: AppRouter.setupDeviceStepsShellKey,
-    parentNavigatorKey: AppRouter.appNavigatorKey,
     redirect: _authenticatedRoute,
-    path: AppScreen.setupDeviceSelectNetwork.toPath,
+    path: AppScreen.setupDeviceSelectNetwork.asSubPath,
     name: AppScreen.setupDeviceSelectNetwork.toName,
-    pageBuilder: (context, state) => CupertinoPage(
-      child: BlocProvider(
-        create: (context) => SetupDeviceSelectNetworkCubit(),
-        child: const SetupDeviceSelectNetworkScreen(),
-      ),
-    ),
+    builder: (context, state) => const SetupDeviceSelectNetworkScreen(),
   );
 
-  // static final setupDeviceSteps = ShellRoute(
-  //   parentNavigatorKey: AppRouter.appNavigatorKey,
-  //   navigatorKey: AppRouter.setupDeviceStepsShellKey,
-  //   pageBuilder: (context, state, child) => NoTransitionPage(
-  //     child: child,
-  //   ),
-  //   routes: [setupDeviceSelectNetwork],
-  // );
+  static final addDeviceName = GoRoute(
+    redirect: _authenticatedRoute,
+    path: AppScreen.setupDeviceAddDeviceName.asSubPath,
+    name: AppScreen.setupDeviceAddDeviceName.toName,
+    pageBuilder: (context, state) =>
+        const NoTransitionPage(child: SetupDeviceAddDeviceNameScreen()),
+  );
 
   // Todo: Refactor redirect functions.
   static FutureOr<String?> _authenticatedRoute(

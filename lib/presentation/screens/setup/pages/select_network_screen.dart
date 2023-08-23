@@ -6,20 +6,19 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/assets_manager.dart';
-import 'package:naqaa/app/constants.dart';
 import 'package:naqaa/app/enum.dart';
+import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/presentation/blocs/setup_device_select_network/setup_device_select_network_cubit.dart';
 import 'package:naqaa/presentation/screens/setup/components/network_data_form_dailog.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
-import 'package:naqaa/presentation/widgets/custom_app_bar.dart';
 import 'package:naqaa/presentation/widgets/custom_spacers.dart';
 import 'package:naqaa/presentation/widgets/custom_toast.dart';
 import 'package:naqaa/presentation/widgets/dialog_service.dart';
 import 'package:wifi_scan/wifi_scan.dart';
 
-import '../../widgets/page_container.dart';
+import '../../../widgets/page_container.dart';
 
 class SetupDeviceSelectNetworkScreen extends StatefulWidget {
   const SetupDeviceSelectNetworkScreen({super.key});
@@ -56,83 +55,54 @@ class _SetupDeviceSelectNetworkScreenState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar.basic(
-        actions: [
-          SizedBox(
-            height: AppSizes.s48.r,
-            width: AppSizes.s48.r,
-            child: InkWell(
-                borderRadius: BorderRadius.circular(100),
-                onTap: () =>
-                    BlocProvider.of<SetupDeviceSelectNetworkCubit>(context)
-                        .refresh(),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: SvgPicture.asset(
-                    SvgAssets.refresh,
-                    height: AppSizes.s16.r,
-                    width: AppSizes.s16.r,
-                  ),
-                )),
-          ),
-        ],
-        title: Constants.empty,
-        backButton: () {
-          context.pop(false);
-        },
-      ),
-      body: BlocListener<SetupDeviceSelectNetworkCubit,
-          SetupDeviceSelectNetworkState>(
-        listenWhen: (previous, current) =>
-            previous.connectStatus != current.connectStatus,
-        listener: (context, state) {
-          if (state.connectStatus.isFailure) {
-            CustomToast.error(context, state.connectErrorMessage!);
-          } else if (state.connectStatus.isSuccess) {
-            DialogService.dispose();
-            BlocProvider.of<SetupDeviceSelectNetworkCubit>(context)
-                .passwordController
-                .clear();
-            // TODO: go to the next step.
-          }
-        },
-        child: PageContainer(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                AppStrings.chooseANetwork.tr(),
-                style: boldBlackHugeStyle(),
-              ),
-              CustomSpacers.mediumLarge(),
-              Text(
-                AppStrings.chooseOneOfTheNetworks.tr(),
-                style: regularGrayStyle(),
-              ),
-              Text(
-                AppStrings.ifYourNetworkIsHidden.tr(),
-                style: regularPrimaryStyle(),
-              ),
-              CustomSpacers.mediumLarge(),
-              BlocBuilder<SetupDeviceSelectNetworkCubit,
-                  SetupDeviceSelectNetworkState>(
-                builder: (context, state) {
-                  if (state.accessPoints?.isEmpty ?? true) {
-                    return Container();
-                  } else {
-                    return Column(
-                      children: [
-                        ...state.accessPoints!
-                            .map((e) => _wifiListTile(e))
-                            .toList()
-                      ],
-                    );
-                  }
-                },
-              )
-            ],
-          ),
+    return BlocListener<SetupDeviceSelectNetworkCubit,
+        SetupDeviceSelectNetworkState>(
+      listenWhen: (previous, current) =>
+          previous.connectStatus != current.connectStatus,
+      listener: (context, state) {
+        if (state.connectStatus.isSuccess) {
+          DialogService.dispose();
+          BlocProvider.of<SetupDeviceSelectNetworkCubit>(context)
+              .passwordController
+              .clear();
+          context.go(AppScreen.setupDeviceAddDeviceName.toPath);
+        }
+      },
+      child: PageContainer(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              AppStrings.chooseANetwork.tr(),
+              style: boldBlackHugeStyle(),
+            ),
+            CustomSpacers.mediumLarge(),
+            Text(
+              AppStrings.chooseOneOfTheNetworks.tr(),
+              style: regularGrayStyle(),
+            ),
+            Text(
+              AppStrings.ifYourNetworkIsHidden.tr(),
+              style: regularPrimaryStyle(),
+            ),
+            CustomSpacers.mediumLarge(),
+            BlocBuilder<SetupDeviceSelectNetworkCubit,
+                SetupDeviceSelectNetworkState>(
+              builder: (context, state) {
+                if (state.accessPoints?.isEmpty ?? true) {
+                  return Container();
+                } else {
+                  return Column(
+                    children: [
+                      ...state.accessPoints!
+                          .map((e) => _wifiListTile(e))
+                          .toList()
+                    ],
+                  );
+                }
+              },
+            )
+          ],
         ),
       ),
     );

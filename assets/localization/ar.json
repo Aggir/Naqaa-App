@@ -228,5 +228,6 @@
     "so_you_can_easily_remember": "، لتتمكن من تذكره بسهولة. مثل 'يئر' أو 'خزان المياة'.",
     "device_name": "اسم الجهاز",
     "congratulations": "تهانينا",
-    "everything_is_setup_and_you_are_ready_to_go": "كل شيء جاهز وأنت جاهز للبدء!"
+    "everything_is_setup_and_you_are_ready_to_go": "كل شيء جاهز وأنت جاهز للبدء!",
+    "connect_error_message": "حدث خطأ ما، الرجاء التحقق من كلمة المرور وان الجهاز بالقرب منك و المحاولة مرة اخرى"
 }
