@@ -4,8 +4,9 @@ import 'package:get_it/get_it.dart';
 import 'package:naqaa/app/helpers/app_service.dart';
 import 'package:naqaa/data/datasources/remote/firebase_api.dart';
 import 'package:naqaa/data/datasources/remote_datasource.dart';
-import 'package:naqaa/data/repositories/auth_repository_impl.dart';
+import 'package:naqaa/data/repositories/repository_impl.dart';
 import 'package:naqaa/domain/repositories/repository.dart';
+import 'package:naqaa/domain/usecases/add_device_usecase.dart';
 import 'package:naqaa/domain/usecases/change_password_usecase.dart';
 import 'package:naqaa/domain/usecases/edit_profile_usecase.dart';
 import 'package:naqaa/domain/usecases/index.dart';
@@ -102,5 +103,12 @@ void initEditProfile() async {
   if (!GetIt.I.isRegistered<EditProfileUsecase>()) {
     instance.registerFactory<EditProfileUsecase>(
         () => EditProfileUsecase(instance<Repository>()));
+  }
+}
+
+void initAddDevice() async {
+  if (!GetIt.I.isRegistered<AddDeviceUsecase>()) {
+    instance.registerFactory<AddDeviceUsecase>(
+        () => AddDeviceUsecase(instance<Repository>()));
   }
 }

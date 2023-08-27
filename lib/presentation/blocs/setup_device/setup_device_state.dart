@@ -1,35 +1,46 @@
-part of 'setup_device_select_network_cubit.dart';
+part of 'setup_device_cubit.dart';
 
-class SetupDeviceSelectNetworkState extends Equatable {
+class SetupDeviceState extends Equatable {
   final List<WiFiAccessPoint>? accessPoints;
   final String? bssid;
   final Status connectStatus;
   final String? connectErrorMessage;
+  final Status addDeviceStatus;
+  final String? addDeviceErrorMessage;
 
-  const SetupDeviceSelectNetworkState({
+  const SetupDeviceState({
     this.accessPoints,
     this.bssid,
     this.connectStatus = Status.initial,
     this.connectErrorMessage,
+    this.addDeviceStatus = Status.initial,
+    this.addDeviceErrorMessage,
   });
   @override
   List<Object?> get props => [
         accessPoints,
         bssid,
         connectStatus,
+        addDeviceStatus,
+        addDeviceErrorMessage,
       ];
 
-  SetupDeviceSelectNetworkState copyWith({
+  SetupDeviceState copyWith({
     List<WiFiAccessPoint>? accessPoints,
     String? bssid,
     Status? connectStatus,
     String? connectErrorMessage,
+    Status? addDeviceStatus,
+    String? addDeviceErrorMessage,
   }) {
-    return SetupDeviceSelectNetworkState(
+    return SetupDeviceState(
       accessPoints: accessPoints ?? this.accessPoints,
       bssid: bssid ?? this.bssid,
       connectStatus: connectStatus ?? this.connectStatus,
       connectErrorMessage: connectErrorMessage ?? this.connectErrorMessage,
+      addDeviceStatus: addDeviceStatus ?? this.addDeviceStatus,
+      addDeviceErrorMessage:
+          addDeviceErrorMessage ?? this.addDeviceErrorMessage,
     );
   }
 }

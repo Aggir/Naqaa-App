@@ -17,6 +17,7 @@ enum AppScreen {
   setupDeviceOnboarding,
   setupDeviceSelectNetwork,
   setupDeviceAddDeviceName,
+  setupDeviceAddDeviceMac,
 }
 
 extension AppScreenExtension on AppScreen {
@@ -58,6 +59,8 @@ extension AppScreenExtension on AppScreen {
         return "/setup-device/select-network";
       case AppScreen.setupDeviceAddDeviceName:
         return "/setup-device/add-device-name";
+      case AppScreen.setupDeviceAddDeviceMac:
+        return "/setup-device/add-device-mac";
       default:
         return "/";
     }
@@ -101,6 +104,8 @@ extension AppScreenExtension on AppScreen {
         return "SETUP DEVICE SELECT NETWORK";
       case AppScreen.setupDeviceAddDeviceName:
         return "SETUP DEVICE ADD DEVICE NAME";
+      case AppScreen.setupDeviceAddDeviceMac:
+        return "SETUP DEVICE ADD DEVICE MAC";
       default:
         return "HOME";
     }
@@ -112,6 +117,8 @@ extension AppScreenExtension on AppScreen {
         return "select-network";
       case AppScreen.setupDeviceAddDeviceName:
         return "add-device-name";
+      case AppScreen.setupDeviceAddDeviceMac:
+        return "add-device-mac";
       default:
         return "";
     }

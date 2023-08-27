@@ -46,6 +46,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         source: ImageSource.gallery, imageQuality: 70, maxHeight: 500);
     if (image != null) {
       final File imageFile = File(image.path);
+
       emit(state.copyWith(
           editPictureStatus: Status.success, selectedPicture: imageFile));
     } else {
@@ -57,6 +58,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     emit(state.copyWith(editPictureStatus: Status.loading));
     final XFile? image = await _imagePicker.pickImage(
         source: ImageSource.camera, imageQuality: 70, maxHeight: 500);
+
     if (image != null) {
       final File imageFile = File(image.path);
       emit(state.copyWith(

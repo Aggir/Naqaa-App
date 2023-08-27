@@ -10,6 +10,7 @@ import 'package:naqaa/data/mappers/user_mapper.dart';
 import 'package:naqaa/data/models/user.dart';
 import 'package:naqaa/data/requests/requests.dart';
 import 'package:naqaa/data/responses/firebase_responses.dart';
+import 'package:naqaa/data/responses/responses.dart';
 import 'package:naqaa/domain/entities/user.dart';
 
 import 'firebase_auth_error_handler.dart';
@@ -244,6 +245,27 @@ class FirebaseApi implements RemoteDataSource {
           message: FirebaseAuthErrorHandler.getAuthErrorMessage(e));
     } catch (e) {
       return FirebaseAuthResponse(Status.failure, message: e.toString());
+    }
+  }
+
+  @override
+  Future<BasicResponse> addDevice(AddDeviceRequest request) async {
+    try {
+      final User? user = _firebaseAuth.currentUser;
+
+      _firebaseFirestore
+          .collection(FirebaseConstants.userDevice)
+          .doc(user?.uid)
+          .set({
+        FirebaseConstants.devices: FieldValue.arrayUnion([request.toMap()])
+      }, SetOptions(merge: true));
+
+      return const BasicResponse(Status.success, 'success');
+    } on FirebaseAuthException catch (e) {
+      return BasicResponse(
+          Status.failure, FirebaseAuthErrorHandler.getAuthErrorMessage(e));
+    } catch (e) {
+      return BasicResponse(Status.failure, e.toString());
     }
   }
 }

@@ -8,15 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/di/dependency_injection.dart';
 import 'package:naqaa/app/enum.dart';
+import 'package:naqaa/domain/usecases/add_device_usecase.dart';
 import 'package:wifi_scan/wifi_scan.dart';
 
-part 'setup_device_select_network_state.dart';
+part 'setup_device_state.dart';
 
-class SetupDeviceSelectNetworkCubit
-    extends Cubit<SetupDeviceSelectNetworkState> {
-  SetupDeviceSelectNetworkCubit()
-      : super(const SetupDeviceSelectNetworkState());
-
+class SetupDeviceCubit extends Cubit<SetupDeviceState> {
+  SetupDeviceCubit() : super(const SetupDeviceState());
+  bool debugMode = true;
   final GlobalKey<FormState> networkDataForm = GlobalKey<FormState>();
   final TextEditingController ssidController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -24,6 +23,7 @@ class SetupDeviceSelectNetworkCubit
 
   final GlobalKey<FormState> deviceNameForm = GlobalKey<FormState>();
   final TextEditingController deviceNameController = TextEditingController();
+  final FocusNode deviceNameFocusNode = FocusNode();
 
   final GlobalKey<FormState> deviceMacForm = GlobalKey<FormState>();
   final TextEditingController deviceMacController = TextEditingController();
@@ -38,6 +38,19 @@ class SetupDeviceSelectNetworkCubit
       return false;
     }
     return true;
+  }
+
+  Future<void> addDevice() async {
+    emit(state.copyWith(addDeviceStatus: Status.loading));
+    initAddDevice();
+    (await instance<AddDeviceUsecase>().execute(AddDeviceUsecaseInput(
+            name: deviceNameController.text.trim(),
+            macAddress: deviceMacController.text.trim())))
+        .fold(
+            (failure) => emit(state.copyWith(
+                addDeviceStatus: Status.failure,
+                addDeviceErrorMessage: failure.message)),
+            (_) => emit(state.copyWith(addDeviceStatus: Status.success)));
   }
 
   Future<void> startListeningToScanResults() async {
@@ -81,13 +94,10 @@ class SetupDeviceSelectNetworkCubit
       print(ssidController.text);
       print(state.bssid);
       print(passwordController.text);
-      // TODO: REFACTOR STATUS FLOW.
-      // make it wait for 10 seconds and if there is no response from any device, the emit Status failure
-      // emit Status failure if the credentials are invalid
+
       emit(state.copyWith(connectStatus: Status.loading));
       final provisioner = Provisioner.espTouch();
       provisioner.listen((response) {
-        print("Device ${response.bssidText} connected to WiFi!");
         if (response.bssidText.isNotEmpty) {
           deviceMacController.text = response.bssidText;
         }
@@ -100,15 +110,18 @@ class SetupDeviceSelectNetworkCubit
           bssid: state.bssid!,
           password: passwordController.text,
         ));
-        await Future.delayed(const Duration(seconds: 10));
+        await Future.delayed(Duration(seconds: debugMode ? 2 : 20));
       } catch (e) {
         emit(state.copyWith(
             connectStatus: Status.failure, connectErrorMessage: e.toString()));
       }
       provisioner.stop();
+      if (debugMode) {
+        deviceMacController.text = 'D4:D4:DA:71:D6:F8';
+      }
       emit(
         state.copyWith(
-            connectStatus: Status.failure,
+            connectStatus: debugMode ? Status.success : Status.failure,
             connectErrorMessage: AppStrings.connectErrorMessage.tr()),
       );
     }

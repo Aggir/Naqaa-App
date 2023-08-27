@@ -51,4 +51,5 @@ class SvgAssets {
   static const String wifiFull = '$_svgPath/wifi-full.svg';
   static const String wifiHalf = '$_svgPath/wifi-half.svg';
   static const String refresh = '$_svgPath/refresh.svg';
+  static const String qrCode = '$_svgPath/qr-code.svg';
 }

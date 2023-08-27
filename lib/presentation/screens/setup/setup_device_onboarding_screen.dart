@@ -15,7 +15,8 @@ import 'package:naqaa/presentation/widgets/custom_app_bar.dart';
 import '../../widgets/onboarding_page.dart';
 
 class SetupDeviceOnboardingScreen extends StatefulWidget {
-  const SetupDeviceOnboardingScreen({super.key});
+  const SetupDeviceOnboardingScreen({this.pageIndex, super.key});
+  final int? pageIndex;
 
   @override
   State<SetupDeviceOnboardingScreen> createState() =>
@@ -25,7 +26,14 @@ class SetupDeviceOnboardingScreen extends StatefulWidget {
 class _SetupDeviceOnboardingScreenState
     extends State<SetupDeviceOnboardingScreen> {
   late Function navigateTo;
-  int currentIndex = 0;
+  late int currentIndex;
+
+  @override
+  void initState() {
+    print(widget.pageIndex);
+    currentIndex = widget.pageIndex ?? 0;
+    super.initState();
+  }
 
   Widget _indicator(Color color) {
     return Container(
@@ -67,6 +75,8 @@ class _SetupDeviceOnboardingScreenState
       body: IntroSlider(
         refFuncGoToTab: (function) {
           navigateTo = function;
+          print(currentIndex);
+          navigateTo(currentIndex);
         },
         onTabChangeCompleted: (index) {
           currentIndex = index;

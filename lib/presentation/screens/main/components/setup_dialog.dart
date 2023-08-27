@@ -13,9 +13,14 @@ import 'package:naqaa/presentation/widgets/dialog_service.dart';
 import 'package:naqaa/presentation/widgets/primary_button.dart';
 import 'package:naqaa/presentation/widgets/secondary_button.dart';
 
-class SetupDialog extends StatelessWidget {
+class SetupDialog extends StatefulWidget {
   const SetupDialog({super.key});
 
+  @override
+  State<SetupDialog> createState() => _SetupDialogState();
+}
+
+class _SetupDialogState extends State<SetupDialog> {
   void _setupNowFunction(BuildContext context) {
     DialogService.dispose();
     context.push(AppScreen.setupDeviceOnboarding.toPath);

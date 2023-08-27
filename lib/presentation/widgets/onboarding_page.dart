@@ -29,30 +29,33 @@ class OnboardingPage extends StatelessWidget {
     return Padding(
       padding:
           const EdgeInsets.symmetric(horizontal: AppValues.mediumLarge - 5).r,
-      child: Column(
-        children: [
-          _onboardingDivider(),
-          _onboardingDivider(),
-          SvgPicture.asset(
-            svgPath,
-            height: AppSizes.s330.r,
-            width: AppSizes.s330.r,
-          ),
-          _onboardingDivider(),
-          Text(
-            title,
-            style: boldBlackExtraLargeStyle(),
-          ).tr(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppValues.medium).r,
-            child: subtitleWidget ??
-                Text(
-                  subtitle!,
-                  style: regularBluishGrayMediumStyle(),
-                  textAlign: TextAlign.center,
-                ).tr(),
-          ),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            _onboardingDivider(),
+            _onboardingDivider(),
+            SvgPicture.asset(
+              svgPath,
+              height: AppSizes.s330.r,
+              width: AppSizes.s330.r,
+            ),
+            _onboardingDivider(),
+            Text(
+              title,
+              style: boldBlackExtraLargeStyle(),
+            ).tr(),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: AppValues.medium).r,
+              child: subtitleWidget ??
+                  Text(
+                    subtitle!,
+                    style: regularBluishGrayMediumStyle(),
+                    textAlign: TextAlign.center,
+                  ).tr(),
+            ),
+          ],
+        ),
       ),
     );
   }

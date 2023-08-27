@@ -8,38 +8,36 @@ import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/assets_manager.dart';
 import 'package:naqaa/app/enum.dart';
 import 'package:naqaa/app/router/routes.dart';
-import 'package:naqaa/presentation/blocs/setup_device_select_network/setup_device_select_network_cubit.dart';
+import 'package:naqaa/presentation/blocs/setup_device/setup_device_cubit.dart';
 import 'package:naqaa/presentation/screens/setup/components/network_data_form_dailog.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
 import 'package:naqaa/presentation/widgets/custom_spacers.dart';
-import 'package:naqaa/presentation/widgets/custom_toast.dart';
 import 'package:naqaa/presentation/widgets/dialog_service.dart';
 import 'package:wifi_scan/wifi_scan.dart';
 
 import '../../../widgets/page_container.dart';
 
-class SetupDeviceSelectNetworkScreen extends StatefulWidget {
-  const SetupDeviceSelectNetworkScreen({super.key});
+class SetupDeviceSelectNetworkPage extends StatefulWidget {
+  const SetupDeviceSelectNetworkPage({super.key});
 
   @override
-  State<SetupDeviceSelectNetworkScreen> createState() =>
-      _SetupDeviceSelectNetworkScreenState();
+  State<SetupDeviceSelectNetworkPage> createState() =>
+      _SetupDeviceSelectNetworkPageState();
 }
 
-class _SetupDeviceSelectNetworkScreenState
-    extends State<SetupDeviceSelectNetworkScreen> {
+class _SetupDeviceSelectNetworkPageState
+    extends State<SetupDeviceSelectNetworkPage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<SetupDeviceSelectNetworkCubit>(context)
-        .startListeningToScanResults();
+    BlocProvider.of<SetupDeviceCubit>(context).startListeningToScanResults();
   }
 
   void openNetworkFormFunction(
       BuildContext context, WiFiAccessPoint accessPoint) {
-    final cubit = BlocProvider.of<SetupDeviceSelectNetworkCubit>(context);
+    final cubit = BlocProvider.of<SetupDeviceCubit>(context);
     cubit.ssidController.text = accessPoint.ssid;
     cubit.selectNetwork(accessPoint.bssid);
     DialogService.load(
@@ -55,16 +53,13 @@ class _SetupDeviceSelectNetworkScreenState
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SetupDeviceSelectNetworkCubit,
-        SetupDeviceSelectNetworkState>(
+    return BlocListener<SetupDeviceCubit, SetupDeviceState>(
       listenWhen: (previous, current) =>
           previous.connectStatus != current.connectStatus,
       listener: (context, state) {
         if (state.connectStatus.isSuccess) {
           DialogService.dispose();
-          BlocProvider.of<SetupDeviceSelectNetworkCubit>(context)
-              .passwordController
-              .clear();
+          BlocProvider.of<SetupDeviceCubit>(context).passwordController.clear();
           context.go(AppScreen.setupDeviceAddDeviceName.toPath);
         }
       },
@@ -86,8 +81,7 @@ class _SetupDeviceSelectNetworkScreenState
               style: regularPrimaryStyle(),
             ),
             CustomSpacers.mediumLarge(),
-            BlocBuilder<SetupDeviceSelectNetworkCubit,
-                SetupDeviceSelectNetworkState>(
+            BlocBuilder<SetupDeviceCubit, SetupDeviceState>(
               builder: (context, state) {
                 if (state.accessPoints?.isEmpty ?? true) {
                   return Container();
@@ -134,8 +128,13 @@ class _SetupDeviceSelectNetworkScreenState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      accessPoint.ssid,
-                      style: semiBlackStyle(),
+                      accessPoint.ssid.isEmpty
+                          ? AppStrings.hiddenWifi.tr()
+                          : accessPoint.ssid,
+                      style: semiBlackStyle().copyWith(
+                          color: accessPoint.ssid.isEmpty
+                              ? AppColors.bluishGray
+                              : null),
                     ),
                     Text(
                       (isWifiProtected()

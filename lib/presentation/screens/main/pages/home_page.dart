@@ -31,13 +31,15 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance.addPostFrameCallback(
-      (_) => DialogService.load(
-        context,
-        isDismissible: false,
-        content: const SetupDialog(),
-      ),
-    );
+    if (BlocProvider.of<UserCubit>(context).state.user?.isNewUser ?? false) {
+      SchedulerBinding.instance.addPostFrameCallback(
+        (_) => DialogService.load(
+          context,
+          isDismissible: false,
+          content: const SetupDialog(),
+        ),
+      );
+    }
   }
 
   @override

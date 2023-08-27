@@ -294,6 +294,7 @@ class AppStrings {
   static const chooseANetwork = 'choose_a_network';
   static const chooseOneOfTheNetworks = 'choose_one_of_the_networks';
   static const ifYourNetworkIsHidden = 'if_your_network_is_hidden';
+  static const hiddenWifi = 'hidden_wifi';
   static const device = 'device';
   static const protected = 'protected';
   static const open = 'open';
@@ -305,6 +306,12 @@ class AppStrings {
   static const enterNameForYour = 'enter_name_for_your';
   static const soYouCanEasilyRemember = 'so_you_can_easily_remember';
   static const deviceName = 'device_name';
+  static const enterName = 'enter_name';
+  static const continueButton = 'continue_button';
+  static const enterTheDeviceMacAddress = 'enter_the_device_mac_address';
+  static const enterOrScanTheQrCodeMac = 'enter_or_scan_the_qr_code_mac';
+  static const macAddressHint = 'mac_address_hint';
+  static const finishSetup = 'finish_setup';
   static const congratulations = 'congratulations';
   static const everythingIsSetupAndYouAreReadyToGo =
       'everything_is_setup_and_you_are_ready_to_go';

@@ -21,4 +21,6 @@ abstract class Repository {
       SendResetPasswordInstructionsRequest input);
 
   Future<Either<Failure, UserEntity>> editProfile(EditProfileRequest input);
+
+  Future<Either<Failure, void>> addDevice(AddDeviceRequest input);
 }

@@ -8,7 +8,7 @@ import 'package:naqaa/app/router/app_router.dart';
 import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/presentation/blocs/change_password/change_password_cubit.dart';
 import 'package:naqaa/presentation/blocs/edit_profile/edit_profile_cubit.dart';
-import 'package:naqaa/presentation/blocs/setup_device_select_network/setup_device_select_network_cubit.dart';
+import 'package:naqaa/presentation/blocs/setup_device/setup_device_cubit.dart';
 import 'package:naqaa/presentation/screens/index.dart';
 import 'package:naqaa/presentation/blocs/index.dart';
 
@@ -188,39 +188,52 @@ class AppRoutes {
   );
 
   static final setupDeviceOnboarding = GoRoute(
-      parentNavigatorKey: AppRouter.appNavigatorKey,
-      redirect: _authenticatedRoute,
-      path: AppScreen.setupDeviceOnboarding.toPath,
-      name: AppScreen.setupDeviceOnboarding.toName,
-      pageBuilder: (context, state) => const CupertinoPage(
-            child: SetupDeviceOnboardingScreen(),
-          ),
-      routes: [setupDeviceSteps]);
+    parentNavigatorKey: AppRouter.appNavigatorKey,
+    redirect: _authenticatedRoute,
+    path: AppScreen.setupDeviceOnboarding.toPath,
+    name: AppScreen.setupDeviceOnboarding.toName,
+    pageBuilder: (context, state) {
+      print('e ${state.extra}');
+      return CupertinoPage(
+        child: SetupDeviceOnboardingScreen(
+          pageIndex: (state.extra as int?),
+        ),
+      );
+    },
+  );
 
   static final setupDeviceSteps = StatefulShellRoute.indexedStack(
-      // parentNavigatorKey: AppRouter.rootNavigatorKey,
       builder: (context, state, child) => BlocProvider(
-          create: (context) => SetupDeviceSelectNetworkCubit(),
+          create: (context) => SetupDeviceCubit(),
           child: SetupDeviceScreen(child)),
       branches: setupBranches);
 
   static final setupBranches = [
-    StatefulShellBranch(routes: [setupDeviceSelectNetwork, addDeviceName]),
+    StatefulShellBranch(routes: [setupDeviceSelectNetwork]),
+    StatefulShellBranch(routes: [addDeviceName]),
+    StatefulShellBranch(routes: [addDeviceMac]),
   ];
 
   static final setupDeviceSelectNetwork = GoRoute(
     redirect: _authenticatedRoute,
-    path: AppScreen.setupDeviceSelectNetwork.asSubPath,
+    path: AppScreen.setupDeviceSelectNetwork.toPath,
     name: AppScreen.setupDeviceSelectNetwork.toName,
-    builder: (context, state) => const SetupDeviceSelectNetworkScreen(),
+    builder: (context, state) => const SetupDeviceSelectNetworkPage(),
   );
 
   static final addDeviceName = GoRoute(
     redirect: _authenticatedRoute,
-    path: AppScreen.setupDeviceAddDeviceName.asSubPath,
+    path: AppScreen.setupDeviceAddDeviceName.toPath,
     name: AppScreen.setupDeviceAddDeviceName.toName,
     pageBuilder: (context, state) =>
-        const NoTransitionPage(child: SetupDeviceAddDeviceNameScreen()),
+        const NoTransitionPage(child: SetupDeviceAddDeviceNamePage()),
+  );
+
+  static final addDeviceMac = GoRoute(
+    redirect: _authenticatedRoute,
+    path: AppScreen.setupDeviceAddDeviceMac.toPath,
+    name: AppScreen.setupDeviceAddDeviceMac.toName,
+    builder: (context, state) => const SetupDeviceAddDeviceMacPage(),
   );
 
   // Todo: Refactor redirect functions.

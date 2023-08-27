@@ -158,7 +158,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               children: [
                 CircleAvatar(
                   radius: AppSizes.s45.r,
-                  child: state.user?.profilePictureUrl.isEmpty ?? false
+                  child: (state.user?.profilePictureUrl.isEmpty ?? false) &&
+                          editState.selectedPicture == null
                       ? Text(
                           (state.user?.name[0] ?? Constants.empty)
                               .toUpperCase(),

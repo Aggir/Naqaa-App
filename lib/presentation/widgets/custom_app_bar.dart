@@ -16,6 +16,7 @@ class CustomAppBar {
           style: semiBlackStyle(),
         ),
         actions: actions,
+        automaticallyImplyLeading: false,
         leading: backButton != null
             ? CustomBackButton(
                 onTap: backButton,

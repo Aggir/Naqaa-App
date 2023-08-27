@@ -77,7 +77,7 @@ class UserCubit extends Cubit<UserState> {
         .fold(
       (failure) {
         emit(state.copyWith(
-          authStatus: state.authStatus,
+          authStatus: Status.failure,
           authErrorMessage: failure.message,
         ));
       },

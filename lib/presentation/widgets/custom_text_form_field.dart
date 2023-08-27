@@ -32,6 +32,7 @@ class CustomTextFormField extends StatefulWidget {
     this.onChanged,
     this.onTap,
     this.focusNode,
+    this.customDecoration,
   });
   final TextInputType keyboardType;
   final String? Function(String? value)? validator;
@@ -52,6 +53,7 @@ class CustomTextFormField extends StatefulWidget {
   final void Function(String)? onChanged;
   final void Function()? onTap;
   final FocusNode? focusNode;
+  final InputDecoration? customDecoration;
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
@@ -111,13 +113,13 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(AppValues.smallRadius.r),
-        borderSide: BorderSide(color: AppColors.pastelBlue),
+        borderSide: const BorderSide(color: AppColors.pastelBlue),
       ),
       focusedBorder: widget.focusedStyleEnabled
           ? null
           : OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppValues.smallRadius.r),
-              borderSide: BorderSide(color: AppColors.pastelBlue),
+              borderSide: const BorderSide(color: AppColors.pastelBlue),
             ),
       contentPadding:
           const EdgeInsets.symmetric(vertical: 0, horizontal: AppValues.medium)
@@ -156,7 +158,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             validator: (value) => (widget.defaultValidator
                 ? _defaultValidator(value, widget.validator)
                 : null),
-            decoration: inputDecoration,
+            decoration: widget.customDecoration ?? inputDecoration,
           ),
         ),
         if (_showError)

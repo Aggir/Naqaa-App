@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/enum.dart';
 import 'package:naqaa/app/validators.dart';
-import 'package:naqaa/presentation/blocs/setup_device_select_network/setup_device_select_network_cubit.dart';
+import 'package:naqaa/presentation/blocs/setup_device/setup_device_cubit.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
 import 'package:naqaa/presentation/widgets/custom_spacers.dart';
@@ -17,7 +17,7 @@ class NetworkDataFormDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = BlocProvider.of<SetupDeviceSelectNetworkCubit>(context);
+    final cubit = BlocProvider.of<SetupDeviceCubit>(context);
     return Form(
       key: cubit.networkDataForm,
       child: Column(
@@ -33,6 +33,7 @@ class NetworkDataFormDialog extends StatelessWidget {
             controller: cubit.ssidController,
             readOnly: true,
             enabled: false,
+            defaultValidator: false,
           ),
           CustomSpacers.medium(),
           CustomTextFormField(
@@ -42,8 +43,8 @@ class NetworkDataFormDialog extends StatelessWidget {
             isPassword: true,
             validator: passwordValidator,
           ),
-          BlocBuilder<SetupDeviceSelectNetworkCubit,
-              SetupDeviceSelectNetworkState>(builder: (context, state) {
+          BlocBuilder<SetupDeviceCubit, SetupDeviceState>(
+              builder: (context, state) {
             if (state.connectStatus.isFailure) {
               return Text(
                 state.connectErrorMessage!,
@@ -54,8 +55,7 @@ class NetworkDataFormDialog extends StatelessWidget {
             }
           }),
           CustomSpacers.mediumLarge(),
-          BlocBuilder<SetupDeviceSelectNetworkCubit,
-              SetupDeviceSelectNetworkState>(
+          BlocBuilder<SetupDeviceCubit, SetupDeviceState>(
             builder: (context, state) {
               if (state.connectStatus.isLoading) {
                 return const CircularProgressIndicator();
@@ -64,13 +64,19 @@ class NetworkDataFormDialog extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     CustomTextButton(
-                      onPressed: () => DialogService.dispose(),
+                      onPressed: () {
+                        cubit.passwordFocusNode.unfocus();
+                        DialogService.dispose();
+                      },
                       text: AppStrings.cancel.tr(),
                       textColor: AppColors.blackText,
                     ),
                     CustomSpacers.small(),
                     CustomTextButton(
-                      onPressed: () => cubit.connect(),
+                      onPressed: () {
+                        cubit.passwordFocusNode.unfocus();
+                        cubit.connect();
+                      },
                       text: AppStrings.connect.tr(),
                     ),
                   ],
