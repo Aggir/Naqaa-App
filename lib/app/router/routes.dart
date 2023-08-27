@@ -14,6 +14,10 @@ enum AppScreen {
   termsOfUse,
   privacyPolicy,
   aboutUs,
+  setupDeviceOnboarding,
+  setupDeviceSelectNetwork,
+  setupDeviceAddDeviceName,
+  setupDeviceAddDeviceMac,
 }
 
 extension AppScreenExtension on AppScreen {
@@ -49,6 +53,14 @@ extension AppScreenExtension on AppScreen {
         return "/privacy-policy";
       case AppScreen.aboutUs:
         return "/about-us";
+      case AppScreen.setupDeviceOnboarding:
+        return "/setup-device";
+      case AppScreen.setupDeviceSelectNetwork:
+        return "/setup-device/select-network";
+      case AppScreen.setupDeviceAddDeviceName:
+        return "/setup-device/add-device-name";
+      case AppScreen.setupDeviceAddDeviceMac:
+        return "/setup-device/add-device-mac";
       default:
         return "/";
     }
@@ -86,17 +98,29 @@ extension AppScreenExtension on AppScreen {
         return "PRIVACY POLICY";
       case AppScreen.aboutUs:
         return "ABOUT US";
+      case AppScreen.setupDeviceOnboarding:
+        return "SETUP DEVICE ONBOARDING";
+      case AppScreen.setupDeviceSelectNetwork:
+        return "SETUP DEVICE SELECT NETWORK";
+      case AppScreen.setupDeviceAddDeviceName:
+        return "SETUP DEVICE ADD DEVICE NAME";
+      case AppScreen.setupDeviceAddDeviceMac:
+        return "SETUP DEVICE ADD DEVICE MAC";
       default:
         return "HOME";
     }
   }
 
-  // String get asSubPath {
-  //   switch (this) {
-  //     case AppScreen.changePassword:
-  //       return "change-password";
-  //     default:
-  //       return "";
-  //   }
-  // }
+  String get asSubPath {
+    switch (this) {
+      case AppScreen.setupDeviceSelectNetwork:
+        return "select-network";
+      case AppScreen.setupDeviceAddDeviceName:
+        return "add-device-name";
+      case AppScreen.setupDeviceAddDeviceMac:
+        return "add-device-mac";
+      default:
+        return "";
+    }
+  }
 }

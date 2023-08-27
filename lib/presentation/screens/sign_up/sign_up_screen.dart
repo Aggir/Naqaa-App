@@ -8,7 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/enum.dart';
 import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/app/validators.dart';
-import 'package:naqaa/presentation/blocs/auth/auth_cubit.dart';
+import 'package:naqaa/presentation/blocs/user/user_cubit.dart';
 import 'package:naqaa/presentation/blocs/sign_up/sign_up_cubit.dart';
 
 import 'package:naqaa/presentation/widgets/custom_back_button.dart';
@@ -32,7 +32,7 @@ class SignUpScreen extends StatelessWidget {
     _unFocus(context);
     final signUpCubit = BlocProvider.of<SignUpCubit>(context);
     if (signUpCubit.isFormValid) {
-      BlocProvider.of<AuthCubit>(context)
+      BlocProvider.of<UserCubit>(context)
           .signUp(signUpCubit.name, signUpCubit.email, signUpCubit.password);
     }
   }
@@ -49,7 +49,7 @@ class SignUpScreen extends StatelessWidget {
 
   void _signUpWithGoogleHandler(BuildContext context) {
     _unFocus(context);
-    BlocProvider.of<AuthCubit>(context).connectWithGoogle();
+    BlocProvider.of<UserCubit>(context).connectWithGoogle();
   }
 
   void _unFocus(BuildContext context) {
@@ -75,7 +75,7 @@ class SignUpScreen extends StatelessWidget {
               CustomSpacers.large(),
               Text(
                 capitalizeAllWord(AppStrings.createAccount.tr()),
-                style: headlineTextStyle(),
+                style: boldBlackHugeStyle(),
               ),
               CustomSpacers.mediumLarge(),
               Text(
@@ -139,7 +139,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               CustomSpacers.medium(),
-              BlocConsumer<AuthCubit, AuthState>(
+              BlocConsumer<UserCubit, UserState>(
                 listener: (context, state) {
                   if (state.authStatus.isFailure) {
                     CustomToast.error(context, state.authErrorMessage!);
@@ -194,11 +194,11 @@ class SignUpScreen extends StatelessWidget {
               Center(
                 child: Text(
                   AppStrings.or.tr(),
-                  style: descriptionTextStyle(),
+                  style: regularBluishGrayMediumStyle(),
                 ),
               ),
               CustomSpacers.mediumSmall(),
-              BlocBuilder<AuthCubit, AuthState>(
+              BlocBuilder<UserCubit, UserState>(
                 builder: (context, state) {
                   return ConnectWithGoogleButton(
                     onPressed: () => _signUpWithGoogleHandler(context),

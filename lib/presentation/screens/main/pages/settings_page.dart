@@ -9,7 +9,7 @@ import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/assets_manager.dart';
 import 'package:naqaa/app/constants.dart';
 import 'package:naqaa/app/router/routes.dart';
-import 'package:naqaa/presentation/blocs/auth/auth_cubit.dart';
+import 'package:naqaa/presentation/blocs/user/user_cubit.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
@@ -38,7 +38,7 @@ class SettingsPage extends StatelessWidget {
   }
 
   void _signOutFunction(BuildContext context) async {
-    await BlocProvider.of<AuthCubit>(context).signOut();
+    await BlocProvider.of<UserCubit>(context).signOut();
   }
 
   @override
@@ -64,7 +64,7 @@ class SettingsPage extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: AppValues.medium).r,
                 child: const CustomDivider(),
               ),
-              BlocBuilder<AuthCubit, AuthState>(
+              BlocBuilder<UserCubit, UserState>(
                 builder: (context, state) {
                   if (!(state.user?.isSignedInWithGoogle ?? false)) {
                     return _customListTile(
@@ -155,7 +155,7 @@ class SettingsPage extends StatelessWidget {
   }
 
   Widget _profilePicture(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
+    return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
         return Column(
           children: [

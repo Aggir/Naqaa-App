@@ -21,7 +21,7 @@ import 'package:naqaa/presentation/widgets/primary_button.dart';
 
 import '../../../app/app_strings.dart';
 import '../../../app/constants.dart';
-import '../../blocs/auth/auth_cubit.dart';
+import '../../blocs/user/user_cubit.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/text_style_manager.dart';
 import '../../widgets/custom_app_bar.dart';
@@ -35,10 +35,10 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  void _saveButtonFunction(BuildContext context, AuthState state) {
+  void _saveButtonFunction(BuildContext context, UserState state) {
     final cubit = BlocProvider.of<EditProfileCubit>(context);
     if (cubit.isFormValid) {
-      BlocProvider.of<AuthCubit>(context).editProfile(
+      BlocProvider.of<UserCubit>(context).editProfile(
           state.user!.copyWith(
             name: cubit.name,
             genderId: cubit.gender,
@@ -82,7 +82,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           CustomSpacers.large(),
           _form(context),
           CustomSpacers.large(),
-          BlocConsumer<AuthCubit, AuthState>(
+          BlocConsumer<UserCubit, UserState>(
             listenWhen: (previous, current) =>
                 current.editProfileStatus != previous.editProfileStatus,
             listener: (context, state) {
@@ -108,7 +108,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   Widget? getProfilePictureWidget(
     EditProfileState editState,
-    AuthState authState,
+    UserState userState,
   ) {
     if (editState.selectedPicture != null) {
       return Container(
@@ -122,14 +122,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           fit: BoxFit.fitWidth,
         ),
       );
-    } else if (authState.user?.profilePictureUrl.isNotEmpty ?? false) {
+    } else if (userState.user?.profilePictureUrl.isNotEmpty ?? false) {
       return Container(
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppValues.circleRadius)),
         height: AppSizes.s120.r,
         width: AppSizes.s120.r,
-        child: authState.user != null
+        child: userState.user != null
             ? CachedNetworkImage(
                 placeholder: (context, url) => SizedBox(
                   width: AppSizes.s20.r,
@@ -138,7 +138,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     color: AppColors.snowWhite,
                   ),
                 ),
-                imageUrl: authState.user!.profilePictureUrl,
+                imageUrl: userState.user!.profilePictureUrl,
                 fit: BoxFit.fitWidth,
               )
             : null,
@@ -149,7 +149,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   Widget _profilePicture(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
+    return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
         return BlocBuilder<EditProfileCubit, EditProfileState>(
           builder: (context, editState) {
@@ -158,7 +158,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               children: [
                 CircleAvatar(
                   radius: AppSizes.s45.r,
-                  child: state.user?.profilePictureUrl.isEmpty ?? false
+                  child: (state.user?.profilePictureUrl.isEmpty ?? false) &&
+                          editState.selectedPicture == null
                       ? Text(
                           (state.user?.name[0] ?? Constants.empty)
                               .toUpperCase(),
@@ -200,7 +201,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   Widget _form(BuildContext context) {
     final cubit = BlocProvider.of<EditProfileCubit>(context);
-    return BlocBuilder<AuthCubit, AuthState>(
+    return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
         return Form(
             key: cubit.formKey,

@@ -8,10 +8,11 @@ import 'package:naqaa/app/router/app_router.dart';
 import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/presentation/blocs/change_password/change_password_cubit.dart';
 import 'package:naqaa/presentation/blocs/edit_profile/edit_profile_cubit.dart';
+import 'package:naqaa/presentation/blocs/setup_device/setup_device_cubit.dart';
 import 'package:naqaa/presentation/screens/index.dart';
 import 'package:naqaa/presentation/blocs/index.dart';
 
-import '../../presentation/blocs/auth/auth_cubit.dart';
+import '../../presentation/blocs/user/user_cubit.dart';
 import '../di/dependency_injection.dart';
 
 class AppRoutes {
@@ -77,12 +78,12 @@ class AppRoutes {
       ]);
 
   static final main = ShellRoute(
-      navigatorKey: AppRouter.mainShellNavigatorKey,
+      navigatorKey: AppRouter.mainShellKey,
       pageBuilder: (context, state, child) =>
           NoTransitionPage(child: MainScreen(child, state.uri)),
       routes: [
         GoRoute(
-          parentNavigatorKey: AppRouter.mainShellNavigatorKey,
+          parentNavigatorKey: AppRouter.mainShellKey,
           redirect: _authenticatedRoute,
           path: AppScreen.home.toPath,
           name: AppScreen.home.toName,
@@ -91,7 +92,7 @@ class AppRoutes {
           },
         ),
         GoRoute(
-          parentNavigatorKey: AppRouter.mainShellNavigatorKey,
+          parentNavigatorKey: AppRouter.mainShellKey,
           redirect: _authenticatedRoute,
           path: AppScreen.statistics.toPath,
           name: AppScreen.statistics.toName,
@@ -100,7 +101,7 @@ class AppRoutes {
           },
         ),
         GoRoute(
-          parentNavigatorKey: AppRouter.mainShellNavigatorKey,
+          parentNavigatorKey: AppRouter.mainShellKey,
           redirect: _authenticatedRoute,
           path: AppScreen.notifications.toPath,
           name: AppScreen.notifications.toName,
@@ -109,7 +110,7 @@ class AppRoutes {
           },
         ),
         GoRoute(
-          parentNavigatorKey: AppRouter.mainShellNavigatorKey,
+          parentNavigatorKey: AppRouter.mainShellKey,
           redirect: _authenticatedRoute,
           path: AppScreen.settings.toPath,
           name: AppScreen.settings.toName,
@@ -138,7 +139,7 @@ class AppRoutes {
     path: AppScreen.editProfile.toPath,
     name: AppScreen.editProfile.toName,
     pageBuilder: (context, state) => CupertinoPage(
-      child: BlocBuilder<AuthCubit, AuthState>(
+      child: BlocBuilder<UserCubit, UserState>(
         builder: (context, state) {
           return BlocProvider(
             create: (context) => EditProfileCubit()..init(state.user),
@@ -184,6 +185,47 @@ class AppRoutes {
     pageBuilder: (context, state) => const CupertinoPage(
       child: AboutUsScreen(),
     ),
+  );
+
+  static final setupDeviceOnboarding = GoRoute(
+    parentNavigatorKey: AppRouter.appNavigatorKey,
+    redirect: _authenticatedRoute,
+    path: AppScreen.setupDeviceOnboarding.toPath,
+    name: AppScreen.setupDeviceOnboarding.toName,
+    pageBuilder: (context, state) {
+      print('e ${state.extra}');
+      return CupertinoPage(
+        child: SetupDeviceOnboardingScreen(
+          pageIndex: (state.extra as int?),
+        ),
+      );
+    },
+  );
+
+  static final setupDeviceSteps = StatefulShellRoute.indexedStack(
+      builder: (context, state, child) => BlocProvider(
+          create: (context) => SetupDeviceCubit(),
+          child: SetupDeviceScreen(child)),
+      branches: setupBranches);
+
+  static final setupBranches = [
+    StatefulShellBranch(routes: [setupDeviceSelectNetwork]),
+    StatefulShellBranch(routes: [addDeviceName]),
+  ];
+
+  static final setupDeviceSelectNetwork = GoRoute(
+    redirect: _authenticatedRoute,
+    path: AppScreen.setupDeviceSelectNetwork.toPath,
+    name: AppScreen.setupDeviceSelectNetwork.toName,
+    builder: (context, state) => const SetupDeviceSelectNetworkPage(),
+  );
+
+  static final addDeviceName = GoRoute(
+    redirect: _authenticatedRoute,
+    path: AppScreen.setupDeviceAddDeviceName.toPath,
+    name: AppScreen.setupDeviceAddDeviceName.toName,
+    pageBuilder: (context, state) =>
+        const NoTransitionPage(child: SetupDeviceAddDeviceNamePage()),
   );
 
   // Todo: Refactor redirect functions.

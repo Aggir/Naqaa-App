@@ -10,7 +10,7 @@ import 'package:naqaa/app/enum.dart';
 import 'package:naqaa/app/functions.dart';
 import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/app/validators.dart';
-import 'package:naqaa/presentation/blocs/auth/auth_cubit.dart';
+import 'package:naqaa/presentation/blocs/user/user_cubit.dart';
 import 'package:naqaa/presentation/blocs/sign_in/sign_in_cubit.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:naqaa/presentation/theme/font_manager.dart';
@@ -36,7 +36,7 @@ class SignInScreen extends StatelessWidget {
     _unfocusFields(context);
     final signInCubit = BlocProvider.of<SignInCubit>(context);
     if (signInCubit.isFormValid) {
-      BlocProvider.of<AuthCubit>(context).signIn(
+      BlocProvider.of<UserCubit>(context).signIn(
         signInCubit.email,
         signInCubit.password,
       );
@@ -45,7 +45,7 @@ class SignInScreen extends StatelessWidget {
 
   void _connectWithGoogleHandler(BuildContext context) {
     _unfocusFields(context);
-    BlocProvider.of<AuthCubit>(context).connectWithGoogle();
+    BlocProvider.of<UserCubit>(context).connectWithGoogle();
   }
 
   void _createAccountHandler(BuildContext context) {
@@ -86,11 +86,11 @@ class SignInScreen extends StatelessWidget {
               CustomSpacers.large(),
               Text(
                 AppStrings.loginScreenDescription.tr(),
-                style: descriptionTextStyle(),
+                style: regularBluishGrayMediumStyle(),
                 textAlign: TextAlign.center,
               ),
               CustomSpacers.large(),
-              BlocBuilder<AuthCubit, AuthState>(
+              BlocBuilder<UserCubit, UserState>(
                 builder: (context, state) {
                   return ConnectWithGoogleButton(
                     onPressed: () => _connectWithGoogleHandler(context),
@@ -101,7 +101,7 @@ class SignInScreen extends StatelessWidget {
               CustomSpacers.medium(),
               Text(
                 AppStrings.or.tr(),
-                style: descriptionTextStyle(),
+                style: regularBluishGrayMediumStyle(),
               ),
               CustomSpacers.medium(),
               Form(
@@ -145,7 +145,7 @@ class SignInScreen extends StatelessWidget {
                 ],
               ),
               CustomSpacers.large(),
-              BlocConsumer<AuthCubit, AuthState>(
+              BlocConsumer<UserCubit, UserState>(
                 listener: (context, state) {
                   if (state.authStatus.isFailure) {
                     CustomToast.error(context, state.authErrorMessage!);

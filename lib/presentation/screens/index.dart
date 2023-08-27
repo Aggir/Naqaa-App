@@ -15,3 +15,7 @@ export 'app_settings/app_settings_screen.dart';
 export 'terms_of_use/terms_of_use_screen.dart';
 export 'privacy_policy/privacy_policy_screen.dart';
 export 'about_us/about_us_screen.dart';
+export 'setup/setup_device_onboarding_screen.dart';
+export 'setup/setup_steps_screen.dart';
+export 'setup/pages/select_network_page.dart';
+export 'setup/pages/add_device_name_page.dart';

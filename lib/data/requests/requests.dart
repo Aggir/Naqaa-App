@@ -48,3 +48,19 @@ class EditProfileRequest implements BaseRequest {
     this.pickedImage,
   });
 }
+
+class AddDeviceRequest implements BaseRequest {
+  final String name;
+  final String macAddress;
+  const AddDeviceRequest({
+    required this.name,
+    required this.macAddress,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'mac_address': macAddress,
+    };
+  }
+}

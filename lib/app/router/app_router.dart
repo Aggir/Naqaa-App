@@ -7,15 +7,17 @@ import 'package:naqaa/app/helpers/app_service.dart';
 import 'package:naqaa/app/di/dependency_injection.dart';
 import 'package:naqaa/app/router/app_routes.dart';
 import 'package:naqaa/app/router/routes.dart';
-import 'package:naqaa/presentation/blocs/auth/auth_cubit.dart';
+import 'package:naqaa/presentation/blocs/user/user_cubit.dart';
 
 class AppRouter {
   static GlobalKey<NavigatorState> rootNavigatorKey =
       GlobalKey(debugLabel: 'root');
   static GlobalKey<NavigatorState> appNavigatorKey =
       GlobalKey(debugLabel: 'app');
-  static GlobalKey<NavigatorState> mainShellNavigatorKey =
+  static GlobalKey<NavigatorState> mainShellKey =
       GlobalKey(debugLabel: 'mainShell');
+  static GlobalKey<NavigatorState> setupDeviceStepsShellKey =
+      GlobalKey(debugLabel: 'setupDeviceStepsShell');
 
   static final GoRouter appRouter = GoRouter(
     navigatorKey: rootNavigatorKey,
@@ -36,11 +38,13 @@ class AppRouter {
           AppRoutes.termsOfUse,
           AppRoutes.privacyPolicy,
           AppRoutes.aboutUs,
+          AppRoutes.setupDeviceOnboarding,
+          AppRoutes.setupDeviceSteps
         ],
         builder: (context, state, child) => BlocProvider(
-          create: (context) => instance<AuthCubit>()..onAppStart(),
+          create: (context) => instance<UserCubit>()..onAppStart(),
           child: Builder(builder: (context) {
-            return BlocListener<AuthCubit, AuthState>(
+            return BlocListener<UserCubit, UserState>(
               listenWhen: (previous, current) =>
                   previous.user != current.user &&
                   previous.authStatus != current.authStatus,

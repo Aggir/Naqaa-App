@@ -94,4 +94,14 @@ class RepositoryImpl implements Repository {
       return Right(response.user!.toDomain());
     }
   }
+
+  @override
+  Future<Either<Failure, void>> addDevice(AddDeviceRequest input) async {
+    final response = await _remoteDataSource.addDevice(input);
+    if (response.status.isFailure) {
+      return Left(Failure(0, response.message));
+    } else {
+      return const Right(null);
+    }
+  }
 }

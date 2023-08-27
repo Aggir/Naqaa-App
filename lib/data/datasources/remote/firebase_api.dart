@@ -10,6 +10,7 @@ import 'package:naqaa/data/mappers/user_mapper.dart';
 import 'package:naqaa/data/models/user.dart';
 import 'package:naqaa/data/requests/requests.dart';
 import 'package:naqaa/data/responses/firebase_responses.dart';
+import 'package:naqaa/data/responses/responses.dart';
 import 'package:naqaa/domain/entities/user.dart';
 
 import 'firebase_auth_error_handler.dart';
@@ -44,14 +45,14 @@ class FirebaseApi implements RemoteDataSource {
               email: request.emailAddress, password: request.password))
           .user;
       final response = await _firebaseFirestore
-          .collection(FirebaseConstants.users)
+          .collection(FirebaseConstants.user)
           .doc(user?.uid)
           .get();
       UserModel userModel = UserModel.fromMap(response.data());
       if (userModel.isNewUser == true) {
         userModel = userModel.copyWith(isNewUser: false);
         await _firebaseFirestore
-            .collection(FirebaseConstants.users)
+            .collection(FirebaseConstants.user)
             .doc(user?.uid)
             .set(userModel.toMap());
       }
@@ -89,12 +90,12 @@ class FirebaseApi implements RemoteDataSource {
             isNewUser: userCredential.additionalUserInfo?.isNewUser,
           );
           await _firebaseFirestore
-              .collection(FirebaseConstants.users)
+              .collection(FirebaseConstants.user)
               .doc(user?.uid)
               .set(userModel.toMap());
         } else {
           final response = await _firebaseFirestore
-              .collection(FirebaseConstants.users)
+              .collection(FirebaseConstants.user)
               .doc(user?.uid)
               .get();
           userModel = UserModel.fromMap(response.data());
@@ -104,7 +105,7 @@ class FirebaseApi implements RemoteDataSource {
               isNewUser: userCredential.additionalUserInfo?.isNewUser,
             );
             await _firebaseFirestore
-                .collection(FirebaseConstants.users)
+                .collection(FirebaseConstants.user)
                 .doc(user?.uid)
                 .set(userModel.toMap());
           }
@@ -154,7 +155,7 @@ class FirebaseApi implements RemoteDataSource {
         isSignedInWithGoogle: false,
       );
       await _firebaseFirestore
-          .collection(FirebaseConstants.users)
+          .collection(FirebaseConstants.user)
           .doc(user?.uid)
           .set(userModel.toMap());
       return FirebaseAuthResponse(Status.success, user: userModel);
@@ -171,14 +172,14 @@ class FirebaseApi implements RemoteDataSource {
     User? user;
     user = _firebaseAuth.currentUser;
     final response = await _firebaseFirestore
-        .collection(FirebaseConstants.users)
+        .collection(FirebaseConstants.user)
         .doc(user?.uid)
         .get();
     UserModel userModel = UserModel.fromMap(response.data());
     if (userModel.isNewUser == true) {
       userModel = userModel.copyWith(isNewUser: false);
       await _firebaseFirestore
-          .collection(FirebaseConstants.users)
+          .collection(FirebaseConstants.user)
           .doc(user?.uid)
           .set(userModel.toMap());
     }
@@ -232,7 +233,7 @@ class FirebaseApi implements RemoteDataSource {
 
       await user?.updateDisplayName(updatedUser.name);
       await _firebaseFirestore
-          .collection(FirebaseConstants.users)
+          .collection(FirebaseConstants.user)
           .doc(user?.uid)
           .set(updatedUser.toMap());
       return FirebaseAuthResponse(
@@ -244,6 +245,27 @@ class FirebaseApi implements RemoteDataSource {
           message: FirebaseAuthErrorHandler.getAuthErrorMessage(e));
     } catch (e) {
       return FirebaseAuthResponse(Status.failure, message: e.toString());
+    }
+  }
+
+  @override
+  Future<BasicResponse> addDevice(AddDeviceRequest request) async {
+    try {
+      final User? user = _firebaseAuth.currentUser;
+
+      _firebaseFirestore
+          .collection(FirebaseConstants.userDevice)
+          .doc(user?.uid)
+          .set({
+        FirebaseConstants.devices: FieldValue.arrayUnion([request.toMap()])
+      }, SetOptions(merge: true));
+
+      return const BasicResponse(Status.success, 'success');
+    } on FirebaseAuthException catch (e) {
+      return BasicResponse(
+          Status.failure, FirebaseAuthErrorHandler.getAuthErrorMessage(e));
+    } catch (e) {
+      return BasicResponse(Status.failure, e.toString());
     }
   }
 }

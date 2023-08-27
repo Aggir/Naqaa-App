@@ -18,4 +18,6 @@ abstract class RemoteDataSource {
       SendResetPasswordInstructionsRequest request);
 
   Future<AuthResponse> editProfile(EditProfileRequest request);
+
+  Future<BasicResponse> addDevice(AddDeviceRequest request);
 }
