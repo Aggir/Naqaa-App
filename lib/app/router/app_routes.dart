@@ -211,7 +211,6 @@ class AppRoutes {
   static final setupBranches = [
     StatefulShellBranch(routes: [setupDeviceSelectNetwork]),
     StatefulShellBranch(routes: [addDeviceName]),
-    StatefulShellBranch(routes: [addDeviceMac]),
   ];
 
   static final setupDeviceSelectNetwork = GoRoute(
@@ -227,13 +226,6 @@ class AppRoutes {
     name: AppScreen.setupDeviceAddDeviceName.toName,
     pageBuilder: (context, state) =>
         const NoTransitionPage(child: SetupDeviceAddDeviceNamePage()),
-  );
-
-  static final addDeviceMac = GoRoute(
-    redirect: _authenticatedRoute,
-    path: AppScreen.setupDeviceAddDeviceMac.toPath,
-    name: AppScreen.setupDeviceAddDeviceMac.toName,
-    builder: (context, state) => const SetupDeviceAddDeviceMacPage(),
   );
 
   // Todo: Refactor redirect functions.

@@ -19,4 +19,3 @@ export 'setup/setup_device_onboarding_screen.dart';
 export 'setup/setup_steps_screen.dart';
 export 'setup/pages/select_network_page.dart';
 export 'setup/pages/add_device_name_page.dart';
-export 'setup/pages/add_device_mac_page.dart';
