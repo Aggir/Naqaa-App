@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/assets_manager.dart';
 import 'package:naqaa/app/constants.dart';
+import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/presentation/blocs/setup_device/setup_device_cubit.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:naqaa/presentation/widgets/custom_app_bar.dart';
@@ -42,7 +43,7 @@ class _SetupDeviceScreenState extends State<SetupDeviceScreen> {
           ],
           title: Constants.empty,
           backButton: () {
-            context.pop(false);
+            context.go(AppScreen.setupDeviceOnboarding.toPath, extra: 1);
           },
         );
       case 1:

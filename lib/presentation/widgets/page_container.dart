@@ -22,7 +22,7 @@ class PageContainer extends StatelessWidget {
                         vertical: AppValues.large,
                         horizontal: AppValues.mediumLarge)
                     .r,
-            child: IntrinsicHeight(child: child),
+            child: child,
           ),
         ),
       ),

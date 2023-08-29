@@ -67,7 +67,8 @@ class AppStrings {
   static const hi = "hi";
   static const youDoNotHaveAnyDevicesYet = "you_do_not_have_any_devices_yet";
   static const clickToAddADevice = "click_to_add_a_device";
-  static const yourDevicesAreWorkingHard = "click_to_add_a_device";
+  static const yourDevicesAreWorkingHard = "your_devices_are_working_hard";
+  static const noWifiNetworksAvailable = 'no_wifi_networks_available';
   static const waterQuality = "water_quality";
   static const great = "great";
   static const good = "good";

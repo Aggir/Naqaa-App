@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 String capitalizeAllWord(String value) {
   var result = value[0].toUpperCase();
   for (int i = 1; i < value.length; i++) {
@@ -10,7 +12,15 @@ String capitalizeAllWord(String value) {
   return result;
 }
 
-
+Color? colorFromHexString(String hexString) {
+  if (hexString.isEmpty) {
+    return null;
+  }
+  final buffer = StringBuffer();
+  if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
+  buffer.write(hexString.replaceFirst('#', ''));
+  return Color(int.parse(buffer.toString(), radix: 16));
+}
 // import 'package:flutter/material.dart';
 
 

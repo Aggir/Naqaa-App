@@ -20,4 +20,8 @@ abstract class RemoteDataSource {
   Future<AuthResponse> editProfile(EditProfileRequest request);
 
   Future<BasicResponse> addDevice(AddDeviceRequest request);
+
+  Future<DevicesResponse> getDevices();
+
+  Future<BasicResponse> editDeviceName(EditDeviceNameRequest request);
 }

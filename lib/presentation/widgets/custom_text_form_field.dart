@@ -174,7 +174,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   }
 
   String? _defaultValidator(
-      String? value, String? Function(String? value)? validator) {
+      String? valueFull, String? Function(String? value)? validator) {
+    String? value = valueFull?.trim();
     // check if there is a custom Validator
     if (validator != null) {
       String? errorMessage = validator(value);

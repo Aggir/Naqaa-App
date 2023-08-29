@@ -7,6 +7,7 @@ import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/enum.dart';
 import 'package:naqaa/data/datasources/remote_datasource.dart';
 import 'package:naqaa/data/mappers/user_mapper.dart';
+import 'package:naqaa/data/models/device_model.dart';
 import 'package:naqaa/data/models/user.dart';
 import 'package:naqaa/data/requests/requests.dart';
 import 'package:naqaa/data/responses/firebase_responses.dart';
@@ -256,10 +257,53 @@ class FirebaseApi implements RemoteDataSource {
       _firebaseFirestore
           .collection(FirebaseConstants.userDevice)
           .doc(user?.uid)
-          .set({
-        FirebaseConstants.devices: FieldValue.arrayUnion([request.toMap()])
-      }, SetOptions(merge: true));
+          .collection(FirebaseConstants.devices)
+          .doc(request.macAddress)
+          .set(request.toMap());
 
+      return const BasicResponse(Status.success, 'success');
+    } on FirebaseAuthException catch (e) {
+      return BasicResponse(
+          Status.failure, FirebaseAuthErrorHandler.getAuthErrorMessage(e));
+    } catch (e) {
+      return BasicResponse(Status.failure, e.toString());
+    }
+  }
+
+  @override
+  Future<DevicesResponse> getDevices() async {
+    try {
+      final Stream<QuerySnapshot<Map<String, dynamic>>> userDevicesStream =
+          _firebaseFirestore
+              .collection(FirebaseConstants.userDevice)
+              .doc(_firebaseAuth.currentUser!.uid)
+              .collection(FirebaseConstants.devices)
+              .snapshots();
+
+      return DevicesResponse(
+          status: Status.success,
+          devicesStream: userDevicesStream.map((snapshot) =>
+              (snapshot.docs.map((doc) => doc.data()))
+                  .map((e) => DeviceModel.fromMap(e))
+                  .toList()));
+    } on FirebaseAuthException catch (e) {
+      return DevicesResponse(
+          status: Status.failure,
+          message: FirebaseAuthErrorHandler.getAuthErrorMessage(e));
+    } catch (e) {
+      return DevicesResponse(status: Status.failure, message: e.toString());
+    }
+  }
+
+  @override
+  Future<BasicResponse> editDeviceName(EditDeviceNameRequest request) async {
+    try {
+      await _firebaseFirestore
+          .collection(FirebaseConstants.userDevice)
+          .doc(_firebaseAuth.currentUser!.uid)
+          .collection(FirebaseConstants.devices)
+          .doc(request.macAddress)
+          .update(request.toMap());
       return const BasicResponse(Status.success, 'success');
     } on FirebaseAuthException catch (e) {
       return BasicResponse(

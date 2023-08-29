@@ -30,7 +30,6 @@ class _SetupDeviceOnboardingScreenState
 
   @override
   void initState() {
-    print(widget.pageIndex);
     currentIndex = widget.pageIndex ?? 0;
     super.initState();
   }

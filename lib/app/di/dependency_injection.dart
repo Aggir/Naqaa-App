@@ -8,7 +8,9 @@ import 'package:naqaa/data/repositories/repository_impl.dart';
 import 'package:naqaa/domain/repositories/repository.dart';
 import 'package:naqaa/domain/usecases/add_device_usecase.dart';
 import 'package:naqaa/domain/usecases/change_password_usecase.dart';
+import 'package:naqaa/domain/usecases/edit_device_name_usecase.dart';
 import 'package:naqaa/domain/usecases/edit_profile_usecase.dart';
+import 'package:naqaa/domain/usecases/get_devices_usecase.dart';
 import 'package:naqaa/domain/usecases/index.dart';
 import 'package:naqaa/domain/usecases/connect_with_google_usecase.dart';
 import 'package:naqaa/domain/usecases/is_signed_in_usecase.dart';
@@ -110,5 +112,19 @@ void initAddDevice() async {
   if (!GetIt.I.isRegistered<AddDeviceUsecase>()) {
     instance.registerFactory<AddDeviceUsecase>(
         () => AddDeviceUsecase(instance<Repository>()));
+  }
+}
+
+void initGetDevices() async {
+  if (!GetIt.I.isRegistered<GetDevicesUsecase>()) {
+    instance.registerFactory<GetDevicesUsecase>(
+        () => GetDevicesUsecase(instance<Repository>()));
+  }
+}
+
+void initEditDeviceName() async {
+  if (!GetIt.I.isRegistered<EditDeviceNameUsecase>()) {
+    instance.registerFactory<EditDeviceNameUsecase>(
+        () => EditDeviceNameUsecase(instance<Repository>()));
   }
 }

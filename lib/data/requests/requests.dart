@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:naqaa/data/datasources/remote/firebase_constants.dart';
 import 'package:naqaa/domain/entities/user.dart';
 
 import 'base_request.dart';
@@ -61,6 +62,23 @@ class AddDeviceRequest implements BaseRequest {
     return {
       'name': name,
       'mac_address': macAddress,
+    };
+  }
+}
+
+class EditDeviceNameRequest implements BaseRequest {
+  final String newName;
+  final String macAddress;
+
+  EditDeviceNameRequest({
+    required this.newName,
+    required this.macAddress,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      FirebaseConstants.name: newName,
+      FirebaseConstants.macAddress: macAddress,
     };
   }
 }

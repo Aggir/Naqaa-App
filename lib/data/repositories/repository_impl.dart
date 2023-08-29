@@ -2,7 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:naqaa/app/enum.dart';
 import 'package:naqaa/app/failure.dart';
 import 'package:naqaa/data/datasources/remote_datasource.dart';
+import 'package:naqaa/data/mappers/device_mapper.dart';
 import 'package:naqaa/data/requests/requests.dart';
+import 'package:naqaa/domain/entities/device.dart';
 import 'package:naqaa/domain/entities/user.dart';
 import 'package:naqaa/domain/repositories/repository.dart';
 import 'package:naqaa/data/mappers/user_mapper.dart';
@@ -98,6 +100,29 @@ class RepositoryImpl implements Repository {
   @override
   Future<Either<Failure, void>> addDevice(AddDeviceRequest input) async {
     final response = await _remoteDataSource.addDevice(input);
+    if (response.status.isFailure) {
+      return Left(Failure(0, response.message));
+    } else {
+      return const Right(null);
+    }
+  }
+
+  @override
+  Future<Either<Failure, Stream<List<DeviceEntity>>>> getDevices() async {
+    final response = await _remoteDataSource.getDevices();
+    if (response.status.isFailure) {
+      return Left(Failure(0, response.message!));
+    } else {
+      return Right(response.devicesStream
+              ?.map((event) => event.map((e) => e.toDomain()).toList()) ??
+          const Stream.empty());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> editDeviceName(
+      EditDeviceNameRequest request) async {
+    final response = await _remoteDataSource.editDeviceName(request);
     if (response.status.isFailure) {
       return Left(Failure(0, response.message));
     } else {

@@ -84,7 +84,17 @@ class _SetupDeviceSelectNetworkPageState
             BlocBuilder<SetupDeviceCubit, SetupDeviceState>(
               builder: (context, state) {
                 if (state.accessPoints?.isEmpty ?? true) {
-                  return Container();
+                  return SizedBox(
+                    width: double.infinity,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CustomSpacers.extraLarge(),
+                          SvgPicture.asset(SvgAssets.noWifi),
+                          CustomSpacers.mediumLarge(),
+                          Text(AppStrings.noWifiNetworksAvailable.tr()),
+                        ]),
+                  );
                 } else {
                   return Column(
                     children: [
@@ -101,6 +111,8 @@ class _SetupDeviceSelectNetworkPageState
       ),
     );
   }
+
+  // Widget
 
   Widget _wifiListTile(WiFiAccessPoint accessPoint) {
     bool isWifiProtected() =>

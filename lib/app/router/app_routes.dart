@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/router/app_router.dart';
 import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/presentation/blocs/change_password/change_password_cubit.dart';
+import 'package:naqaa/presentation/blocs/devices/devices_cubit.dart';
 import 'package:naqaa/presentation/blocs/edit_profile/edit_profile_cubit.dart';
 import 'package:naqaa/presentation/blocs/setup_device/setup_device_cubit.dart';
 import 'package:naqaa/presentation/screens/index.dart';
@@ -79,8 +80,11 @@ class AppRoutes {
 
   static final main = ShellRoute(
       navigatorKey: AppRouter.mainShellKey,
-      pageBuilder: (context, state, child) =>
-          NoTransitionPage(child: MainScreen(child, state.uri)),
+      pageBuilder: (context, state, child) => NoTransitionPage(
+              child: BlocProvider(
+            create: (context) => DevicesCubit(),
+            child: MainScreen(child, state.uri),
+          )),
       routes: [
         GoRoute(
           parentNavigatorKey: AppRouter.mainShellKey,

@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/router/routes.dart';
+import 'package:naqaa/presentation/blocs/devices/devices_cubit.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/widgets/custom_app_bar.dart';
 import 'package:naqaa/presentation/widgets/custom_spacers.dart';
@@ -25,6 +27,12 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   void _plusButtonFunction(BuildContext context) {
     context.go(AppScreen.setupDeviceOnboarding.toPath);
+  }
+
+  @override
+  void initState() {
+    BlocProvider.of<DevicesCubit>(context).getDevices();
+    super.initState();
   }
 
   final List<Map<String, String>> _navBarItems = [

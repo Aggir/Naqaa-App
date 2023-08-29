@@ -215,6 +215,7 @@
     "choose_a_network": "Choose a Network",
     "choose_one_of_the_networks": "Choose one of the networks listed below to connect your device to.",
     "if_your_network_is_hidden": "If your network is hidden, just add it in the system Wi-Fi settings to make it appear here.",
+    "no_wifi_networks_available": "No Wi-Fi networks available!",
     "hidden_wifi": "(Hidden WiFi)",
     "device": "Device",
     "protected": "Protected",
