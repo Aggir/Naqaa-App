@@ -7,7 +7,6 @@ import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/presentation/blocs/devices/devices_cubit.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';
-import 'package:naqaa/presentation/widgets/custom_app_bar.dart';
 import 'package:naqaa/presentation/widgets/custom_spacers.dart';
 
 import '../../../app/app_strings.dart';
@@ -68,15 +67,10 @@ class _MainScreenState extends State<MainScreen> {
         .indexWhere((element) => element['path'] == widget.location.toString());
     // todo: Refactor it
     return Scaffold(
-      appBar: CustomAppBar.basic(
-          title: _navBarItems[currentIndex]['label'],
-          backButton: widget.location.pathSegments.length > 1
-              ? () => context.pop()
-              : null),
       body: widget.child,
       floatingActionButton: FloatingActionButton(
         onPressed: () => _plusButtonFunction(context),
-        tooltip: 'Increment',
+        tooltip: AppStrings.clickToAddADevice.tr(),
         backgroundColor: AppColors.primary,
         elevation: 1.0,
         child: SvgPicture.asset(

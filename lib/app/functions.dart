@@ -21,6 +21,22 @@ Color? colorFromHexString(String hexString) {
   buffer.write(hexString.replaceFirst('#', ''));
   return Color(int.parse(buffer.toString(), radix: 16));
 }
+
+bool olderThanXSeconds(int? millisecondsSinceEpoch, secondsDifference) {
+  if (millisecondsSinceEpoch != null) {
+    DateTime dateTime =
+        DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch);
+    DateTime dateTimeNow = DateTime.now();
+    if (dateTimeNow.difference(dateTime).inSeconds > secondsDifference) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  return true;
+}
+
+
 // import 'package:flutter/material.dart';
 
 

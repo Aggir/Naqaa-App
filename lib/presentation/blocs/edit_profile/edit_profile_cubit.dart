@@ -6,7 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:naqaa/app/constants.dart';
-import 'package:naqaa/app/enum.dart';
+import 'package:naqaa/app/enums/status_enum.dart';
 import 'package:naqaa/domain/entities/user.dart';
 
 part 'edit_profile_state.dart';

@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:naqaa/app/enum.dart';
+import 'package:naqaa/app/enums/status_enum.dart';
 import 'package:naqaa/presentation/widgets/pressable_text.dart';
 
 import '../../../../app/app_strings.dart';

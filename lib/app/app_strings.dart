@@ -78,6 +78,8 @@ class AppStrings {
   static const danger = "danger";
   static const details = "details";
   static const deviceStatus = "device_status";
+  static const connected = "connected";
+  static const disconnected = "disconnected";
   static const temp = "temp";
   static const tempUnit = "temp_unit";
   static const tds = "tds";

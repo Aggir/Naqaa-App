@@ -10,3 +10,13 @@ extension Validators on String {
   DateTime? get asNullableDate =>
       isNotEmpty ? DateFormat('dd/MM/yyyy').parse(this) : null;
 }
+
+extension Formatter on double {
+  String asString() {
+    if (this == toInt()) {
+      return toInt().toString();
+    } else {
+      return toString();
+    }
+  }
+}

@@ -7,7 +7,7 @@ import 'package:esp_smartconfig/esp_smartconfig.dart';
 import 'package:flutter/material.dart';
 import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/di/dependency_injection.dart';
-import 'package:naqaa/app/enum.dart';
+import 'package:naqaa/app/enums/status_enum.dart';
 import 'package:naqaa/domain/usecases/add_device_usecase.dart';
 import 'package:wifi_scan/wifi_scan.dart';
 
@@ -15,7 +15,7 @@ part 'setup_device_state.dart';
 
 class SetupDeviceCubit extends Cubit<SetupDeviceState> {
   SetupDeviceCubit() : super(const SetupDeviceState());
-  bool debugMode = true;
+  bool debugMode = false;
   final GlobalKey<FormState> networkDataForm = GlobalKey<FormState>();
   final TextEditingController ssidController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();

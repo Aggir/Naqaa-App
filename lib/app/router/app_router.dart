@@ -39,7 +39,8 @@ class AppRouter {
           AppRoutes.privacyPolicy,
           AppRoutes.aboutUs,
           AppRoutes.setupDeviceOnboarding,
-          AppRoutes.setupDeviceSteps
+          AppRoutes.setupDeviceSteps,
+          AppRoutes.deviceDetails,
         ],
         builder: (context, state, child) => BlocProvider(
           create: (context) => instance<UserCubit>()..onAppStart(),

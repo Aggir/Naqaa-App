@@ -1,4 +1,4 @@
-import 'package:naqaa/app/enum.dart';
+import 'package:naqaa/app/enums/status_enum.dart';
 
 import '../models/user.dart';
 import 'responses.dart';

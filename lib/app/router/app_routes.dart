@@ -232,6 +232,15 @@ class AppRoutes {
         const NoTransitionPage(child: SetupDeviceAddDeviceNamePage()),
   );
 
+  static final deviceDetails = GoRoute(
+    redirect: _authenticatedRoute,
+    path: AppScreen.deviceDetails.toPath,
+    name: AppScreen.deviceDetails.toName,
+    pageBuilder: (context, state) {
+      return const NoTransitionPage(child: DeviceDetailsScreen());
+    },
+  );
+
   // Todo: Refactor redirect functions.
   static FutureOr<String?> _authenticatedRoute(
       BuildContext context, GoRouterState state) {

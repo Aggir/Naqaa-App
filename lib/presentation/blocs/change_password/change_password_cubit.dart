@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:naqaa/app/di/dependency_injection.dart';
-import 'package:naqaa/app/enum.dart';
+import 'package:naqaa/app/enums/status_enum.dart';
 import 'package:naqaa/domain/usecases/change_password_usecase.dart';
 
 part 'change_password_state.dart';

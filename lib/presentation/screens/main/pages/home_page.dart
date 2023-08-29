@@ -8,7 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/assets_manager.dart';
 import 'package:naqaa/app/constants.dart';
-import 'package:naqaa/app/enum.dart';
+import 'package:naqaa/app/enums/status_enum.dart';
 import 'package:naqaa/app/functions.dart';
 import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/domain/entities/device.dart';
@@ -17,8 +17,10 @@ import 'package:naqaa/presentation/screens/main/components/setup_dialog.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
+import 'package:naqaa/presentation/widgets/custom_app_bar.dart';
 import 'package:naqaa/presentation/widgets/custom_spacers.dart';
 import 'package:naqaa/presentation/widgets/custom_text_form_field.dart';
+import 'package:naqaa/presentation/widgets/custom_toast.dart';
 import 'package:naqaa/presentation/widgets/page_container.dart';
 import 'package:naqaa/presentation/widgets/primary_button.dart';
 
@@ -37,8 +39,6 @@ class _HomePageState extends State<HomePage> {
     context.push(AppScreen.setupDeviceOnboarding.toPath);
   }
 
-  _detailsFunctions(BuildContext context) {}
-
   @override
   void initState() {
     super.initState();
@@ -55,59 +55,64 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return PageContainer(
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        //todo: fetch the name from a cubit
-        BlocBuilder<UserCubit, UserState>(
-          builder: (context, state) {
-            return Text(
-              "${AppStrings.hi.tr()}${state.user?.name ?? Constants.empty}",
-              style: mediumBlackExtraLargeStyle(),
-            );
-          },
-        ),
+    return Scaffold(
+      appBar: CustomAppBar.basic(
+        title: AppStrings.home.tr(),
+      ),
+      body: PageContainer(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          //todo: fetch the name from a cubit
+          BlocBuilder<UserCubit, UserState>(
+            builder: (context, state) {
+              return Text(
+                "${AppStrings.hi.tr()}${state.user?.name ?? Constants.empty}",
+                style: mediumBlackExtraLargeStyle(),
+              );
+            },
+          ),
 
-        BlocBuilder<DevicesCubit, DevicesState>(
-          builder: (context, state) {
-            if (state.fetchDevicesStatus.isLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (state.fetchDevicesStatus.isSuccess &&
-                state.devicesStream != null) {
-              return StreamBuilder<List<DeviceEntity>>(
-                stream: state.devicesStream,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Column(
-                      children: [
-                        CustomSpacers.extraLarge(),
-                        const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      ],
-                    );
-                  } else if (snapshot.hasData &&
-                      (snapshot.data?.length ?? 0) > 0) {
-                    return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+          BlocBuilder<DevicesCubit, DevicesState>(
+            builder: (context, state) {
+              if (state.fetchDevicesStatus.isLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state.fetchDevicesStatus.isSuccess &&
+                  state.devicesStream != null) {
+                return StreamBuilder<List<DeviceEntity>>(
+                  stream: state.devicesStream,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Column(
                         children: [
-                          Text(
-                            AppStrings.yourDevicesAreWorkingHard.tr(),
-                            style: regularGrayStyle(),
+                          CustomSpacers.extraLarge(),
+                          const Center(
+                            child: CircularProgressIndicator(),
                           ),
-                          CustomSpacers.mediumLarge(),
-                          _devicesListView(snapshot),
-                        ]);
-                  }
-                  return _homePageEmptyList(context);
-                },
-              );
-            }
-            return _homePageEmptyList(context);
-          },
-        )
-      ]),
+                        ],
+                      );
+                    } else if (snapshot.hasData &&
+                        (snapshot.data?.length ?? 0) > 0) {
+                      return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppStrings.yourDevicesAreWorkingHard.tr(),
+                              style: regularGrayStyle(),
+                            ),
+                            CustomSpacers.mediumLarge(),
+                            _devicesListView(snapshot),
+                          ]);
+                    }
+                    return _homePageEmptyList(context);
+                  },
+                );
+              }
+              return _homePageEmptyList(context);
+            },
+          )
+        ]),
+      ),
     );
   }
 
@@ -217,14 +222,30 @@ class _HomePageState extends State<HomePage> {
                           )
                         ],
                       ),
-                      PrimaryButton(
-                          onPressed: () => _detailsFunctions(context),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                    horizontal: AppValues.medium)
-                                .r,
-                            child: Text(AppStrings.details.tr()),
-                          )),
+                      BlocConsumer<DevicesCubit, DevicesState>(
+                        listenWhen: (previous, current) =>
+                            previous.deviceDetailsStatus !=
+                            current.deviceDetailsStatus,
+                        listener: (context, state) {
+                          if (state.deviceDetailsStatus.isFailure) {
+                            CustomToast.error(
+                                context, state.deviceDetailsErrorMessage!);
+                          } else if (state.deviceDetailsStatus.isSuccess) {
+                            context.push(AppScreen.deviceDetails.toPath);
+                          }
+                        },
+                        builder: (context, state) {
+                          return PrimaryButton(
+                              isLoading: state.deviceDetailsStatus.isLoading &&
+                                  device.macAddress ==
+                                      state.selectedDevice?.macAddress,
+                              customSize: Size(100.r, 25.r),
+                              onPressed: () =>
+                                  BlocProvider.of<DevicesCubit>(context)
+                                      .deviceDetails(device),
+                              child: Text(AppStrings.details.tr()));
+                        },
+                      ),
                     ],
                   ),
                 ],

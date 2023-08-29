@@ -1,10 +1,14 @@
+import 'dart:math';
+
 import 'package:dartz/dartz.dart';
-import 'package:naqaa/app/enum.dart';
+import 'package:naqaa/app/enums/status_enum.dart';
 import 'package:naqaa/app/failure.dart';
 import 'package:naqaa/data/datasources/remote_datasource.dart';
+import 'package:naqaa/data/mappers/device_details_mapper.dart';
 import 'package:naqaa/data/mappers/device_mapper.dart';
 import 'package:naqaa/data/requests/requests.dart';
 import 'package:naqaa/domain/entities/device.dart';
+import 'package:naqaa/domain/entities/device_details.dart';
 import 'package:naqaa/domain/entities/user.dart';
 import 'package:naqaa/domain/repositories/repository.dart';
 import 'package:naqaa/data/mappers/user_mapper.dart';
@@ -127,6 +131,19 @@ class RepositoryImpl implements Repository {
       return Left(Failure(0, response.message));
     } else {
       return const Right(null);
+    }
+  }
+
+  @override
+  Future<Either<Failure, Stream<DeviceDetailsEntity>>> getDeviceDetails(
+      String macAddress) async {
+    final response = await _remoteDataSource.getDeviceDetails(macAddress);
+    if (response.status.isFailure) {
+      return Left(Failure(0, response.message!));
+    } else {
+      return Right(
+          response.deviceDetailsStream?.map((event) => event.toDomain()) ??
+              const Stream.empty());
     }
   }
 }

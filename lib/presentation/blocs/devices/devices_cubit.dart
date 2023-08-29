@@ -2,9 +2,13 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:naqaa/app/di/dependency_injection.dart';
-import 'package:naqaa/app/enum.dart';
+import 'package:naqaa/app/enums/sensor_type_enum.dart';
+import 'package:naqaa/app/enums/status_enum.dart';
+import 'package:naqaa/domain/data_classes/sensor_details.dart';
 import 'package:naqaa/domain/entities/device.dart';
+import 'package:naqaa/domain/entities/device_details.dart';
 import 'package:naqaa/domain/usecases/edit_device_name_usecase.dart';
+import 'package:naqaa/domain/usecases/get_device_details_usecase.dart';
 import 'package:naqaa/domain/usecases/get_devices_usecase.dart';
 
 part 'devices_state.dart';
@@ -26,8 +30,44 @@ class DevicesCubit extends Cubit<DevicesState> {
             fetchDevicesStatus: Status.success, devicesStream: stream)));
   }
 
-  selectDevice(DeviceEntity device) {
-    emit(state.copyWith(selectedDevice: device));
+  selectSensor(SensorType sensorType, DeviceDetailsEntity deviceDetails) {
+    switch (sensorType) {
+      case SensorType.temp:
+        emit(state.copyWith(
+            selectedSensor: SensorDetails(
+                min: deviceDetails.tempMin,
+                max: deviceDetails.tempMax,
+                value: deviceDetails.tempValue,
+                type: sensorType)));
+      case SensorType.tds:
+        emit(state.copyWith(
+            selectedSensor: SensorDetails(
+                min: deviceDetails.tdsMin,
+                max: deviceDetails.tdsMax,
+                value: deviceDetails.tdsValue,
+                type: sensorType)));
+      case SensorType.ph:
+        emit(state.copyWith(
+            selectedSensor: SensorDetails(
+                min: deviceDetails.phMin,
+                max: deviceDetails.phMax,
+                value: deviceDetails.phValue,
+                type: sensorType)));
+    }
+  }
+
+  deviceDetails(DeviceEntity device) async {
+    emit(state.copyWith(
+      selectedDevice: device,
+      deviceDetailsStatus: Status.loading,
+    ));
+    initGetDeviceDetails();
+    (await instance<GetDeviceDetailsUsecase>().execute(device.macAddress)).fold(
+        (failure) => emit(state.copyWith(
+            deviceDetailsStatus: Status.failure,
+            deviceDetailsErrorMessage: failure.message)),
+        (stream) => emit(state.copyWith(
+            deviceDetailsStatus: Status.success, deviceDetailsStream: stream)));
   }
 
   saveEdit() async {

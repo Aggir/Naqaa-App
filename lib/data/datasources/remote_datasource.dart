@@ -24,4 +24,6 @@ abstract class RemoteDataSource {
   Future<DevicesResponse> getDevices();
 
   Future<BasicResponse> editDeviceName(EditDeviceNameRequest request);
+
+  Future<DeviceDetailsResponse> getDeviceDetails(String macAddress);
 }

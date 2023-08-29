@@ -11,7 +11,7 @@ import 'package:naqaa/domain/usecases/index.dart';
 import 'package:naqaa/domain/usecases/is_signed_in_usecase.dart';
 import 'package:naqaa/domain/usecases/sign_out_usecase.dart';
 
-import '../../../app/enum.dart';
+import '../../../app/enums/status_enum.dart';
 
 part 'user_state.dart';
 

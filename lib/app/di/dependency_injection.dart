@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:get_it/get_it.dart';
 import 'package:naqaa/app/helpers/app_service.dart';
 import 'package:naqaa/data/datasources/remote/firebase_api.dart';
@@ -10,6 +11,7 @@ import 'package:naqaa/domain/usecases/add_device_usecase.dart';
 import 'package:naqaa/domain/usecases/change_password_usecase.dart';
 import 'package:naqaa/domain/usecases/edit_device_name_usecase.dart';
 import 'package:naqaa/domain/usecases/edit_profile_usecase.dart';
+import 'package:naqaa/domain/usecases/get_device_details_usecase.dart';
 import 'package:naqaa/domain/usecases/get_devices_usecase.dart';
 import 'package:naqaa/domain/usecases/index.dart';
 import 'package:naqaa/domain/usecases/connect_with_google_usecase.dart';
@@ -38,12 +40,18 @@ Future<void> initAppModule() async {
   instance.registerLazySingleton<FirebaseFirestore>(
       () => FirebaseFirestore.instance);
 
+  // remote FirebaseDatabase instance
+  instance
+      .registerLazySingleton<FirebaseDatabase>(() => FirebaseDatabase.instance);
+
   // remote WiFi-Scan instance
   instance.registerLazySingleton<WiFiScan>(() => WiFiScan.instance);
 
   // remote database instance (Firebase Package)
-  instance.registerLazySingleton<RemoteDataSource>(() =>
-      FirebaseApi(instance<FirebaseAuth>(), instance<FirebaseFirestore>()));
+  instance.registerLazySingleton<RemoteDataSource>(() => FirebaseApi(
+      instance<FirebaseAuth>(),
+      instance<FirebaseFirestore>(),
+      instance<FirebaseDatabase>()));
 
   // Repositories
   instance.registerLazySingleton<Repository>(
@@ -126,5 +134,12 @@ void initEditDeviceName() async {
   if (!GetIt.I.isRegistered<EditDeviceNameUsecase>()) {
     instance.registerFactory<EditDeviceNameUsecase>(
         () => EditDeviceNameUsecase(instance<Repository>()));
+  }
+}
+
+void initGetDeviceDetails() async {
+  if (!GetIt.I.isRegistered<GetDeviceDetailsUsecase>()) {
+    instance.registerFactory<GetDeviceDetailsUsecase>(
+        () => GetDeviceDetailsUsecase(instance<Repository>()));
   }
 }

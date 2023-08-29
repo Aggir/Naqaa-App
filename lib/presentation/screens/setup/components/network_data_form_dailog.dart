@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:naqaa/app/app_strings.dart';
-import 'package:naqaa/app/enum.dart';
+import 'package:naqaa/app/enums/status_enum.dart';
 import 'package:naqaa/app/validators.dart';
 import 'package:naqaa/presentation/blocs/setup_device/setup_device_cubit.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';

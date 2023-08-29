@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:naqaa/app/app_strings.dart';
-import 'package:naqaa/app/enum.dart';
+import 'package:naqaa/app/enums/status_enum.dart';
 import 'package:naqaa/data/datasources/remote_datasource.dart';
 import 'package:naqaa/data/mappers/user_mapper.dart';
+import 'package:naqaa/data/models/device_details_model.dart';
 import 'package:naqaa/data/models/device_model.dart';
 import 'package:naqaa/data/models/user.dart';
 import 'package:naqaa/data/requests/requests.dart';
@@ -20,7 +22,12 @@ import 'firebase_constants.dart';
 class FirebaseApi implements RemoteDataSource {
   final FirebaseAuth _firebaseAuth;
   final FirebaseFirestore _firebaseFirestore;
-  const FirebaseApi(this._firebaseAuth, this._firebaseFirestore);
+  final FirebaseDatabase _firebaseDatabase;
+  const FirebaseApi(
+    this._firebaseAuth,
+    this._firebaseFirestore,
+    this._firebaseDatabase,
+  );
 
   @override
   Future<FirebaseBasicResponse> sendResetPasswordInstructions(
@@ -310,6 +317,29 @@ class FirebaseApi implements RemoteDataSource {
           Status.failure, FirebaseAuthErrorHandler.getAuthErrorMessage(e));
     } catch (e) {
       return BasicResponse(Status.failure, e.toString());
+    }
+  }
+
+  @override
+  Future<DeviceDetailsResponse> getDeviceDetails(String macAddress) async {
+    try {
+      final response = _firebaseDatabase.ref().child(macAddress).ref.onValue;
+      return DeviceDetailsResponse(
+          status: Status.success,
+          deviceDetailsStream: response.map((event) =>
+              DeviceDetailsModel.fromMap(
+                  event.snapshot.value as Map<Object?, Object?>?)));
+    } on FirebaseAuthException catch (e) {
+      return DeviceDetailsResponse(
+        status: Status.failure,
+        message: FirebaseAuthErrorHandler.getAuthErrorMessage(e),
+      );
+    } catch (e) {
+      print(e);
+      return DeviceDetailsResponse(
+        status: Status.failure,
+        message: e.toString(),
+      );
     }
   }
 }

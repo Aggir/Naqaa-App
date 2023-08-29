@@ -15,6 +15,8 @@ class Constants {
       'https://www.linkedin.com/in/abdulsalam-almajdoob/';
 
   static const String empty = "";
+  static const int zero = 0;
+  static const double dZero = 0.0;
 
   static const Gender male = Gender(id: '1', name: 'male');
   static const Gender female = Gender(id: '2', name: 'female');

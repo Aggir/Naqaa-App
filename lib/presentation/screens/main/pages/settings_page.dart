@@ -13,6 +13,7 @@ import 'package:naqaa/presentation/blocs/user/user_cubit.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
+import 'package:naqaa/presentation/widgets/custom_app_bar.dart';
 import 'package:naqaa/presentation/widgets/custom_divider.dart';
 import 'package:naqaa/presentation/widgets/custom_spacers.dart';
 import 'package:naqaa/presentation/widgets/custom_toast.dart';
@@ -43,74 +44,79 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageContainer(
-      padding: const EdgeInsets.symmetric(
-              horizontal: AppValues.mediumLarge, vertical: AppValues.medium)
-          .r,
-      child: Column(
-        children: [
-          CustomSpacers.large(),
-          _profilePicture(context),
-          CustomSpacers.large(),
-          _customListView(
-            children: [
-              _customListTile(
-                onTap: () => _editProfileButtonFunction(context),
-                title: AppStrings.editProfile.tr(),
-                svgPath: SvgAssets.person,
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppValues.medium).r,
-                child: const CustomDivider(),
-              ),
-              BlocBuilder<UserCubit, UserState>(
-                builder: (context, state) {
-                  if (!(state.user?.isSignedInWithGoogle ?? false)) {
-                    return _customListTile(
-                      onTap: () => _changePasswordButtonFunction(context),
-                      title: AppStrings.changePassword.tr(),
-                      svgPath: SvgAssets.lock,
-                    );
-                  } else {
-                    return _connectedWithGoogle();
-                  }
-                },
-              ),
-            ],
-          ),
-          CustomSpacers.mediumLarge(),
-          _customListView(
-            children: [
-              _customListTile(
-                onTap: () => _appSettingsFunction(context),
-                title: AppStrings.appSettings.tr(),
-                svgPath: SvgAssets.gear,
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppValues.medium).r,
-                child: const CustomDivider(),
-              ),
-              _customListTile(
-                onTap: () => _checkForUpdatesFunction(context),
-                title: AppStrings.checkForUpdates.tr(),
-                svgPath: SvgAssets.info,
-              ),
-            ],
-          ),
-          CustomSpacers.mediumLarge(),
-          _customListView(
-            children: [
-              _customListTile(
-                title: AppStrings.signOut.tr(),
-                svgPath: SvgAssets.logout,
-                themeColor: AppColors.lightRed,
-                onTap: () => _signOutFunction(context),
-              ),
-            ],
-          )
-        ],
+    return Scaffold(
+      appBar: CustomAppBar.basic(title: AppStrings.settings.tr()),
+      body: PageContainer(
+        padding: const EdgeInsets.symmetric(
+                horizontal: AppValues.mediumLarge, vertical: AppValues.medium)
+            .r,
+        child: Column(
+          children: [
+            CustomSpacers.large(),
+            _profilePicture(context),
+            CustomSpacers.large(),
+            _customListView(
+              children: [
+                _customListTile(
+                  onTap: () => _editProfileButtonFunction(context),
+                  title: AppStrings.editProfile.tr(),
+                  svgPath: SvgAssets.person,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: AppValues.medium)
+                          .r,
+                  child: const CustomDivider(),
+                ),
+                BlocBuilder<UserCubit, UserState>(
+                  builder: (context, state) {
+                    if (!(state.user?.isSignedInWithGoogle ?? false)) {
+                      return _customListTile(
+                        onTap: () => _changePasswordButtonFunction(context),
+                        title: AppStrings.changePassword.tr(),
+                        svgPath: SvgAssets.lock,
+                      );
+                    } else {
+                      return _connectedWithGoogle();
+                    }
+                  },
+                ),
+              ],
+            ),
+            CustomSpacers.mediumLarge(),
+            _customListView(
+              children: [
+                _customListTile(
+                  onTap: () => _appSettingsFunction(context),
+                  title: AppStrings.appSettings.tr(),
+                  svgPath: SvgAssets.gear,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: AppValues.medium)
+                          .r,
+                  child: const CustomDivider(),
+                ),
+                _customListTile(
+                  onTap: () => _checkForUpdatesFunction(context),
+                  title: AppStrings.checkForUpdates.tr(),
+                  svgPath: SvgAssets.info,
+                ),
+              ],
+            ),
+            CustomSpacers.mediumLarge(),
+            _customListView(
+              children: [
+                _customListTile(
+                  title: AppStrings.signOut.tr(),
+                  svgPath: SvgAssets.logout,
+                  themeColor: AppColors.lightRed,
+                  onTap: () => _signOutFunction(context),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

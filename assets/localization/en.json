@@ -66,6 +66,8 @@
     "danger": "Danger",
     "details": "Details",
     "device_status": "Device status",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
     "temp": "Temp",
     "temp_unit": "°C",
     "tds": "TDS",
