@@ -9,6 +9,7 @@ import 'package:naqaa/data/repositories/repository_impl.dart';
 import 'package:naqaa/domain/repositories/repository.dart';
 import 'package:naqaa/domain/usecases/add_device_usecase.dart';
 import 'package:naqaa/domain/usecases/change_password_usecase.dart';
+import 'package:naqaa/domain/usecases/delete_device_usecase.dart';
 import 'package:naqaa/domain/usecases/edit_device_name_usecase.dart';
 import 'package:naqaa/domain/usecases/edit_profile_usecase.dart';
 import 'package:naqaa/domain/usecases/get_device_details_usecase.dart';
@@ -141,5 +142,12 @@ void initGetDeviceDetails() async {
   if (!GetIt.I.isRegistered<GetDeviceDetailsUsecase>()) {
     instance.registerFactory<GetDeviceDetailsUsecase>(
         () => GetDeviceDetailsUsecase(instance<Repository>()));
+  }
+}
+
+void initDeleteDevice() async {
+  if (!GetIt.I.isRegistered<DeleteDeviceUsecase>()) {
+    instance.registerFactory<DeleteDeviceUsecase>(
+        () => DeleteDeviceUsecase(instance<Repository>()));
   }
 }

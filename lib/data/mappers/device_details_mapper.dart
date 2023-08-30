@@ -16,6 +16,6 @@ extension DeviceDetailsModelExtension on DeviceDetailsModel? {
           tempValue: this?.tempValue ?? Constants.dZero,
           tempMin: this?.tempMin ?? Constants.dZero,
           tempMax: this?.tempMax ?? Constants.dZero,
-          isConnected: !olderThanXSeconds(this?.updatedAt, 15),
+          isConnected: !olderThanXSeconds(this?.updatedAt, 45),
         );
 }

@@ -21,9 +21,17 @@ abstract class RemoteDataSource {
 
   Future<BasicResponse> addDevice(AddDeviceRequest request);
 
+  Future<BasicResponse> deleteDevice(String macAddress);
+
   Future<DevicesResponse> getDevices();
 
   Future<BasicResponse> editDeviceName(EditDeviceNameRequest request);
 
   Future<DeviceDetailsResponse> getDeviceDetails(String macAddress);
+
+  // Future<BasicResponse> getNotifications();
+
+  // Future<BasicResponse> readNotifications();
+
+  // Future<BasicResponse> getNotificationsCount();
 }

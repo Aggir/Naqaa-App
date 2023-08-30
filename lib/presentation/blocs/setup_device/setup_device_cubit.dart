@@ -89,6 +89,7 @@ class SetupDeviceCubit extends Cubit<SetupDeviceState> {
     emit(state.copyWith(bssid: bssid));
   }
 
+  // TODO: Remove 'debugMode' and prints
   void connect() async {
     if (networkDataForm.currentState?.validate() ?? false) {
       print(ssidController.text);

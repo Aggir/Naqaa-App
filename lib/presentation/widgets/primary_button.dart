@@ -12,6 +12,7 @@ class PrimaryButton extends StatelessWidget {
     required this.child,
     this.isLoading = false,
     this.customSize,
+    this.color,
     super.key,
   });
 
@@ -20,37 +21,23 @@ class PrimaryButton extends StatelessWidget {
   final ButtonStyle? style;
   final bool isLoading;
   final Size? customSize;
-
-  static final customStyle = ElevatedButton.styleFrom(
-    textStyle: primaryButtonTextStyle(),
-    minimumSize: AppValues.buttonMinSize,
-    disabledBackgroundColor: AppColors.primary,
-    disabledForegroundColor: AppColors.snowWhite,
-    padding: const EdgeInsets.all(AppValues.small + (AppValues.small / 2)).r,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(AppValues.mediumSmallRadius.r),
-    ),
-  );
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
+    final customStyle = ElevatedButton.styleFrom(
+      textStyle: primaryButtonTextStyle(),
+      minimumSize: customSize ?? AppValues.buttonMinSize,
+      backgroundColor: color,
+      disabledBackgroundColor: color ?? AppColors.primary,
+      disabledForegroundColor: AppColors.snowWhite,
+      padding: const EdgeInsets.all(AppValues.mediumSmall).r,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppValues.mediumSmallRadius.r),
+      ),
+    );
     return ElevatedButton(
-      style: style ??
-          (customSize == null
-              ? customStyle
-              : ElevatedButton.styleFrom(
-                  textStyle: primaryButtonTextStyle(),
-                  minimumSize: customSize,
-                  disabledBackgroundColor: AppColors.primary,
-                  disabledForegroundColor: AppColors.snowWhite,
-                  padding: const EdgeInsets.all(
-                          AppValues.small + (AppValues.small / 2))
-                      .r,
-                  shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(AppValues.mediumSmallRadius.r),
-                  ),
-                )),
+      style: style ?? customStyle,
       onPressed: isLoading ? () {} : onPressed,
       child: isLoading
           ? SizedBox(
@@ -64,11 +51,24 @@ class PrimaryButton extends StatelessWidget {
     );
   }
 
-  static Widget fullWidth(
-      {void Function()? onPressed,
-      required Widget child,
-      ButtonStyle? style,
-      bool isLoading = false}) {
+  static Widget fullWidth({
+    void Function()? onPressed,
+    required Widget child,
+    ButtonStyle? style,
+    Color? color,
+    bool isLoading = false,
+  }) {
+    final customStyle = ElevatedButton.styleFrom(
+      textStyle: primaryButtonTextStyle(),
+      minimumSize: AppValues.buttonMinSize,
+      backgroundColor: color,
+      disabledBackgroundColor: color ?? AppColors.primary,
+      disabledForegroundColor: AppColors.snowWhite,
+      padding: const EdgeInsets.all(AppValues.mediumSmall).r,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppValues.mediumSmallRadius.r),
+      ),
+    );
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
@@ -78,7 +78,7 @@ class PrimaryButton extends StatelessWidget {
             ? SizedBox(
                 height: AppSizes.s25.r,
                 width: AppSizes.s25.r,
-                child: CircularProgressIndicator(
+                child: const CircularProgressIndicator(
                   color: AppColors.snowWhite,
                 ),
               )

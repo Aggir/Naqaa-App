@@ -7,6 +7,7 @@ import 'package:naqaa/app/enums/status_enum.dart';
 import 'package:naqaa/domain/data_classes/sensor_details.dart';
 import 'package:naqaa/domain/entities/device.dart';
 import 'package:naqaa/domain/entities/device_details.dart';
+import 'package:naqaa/domain/usecases/delete_device_usecase.dart';
 import 'package:naqaa/domain/usecases/edit_device_name_usecase.dart';
 import 'package:naqaa/domain/usecases/get_device_details_usecase.dart';
 import 'package:naqaa/domain/usecases/get_devices_usecase.dart';
@@ -72,23 +73,42 @@ class DevicesCubit extends Cubit<DevicesState> {
 
   saveEdit() async {
     if (formKey.currentState?.validate() ?? false) {
-      emit(state.copyWith(editDeviceNameStatus: Status.loading));
-      initEditDeviceName();
-      (await instance<EditDeviceNameUsecase>().execute(
-              EditDeviceNameUsecaseInput(
-                  newName: nameController.text,
-                  macAddress: state.selectedDevice!.macAddress)))
-          .fold(
-              (failure) => emit(state.copyWith(
-                  editDeviceNameStatus: Status.failure,
-                  editDeviceNameErrorMessage: failure.message)),
-              (r) => emit(state.copyWith(
-                  editDeviceNameStatus: Status.success, isEditing: false)));
+      if (state.selectedDevice?.name == nameController.text.trim()) {
+        emit(state.copyWith(isEditing: false));
+      } else {
+        emit(state.copyWith(editDeviceNameStatus: Status.loading));
+        initEditDeviceName();
+        (await instance<EditDeviceNameUsecase>().execute(
+                EditDeviceNameUsecaseInput(
+                    newName: nameController.text.trim(),
+                    macAddress: state.selectedDevice!.macAddress)))
+            .fold(
+                (failure) => emit(state.copyWith(
+                    editDeviceNameStatus: Status.failure,
+                    editDeviceNameErrorMessage: failure.message)),
+                (r) => emit(state.copyWith(
+                    editDeviceNameStatus: Status.success, isEditing: false)));
+      }
     }
   }
 
   toggleEdit(DeviceEntity device) {
     nameController.text = device.name;
     emit(state.copyWith(isEditing: true, selectedDevice: device));
+  }
+
+  deleteDevice() async {
+    emit(state.copyWith(deleteDeviceStatus: Status.loading));
+    initDeleteDevice();
+    (await instance<DeleteDeviceUsecase>()
+            .execute(state.selectedDevice!.macAddress))
+        .fold(
+            (failure) => emit(state.copyWith(
+                deleteDeviceStatus: Status.failure,
+                deleteDeviceErrorMessage: failure.message)),
+            (_) => emit(state.copyWith(
+                  deleteDeviceStatus: Status.success,
+                  isEditing: false,
+                )));
   }
 }

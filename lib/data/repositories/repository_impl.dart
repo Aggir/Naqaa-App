@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:dartz/dartz.dart';
 import 'package:naqaa/app/enums/status_enum.dart';
 import 'package:naqaa/app/failure.dart';
@@ -144,6 +142,16 @@ class RepositoryImpl implements Repository {
       return Right(
           response.deviceDetailsStream?.map((event) => event.toDomain()) ??
               const Stream.empty());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteDevice(String macAddress) async {
+    final response = await _remoteDataSource.deleteDevice(macAddress);
+    if (response.status.isFailure) {
+      return Left(Failure(0, response.message));
+    } else {
+      return const Right(null);
     }
   }
 }

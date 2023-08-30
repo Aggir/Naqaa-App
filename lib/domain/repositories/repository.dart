@@ -26,6 +26,8 @@ abstract class Repository {
 
   Future<Either<Failure, void>> addDevice(AddDeviceRequest input);
 
+  Future<Either<Failure, void>> deleteDevice(String macAddress);
+
   Future<Either<Failure, Stream<List<DeviceEntity>>>> getDevices();
 
   Future<Either<Failure, void>> editDeviceName(EditDeviceNameRequest request);

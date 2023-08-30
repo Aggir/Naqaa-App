@@ -57,4 +57,5 @@ class SvgAssets {
   static const String temp = '$_svgPath/temp.svg';
   static const String tds = '$_svgPath/tds.svg';
   static const String ph = '$_svgPath/ph.svg';
+  static const String trash = '$_svgPath/trash.svg';
 }

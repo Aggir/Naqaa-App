@@ -261,7 +261,7 @@ class FirebaseApi implements RemoteDataSource {
     try {
       final User? user = _firebaseAuth.currentUser;
 
-      _firebaseFirestore
+      await _firebaseFirestore
           .collection(FirebaseConstants.userDevice)
           .doc(user?.uid)
           .collection(FirebaseConstants.devices)
@@ -340,6 +340,27 @@ class FirebaseApi implements RemoteDataSource {
         status: Status.failure,
         message: e.toString(),
       );
+    }
+  }
+
+  @override
+  Future<BasicResponse> deleteDevice(String macAddress) async {
+    try {
+      final User? user = _firebaseAuth.currentUser;
+
+      await _firebaseFirestore
+          .collection(FirebaseConstants.userDevice)
+          .doc(user?.uid)
+          .collection(FirebaseConstants.devices)
+          .doc(macAddress)
+          .delete();
+
+      return const BasicResponse(Status.success, 'success');
+    } on FirebaseAuthException catch (e) {
+      return BasicResponse(
+          Status.failure, FirebaseAuthErrorHandler.getAuthErrorMessage(e));
+    } catch (e) {
+      return BasicResponse(Status.failure, e.toString());
     }
   }
 }

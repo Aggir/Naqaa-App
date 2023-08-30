@@ -12,6 +12,8 @@ class DevicesState extends Equatable {
   final String? deviceDetailsErrorMessage;
   final Stream<DeviceDetailsEntity>? deviceDetailsStream;
   final SensorDetails? selectedSensor;
+  final Status deleteDeviceStatus;
+  final String? deleteDeviceErrorMessage;
 
   const DevicesState({
     this.fetchDevicesStatus = Status.initial,
@@ -25,6 +27,8 @@ class DevicesState extends Equatable {
     this.deviceDetailsErrorMessage,
     this.deviceDetailsStream,
     this.selectedSensor,
+    this.deleteDeviceStatus = Status.initial,
+    this.deleteDeviceErrorMessage,
   });
 
   @override
@@ -40,6 +44,8 @@ class DevicesState extends Equatable {
         deviceDetailsErrorMessage,
         deviceDetailsStream,
         selectedSensor,
+        deleteDeviceStatus,
+        deleteDeviceErrorMessage,
       ];
 
   DevicesState copyWith({
@@ -54,21 +60,27 @@ class DevicesState extends Equatable {
     String? deviceDetailsErrorMessage,
     Stream<DeviceDetailsEntity>? deviceDetailsStream,
     SensorDetails? selectedSensor,
+    Status? deleteDeviceStatus,
+    String? deleteDeviceErrorMessage,
   }) {
     return DevicesState(
-        fetchDevicesStatus: fetchDevicesStatus ?? this.fetchDevicesStatus,
-        fetchDevicesErrorMessage:
-            fetchDevicesErrorMessage ?? this.fetchDevicesErrorMessage,
-        devicesStream: devicesStream ?? this.devicesStream,
-        selectedDevice: selectedDevice ?? this.selectedDevice,
-        isEditing: isEditing ?? this.isEditing,
-        editDeviceNameStatus: editDeviceNameStatus ?? this.editDeviceNameStatus,
-        editDeviceNameErrorMessage:
-            editDeviceNameErrorMessage ?? this.editDeviceNameErrorMessage,
-        deviceDetailsStatus: deviceDetailsStatus ?? this.deviceDetailsStatus,
-        deviceDetailsErrorMessage:
-            deviceDetailsErrorMessage ?? this.deviceDetailsErrorMessage,
-        deviceDetailsStream: deviceDetailsStream ?? this.deviceDetailsStream,
-        selectedSensor: selectedSensor ?? this.selectedSensor);
+      fetchDevicesStatus: fetchDevicesStatus ?? this.fetchDevicesStatus,
+      fetchDevicesErrorMessage:
+          fetchDevicesErrorMessage ?? this.fetchDevicesErrorMessage,
+      devicesStream: devicesStream ?? this.devicesStream,
+      selectedDevice: selectedDevice ?? this.selectedDevice,
+      isEditing: isEditing ?? this.isEditing,
+      editDeviceNameStatus: editDeviceNameStatus ?? this.editDeviceNameStatus,
+      editDeviceNameErrorMessage:
+          editDeviceNameErrorMessage ?? this.editDeviceNameErrorMessage,
+      deviceDetailsStatus: deviceDetailsStatus ?? this.deviceDetailsStatus,
+      deviceDetailsErrorMessage:
+          deviceDetailsErrorMessage ?? this.deviceDetailsErrorMessage,
+      deviceDetailsStream: deviceDetailsStream ?? this.deviceDetailsStream,
+      selectedSensor: selectedSensor ?? this.selectedSensor,
+      deleteDeviceStatus: deleteDeviceStatus ?? this.deleteDeviceStatus,
+      deleteDeviceErrorMessage:
+          deleteDeviceErrorMessage ?? this.deleteDeviceErrorMessage,
+    );
   }
 }

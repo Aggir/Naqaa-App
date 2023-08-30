@@ -77,6 +77,10 @@ class AppStrings {
   static const veryBad = "very_bad";
   static const danger = "danger";
   static const details = "details";
+  static const remove = "remove";
+  static const removeDeviceSuccessMessage = "remove_device_success_message";
+  static const editDeviceNameSuccessMessage =
+      "edit_device_name_success_message";
   static const deviceStatus = "device_status";
   static const connected = "connected";
   static const disconnected = "disconnected";
