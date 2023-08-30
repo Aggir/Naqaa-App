@@ -324,12 +324,14 @@ class FirebaseApi implements RemoteDataSource {
   Future<DeviceDetailsResponse> getDeviceDetails(String macAddress) async {
     try {
       final response = _firebaseDatabase.ref().child(macAddress).ref.onValue;
+
       return DeviceDetailsResponse(
           status: Status.success,
           deviceDetailsStream: response.map((event) =>
               DeviceDetailsModel.fromMap(
                   event.snapshot.value as Map<Object?, Object?>?)));
     } on FirebaseAuthException catch (e) {
+      print(e);
       return DeviceDetailsResponse(
         status: Status.failure,
         message: FirebaseAuthErrorHandler.getAuthErrorMessage(e),

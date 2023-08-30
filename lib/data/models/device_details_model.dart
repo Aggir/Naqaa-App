@@ -36,7 +36,7 @@ class DeviceDetailsModel {
       tempValue: map?[FirebaseConstants.tempValue].toDouble(),
       tempMin: map?[FirebaseConstants.tempMin].toDouble(),
       tempMax: map?[FirebaseConstants.tempMax].toDouble(),
-      updatedAt: map?[FirebaseConstants.updatedAt],
+      updatedAt: int.parse(map?[FirebaseConstants.updatedAt]),
     );
   }
 
