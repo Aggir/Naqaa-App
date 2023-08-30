@@ -64,6 +64,9 @@ class _DeviceDetailsScreenState extends State<DeviceDetailsScreen> {
                         if (state.selectedSensor == null) {
                           BlocProvider.of<DevicesCubit>(context)
                               .selectSensor(SensorType.temp, snapshot.data!);
+                        } else {
+                          BlocProvider.of<DevicesCubit>(context).selectSensor(
+                              state.selectedSensor!.type, snapshot.data!);
                         }
                         return _pageContent(
                             snapshot.data!, state.selectedDevice!);

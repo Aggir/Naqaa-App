@@ -16,6 +16,7 @@ part 'setup_device_state.dart';
 class SetupDeviceCubit extends Cubit<SetupDeviceState> {
   SetupDeviceCubit() : super(const SetupDeviceState());
   bool debugMode = false;
+  bool isDisposed = false;
   final GlobalKey<FormState> networkDataForm = GlobalKey<FormState>();
   final TextEditingController ssidController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -100,7 +101,7 @@ class SetupDeviceCubit extends Cubit<SetupDeviceState> {
       final provisioner = Provisioner.espTouch();
       provisioner.listen((response) {
         if (response.bssidText.isNotEmpty) {
-          deviceMacController.text = response.bssidText;
+          deviceMacController.text = response.bssidText.toUpperCase();
         }
         emit(state.copyWith(connectStatus: Status.success));
       });
@@ -120,11 +121,13 @@ class SetupDeviceCubit extends Cubit<SetupDeviceState> {
       if (debugMode) {
         deviceMacController.text = 'D4:D4:DA:71:D6:F8';
       }
-      emit(
-        state.copyWith(
-            connectStatus: debugMode ? Status.success : Status.failure,
-            connectErrorMessage: AppStrings.connectErrorMessage.tr()),
-      );
+      if (!isDisposed) {
+        emit(
+          state.copyWith(
+              connectStatus: debugMode ? Status.success : Status.failure,
+              connectErrorMessage: AppStrings.connectErrorMessage.tr()),
+        );
+      }
     }
   }
 
@@ -135,6 +138,7 @@ class SetupDeviceCubit extends Cubit<SetupDeviceState> {
 
   @override
   Future<void> close() {
+    isDisposed = true;
     stopListeningToScanResults();
     return super.close();
   }

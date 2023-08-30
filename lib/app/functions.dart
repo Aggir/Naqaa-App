@@ -25,7 +25,7 @@ Color? colorFromHexString(String hexString) {
 bool olderThanXSeconds(int? millisecondsSinceEpoch, secondsDifference) {
   if (millisecondsSinceEpoch != null) {
     DateTime dateTime =
-        DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch);
+        DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch * 1000);
     DateTime dateTimeNow = DateTime.now();
     if (dateTimeNow.difference(dateTime).inSeconds > secondsDifference) {
       return true;
