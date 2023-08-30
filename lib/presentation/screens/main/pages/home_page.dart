@@ -54,57 +54,70 @@ class _HomePageState extends State<HomePage> {
         title: AppStrings.home.tr(),
       ),
       body: PageContainer(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          BlocBuilder<UserCubit, UserState>(
-            builder: (context, state) {
-              return Text(
-                "${AppStrings.hi.tr()}${state.user?.name ?? Constants.empty}",
-                style: mediumBlackExtraLargeStyle(),
-              );
-            },
-          ),
-          BlocBuilder<DevicesCubit, DevicesState>(
-            builder: (context, state) {
-              if (state.fetchDevicesStatus.isLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state.fetchDevicesStatus.isSuccess &&
-                  state.devicesStream != null) {
-                return StreamBuilder<List<DeviceEntity>>(
-                  stream: state.devicesStream,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Column(
-                        children: [
-                          CustomSpacers.extraLarge(),
-                          const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        ],
-                      );
-                    } else if (snapshot.hasData &&
-                        (snapshot.data?.length ?? 0) > 0) {
-                      return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              AppStrings.yourDevicesAreWorkingHard.tr(),
-                              style: regularGrayStyle(),
-                            ),
-                            CustomSpacers.mediumLarge(),
-                            _devicesListView(snapshot),
-                          ]);
-                    }
-                    return _homePageEmptyList(context);
-                  },
-                );
-              }
-              return _homePageEmptyList(context);
-            },
-          )
-        ]),
+        child:
+            BlocBuilder<DevicesCubit, DevicesState>(builder: (context, state) {
+          if (state.fetchDevicesStatus.isLoading) {
+            return _loadingState();
+          } else if (state.fetchDevicesStatus.isSuccess &&
+              state.devicesStream != null) {
+            return StreamBuilder<List<DeviceEntity>>(
+              stream: state.devicesStream,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return _loadingState();
+                } else if (snapshot.hasData &&
+                    (snapshot.data?.length ?? 0) > 0) {
+                  return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _welcomeWidget(),
+                        Text(
+                          AppStrings.yourDevicesAreWorkingHard.tr(),
+                          style: regularGrayStyle(),
+                        ),
+                        CustomSpacers.mediumLarge(),
+                        _devicesListView(snapshot),
+                      ]);
+                }
+                return _emptyState();
+              },
+            );
+          } else {
+            return _emptyState();
+          }
+        }),
       ),
+    );
+  }
+
+  Widget _loadingState() {
+    return Column(
+      children: [
+        _welcomeWidget(),
+        CustomSpacers.extraLarge(),
+        const Center(
+          child: CircularProgressIndicator(),
+        ),
+      ],
+    );
+  }
+
+  Widget _emptyState() {
+    return IntrinsicHeight(
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [_welcomeWidget(), _homePageEmptyList(context)],
+    ));
+  }
+
+  Widget _welcomeWidget() {
+    return BlocBuilder<UserCubit, UserState>(
+      builder: (context, state) {
+        return Text(
+          "${AppStrings.hi.tr()}${state.user?.name ?? Constants.empty}",
+          style: mediumBlackExtraLargeStyle(),
+        );
+      },
     );
   }
 
