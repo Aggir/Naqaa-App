@@ -119,7 +119,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         width: AppSizes.s120.r,
         child: Image.file(
           editState.selectedPicture!,
-          fit: BoxFit.fitWidth,
+          fit: BoxFit.cover,
         ),
       );
     } else if (userState.user?.profilePictureUrl.isNotEmpty ?? false) {
@@ -134,12 +134,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 placeholder: (context, url) => SizedBox(
                   width: AppSizes.s20.r,
                   height: AppSizes.s20.r,
-                  child: CircularProgressIndicator(
+                  child: const CircularProgressIndicator(
                     color: AppColors.snowWhite,
                   ),
                 ),
                 imageUrl: userState.user!.profilePictureUrl,
-                fit: BoxFit.fitWidth,
+                fit: BoxFit.cover,
               )
             : null,
       );

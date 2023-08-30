@@ -184,12 +184,12 @@ class SettingsPage extends StatelessWidget {
                               placeholder: (context, url) => SizedBox(
                                 width: AppSizes.s20.r,
                                 height: AppSizes.s20.r,
-                                child: CircularProgressIndicator(
+                                child: const CircularProgressIndicator(
                                   color: AppColors.snowWhite,
                                 ),
                               ),
                               imageUrl: state.user!.profilePictureUrl,
-                              fit: BoxFit.fitWidth,
+                              fit: BoxFit.cover,
                             )
                           : null,
                     ),
