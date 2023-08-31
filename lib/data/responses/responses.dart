@@ -32,9 +32,11 @@ class DeviceDetailsResponse implements BaseResponse {
   final Status status;
   final String? message;
   final Stream<DeviceDetailsModel>? deviceDetailsStream;
+  final Stream<DeviceModel>? deviceStream;
   DeviceDetailsResponse({
     required this.status,
     this.message,
     this.deviceDetailsStream,
+    this.deviceStream,
   });
 }

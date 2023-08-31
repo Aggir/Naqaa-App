@@ -9,8 +9,8 @@ class FirebaseConstants {
   // User-Device
   static const devices = 'devices';
   static const macAddress = 'mac_address';
-  static const waterQuality = 'water_quality';
-  static const hexColor = 'hex_color';
+  static const waterQualityName = 'water_quality_name';
+  static const waterQualityHex = 'water_quality_hex';
   // User:
   static const String email = 'email';
   static const String dateOfBirth = 'dateOfBirth';

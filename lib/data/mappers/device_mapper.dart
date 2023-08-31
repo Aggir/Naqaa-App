@@ -8,7 +8,8 @@ extension DeviceModelExtension on DeviceModel? {
       : DeviceEntity(
           name: this?.name ?? Constants.empty,
           macAddress: this?.macAddress ?? Constants.empty,
-          waterQuality: this?.waterQuality ?? Constants.empty,
-          hexColor: this?.hexColor ?? Constants.empty,
+          waterQuality:
+              this?.waterQualityName?.toLowerCase() ?? Constants.empty,
+          hexColor: this?.waterQualityHex ?? Constants.empty,
         );
 }
