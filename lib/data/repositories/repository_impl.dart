@@ -134,8 +134,8 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<Either<Failure, Stream<DeviceDetailsEntity>>> getDeviceDetails(
-      String macAddress) async {
-    final response = await _remoteDataSource.getDeviceDetails(macAddress);
+      String id) async {
+    final response = await _remoteDataSource.getDeviceDetails(id);
     if (response.status.isFailure) {
       return Left(Failure(0, response.message!));
     } else {
@@ -146,8 +146,8 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Either<Failure, void>> deleteDevice(String macAddress) async {
-    final response = await _remoteDataSource.deleteDevice(macAddress);
+  Future<Either<Failure, void>> deleteDevice(String id) async {
+    final response = await _remoteDataSource.deleteDevice(id);
     if (response.status.isFailure) {
       return Left(Failure(0, response.message));
     } else {

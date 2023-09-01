@@ -197,7 +197,6 @@ class AppRoutes {
     path: AppScreen.setupDeviceOnboarding.toPath,
     name: AppScreen.setupDeviceOnboarding.toName,
     pageBuilder: (context, state) {
-      print('e ${state.extra}');
       return CupertinoPage(
         child: SetupDeviceOnboardingScreen(
           pageIndex: (state.extra as int?),

@@ -63,7 +63,7 @@ class DevicesCubit extends Cubit<DevicesState> {
       deviceDetailsStatus: Status.loading,
     ));
     initGetDeviceDetails();
-    (await instance<GetDeviceDetailsUsecase>().execute(device.macAddress)).fold(
+    (await instance<GetDeviceDetailsUsecase>().execute(device.id)).fold(
         (failure) => emit(state.copyWith(
             deviceDetailsStatus: Status.failure,
             deviceDetailsErrorMessage: failure.message)),
@@ -81,7 +81,7 @@ class DevicesCubit extends Cubit<DevicesState> {
         (await instance<EditDeviceNameUsecase>().execute(
                 EditDeviceNameUsecaseInput(
                     newName: nameController.text.trim(),
-                    macAddress: state.selectedDevice!.macAddress)))
+                    macAddress: state.selectedDevice!.id)))
             .fold(
                 (failure) => emit(state.copyWith(
                     editDeviceNameStatus: Status.failure,
@@ -100,8 +100,7 @@ class DevicesCubit extends Cubit<DevicesState> {
   deleteDevice() async {
     emit(state.copyWith(deleteDeviceStatus: Status.loading));
     initDeleteDevice();
-    (await instance<DeleteDeviceUsecase>()
-            .execute(state.selectedDevice!.macAddress))
+    (await instance<DeleteDeviceUsecase>().execute(state.selectedDevice!.id))
         .fold(
             (failure) => emit(state.copyWith(
                 deleteDeviceStatus: Status.failure,

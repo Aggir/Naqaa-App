@@ -15,7 +15,7 @@ part 'setup_device_state.dart';
 
 class SetupDeviceCubit extends Cubit<SetupDeviceState> {
   SetupDeviceCubit() : super(const SetupDeviceState());
-  bool debugMode = false;
+  bool debugMode = true;
   bool isDisposed = false;
   final GlobalKey<FormState> networkDataForm = GlobalKey<FormState>();
   final TextEditingController ssidController = TextEditingController();

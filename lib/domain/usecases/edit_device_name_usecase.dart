@@ -16,7 +16,7 @@ class EditDeviceNameUsecase
       EditDeviceNameUsecaseInput input) async {
     return await _repository.editDeviceName(EditDeviceNameRequest(
       newName: input.newName,
-      macAddress: input.macAddress,
+      id: input.macAddress,
     ));
   }
 }

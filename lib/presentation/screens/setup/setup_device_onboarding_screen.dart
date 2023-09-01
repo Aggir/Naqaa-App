@@ -74,7 +74,6 @@ class _SetupDeviceOnboardingScreenState
       body: IntroSlider(
         refFuncGoToTab: (function) {
           navigateTo = function;
-          print(currentIndex);
           navigateTo(currentIndex);
         },
         onTabChangeCompleted: (index) {

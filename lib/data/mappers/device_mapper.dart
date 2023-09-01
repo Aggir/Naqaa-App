@@ -7,7 +7,7 @@ extension DeviceModelExtension on DeviceModel? {
       ? DeviceEntity.empty()
       : DeviceEntity(
           name: this?.name ?? Constants.empty,
-          macAddress: this?.macAddress ?? Constants.empty,
+          id: this?.id ?? Constants.empty,
           waterQuality:
               this?.waterQualityName?.toLowerCase() ?? Constants.empty,
           hexColor: this?.waterQualityHex ?? Constants.empty,

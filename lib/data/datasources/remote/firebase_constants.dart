@@ -4,20 +4,23 @@ class FirebaseConstants {
   // ---------- Collections -----------
   static const String user = 'user';
   static const String userDevice = 'user-device';
+  static const String device = 'device';
   // ------------ Fields ---------------
   static const String name = 'name';
+  static const String id = 'id';
   // User-Device
-  static const devices = 'devices';
-  static const macAddress = 'mac_address';
-  static const waterQualityName = 'water_quality_name';
-  static const waterQualityHex = 'water_quality_hex';
+  static const String devices = 'devices';
+  static const String macAddress = 'mac_address';
   // User:
   static const String email = 'email';
   static const String dateOfBirth = 'dateOfBirth';
   static const String genderId = 'genderId';
   static const String isSignedInWithGoogle = 'isSignedInWithGoogle';
   static const String profilePictureUrl = 'profilePictureUrl';
-
+  // Device:
+  static const String userId = 'user_id';
+  static const String waterQualityName = 'water_quality_name';
+  static const String waterQualityHex = 'water_quality_hex';
   // ################## Firestroage ##################
   static const String profilePictures = 'profilePictures';
 

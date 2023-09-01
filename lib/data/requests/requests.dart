@@ -52,33 +52,33 @@ class EditProfileRequest implements BaseRequest {
 
 class AddDeviceRequest implements BaseRequest {
   final String name;
-  final String macAddress;
+  final String id;
   const AddDeviceRequest({
     required this.name,
-    required this.macAddress,
+    required this.id,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'name': name,
-      'mac_address': macAddress,
+      FirebaseConstants.id: id,
+      FirebaseConstants.name: name,
     };
   }
 }
 
 class EditDeviceNameRequest implements BaseRequest {
   final String newName;
-  final String macAddress;
+  final String id;
 
   EditDeviceNameRequest({
     required this.newName,
-    required this.macAddress,
+    required this.id,
   });
 
   Map<String, dynamic> toMap() {
     return {
+      FirebaseConstants.id: id,
       FirebaseConstants.name: newName,
-      FirebaseConstants.macAddress: macAddress,
     };
   }
 }

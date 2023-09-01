@@ -46,8 +46,7 @@ class DeviceListTile extends StatelessWidget {
                       SizedBox(
                         width: AppSizes.s200.r,
                         child: (state.isEditing &&
-                                state.selectedDevice?.macAddress ==
-                                    device.macAddress)
+                                state.selectedDevice?.id == device.id)
                             ? Form(
                                 key: cubit.formKey,
                                 child: CustomTextFormField(
@@ -158,21 +157,18 @@ class DeviceListTile extends StatelessWidget {
                             },
                             builder: (context, state) {
                               if (state.isEditing &&
-                                  state.selectedDevice?.macAddress ==
-                                      device.macAddress) {
+                                  state.selectedDevice?.id == device.id) {
                                 return PrimaryButton(
                                   isLoading:
                                       state.deleteDeviceStatus.isLoading &&
-                                          device.macAddress ==
-                                              state.selectedDevice?.macAddress,
+                                          device.id == state.selectedDevice?.id,
                                   customSize: Size(100.r, 25.r),
                                   color: AppColors.red,
                                   onPressed: () => (state.deleteDeviceStatus
                                                   .isLoading ||
                                               state.editDeviceNameStatus
                                                   .isLoading) &&
-                                          device.macAddress ==
-                                              state.selectedDevice?.macAddress
+                                          device.id == state.selectedDevice?.id
                                       ? null
                                       : cubit.deleteDevice(),
                                   child: Row(children: [
@@ -189,15 +185,13 @@ class DeviceListTile extends StatelessWidget {
                                 return PrimaryButton(
                                   isLoading:
                                       state.deviceDetailsStatus.isLoading &&
-                                          device.macAddress ==
-                                              state.selectedDevice?.macAddress,
+                                          device.id == state.selectedDevice?.id,
                                   customSize: Size(100.r, 25.r),
                                   onPressed: () => (state.deviceDetailsStatus
                                                   .isLoading ||
                                               state.editDeviceNameStatus
                                                   .isLoading) &&
-                                          device.macAddress ==
-                                              state.selectedDevice?.macAddress
+                                          device.id == state.selectedDevice?.id
                                       ? null
                                       : cubit.deviceDetails(device),
                                   child: Text(

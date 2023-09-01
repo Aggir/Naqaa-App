@@ -10,8 +10,8 @@ class AddDeviceUsecase implements BaseUsecase<AddDeviceUsecaseInput, void> {
   AddDeviceUsecase(this._repository);
   @override
   Future<Either<Failure, void>> execute(AddDeviceUsecaseInput input) async {
-    return await _repository.addDevice(
-        AddDeviceRequest(name: input.name, macAddress: input.macAddress));
+    return await _repository
+        .addDevice(AddDeviceRequest(name: input.name, id: input.macAddress));
   }
 }
 

@@ -262,11 +262,12 @@ class FirebaseApi implements RemoteDataSource {
       final User? user = _firebaseAuth.currentUser;
 
       await _firebaseFirestore
-          .collection(FirebaseConstants.userDevice)
-          .doc(user?.uid)
-          .collection(FirebaseConstants.devices)
-          .doc(request.macAddress)
-          .set(request.toMap());
+          .collection(FirebaseConstants.device)
+          .doc(request.id)
+          .set({
+        FirebaseConstants.userId: user?.uid,
+        ...request.toMap(),
+      });
 
       return const BasicResponse(Status.success, 'success');
     } on FirebaseAuthException catch (e) {
@@ -280,11 +281,11 @@ class FirebaseApi implements RemoteDataSource {
   @override
   Future<DevicesResponse> getDevices() async {
     try {
+      final User? user = _firebaseAuth.currentUser;
       final Stream<QuerySnapshot<Map<String, dynamic>>> userDevicesStream =
           _firebaseFirestore
-              .collection(FirebaseConstants.userDevice)
-              .doc(_firebaseAuth.currentUser!.uid)
-              .collection(FirebaseConstants.devices)
+              .collection(FirebaseConstants.device)
+              .where(FirebaseConstants.userId, isEqualTo: user?.uid)
               .snapshots();
 
       return DevicesResponse(
@@ -294,10 +295,12 @@ class FirebaseApi implements RemoteDataSource {
                   .map((e) => DeviceModel.fromMap(e))
                   .toList()));
     } on FirebaseAuthException catch (e) {
+      print(e);
       return DevicesResponse(
           status: Status.failure,
           message: FirebaseAuthErrorHandler.getAuthErrorMessage(e));
     } catch (e) {
+      print(e);
       return DevicesResponse(status: Status.failure, message: e.toString());
     }
   }
@@ -306,10 +309,8 @@ class FirebaseApi implements RemoteDataSource {
   Future<BasicResponse> editDeviceName(EditDeviceNameRequest request) async {
     try {
       await _firebaseFirestore
-          .collection(FirebaseConstants.userDevice)
-          .doc(_firebaseAuth.currentUser!.uid)
-          .collection(FirebaseConstants.devices)
-          .doc(request.macAddress)
+          .collection(FirebaseConstants.device)
+          .doc(request.id)
           .update(request.toMap());
       return const BasicResponse(Status.success, 'success');
     } on FirebaseAuthException catch (e) {
@@ -321,9 +322,9 @@ class FirebaseApi implements RemoteDataSource {
   }
 
   @override
-  Future<DeviceDetailsResponse> getDeviceDetails(String macAddress) async {
+  Future<DeviceDetailsResponse> getDeviceDetails(String id) async {
     try {
-      final response = _firebaseDatabase.ref().child(macAddress).ref.onValue;
+      final response = _firebaseDatabase.ref().child(id).ref.onValue;
 
       return DeviceDetailsResponse(
           status: Status.success,
@@ -346,15 +347,11 @@ class FirebaseApi implements RemoteDataSource {
   }
 
   @override
-  Future<BasicResponse> deleteDevice(String macAddress) async {
+  Future<BasicResponse> deleteDevice(String id) async {
     try {
-      final User? user = _firebaseAuth.currentUser;
-
       await _firebaseFirestore
-          .collection(FirebaseConstants.userDevice)
-          .doc(user?.uid)
-          .collection(FirebaseConstants.devices)
-          .doc(macAddress)
+          .collection(FirebaseConstants.device)
+          .doc(id)
           .delete();
 
       return const BasicResponse(Status.success, 'success');
