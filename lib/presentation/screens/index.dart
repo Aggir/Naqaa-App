@@ -20,3 +20,4 @@ export 'setup/setup_steps_screen.dart';
 export 'setup/pages/select_network_page.dart';
 export 'setup/pages/add_device_name_page.dart';
 export 'device_details/device_details_screen.dart';
+export 'faq/faq_screen.dart';

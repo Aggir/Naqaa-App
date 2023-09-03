@@ -3,14 +3,17 @@ class FirebaseConstants {
 
   // ---------- Collections -----------
   static const String user = 'user';
-  static const String userDevice = 'user-device';
   static const String device = 'device';
+  static const String notification = 'notification';
   // ------------ Fields ---------------
   static const String name = 'name';
   static const String id = 'id';
-  // User-Device
-  static const String devices = 'devices';
-  static const String macAddress = 'mac_address';
+  static const String createdAt = 'created_at';
+  static const String updatedAt = 'updated_at';
+  // Notification:
+  static const String isRead = 'is_read';
+  static const String deviceName = 'device_name';
+  static const String deviceId = 'device_id';
   // User:
   static const String email = 'email';
   static const String dateOfBirth = 'dateOfBirth';
@@ -36,5 +39,4 @@ class FirebaseConstants {
   static const String tempValue = 'temp_value';
   static const String tempMin = 'temp_min';
   static const String tempMax = 'temp_max';
-  static const String updatedAt = 'updated_at';
 }

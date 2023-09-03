@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/app_strings.dart';
@@ -13,6 +14,8 @@ import 'package:naqaa/domain/entities/device.dart';
 import 'package:naqaa/presentation/blocs/devices/devices_cubit.dart';
 import 'package:naqaa/presentation/screens/main/components/device_list_tile.dart';
 import 'package:naqaa/presentation/screens/main/components/setup_dialog.dart';
+import 'package:naqaa/presentation/theme/app_colors.dart';
+import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
 import 'package:naqaa/presentation/widgets/custom_app_bar.dart';
 import 'package:naqaa/presentation/widgets/custom_spacers.dart';
@@ -50,9 +53,30 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar.basic(
-        title: AppStrings.home.tr(),
-      ),
+      appBar: CustomAppBar.basic(title: AppStrings.home.tr(), actions: [
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: SizedBox(
+            height: AppSizes.s48.r,
+            width: AppSizes.s48.r,
+            child: InkWell(
+                borderRadius: BorderRadius.circular(100),
+                onTap: () {
+                  GoRouter.of(context).push(AppScreen.faq.toPath);
+                },
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: SvgPicture.asset(
+                    SvgAssets.info,
+                    colorFilter:
+                        ColorFilter.mode(AppColors.black, BlendMode.srcIn),
+                    height: AppSizes.s20.r,
+                    width: AppSizes.s20.r,
+                  ),
+                )),
+          ),
+        )
+      ]),
       body: PageContainer(
         child:
             BlocBuilder<DevicesCubit, DevicesState>(builder: (context, state) {

@@ -18,6 +18,7 @@ enum AppScreen {
   setupDeviceSelectNetwork,
   setupDeviceAddDeviceName,
   deviceDetails,
+  faq,
 }
 
 extension AppScreenExtension on AppScreen {
@@ -61,6 +62,8 @@ extension AppScreenExtension on AppScreen {
         return "/setup-device/add-device-name";
       case AppScreen.deviceDetails:
         return "/device-details";
+         case AppScreen.faq:
+        return "/FAQ";
       default:
         return "/";
     }
@@ -106,6 +109,8 @@ extension AppScreenExtension on AppScreen {
         return "SETUP DEVICE ADD DEVICE NAME";
       case AppScreen.deviceDetails:
         return "DEVICE DETAILS";
+         case AppScreen.faq:
+        return "FAQ";
       default:
         return "HOME";
     }

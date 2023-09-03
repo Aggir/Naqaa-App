@@ -41,6 +41,7 @@ class AppRouter {
           AppRoutes.setupDeviceOnboarding,
           AppRoutes.setupDeviceSteps,
           AppRoutes.deviceDetails,
+          AppRoutes.faq,
         ],
         builder: (context, state, child) => BlocProvider(
           create: (context) => instance<UserCubit>()..onAppStart(),

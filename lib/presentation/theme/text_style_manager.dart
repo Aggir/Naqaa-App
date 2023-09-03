@@ -98,6 +98,10 @@ TextStyle mediumBlackLargeStyle() {
   return getMediumStyle(fontSize: FontSize.s20, color: AppColors.blackText);
 }
 
+TextStyle regularBlackSmallStyle() {
+  return getRegularStyle(fontSize: FontSize.s12, color: AppColors.blackText);
+}
+
 TextStyle regularGrayStyle() {
   return getRegularStyle(fontSize: FontSize.s14, color: AppColors.mediumGray);
 }

@@ -241,5 +241,6 @@
     "finish_setup": "Finish setup",
     "congratulations": "Congratulations",
     "everything_is_setup_and_you_are_ready_to_go": "Everything is set-up and you are ready to go!",
-    "connect_error_message": "Something went wrong, please check your password and ensure the device is nearby, then try again."
+    "connect_error_message": "Something went wrong, please check your password and ensure the device is nearby, then try again.",
+    "faq":"FAQ"
 }

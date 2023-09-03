@@ -1,26 +1,41 @@
 import 'package:naqaa/app/enums/status_enum.dart';
 import 'package:naqaa/data/models/device_details_model.dart';
 import 'package:naqaa/data/models/device_model.dart';
+import 'package:naqaa/data/models/notification_model.dart';
 import 'package:naqaa/data/models/user.dart';
 import 'package:naqaa/data/responses/base_response.dart';
 
 class AuthResponse implements BaseResponse {
-  final Status status;
+  @override
+  String? message;
+
+  @override
+  Status status;
+
   final UserModel? user;
-  final String? message;
-  const AuthResponse(this.status, {this.user, this.message});
+
+  AuthResponse(this.status, {this.user, this.message});
 }
 
 class BasicResponse implements BaseResponse {
-  final Status status;
-  final String message;
-  const BasicResponse(this.status, this.message);
+  @override
+  String? message;
+
+  @override
+  Status status;
+
+  BasicResponse(this.status, this.message);
 }
 
 class DevicesResponse implements BaseResponse {
-  final Status status;
-  final String? message;
+  @override
+  String? message;
+
+  @override
+  Status status;
+
   final Stream<List<DeviceModel>>? devicesStream;
+
   DevicesResponse({
     required this.status,
     this.message,
@@ -29,14 +44,33 @@ class DevicesResponse implements BaseResponse {
 }
 
 class DeviceDetailsResponse implements BaseResponse {
-  final Status status;
-  final String? message;
+  @override
+  String? message;
+
+  @override
+  Status status;
+
   final Stream<DeviceDetailsModel>? deviceDetailsStream;
-  final Stream<DeviceModel>? deviceStream;
+
   DeviceDetailsResponse({
     required this.status,
     this.message,
     this.deviceDetailsStream,
-    this.deviceStream,
+  });
+}
+
+class NotificationsResponse implements BaseResponse {
+  @override
+  String? message;
+
+  @override
+  Status status;
+
+  Stream<NotificationModel>? notificationsStream;
+
+  NotificationsResponse({
+    this.message,
+    required this.status,
+    this.notificationsStream,
   });
 }

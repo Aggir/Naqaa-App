@@ -139,7 +139,7 @@ class FirebaseApi implements RemoteDataSource {
     } catch (e) {
       return FirebaseBasicResponse(Status.failure, e.toString());
     }
-    return const FirebaseBasicResponse(
+    return FirebaseBasicResponse(
         Status.success, "Debug: sign-out success response");
   }
 
@@ -208,7 +208,7 @@ class FirebaseApi implements RemoteDataSource {
 
       await user.reauthenticateWithCredential(cred);
       user.updatePassword(input.newPassword);
-      return const FirebaseBasicResponse(
+      return FirebaseBasicResponse(
           Status.success, "Debug: change password success response");
     } on FirebaseAuthException catch (e) {
       return FirebaseBasicResponse(Status.failure,
@@ -269,7 +269,7 @@ class FirebaseApi implements RemoteDataSource {
         ...request.toMap(),
       });
 
-      return const BasicResponse(Status.success, 'success');
+      return BasicResponse(Status.success, 'success');
     } on FirebaseAuthException catch (e) {
       return BasicResponse(
           Status.failure, FirebaseAuthErrorHandler.getAuthErrorMessage(e));
@@ -312,7 +312,7 @@ class FirebaseApi implements RemoteDataSource {
           .collection(FirebaseConstants.device)
           .doc(request.id)
           .update(request.toMap());
-      return const BasicResponse(Status.success, 'success');
+      return BasicResponse(Status.success, 'success');
     } on FirebaseAuthException catch (e) {
       return BasicResponse(
           Status.failure, FirebaseAuthErrorHandler.getAuthErrorMessage(e));
@@ -354,7 +354,7 @@ class FirebaseApi implements RemoteDataSource {
           .doc(id)
           .delete();
 
-      return const BasicResponse(Status.success, 'success');
+      return BasicResponse(Status.success, 'success');
     } on FirebaseAuthException catch (e) {
       return BasicResponse(
           Status.failure, FirebaseAuthErrorHandler.getAuthErrorMessage(e));

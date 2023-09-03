@@ -290,6 +290,8 @@ class AppStrings {
   static const setupNow = 'setup_now';
   static const setupLater = 'setup_later';
 
+  static const faq = 'faq';
+
   static const setupYourDevice = 'setup_your_device';
   static const inOrderToConnectYourDevice = 'in_order_to_connect_your_device';
   static const back = 'back';

@@ -231,6 +231,14 @@ class AppRoutes {
         const NoTransitionPage(child: SetupDeviceAddDeviceNamePage()),
   );
 
+  static final faq = GoRoute(
+    parentNavigatorKey: AppRouter.appNavigatorKey,
+    redirect: _authenticatedRoute,
+    path: AppScreen.faq.toPath,
+    name: AppScreen.faq.toName,
+    pageBuilder: (context, state) => const CupertinoPage(child: FAQScreen()),
+  );
+
   static final deviceDetails = GoRoute(
     redirect: _authenticatedRoute,
     path: AppScreen.deviceDetails.toPath,

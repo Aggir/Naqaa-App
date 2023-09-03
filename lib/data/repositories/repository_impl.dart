@@ -21,9 +21,9 @@ class RepositoryImpl implements Repository {
     final response =
         await _remoteDataSource.sendResetPasswordInstructions(input);
     if (response.status.isFailure) {
-      return Left(Failure(0, response.message));
+      return Left(Failure(0, response.message!));
     } else {
-      return Right(response.message);
+      return Right(response.message!);
     }
   }
 
@@ -41,7 +41,7 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, void>> signOut() async {
     final response = await _remoteDataSource.signOut();
     if (response.status.isFailure) {
-      return Left(Failure(0, response.message));
+      return Left(Failure(0, response.message!));
     } else {
       return const Right(null);
     }
@@ -82,7 +82,7 @@ class RepositoryImpl implements Repository {
       ChangePasswordRequest input) async {
     final response = await _remoteDataSource.changePassword(input);
     if (response.status.isFailure) {
-      return Left(Failure(0, response.message));
+      return Left(Failure(0, response.message!));
     } else {
       return const Right(null);
     }
@@ -103,7 +103,7 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, void>> addDevice(AddDeviceRequest input) async {
     final response = await _remoteDataSource.addDevice(input);
     if (response.status.isFailure) {
-      return Left(Failure(0, response.message));
+      return Left(Failure(0, response.message!));
     } else {
       return const Right(null);
     }
@@ -126,7 +126,7 @@ class RepositoryImpl implements Repository {
       EditDeviceNameRequest request) async {
     final response = await _remoteDataSource.editDeviceName(request);
     if (response.status.isFailure) {
-      return Left(Failure(0, response.message));
+      return Left(Failure(0, response.message!));
     } else {
       return const Right(null);
     }
@@ -149,7 +149,7 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, void>> deleteDevice(String id) async {
     final response = await _remoteDataSource.deleteDevice(id);
     if (response.status.isFailure) {
-      return Left(Failure(0, response.message));
+      return Left(Failure(0, response.message!));
     } else {
       return const Right(null);
     }
