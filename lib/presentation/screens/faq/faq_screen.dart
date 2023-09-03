@@ -34,8 +34,6 @@ class FAQScreen extends StatelessWidget {
             ],
           ),
           CustomSpacers.small(),
-          CustomDivider(),
-          CustomSpacers.small(),
           ExpansionTile(
             backgroundColor: AppColors.pastelBlue,
             title: Text("Measuring Unit:"),
@@ -47,8 +45,6 @@ class FAQScreen extends StatelessWidget {
               ),
             ],
           ),
-          CustomSpacers.small(),
-          CustomDivider(),
           CustomSpacers.small(),
           ExpansionTile(
             backgroundColor: AppColors.pastelBlue,
@@ -137,8 +133,6 @@ class FAQScreen extends StatelessWidget {
             ],
           ),
           CustomSpacers.small(),
-          CustomDivider(),
-          CustomSpacers.small(),
           ExpansionTile(
             backgroundColor: AppColors.pastelBlue,
             title: Text("Measuring Unit:"),
@@ -150,8 +144,6 @@ class FAQScreen extends StatelessWidget {
               ),
             ],
           ),
-          CustomSpacers.small(),
-          CustomDivider(),
           CustomSpacers.small(),
           ExpansionTile(
             backgroundColor: AppColors.pastelBlue,
@@ -238,8 +230,6 @@ class FAQScreen extends StatelessWidget {
             ],
           ),
           CustomSpacers.small(),
-          CustomDivider(),
-          CustomSpacers.small(),
           ExpansionTile(
             backgroundColor: AppColors.pastelBlue,
             title: Text("Measuring Unit:"),
@@ -251,8 +241,6 @@ class FAQScreen extends StatelessWidget {
               ),
             ],
           ),
-          CustomSpacers.small(),
-          CustomDivider(),
           CustomSpacers.small(),
           ExpansionTile(
             backgroundColor: AppColors.pastelBlue,
@@ -327,8 +315,6 @@ class FAQScreen extends StatelessWidget {
               ),
             ],
           ),
-          CustomSpacers.small(),
-          CustomDivider(),
           CustomSpacers.small(),
           ExpansionTile(
             backgroundColor: AppColors.pastelBlue,
