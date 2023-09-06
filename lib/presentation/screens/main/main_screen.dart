@@ -4,8 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:naqaa/app/permissions_handler.dart';
 import 'package:naqaa/app/router/routes.dart';
-import 'package:naqaa/presentation/blocs/devices/devices_cubit.dart';
+import 'package:naqaa/presentation/blocs/notifications/notifications_cubit.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/widgets/custom_spacers.dart';
 
@@ -30,7 +31,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-    BlocProvider.of<DevicesCubit>(context).getDevices();
+    PermissionHandler.initNotifications();
     super.initState();
   }
 
@@ -145,25 +146,64 @@ class _MainScreenState extends State<MainScreen> {
           height: isSelected ? AppSizes.s50.r : AppSizes.s30.r,
           duration: const Duration(milliseconds: 150),
           child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: Stack(
+              alignment: Alignment.center,
+              clipBehavior: Clip.none,
               children: [
-                SvgPicture.asset(
-                  isSelected ? filledSvgPath : svgPath,
-                  height: isSelected ? AppSizes.s22.r : AppSizes.s20.r,
-                  width: isSelected ? AppSizes.s22.r : AppSizes.s20.r,
-                  colorFilter: isSelected
-                      ? null
-                      : ColorFilter.mode(
-                          AppColors.primary.withOpacity(0.8), BlendMode.srcIn),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      isSelected ? filledSvgPath : svgPath,
+                      height: isSelected ? AppSizes.s22.r : AppSizes.s20.r,
+                      width: isSelected ? AppSizes.s22.r : AppSizes.s20.r,
+                      colorFilter: isSelected
+                          ? null
+                          : ColorFilter.mode(AppColors.primary.withOpacity(0.8),
+                              BlendMode.srcIn),
+                    ),
+                    if (isSelected)
+                      Text(
+                        label,
+                        style: boldPrimaryExtraSmallStyle(),
+                        maxLines: 1,
+                      )
+                  ],
                 ),
-                if (isSelected)
-                  Text(
-                    label,
-                    style: boldPrimaryExtraSmallStyle(),
-                    maxLines: 1,
-                  )
+                if (index == 2)
+                  Positioned.directional(
+                      end: -6.r,
+                      top: -6.r,
+                      textDirection: Directionality.of(context),
+                      child: StreamBuilder(
+                        stream: BlocProvider.of<NotificationsCubit>(context)
+                            .unseenNotificationsStream(),
+                        builder: (context, snapshot) {
+                          if (snapshot.data != null &&
+                              currentIndex != 2 &&
+                              snapshot.data! > 0) {
+                            return Container(
+                              height: AppSizes.s14.r,
+                              width: AppSizes.s14.r,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                    AppValues.circleRadius),
+                                color: AppColors.red,
+                              ),
+                              child: Text(
+                                snapshot.data.toString(),
+                                textHeightBehavior: const TextHeightBehavior(
+                                    applyHeightToFirstAscent: false),
+                                textAlign: TextAlign.center,
+                                style: boldWhiteExtraSmallStyle(),
+                              ),
+                            );
+                          } else {
+                            return Container();
+                          }
+                        },
+                      )),
               ],
             ),
           ),

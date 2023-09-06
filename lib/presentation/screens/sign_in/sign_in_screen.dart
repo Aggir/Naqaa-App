@@ -8,6 +8,7 @@ import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/assets_manager.dart';
 import 'package:naqaa/app/enums/status_enum.dart';
 import 'package:naqaa/app/functions.dart';
+import 'package:naqaa/app/permissions_handler.dart';
 import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/app/validators.dart';
 import 'package:naqaa/presentation/blocs/user/user_cubit.dart';
@@ -24,8 +25,19 @@ import 'package:naqaa/presentation/widgets/primary_button.dart';
 
 import '../../widgets/custom_text_form_field.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
+
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
+  @override
+  void initState() {
+    PermissionHandler.initNotifications();
+    super.initState();
+  }
 
   void _forgotPasswordHandler(BuildContext context) {
     _unfocusFields(context);

@@ -9,6 +9,7 @@ import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/presentation/blocs/change_password/change_password_cubit.dart';
 import 'package:naqaa/presentation/blocs/devices/devices_cubit.dart';
 import 'package:naqaa/presentation/blocs/edit_profile/edit_profile_cubit.dart';
+import 'package:naqaa/presentation/blocs/notifications/notifications_cubit.dart';
 import 'package:naqaa/presentation/blocs/setup_device/setup_device_cubit.dart';
 import 'package:naqaa/presentation/screens/index.dart';
 import 'package:naqaa/presentation/blocs/index.dart';
@@ -81,8 +82,12 @@ class AppRoutes {
   static final main = ShellRoute(
       navigatorKey: AppRouter.mainShellKey,
       pageBuilder: (context, state, child) => NoTransitionPage(
-              child: BlocProvider(
-            create: (context) => DevicesCubit(),
+              child: MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => DevicesCubit()..getDevices()),
+              BlocProvider(
+                  create: (context) => NotificationsCubit()..getNotifications())
+            ],
             child: MainScreen(child, state.uri),
           )),
       routes: [

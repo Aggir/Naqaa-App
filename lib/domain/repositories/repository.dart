@@ -3,6 +3,7 @@ import 'package:naqaa/app/failure.dart';
 import 'package:naqaa/data/requests/requests.dart';
 import 'package:naqaa/domain/entities/device.dart';
 import 'package:naqaa/domain/entities/device_details.dart';
+import 'package:naqaa/domain/entities/notification.dart';
 
 import '../entities/user.dart';
 
@@ -34,4 +35,11 @@ abstract class Repository {
 
   Future<Either<Failure, Stream<DeviceDetailsEntity>>> getDeviceDetails(
       String macAddress);
+
+  Future<Either<Failure, Stream<List<NotificationEntity>>>>
+      getUserNotifications();
+
+  Future<Either<Failure, void>> seenNotifications();
+
+  Future<Either<Failure, void>> readNotification(String notificationId);
 }

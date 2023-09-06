@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -10,6 +14,7 @@ import 'package:naqaa/data/datasources/remote_datasource.dart';
 import 'package:naqaa/data/mappers/user_mapper.dart';
 import 'package:naqaa/data/models/device_details_model.dart';
 import 'package:naqaa/data/models/device_model.dart';
+import 'package:naqaa/data/models/notification_model.dart';
 import 'package:naqaa/data/models/user.dart';
 import 'package:naqaa/data/requests/requests.dart';
 import 'package:naqaa/data/responses/firebase_responses.dart';
@@ -23,10 +28,12 @@ class FirebaseApi implements RemoteDataSource {
   final FirebaseAuth _firebaseAuth;
   final FirebaseFirestore _firebaseFirestore;
   final FirebaseDatabase _firebaseDatabase;
+  final FirebaseMessaging _firebaseMessaging;
   const FirebaseApi(
     this._firebaseAuth,
     this._firebaseFirestore,
     this._firebaseDatabase,
+    this._firebaseMessaging,
   );
 
   @override
@@ -48,6 +55,7 @@ class FirebaseApi implements RemoteDataSource {
   @override
   Future<FirebaseAuthResponse> signIn(SignInRequest request) async {
     User? user;
+    String? token = await _firebaseMessaging.getToken();
     try {
       user = (await _firebaseAuth.signInWithEmailAndPassword(
               email: request.emailAddress, password: request.password))
@@ -62,7 +70,17 @@ class FirebaseApi implements RemoteDataSource {
         await _firebaseFirestore
             .collection(FirebaseConstants.user)
             .doc(user?.uid)
-            .set(userModel.toMap());
+            .set({
+          ...userModel.toMap(),
+          FirebaseConstants.tokens: FieldValue.arrayUnion([token])
+        }, SetOptions(merge: true));
+      } else {
+        _firebaseFirestore
+            .collection(FirebaseConstants.user)
+            .doc(user?.uid)
+            .set({
+          FirebaseConstants.tokens: FieldValue.arrayUnion([token])
+        }, SetOptions(merge: true));
       }
 
       return FirebaseAuthResponse(Status.success, user: userModel);
@@ -78,6 +96,7 @@ class FirebaseApi implements RemoteDataSource {
   Future<FirebaseAuthResponse> connectWithGoogle() async {
     try {
       final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
+      String? token = await _firebaseMessaging.getToken();
       if (gUser != null) {
         final GoogleSignInAuthentication gAuth = await gUser.authentication;
         final credential = GoogleAuthProvider.credential(
@@ -100,7 +119,10 @@ class FirebaseApi implements RemoteDataSource {
           await _firebaseFirestore
               .collection(FirebaseConstants.user)
               .doc(user?.uid)
-              .set(userModel.toMap());
+              .set({
+            ...userModel.toMap(),
+            FirebaseConstants.tokens: FieldValue.arrayUnion([token])
+          }, SetOptions(merge: true));
         } else {
           final response = await _firebaseFirestore
               .collection(FirebaseConstants.user)
@@ -115,7 +137,10 @@ class FirebaseApi implements RemoteDataSource {
             await _firebaseFirestore
                 .collection(FirebaseConstants.user)
                 .doc(user?.uid)
-                .set(userModel.toMap());
+                .set({
+              ...userModel.toMap(),
+              FirebaseConstants.tokens: FieldValue.arrayUnion([token])
+            }, SetOptions(merge: true));
           }
         }
         return FirebaseAuthResponse(Status.success, user: userModel);
@@ -132,6 +157,11 @@ class FirebaseApi implements RemoteDataSource {
   @override
   Future<FirebaseBasicResponse> signOut() async {
     try {
+      User? user = _firebaseAuth.currentUser;
+      String? token = await _firebaseMessaging.getToken();
+      _firebaseFirestore.collection(FirebaseConstants.user).doc(user?.uid).set({
+        FirebaseConstants.tokens: FieldValue.arrayRemove([token])
+      }, SetOptions(merge: true));
       await _firebaseAuth.signOut();
     } on FirebaseAuthException catch (e) {
       return FirebaseBasicResponse(
@@ -147,6 +177,7 @@ class FirebaseApi implements RemoteDataSource {
   Future<FirebaseAuthResponse> signUp(SignUpRequest request) async {
     User? user;
     try {
+      String? token = await _firebaseMessaging.getToken();
       user = (await _firebaseAuth.createUserWithEmailAndPassword(
         email: request.emailAddress,
         password: request.password,
@@ -165,7 +196,10 @@ class FirebaseApi implements RemoteDataSource {
       await _firebaseFirestore
           .collection(FirebaseConstants.user)
           .doc(user?.uid)
-          .set(userModel.toMap());
+          .set({
+        ...userModel.toMap(),
+        FirebaseConstants.tokens: FieldValue.arrayUnion([token])
+      }, SetOptions(merge: true));
       return FirebaseAuthResponse(Status.success, user: userModel);
     } on FirebaseAuthException catch (e) {
       return FirebaseAuthResponse(Status.failure,
@@ -177,8 +211,7 @@ class FirebaseApi implements RemoteDataSource {
 
   @override
   Future<FirebaseAuthResponse> isSignedIn() async {
-    User? user;
-    user = _firebaseAuth.currentUser;
+    User? user = _firebaseAuth.currentUser;
     final response = await _firebaseFirestore
         .collection(FirebaseConstants.user)
         .doc(user?.uid)
@@ -325,7 +358,7 @@ class FirebaseApi implements RemoteDataSource {
   Future<DeviceDetailsResponse> getDeviceDetails(String id) async {
     try {
       final response = _firebaseDatabase.ref().child(id).ref.onValue;
-
+      // TODO: GET DEVICE DOCUMENT TOO
       return DeviceDetailsResponse(
           status: Status.success,
           deviceDetailsStream: response.map((event) =>
@@ -354,6 +387,66 @@ class FirebaseApi implements RemoteDataSource {
           .doc(id)
           .delete();
 
+      return BasicResponse(Status.success, 'success');
+    } on FirebaseAuthException catch (e) {
+      return BasicResponse(
+          Status.failure, FirebaseAuthErrorHandler.getAuthErrorMessage(e));
+    } catch (e) {
+      return BasicResponse(Status.failure, e.toString());
+    }
+  }
+
+  @override
+  Future<NotificationsResponse> getNotifications() async {
+    try {
+      final User? user = _firebaseAuth.currentUser;
+      final Stream<QuerySnapshot<Map<String, dynamic>>>
+          userNotificationsStream = _firebaseFirestore
+              .collection(FirebaseConstants.notification)
+              .where(
+                FirebaseConstants.userId,
+                isEqualTo: user?.uid,
+              )
+              .snapshots();
+      return NotificationsResponse(
+          status: Status.success,
+          notificationsStream: userNotificationsStream.map((snapshot) =>
+              (snapshot.docs.map(
+                      (doc) => {FirebaseConstants.id: doc.id, ...doc.data()}))
+                  .map((e) => NotificationModel.fromMap(e))
+                  .toList()
+                ..sort((a, b) => b.createdAt!.compareTo(a.createdAt!))));
+    } on FirebaseAuthException catch (e) {
+      return NotificationsResponse(
+          status: Status.failure,
+          message: FirebaseAuthErrorHandler.getAuthErrorMessage(e));
+    } catch (e) {
+      return NotificationsResponse(
+          status: Status.failure, message: e.toString());
+    }
+  }
+
+  @override
+  Future<BasicResponse> seenNotifications() async {
+    try {
+      final String? userId = _firebaseAuth.currentUser?.uid;
+      await http.get(Uri.parse(
+          '${FirebaseConstants.baseUrl}${FirebaseConstants.toggleIsRead}?user_id=$userId'));
+      return BasicResponse(Status.success, 'success');
+    } on HttpException catch (e) {
+      return BasicResponse(Status.failure, e.message);
+    } catch (e) {
+      return BasicResponse(Status.failure, e.toString());
+    }
+  }
+
+  @override
+  Future<BasicResponse> readNotification(notificationId) async {
+    try {
+      await _firebaseFirestore
+          .collection(FirebaseConstants.notification)
+          .doc(notificationId)
+          .update({FirebaseConstants.isRead: true});
       return BasicResponse(Status.success, 'success');
     } on FirebaseAuthException catch (e) {
       return BasicResponse(

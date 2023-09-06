@@ -66,7 +66,7 @@ class NotificationsResponse implements BaseResponse {
   @override
   Status status;
 
-  Stream<NotificationModel>? notificationsStream;
+  Stream<List<NotificationModel>>? notificationsStream;
 
   NotificationsResponse({
     this.message,

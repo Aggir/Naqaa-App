@@ -100,6 +100,9 @@ class AppStrings {
       "setting_up_device_notification_message";
   static const finishSettingUpAccountNotificationMessage =
       "setting_up_device_notification_message";
+  static const your = 'your';
+  static const waterQualityIsDropping = 'water_quality_is_dropping';
+  static const waterQualityLevel = 'water_quality_level';
 
   static const editProfile = 'edit_profile';
   static const changePassword = 'change_password';

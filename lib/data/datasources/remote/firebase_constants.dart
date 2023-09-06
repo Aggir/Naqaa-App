@@ -1,5 +1,9 @@
 class FirebaseConstants {
-  //  ################## Firestore ##################
+  // ############# Firebase Functions ##############
+  static const String baseUrl =
+      'https://europe-west1-naqaa-2023.cloudfunctions.net/expressFunction';
+  static const String toggleIsRead = '/toggleIsSeen';
+  // ################## Firestore ##################
 
   // ---------- Collections -----------
   static const String user = 'user';
@@ -12,6 +16,7 @@ class FirebaseConstants {
   static const String updatedAt = 'updated_at';
   // Notification:
   static const String isRead = 'is_read';
+  static const String isSeen = 'is_seen';
   static const String deviceName = 'device_name';
   static const String deviceId = 'device_id';
   // User:
@@ -20,6 +25,7 @@ class FirebaseConstants {
   static const String genderId = 'genderId';
   static const String isSignedInWithGoogle = 'isSignedInWithGoogle';
   static const String profilePictureUrl = 'profilePictureUrl';
+  static const String tokens = 'tokens';
   // Device:
   static const String userId = 'user_id';
   static const String waterQualityName = 'water_quality_name';

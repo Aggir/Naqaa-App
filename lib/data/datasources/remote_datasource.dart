@@ -29,9 +29,9 @@ abstract class RemoteDataSource {
 
   Future<DeviceDetailsResponse> getDeviceDetails(String macAddress);
 
-  // Future<BasicResponse> getNotifications();
+  Future<NotificationsResponse> getNotifications();
 
-  // Future<BasicResponse> readNotifications();
+  Future<BasicResponse> seenNotifications();
 
-  // Future<BasicResponse> getNotificationsCount();
+  Future<BasicResponse> readNotification(notificationId);
 }

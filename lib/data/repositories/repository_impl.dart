@@ -4,9 +4,11 @@ import 'package:naqaa/app/failure.dart';
 import 'package:naqaa/data/datasources/remote_datasource.dart';
 import 'package:naqaa/data/mappers/device_details_mapper.dart';
 import 'package:naqaa/data/mappers/device_mapper.dart';
+import 'package:naqaa/data/mappers/notification_mapper.dart';
 import 'package:naqaa/data/requests/requests.dart';
 import 'package:naqaa/domain/entities/device.dart';
 import 'package:naqaa/domain/entities/device_details.dart';
+import 'package:naqaa/domain/entities/notification.dart';
 import 'package:naqaa/domain/entities/user.dart';
 import 'package:naqaa/domain/repositories/repository.dart';
 import 'package:naqaa/data/mappers/user_mapper.dart';
@@ -148,6 +150,39 @@ class RepositoryImpl implements Repository {
   @override
   Future<Either<Failure, void>> deleteDevice(String id) async {
     final response = await _remoteDataSource.deleteDevice(id);
+    if (response.status.isFailure) {
+      return Left(Failure(0, response.message!));
+    } else {
+      return const Right(null);
+    }
+  }
+
+  @override
+  Future<Either<Failure, Stream<List<NotificationEntity>>>>
+      getUserNotifications() async {
+    final response = await _remoteDataSource.getNotifications();
+    if (response.status.isFailure) {
+      return Left(Failure(0, response.message!));
+    } else {
+      return Right(response.notificationsStream
+              ?.map((event) => event.map((e) => e.toDomain()).toList()) ??
+          const Stream.empty());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> seenNotifications() async {
+    final response = await _remoteDataSource.seenNotifications();
+    if (response.status.isFailure) {
+      return Left(Failure(0, response.message!));
+    } else {
+      return const Right(null);
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> readNotification(String notificationId) async {
+    final response = await _remoteDataSource.readNotification(notificationId);
     if (response.status.isFailure) {
       return Left(Failure(0, response.message!));
     } else {

@@ -181,3 +181,7 @@ TextStyle boldBlackMediumStyle() {
 TextStyle boldBlackLargeStyle() {
   return getBoldStyle(fontSize: FontSize.s20, color: AppColors.blackText);
 }
+
+TextStyle boldWhiteExtraSmallStyle() {
+  return getBoldStyle(fontSize: FontSize.s10, color: AppColors.whiteText);
+}

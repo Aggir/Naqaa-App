@@ -12,6 +12,7 @@ class UserModel extends Equatable {
   final int? modificationDate;
   final int? creationDate;
   final bool? isNewUser;
+  final List<dynamic>? tokens;
 
   const UserModel({
     this.name,
@@ -23,6 +24,7 @@ class UserModel extends Equatable {
     this.modificationDate,
     this.creationDate,
     this.isNewUser,
+    this.tokens,
   });
 
   UserModel copyWith({
@@ -35,18 +37,19 @@ class UserModel extends Equatable {
     int? modificationDate,
     int? creationDate,
     bool? isNewUser,
+    List<dynamic>? tokens,
   }) {
     return UserModel(
-      name: name ?? this.name,
-      profilePictureUrl: profilePictureUrl ?? this.profilePictureUrl,
-      email: email ?? this.email,
-      dateOfBirth: dateOfBirth ?? this.dateOfBirth,
-      genderId: genderId ?? this.genderId,
-      isSignedInWithGoogle: isSignedInWithGoogle ?? this.isSignedInWithGoogle,
-      modificationDate: modificationDate ?? this.modificationDate,
-      creationDate: creationDate ?? this.creationDate,
-      isNewUser: isNewUser ?? this.isNewUser,
-    );
+        name: name ?? this.name,
+        profilePictureUrl: profilePictureUrl ?? this.profilePictureUrl,
+        email: email ?? this.email,
+        dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+        genderId: genderId ?? this.genderId,
+        isSignedInWithGoogle: isSignedInWithGoogle ?? this.isSignedInWithGoogle,
+        modificationDate: modificationDate ?? this.modificationDate,
+        creationDate: creationDate ?? this.creationDate,
+        isNewUser: isNewUser ?? this.isNewUser,
+        tokens: tokens ?? this.tokens);
   }
 
   @override
@@ -61,6 +64,7 @@ class UserModel extends Equatable {
       modificationDate,
       creationDate,
       isNewUser,
+      tokens
     ];
   }
 
@@ -89,6 +93,7 @@ class UserModel extends Equatable {
       modificationDate: map?['modificationDate']?.toInt(),
       creationDate: map?['creationDate']?.toInt(),
       isNewUser: map?['isNewUser'],
+      tokens: map?['tokens'],
     );
   }
 
