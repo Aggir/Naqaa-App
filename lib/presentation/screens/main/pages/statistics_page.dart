@@ -2,7 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:naqaa/app/app_strings.dart';
+import 'package:naqaa/app/assets_manager.dart';
 import 'package:naqaa/app/enums/sensor_type_enum.dart';
 import 'package:naqaa/app/enums/statistics_cart_type_ui_enum.dart';
 import 'package:naqaa/app/enums/statistics_date_enum.dart';
@@ -40,84 +42,149 @@ class _StatisticsPageState extends State<StatisticsPage> {
     return Scaffold(
       appBar: CustomAppBar.basic(title: AppStrings.statistics.tr()),
       body: PageContainer(
+        child: BlocBuilder<DevicesCubit, DevicesState>(
+          builder: (context, state) {
+            if (state.latestDevicesSnapshot == null) {
+              return _loadingState();
+            } else if (state.latestDevicesSnapshot!.isEmpty) {
+              return _emptyState(context);
+            } else {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _header(),
+                  CustomSpacers.small(),
+                  Text(
+                    AppStrings.statisticsPageSubtitle.tr(),
+                    style: regularGraySmallStyle(),
+                  ),
+                  CustomSpacers.large(),
+                  _devicesDropDown(context),
+                  CustomSpacers.medium(),
+                  Container(
+                    height: AppSizes.s240.r,
+                    decoration: BoxDecoration(
+                        color: AppColors.snowWhite,
+                        borderRadius: BorderRadius.circular(AppValues.small)),
+                    padding: const EdgeInsets.all(AppValues.mediumSmall).r,
+                    child: BlocBuilder<StatisticsCubit, StatisticsState>(
+                      builder: (context, state) {
+                        return Column(
+                          children: [
+                            SizedBox(
+                              height: 40,
+                              child: Row(
+                                children: [
+                                  _selectableTab(context, StatisticsDate.today),
+                                  CustomSpacers.small(),
+                                  _selectableTab(
+                                      context, StatisticsDate.sevenDays),
+                                  CustomSpacers.small(),
+                                  _selectableTab(context, StatisticsDate.month),
+                                  CustomSpacers.small(),
+                                  _selectableTab(
+                                      context, StatisticsDate.sixMonths),
+                                ],
+                              ),
+                            ),
+                            Flexible(
+                              child: StatisticsChart(
+                                statisticsDate: state.selectedStatisticsDate,
+                                selectedPeriodIndex:
+                                    state.selectedPeriodIndex ?? 0,
+                                statistics: state.statistics ?? [],
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  CustomSpacers.medium(),
+                  _sensorSelectorRow(context),
+                  CustomSpacers.medium(),
+                  BlocBuilder<StatisticsCubit, StatisticsState>(
+                    builder: (context, state) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          StatisticsCard(
+                            type: state.selectedSensorType,
+                            statisticsCardTypeUi: StatisticsCardTypeUi.highest,
+                            statistics: state.statistics ?? [],
+                          ),
+                          StatisticsCard(
+                            type: state.selectedSensorType,
+                            statisticsCardTypeUi: StatisticsCardTypeUi.lowest,
+                            statistics: state.statistics ?? [],
+                          ),
+                          StatisticsCard(
+                            type: state.selectedSensorType,
+                            statisticsCardTypeUi: StatisticsCardTypeUi.average,
+                            statistics: state.statistics ?? [],
+                          ),
+                        ],
+                      );
+                    },
+                  )
+                ],
+              );
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _header() {
+    return Text(
+      AppStrings.statisticsPageTitle.tr(),
+      style: mediumBlackLargeMediumStyle(),
+    );
+  }
+
+  Widget _loadingState() {
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _header(),
+          CustomSpacers.extraLarge(),
+          const Center(
+            child: CircularProgressIndicator(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _emptyState(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: IntrinsicHeight(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              AppStrings.statisticsPageTitle.tr(),
-              style: mediumBlackLargeMediumStyle(),
-            ),
+            _header(),
             CustomSpacers.small(),
             Text(
-              AppStrings.statisticsPageSubtitle.tr(),
+              AppStrings.youDoNotHaveAnyDevicesYet.tr(),
               style: regularGraySmallStyle(),
             ),
-            CustomSpacers.large(),
-            _devicesDropDown(context),
-            CustomSpacers.medium(),
-            Container(
-              height: AppSizes.s240.r,
-              decoration: BoxDecoration(
-                  color: AppColors.snowWhite,
-                  borderRadius: BorderRadius.circular(AppValues.small)),
-              padding: const EdgeInsets.all(AppValues.mediumSmall).r,
-              child: BlocBuilder<StatisticsCubit, StatisticsState>(
-                builder: (context, state) {
-                  return Column(
-                    children: [
-                      SizedBox(
-                        height: 40,
-                        child: Row(
-                          children: [
-                            _selectableTab(context, StatisticsDate.today),
-                            CustomSpacers.small(),
-                            _selectableTab(context, StatisticsDate.sevenDays),
-                            CustomSpacers.small(),
-                            _selectableTab(context, StatisticsDate.month),
-                            CustomSpacers.small(),
-                            _selectableTab(context, StatisticsDate.sixMonths),
-                          ],
-                        ),
-                      ),
-                      Flexible(
-                        child: StatisticsChart(
-                          statisticsDate: state.selectedStatisticsDate,
-                          selectedPeriodIndex: state.selectedPeriodIndex ?? 0,
-                          statistics: state.statistics ?? [],
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
+            const Spacer(),
+            Center(
+              child: Column(mainAxisSize: MainAxisSize.min, children: [
+                SvgPicture.asset(SvgAssets.emptyStatistics),
+                CustomSpacers.medium(),
+                Text(
+                  AppStrings.thisPlaceIsEmptyTryAdding.tr(),
+                  style: regularBluishGrayMediumStyle(),
+                  textAlign: TextAlign.center,
+                )
+              ]),
             ),
-            CustomSpacers.medium(),
-            _sensorSelectorRow(context),
-            CustomSpacers.medium(),
-            BlocBuilder<StatisticsCubit, StatisticsState>(
-              builder: (context, state) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    StatisticsCard(
-                      type: state.selectedSensorType,
-                      statisticsCardTypeUi: StatisticsCardTypeUi.highest,
-                      statistics: state.statistics ?? [],
-                    ),
-                    StatisticsCard(
-                      type: state.selectedSensorType,
-                      statisticsCardTypeUi: StatisticsCardTypeUi.lowest,
-                      statistics: state.statistics ?? [],
-                    ),
-                    StatisticsCard(
-                      type: state.selectedSensorType,
-                      statisticsCardTypeUi: StatisticsCardTypeUi.average,
-                      statistics: state.statistics ?? [],
-                    ),
-                  ],
-                );
-              },
-            )
+            const Spacer(),
           ],
         ),
       ),

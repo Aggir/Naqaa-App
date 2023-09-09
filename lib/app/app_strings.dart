@@ -53,6 +53,7 @@ class AppStrings {
   static const weHaveSentTheInstructionsEmailTo =
       "we_have_sent_the_instructions_email_to";
   static const didNotReceiveInstructions = 'did_not_receive_instructions';
+  static const continueSigningIn = 'continue_signing_in';
   static const havingAProblem = 'having_a_problem';
   static const sendAgain = 'send_again';
 
@@ -329,6 +330,7 @@ class AppStrings {
 
   static const statisticsPageTitle = 'statistics_page_title';
   static const statisticsPageSubtitle = 'statistics_page_subtitle';
+  static const thisPlaceIsEmptyTryAdding = 'this_place_is_empty_try_adding';
   static const today = 'today';
   static const days = 'days';
   static const month = 'month';

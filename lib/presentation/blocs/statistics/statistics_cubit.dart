@@ -17,7 +17,7 @@ class StatisticsCubit extends Cubit<StatisticsState> {
     emit(
       state.copyWith(
         selectedSensorType: SensorType.temp,
-        selectedDeviceId: list[0].id,
+        selectedDeviceId: list.isEmpty ? null : list[0].id,
         selectedPeriodIndex: (state.statistics?.length ?? 1) - 1,
         selectedStatisticsDate: StatisticsDate.today,
       ),
@@ -47,18 +47,20 @@ class StatisticsCubit extends Cubit<StatisticsState> {
   }
 
   Future<void> getStatistics() async {
-    emit(state.copyWith(getStatisticsStatus: Status.loading));
-    initGetStatistics();
-    (await instance<GetStatisticsUsecase>().execute(GetStatisticsUsecaseInput(
-            statisticsDate: state.selectedStatisticsDate,
-            deviceId: state.selectedDeviceId!)))
-        .fold(
-            (failure) => emit(state.copyWith(
-                getStatisticsStatus: Status.failure,
-                getStatisticsErrorMessage: failure.message)),
-            (statistics) => emit(state.copyWith(
-                getStatisticsStatus: Status.success,
-                statistics: statistics,
-                selectedPeriodIndex: statistics.length - 1)));
+    if (state.selectedDeviceId != null) {
+      emit(state.copyWith(getStatisticsStatus: Status.loading));
+      initGetStatistics();
+      (await instance<GetStatisticsUsecase>().execute(GetStatisticsUsecaseInput(
+              statisticsDate: state.selectedStatisticsDate,
+              deviceId: state.selectedDeviceId!)))
+          .fold(
+              (failure) => emit(state.copyWith(
+                  getStatisticsStatus: Status.failure,
+                  getStatisticsErrorMessage: failure.message)),
+              (statistics) => emit(state.copyWith(
+                  getStatisticsStatus: Status.success,
+                  statistics: statistics,
+                  selectedPeriodIndex: statistics.length - 1)));
+    }
   }
 }

@@ -83,7 +83,8 @@ class _HomePageState extends State<HomePage> {
           if (state.fetchDevicesStatus.isLoading) {
             return _loadingState();
           } else if (state.fetchDevicesStatus.isSuccess &&
-              state.latestDevicesSnapshot != null) {
+              state.latestDevicesSnapshot != null &&
+              state.latestDevicesSnapshot!.isNotEmpty) {
             return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

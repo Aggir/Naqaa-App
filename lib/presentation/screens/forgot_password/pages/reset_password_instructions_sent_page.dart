@@ -2,7 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/enums/status_enum.dart';
+import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/presentation/widgets/pressable_text.dart';
 
 import '../../../../app/app_strings.dart';
@@ -20,6 +22,10 @@ class ResetPasswordInstructionsSentScreen extends StatelessWidget {
 
   void _sendAgainFunction(BuildContext context) {
     BlocProvider.of<ForgotPasswordCubit>(context).sendResetInstructions();
+  }
+
+  void _goBackToSignIn(BuildContext context) {
+    context.go(AppScreen.signIn.toPath);
   }
 
   void _havingAProblemFunction(context) {}
@@ -46,15 +52,15 @@ class ResetPasswordInstructionsSentScreen extends StatelessWidget {
                   style: regularGrayStyle(),
                 ),
                 Text(
-                  '${cubit.emailAddressController.text}.',
+                  cubit.emailAddressController.text,
                   style: semiGrayStyle(),
                 ),
               ],
             ),
-            PressableText(
-                text: AppStrings.havingAProblem.tr(),
-                onTap: () => _havingAProblemFunction(context),
-                fontWeight: FontWeight.w600),
+            // PressableText(
+            //     text: AppStrings.havingAProblem.tr(),
+            //     onTap: () => _havingAProblemFunction(context),
+            //     fontWeight: FontWeight.w600),
             CustomSpacers.large(),
             BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
               listener: (context, state) {
@@ -68,9 +74,9 @@ class ResetPasswordInstructionsSentScreen extends StatelessWidget {
               builder: (context, state) {
                 return PrimaryButton.fullWidth(
                   isLoading: state.sendResetInstructionsStatus.isLoading,
-                  onPressed: () => _sendAgainFunction(context),
+                  onPressed: () => _goBackToSignIn(context),
                   child: Text(
-                    AppStrings.sendAgain.tr().toUpperCase(),
+                    AppStrings.continueSigningIn.tr().toUpperCase(),
                   ),
                 );
               },
