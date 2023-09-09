@@ -246,5 +246,22 @@
     "congratulations": "تهانينا",
     "everything_is_setup_and_you_are_ready_to_go": "كل شيء جاهز وأنت جاهز للبدء!",
     "connect_error_message": "حدث خطأ ما، الرجاء التحقق من كلمة المرور وان الجهاز بالقرب منك و المحاولة مرة اخرى",
-    "faq": "اسئلة شائعة"
+    "faq": "اسئلة شائعة",
+    "statistics_page_title": "لمحة عن جودة المياة",
+    "statistics_page_subtitle": "ألقِ نظرة بسيطة على إحصائيات جودة المياه",
+    "today": "اليوم",
+    "days": "ايام",
+    "month": "شهر",
+    "months": "اشهر",
+    "week": "الأسبوع",
+    "monday": "الإثنين",
+    "tuesday": "الثلاثاء",
+    "wednesday": "الأربعاء",
+    "thursday": "الخميس",
+    "friday": "الجمعة",
+    "saturday": "السبت",
+    "sunday": "الأحد",
+    "highest": "الأعلى",
+    "lowest": "الأدنى",
+    "water_quality_highlights":"أبرز القيم لجودة المياة"
 }

@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:naqaa/app/app_strings.dart';
 
 extension Validators on String {
   bool isValidEmail() {
@@ -17,6 +18,48 @@ extension Formatter on double {
       return toInt().toString();
     } else {
       return toString();
+    }
+  }
+}
+
+extension WeekdayIntExtension on int {
+  String get weekdayName {
+    switch (this) {
+      case 1:
+        return AppStrings.monday.tr();
+      case 2:
+        return AppStrings.tuesday.tr();
+      case 3:
+        return AppStrings.wednesday.tr();
+      case 4:
+        return AppStrings.thursday.tr();
+      case 5:
+        return AppStrings.friday.tr();
+      case 6:
+        return AppStrings.saturday.tr();
+      default:
+        return AppStrings.sunday.tr();
+    }
+  }
+}
+
+extension WaterQualityExtension on int {
+  String get toWaterQualityName {
+    switch (this) {
+      case 0:
+        return '';
+      case 1:
+        return AppStrings.great.tr();
+      case 2:
+        return AppStrings.good.tr();
+      case 3:
+        return AppStrings.average.tr();
+      case 4:
+        return AppStrings.bad.tr();
+      case 5:
+        return AppStrings.veryBad.tr();
+      default:
+        return AppStrings.danger.tr();
     }
   }
 }

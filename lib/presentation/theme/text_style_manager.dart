@@ -58,6 +58,10 @@ TextStyle semiWhiteHugeStyle() {
   return getSemiBoldStyle(fontSize: FontSize.s32, color: AppColors.whiteText);
 }
 
+TextStyle semiWhiteMediumStyle() {
+  return getSemiBoldStyle(fontSize: FontSize.s16, color: AppColors.whiteText);
+}
+
 TextStyle semiPrimaryStyle() {
   return getSemiBoldStyle(fontSize: FontSize.s14, color: AppColors.mediumGray);
 }
@@ -94,8 +98,16 @@ TextStyle mediumBlackExtraLargeStyle() {
   return getMediumStyle(fontSize: FontSize.s26, color: AppColors.blackText);
 }
 
+TextStyle mediumBlackLargeMediumStyle() {
+  return getMediumStyle(fontSize: FontSize.s22, color: AppColors.blackText);
+}
+
 TextStyle mediumBlackLargeStyle() {
   return getMediumStyle(fontSize: FontSize.s20, color: AppColors.blackText);
+}
+
+TextStyle mediumBlackMediumStyle() {
+  return getMediumStyle(fontSize: FontSize.s16, color: AppColors.blackText);
 }
 
 TextStyle regularBlackSmallStyle() {
@@ -164,6 +176,10 @@ TextStyle boldBlackExtraLargeStyle() {
 
 TextStyle regularGrayExtraSmallStyle() {
   return getRegularStyle(fontSize: FontSize.s10, color: AppColors.mediumGray);
+}
+
+TextStyle regularGrayTinyStyle() {
+  return getRegularStyle(fontSize: FontSize.s8, color: AppColors.mediumGray);
 }
 
 TextStyle regularBluishGrayExtraSmallStyle() {

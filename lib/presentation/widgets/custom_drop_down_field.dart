@@ -23,6 +23,10 @@ class CustomDropDownField extends StatefulWidget {
     this.value,
     this.focusedStyleEnabled = true,
     this.hideErrorMessage = false,
+    this.style,
+    this.color,
+    this.secondaryColor,
+    this.selectedItemBuilder,
   }) : super(key: key);
   final List<DropdownMenuItem> items;
   final void Function(dynamic)? onChanged;
@@ -35,6 +39,10 @@ class CustomDropDownField extends StatefulWidget {
   final String? hintText;
   final bool focusedStyleEnabled;
   final bool hideErrorMessage;
+  final InputDecoration? style;
+  final Color? color;
+  final Color? secondaryColor;
+  final List<Widget> Function(BuildContext context)? selectedItemBuilder;
 
   @override
   State<CustomDropDownField> createState() => _CustomDropDownFieldState();
@@ -61,6 +69,7 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
           width: double.infinity,
           height: AppValues.textFieldHeight.r,
           child: DropdownButtonFormField(
+            selectedItemBuilder: widget.selectedItemBuilder,
             onTap: widget.onTap,
             validator: (value) => (widget.defaultValidator
                 ? _defaultValidator(value, widget.validator)
@@ -68,6 +77,9 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
             icon: SvgPicture.asset(
               SvgAssets.chevronDown,
               width: AppSizes.s12.r,
+              colorFilter: widget.secondaryColor != null
+                  ? ColorFilter.mode(widget.secondaryColor!, BlendMode.srcIn)
+                  : null,
             ),
             items: widget.items,
             value: widget.value ?? selectedValue,
@@ -79,33 +91,39 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
                 selectedValue = value;
               });
             },
-            decoration: InputDecoration(
-              errorMaxLines: 3,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(AppValues.smallRadius.r),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(AppValues.smallRadius.r),
-                borderSide: BorderSide(color: AppColors.pastelBlue),
-              ),
-              focusedBorder: widget.focusedStyleEnabled
-                  ? null
-                  : OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.circular(AppValues.smallRadius.r),
-                      borderSide: BorderSide(color: AppColors.pastelBlue),
-                    ),
-              contentPadding: const EdgeInsets.symmetric(
-                      vertical: 0, horizontal: AppValues.medium)
-                  .r,
-              fillColor: widget.enabled
-                  ? AppColors.snowWhite
-                  : AppColors.snowWhite.withOpacity(0.20),
-              filled: true,
-              counterText: '',
-              hintText: widget.hintText ?? '',
-              hintStyle: textFieldHintStyle(),
-            ),
+            decoration: widget.style ??
+                InputDecoration(
+                  errorMaxLines: 3,
+                  border: OutlineInputBorder(
+                    borderRadius:
+                        BorderRadius.circular(AppValues.smallRadius.r),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius:
+                        BorderRadius.circular(AppValues.smallRadius.r),
+                    borderSide:
+                        BorderSide(color: widget.color ?? AppColors.pastelBlue),
+                  ),
+                  focusedBorder: widget.focusedStyleEnabled
+                      ? null
+                      : OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.circular(AppValues.smallRadius.r),
+                          borderSide: BorderSide(
+                              color: widget.color ?? AppColors.pastelBlue),
+                        ),
+                  contentPadding: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: AppValues.medium)
+                      .r,
+                  fillColor: widget.enabled
+                      ? widget.color ?? AppColors.snowWhite
+                      : widget.color?.withOpacity(0.20) ??
+                          AppColors.snowWhite.withOpacity(0.20),
+                  filled: true,
+                  counterText: '',
+                  hintText: widget.hintText ?? '',
+                  hintStyle: textFieldHintStyle(),
+                ),
           ),
         ),
         if (_showError)

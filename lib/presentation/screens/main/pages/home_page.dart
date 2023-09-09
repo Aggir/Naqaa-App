@@ -83,29 +83,18 @@ class _HomePageState extends State<HomePage> {
           if (state.fetchDevicesStatus.isLoading) {
             return _loadingState();
           } else if (state.fetchDevicesStatus.isSuccess &&
-              state.devicesStream != null) {
-            return StreamBuilder<List<DeviceEntity>>(
-              stream: state.devicesStream,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return _loadingState();
-                } else if (snapshot.hasData &&
-                    (snapshot.data?.length ?? 0) > 0) {
-                  return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _welcomeWidget(),
-                        Text(
-                          AppStrings.yourDevicesAreWorkingHard.tr(),
-                          style: regularGrayStyle(),
-                        ),
-                        CustomSpacers.mediumLarge(),
-                        _devicesListView(snapshot),
-                      ]);
-                }
-                return _emptyState();
-              },
-            );
+              state.latestDevicesSnapshot != null) {
+            return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _welcomeWidget(),
+                  Text(
+                    AppStrings.yourDevicesAreWorkingHard.tr(),
+                    style: regularGrayStyle(),
+                  ),
+                  CustomSpacers.mediumLarge(),
+                  _devicesListView(state.latestDevicesSnapshot!),
+                ]);
           } else {
             return _emptyState();
           }
@@ -145,15 +134,15 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _devicesListView(AsyncSnapshot<List<DeviceEntity>> snapshot) {
+  Widget _devicesListView(List<DeviceEntity> snapshot) {
     return ListView.separated(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-          return DeviceListTile(snapshot.data![index]);
+          return DeviceListTile(snapshot[index]);
         },
         separatorBuilder: (context, index) => CustomSpacers.medium(),
-        itemCount: snapshot.data?.length ?? 0);
+        itemCount: snapshot.length);
   }
 
   Widget _homePageEmptyList(BuildContext context) {

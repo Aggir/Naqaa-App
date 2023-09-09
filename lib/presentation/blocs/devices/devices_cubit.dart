@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,7 @@ class DevicesCubit extends Cubit<DevicesState> {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
-
+  StreamSubscription<List<DeviceEntity>>? _devicesSubscription;
   getDevices() async {
     emit(state.copyWith(fetchDevicesStatus: Status.loading));
     initGetDevices();
@@ -29,6 +31,10 @@ class DevicesCubit extends Cubit<DevicesState> {
             fetchDevicesErrorMessage: failure.message)),
         (stream) => emit(state.copyWith(
             fetchDevicesStatus: Status.success, devicesStream: stream)));
+
+    _devicesSubscription = state.devicesStream?.listen((devices) {
+      emit(state.copyWith(latestDevicesSnapshot: devices));
+    });
   }
 
   selectSensor(SensorType sensorType, DeviceDetailsEntity deviceDetails) {
@@ -109,5 +115,11 @@ class DevicesCubit extends Cubit<DevicesState> {
                   deleteDeviceStatus: Status.success,
                   isEditing: false,
                 )));
+  }
+
+  @override
+  Future<void> close() {
+    _devicesSubscription?.cancel();
+    return super.close();
   }
 }

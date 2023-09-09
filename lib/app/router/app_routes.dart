@@ -85,6 +85,7 @@ class AppRoutes {
               child: MultiBlocProvider(
             providers: [
               BlocProvider(create: (context) => DevicesCubit()..getDevices()),
+              BlocProvider(create: (context) => StatisticsCubit()),
               BlocProvider(
                   create: (context) => NotificationsCubit()..getNotifications())
             ],

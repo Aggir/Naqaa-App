@@ -245,5 +245,22 @@
     "congratulations": "Congratulations",
     "everything_is_setup_and_you_are_ready_to_go": "Everything is set-up and you are ready to go!",
     "connect_error_message": "Something went wrong, please check your password and ensure the device is nearby, then try again.",
-    "faq":"FAQ"
+    "faq": "FAQ",
+    "statistics_page_title": "Water quality at a glance",
+    "statistics_page_subtitle": "Take a quick look at your water quality statistics",
+    "today": "Today",
+    "days": "Days",
+    "month": "Month",
+    "months": "Months",
+    "week": "Week",
+    "monday": "Mon",
+    "tuesday": "Tue",
+    "wednesday": "Wed",
+    "thursday": "Thu",
+    "friday": "Fri",
+    "saturday": "Sat",
+    "sunday": "Sun",
+    "highest": "Highest",
+    "lowest": "Lowest",
+    "water_quality_highlights":"Water quality highlights"
 }

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:naqaa/app/app_strings.dart';
+import 'package:naqaa/app/assets_manager.dart';
 
 enum SensorType {
   temp,
@@ -23,6 +24,17 @@ extension SensorTypeExtension on SensorType {
     }
   }
 
+  String get svgIcon {
+    switch (this) {
+      case SensorType.temp:
+        return SvgAssets.temp;
+      case SensorType.tds:
+        return SvgAssets.tds;
+      case SensorType.ph:
+        return SvgAssets.ph;
+    }
+  }
+
   String unit() {
     switch (this) {
       case SensorType.temp:
@@ -31,6 +43,22 @@ extension SensorTypeExtension on SensorType {
         return AppStrings.tdsUnit.tr();
       case SensorType.ph:
         return AppStrings.phUnit.tr();
+    }
+  }
+
+  List<SensorType> get list => [SensorType.temp, SensorType.tds, SensorType.ph];
+}
+
+extension StringToSensorTypeExtension on String {
+  SensorType toSensorType() {
+    String ph = AppStrings.ph.tr();
+    String tds = AppStrings.tds.tr();
+    if (this == ph) {
+      return SensorType.ph;
+    } else if (this == tds) {
+      return SensorType.tds;
+    } else {
+      return SensorType.temp;
     }
   }
 }

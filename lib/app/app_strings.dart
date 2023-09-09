@@ -328,4 +328,22 @@ class AppStrings {
   static const everythingIsSetupAndYouAreReadyToGo =
       'everything_is_setup_and_you_are_ready_to_go';
   static const connectErrorMessage = 'connect_error_message';
+
+  static const statisticsPageTitle = 'statistics_page_title';
+  static const statisticsPageSubtitle = 'statistics_page_subtitle';
+  static const today = 'today';
+  static const days = 'days';
+  static const month = 'month';
+  static const months = 'months';
+  static const waterQualityHighlights = 'water_quality_highlights';
+  static const highest = 'highest';
+  static const lowest = 'lowest';
+  static const monday = 'monday';
+  static const tuesday = 'tuesday';
+  static const wednesday = 'wednesday';
+  static const thursday = 'thursday';
+  static const friday = 'friday';
+  static const saturday = 'saturday';
+  static const sunday = 'sunday';
+  static const week = 'week';
 }

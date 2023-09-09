@@ -4,6 +4,7 @@ class DevicesState extends Equatable {
   final Status fetchDevicesStatus;
   final String? fetchDevicesErrorMessage;
   final Stream<List<DeviceEntity>>? devicesStream;
+  final List<DeviceEntity>? latestDevicesSnapshot;
   final DeviceEntity? selectedDevice;
   final bool isEditing;
   final Status editDeviceNameStatus;
@@ -19,6 +20,7 @@ class DevicesState extends Equatable {
     this.fetchDevicesStatus = Status.initial,
     this.fetchDevicesErrorMessage,
     this.devicesStream,
+    this.latestDevicesSnapshot,
     this.selectedDevice,
     this.isEditing = false,
     this.editDeviceNameStatus = Status.initial,
@@ -36,6 +38,7 @@ class DevicesState extends Equatable {
         fetchDevicesStatus,
         fetchDevicesErrorMessage,
         devicesStream,
+        latestDevicesSnapshot,
         selectedDevice,
         isEditing,
         editDeviceNameStatus,
@@ -52,6 +55,7 @@ class DevicesState extends Equatable {
     Status? fetchDevicesStatus,
     String? fetchDevicesErrorMessage,
     Stream<List<DeviceEntity>>? devicesStream,
+    List<DeviceEntity>? latestDevicesSnapshot,
     DeviceEntity? selectedDevice,
     bool? isEditing,
     Status? editDeviceNameStatus,
@@ -68,6 +72,8 @@ class DevicesState extends Equatable {
       fetchDevicesErrorMessage:
           fetchDevicesErrorMessage ?? this.fetchDevicesErrorMessage,
       devicesStream: devicesStream ?? this.devicesStream,
+      latestDevicesSnapshot:
+          latestDevicesSnapshot ?? this.latestDevicesSnapshot,
       selectedDevice: selectedDevice ?? this.selectedDevice,
       isEditing: isEditing ?? this.isEditing,
       editDeviceNameStatus: editDeviceNameStatus ?? this.editDeviceNameStatus,

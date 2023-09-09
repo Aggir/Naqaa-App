@@ -16,6 +16,7 @@ import 'package:naqaa/domain/usecases/edit_profile_usecase.dart';
 import 'package:naqaa/domain/usecases/get_device_details_usecase.dart';
 import 'package:naqaa/domain/usecases/get_devices_usecase.dart';
 import 'package:naqaa/domain/usecases/get_notifications_usecase.dart';
+import 'package:naqaa/domain/usecases/get_statistics_usecase.dart';
 import 'package:naqaa/domain/usecases/index.dart';
 import 'package:naqaa/domain/usecases/connect_with_google_usecase.dart';
 import 'package:naqaa/domain/usecases/is_signed_in_usecase.dart';
@@ -180,5 +181,12 @@ void initReadNotification() async {
   if (!GetIt.I.isRegistered<ReadNotificationUsecase>()) {
     instance.registerFactory<ReadNotificationUsecase>(
         () => ReadNotificationUsecase(instance<Repository>()));
+  }
+}
+
+void initGetStatistics() async {
+  if (!GetIt.I.isRegistered<GetStatisticsUsecase>()) {
+    instance.registerFactory<GetStatisticsUsecase>(
+        () => GetStatisticsUsecase(instance<Repository>()));
   }
 }
