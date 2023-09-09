@@ -11,8 +11,6 @@ class StatisticEntity extends Equatable {
   final double phLowest;
   final double phAverage;
   final int waterQuality;
-  final String waterQualityName;
-  final String waterQualityHex;
 
   const StatisticEntity({
     required this.tempHighest,
@@ -25,8 +23,6 @@ class StatisticEntity extends Equatable {
     required this.phLowest,
     required this.phAverage,
     required this.waterQuality,
-    required this.waterQualityName,
-    required this.waterQualityHex,
   });
 
   @override
@@ -42,8 +38,6 @@ class StatisticEntity extends Equatable {
       phLowest,
       phAverage,
       waterQuality,
-      waterQualityName,
-      waterQualityHex,
     ];
   }
 }

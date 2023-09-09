@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:naqaa/app/app_strings.dart';
+import 'package:naqaa/app/functions.dart';
 
 extension Validators on String {
   bool isValidEmail() {
@@ -62,6 +64,25 @@ extension WaterQualityExtension on int {
         return AppStrings.danger.tr();
       default:
         return '';
+    }
+  }
+
+  Color? get toWaterQualityColor {
+    switch (this) {
+      case 1:
+        return colorFromHexString("#0667CF");
+      case 2:
+        return colorFromHexString("#22A45D");
+      case 3:
+        return colorFromHexString("#39393F");
+      case 4:
+        return colorFromHexString("#FFC315");
+      case 5:
+        return colorFromHexString("#FF6B00");
+      case 6:
+        return colorFromHexString("#FF0F0F");
+      default:
+        return null;
     }
   }
 }

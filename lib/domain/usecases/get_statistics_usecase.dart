@@ -28,8 +28,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 1,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
           StatisticEntity(
             tempHighest: 11,
@@ -42,8 +40,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 3,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
           StatisticEntity(
             tempHighest: 34,
@@ -56,8 +52,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 3,
-            waterQualityName: "VERY_BAD",
-            waterQualityHex: "#FF6B00",
           ),
           StatisticEntity(
             tempHighest: 34,
@@ -70,8 +64,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 5,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
           StatisticEntity(
             tempHighest: 34,
@@ -84,8 +76,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 2,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
           StatisticEntity(
             tempHighest: 34,
@@ -98,12 +88,10 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 1,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
         ]);
       case StatisticsDate.sevenDays:
-        return Right([
+        return const Right([
           StatisticEntity(
             tempHighest: 34,
             tempLowest: 12,
@@ -115,8 +103,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 2,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
           StatisticEntity(
             tempHighest: 11,
@@ -129,8 +115,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 1,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
           StatisticEntity(
             tempHighest: 34,
@@ -143,8 +127,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 4,
-            waterQualityName: "VERY_BAD",
-            waterQualityHex: "#FF6B00",
           ),
           StatisticEntity(
             tempHighest: 34,
@@ -157,8 +139,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 3,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
           StatisticEntity(
             tempHighest: 34,
@@ -171,8 +151,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 4,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
           StatisticEntity(
             tempHighest: 34,
@@ -185,8 +163,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 2,
-            waterQualityName: "VERY_BAD",
-            waterQualityHex: "#FF6B00",
           ),
           StatisticEntity(
             tempHighest: 34,
@@ -199,12 +175,10 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 3,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
         ]);
       case StatisticsDate.month:
-        return Right([
+        return const Right([
           StatisticEntity(
             tempHighest: 34,
             tempLowest: 12,
@@ -216,8 +190,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 3,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
           StatisticEntity(
             tempHighest: 11,
@@ -230,8 +202,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 2,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
           StatisticEntity(
             tempHighest: 34,
@@ -244,8 +214,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 1,
-            waterQualityName: "VERY_BAD",
-            waterQualityHex: "#FF6B00",
           ),
           StatisticEntity(
             tempHighest: 34,
@@ -258,8 +226,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 5,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
           StatisticEntity(
             tempHighest: 34,
@@ -272,12 +238,10 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 2,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
         ]);
       case StatisticsDate.sixMonths:
-        return Right([
+        return const Right([
           StatisticEntity(
             tempHighest: 34,
             tempLowest: 12,
@@ -289,8 +253,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 1,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
           StatisticEntity(
             tempHighest: 11,
@@ -303,8 +265,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 1,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
           StatisticEntity(
             tempHighest: 34,
@@ -317,8 +277,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 3,
-            waterQualityName: "VERY_BAD",
-            waterQualityHex: "#FF6B00",
           ),
           StatisticEntity(
             tempHighest: 34,
@@ -331,8 +289,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 2,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
           StatisticEntity(
             tempHighest: 34,
@@ -345,8 +301,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 4,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
           StatisticEntity(
             tempHighest: 34,
@@ -359,8 +313,6 @@ class GetStatisticsUsecase
             phLowest: 5.5,
             phAverage: 6.7,
             waterQuality: 2,
-            waterQualityName: "DANGER",
-            waterQualityHex: "#FF0F0F",
           ),
         ]);
     }

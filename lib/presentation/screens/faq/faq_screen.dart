@@ -1,8 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:naqaa/app/app_strings.dart';
-import 'package:naqaa/app/functions.dart';
+import 'package:naqaa/app/extensions.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
@@ -24,11 +25,11 @@ class FAQScreen extends StatelessWidget {
         children: [
           ExpansionTile(
             backgroundColor: AppColors.pastelBlue,
-            title: Text("What is pH?"),
-            childrenPadding: EdgeInsets.all(AppValues.small).r,
+            title: Text(AppStrings.whatIsPh.tr()),
+            childrenPadding: const EdgeInsets.all(AppValues.small).r,
             children: [
               Text(
-                'pH (Potential of Hydrogen) is a crucial water quality parameter that measures the acidity or alkalinity of a liquid. It tells us how acidic or basic a solution is on a scale from 0 to 14, with 7 being neutral.',
+                AppStrings.phDefinition.tr(),
                 style: regularBlackSmallStyle(),
               ),
             ],
@@ -36,11 +37,11 @@ class FAQScreen extends StatelessWidget {
           CustomSpacers.small(),
           ExpansionTile(
             backgroundColor: AppColors.pastelBlue,
-            title: Text("Measuring Unit:"),
-            childrenPadding: EdgeInsets.all(AppValues.small).r,
+            title: Text(AppStrings.measuringUnit.tr()),
+            childrenPadding: const EdgeInsets.all(AppValues.small).r,
             children: [
               Text(
-                'pH is measured on a scale from 0 to 14, with 7 considered neutral. Values below 7 are acidic, and values above 7 are alkaline.',
+                AppStrings.phMeasuringUnit.tr(),
                 style: regularBlackSmallStyle(),
               ),
             ],
@@ -48,86 +49,112 @@ class FAQScreen extends StatelessWidget {
           CustomSpacers.small(),
           ExpansionTile(
             backgroundColor: AppColors.pastelBlue,
-            title: Text("Meaning of Readings:"),
-            childrenPadding: EdgeInsets.all(AppValues.small).r,
+            title: Text(AppStrings.meaningOfReadings.tr()),
+            childrenPadding: const EdgeInsets.all(AppValues.small).r,
             expandedCrossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text.rich(
-                TextSpan(text: "• 3 and below: Indicates ", children: [
-                  TextSpan(
-                    text: 'Dangerous',
-                    style:
-                        semiPrimarySmallStyle().copyWith(color: AppColors.red),
-                  ),
-                  TextSpan(text: ' levels of acidity.'),
-                ]),
+                TextSpan(
+                    text: "• ${AppStrings.phMeaningOfReadingsOnePrefix.tr()}",
+                    children: [
+                      TextSpan(
+                        text: 6.toWaterQualityName,
+                        style: semiPrimarySmallStyle()
+                            .copyWith(color: 6.toWaterQualityColor),
+                      ),
+                      TextSpan(text: AppStrings.levelsOfAcidity.tr()),
+                    ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(text: "• 5 - 6: Indicates ", children: [
-                  TextSpan(
-                    text: 'Good',
-                    style: semiPrimarySmallStyle()
-                        .copyWith(color: AppColors.green),
-                  ),
-                  TextSpan(text: ' levels of acidity.'),
-                ]),
+                TextSpan(
+                    text: '• ${AppStrings.phMeaningOfReadingsTwoPrefix.tr()}',
+                    children: [
+                      TextSpan(
+                        text: 4.toWaterQualityName,
+                        style: semiPrimarySmallStyle()
+                            .copyWith(color: 4.toWaterQualityColor),
+                      ),
+                      TextSpan(text: AppStrings.levelsOfAcidity.tr()),
+                    ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(text: "• 6.5 - 8.5: Indicates ", children: [
-                  TextSpan(text: 'Great', style: semiPrimarySmallStyle()),
-                  TextSpan(
-                      text:
-                          ' levels of acidity and alkalinity (Perfect drinkable water).'),
-                ]),
+                TextSpan(
+                    text: '• ${AppStrings.phMeaningOfReadingsThreePrefix.tr()}',
+                    children: [
+                      TextSpan(
+                        text: 2.toWaterQualityName,
+                        style: semiPrimarySmallStyle()
+                            .copyWith(color: 2.toWaterQualityColor),
+                      ),
+                      TextSpan(text: AppStrings.levelsOfAcidity.tr()),
+                    ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(text: "• 9 - 10.5: Indicates ", children: [
-                  TextSpan(
-                    text: 'Good',
-                    style: semiPrimarySmallStyle()
-                        .copyWith(color: AppColors.green),
-                  ),
-                  TextSpan(text: ' levels of alkalinity.'),
-                ]),
+                TextSpan(
+                    text: '• ${AppStrings.phMeaningOfReadingsFourPrefix.tr()}',
+                    children: [
+                      TextSpan(
+                          text: 1.toWaterQualityName,
+                          style: semiPrimarySmallStyle()),
+                      TextSpan(
+                          text: AppStrings.levelsOfAcidityAndAlkalinity.tr()),
+                    ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(text: "• 11 - 12: Indicates ", children: [
-                  TextSpan(
-                    text: 'Bad',
-                    style: semiPrimarySmallStyle()
-                        .copyWith(color: colorFromHexString('#FFC315')),
-                  ),
-                  TextSpan(text: ' levels of alkalinity.'),
-                ]),
+                TextSpan(
+                    text: '• ${AppStrings.phMeaningOfReadingsFivePrefix.tr()}',
+                    children: [
+                      TextSpan(
+                        text: 2.toWaterQualityName,
+                        style: semiPrimarySmallStyle()
+                            .copyWith(color: AppColors.green),
+                      ),
+                      TextSpan(text: AppStrings.levelsOfAlkalinity.tr()),
+                    ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(text: "• 3.5 and more: Indicates ", children: [
-                  TextSpan(
-                    text: 'Dangerous',
-                    style:
-                        semiPrimarySmallStyle().copyWith(color: AppColors.red),
-                  ),
-                  TextSpan(text: ' levels of acidity.'),
-                ]),
+                TextSpan(
+                    text: "• ${AppStrings.phMeaningOfReadingsSixPrefix.tr()}",
+                    children: [
+                      TextSpan(
+                        text: 4.toWaterQualityName,
+                        style: semiPrimarySmallStyle()
+                            .copyWith(color: 4.toWaterQualityColor),
+                      ),
+                      TextSpan(text: AppStrings.levelsOfAlkalinity.tr()),
+                    ]),
+                style: regularBlackSmallStyle(),
+              ),
+              Text.rich(
+                TextSpan(
+                    text: '• ${AppStrings.phMeaningOfReadingsSevenPrefix.tr()}',
+                    children: [
+                      TextSpan(
+                        text: 6.toWaterQualityName,
+                        style: semiPrimarySmallStyle()
+                            .copyWith(color: 6.toWaterQualityColor),
+                      ),
+                      TextSpan(text: AppStrings.levelsOfAlkalinity.tr()),
+                    ]),
                 style: regularBlackSmallStyle(),
               ),
             ],
           ),
           CustomSpacers.small(),
-          CustomDivider(),
+          const CustomDivider(),
           CustomSpacers.small(),
           ExpansionTile(
             backgroundColor: AppColors.pastelBlue,
-            title: Text("What is TDS?"),
-            childrenPadding: EdgeInsets.all(AppValues.small).r,
+            title: Text(AppStrings.whatIsTds.tr()),
+            childrenPadding: const EdgeInsets.all(AppValues.small).r,
             children: [
               Text(
-                'TDS (Total Dissolved Solids) measures the total concentration of dissolved substances in water, including minerals, salts, and organic matter. It provides insights into water\'s overall quality and taste.',
+                AppStrings.tdsDefinition.tr(),
                 style: regularBlackSmallStyle(),
               ),
             ],
@@ -135,11 +162,11 @@ class FAQScreen extends StatelessWidget {
           CustomSpacers.small(),
           ExpansionTile(
             backgroundColor: AppColors.pastelBlue,
-            title: Text("Measuring Unit:"),
-            childrenPadding: EdgeInsets.all(AppValues.small).r,
+            title: Text(AppStrings.measuringUnit.tr()),
+            childrenPadding: const EdgeInsets.all(AppValues.small).r,
             children: [
               Text(
-                'TDS is measured in parts per million (ppm) or milligrams per liter (mg/L).',
+                AppStrings.tdsMeasuringUnit.tr(),
                 style: regularBlackSmallStyle(),
               ),
             ],
@@ -147,84 +174,99 @@ class FAQScreen extends StatelessWidget {
           CustomSpacers.small(),
           ExpansionTile(
             backgroundColor: AppColors.pastelBlue,
-            title: Text("Meaning of Readings:"),
-            childrenPadding: EdgeInsets.all(AppValues.small).r,
+            title: Text(AppStrings.meaningOfReadings.tr()),
+            childrenPadding: const EdgeInsets.all(AppValues.small).r,
             expandedCrossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text.rich(
-                TextSpan(text: "• 0 - 140 ppm: Indicates ", children: [
-                  TextSpan(text: 'Great', style: semiPrimarySmallStyle()),
-                  TextSpan(text: ' levels of TDS (Perfect drinkable water).'),
-                ]),
+                TextSpan(
+                    text: "• ${AppStrings.tdsMeaningOfReadingsOnePrefix.tr()}",
+                    children: [
+                      TextSpan(
+                          text: 1.toWaterQualityName,
+                          style: semiPrimarySmallStyle()),
+                      TextSpan(text: AppStrings.levelsOfTdsDrinkable.tr()),
+                    ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(text: "• 141 - 200: Indicates ", children: [
-                  TextSpan(
-                    text: 'Good',
-                    style: semiPrimarySmallStyle()
-                        .copyWith(color: AppColors.green),
-                  ),
-                  TextSpan(text: ' levels of TDS.'),
-                ]),
+                TextSpan(
+                    text: "• ${AppStrings.tdsMeaningOfReadingsTwoPrefix.tr()}",
+                    children: [
+                      TextSpan(
+                        text: 2.toWaterQualityName,
+                        style: semiPrimarySmallStyle()
+                            .copyWith(color: 2.toWaterQualityColor),
+                      ),
+                      TextSpan(text: AppStrings.levelsOfTds.tr()),
+                    ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(text: "• 201 - 350: Indicates ", children: [
-                  TextSpan(
-                    text: 'Average',
-                    style: semiPrimarySmallStyle()
-                        .copyWith(color: AppColors.blackText),
-                  ),
-                  TextSpan(text: ' levels of TDS.'),
-                ]),
+                TextSpan(
+                    text:
+                        "• ${AppStrings.tdsMeaningOfReadingsThreePrefix.tr()}",
+                    children: [
+                      TextSpan(
+                        text: 3.toWaterQualityName,
+                        style: semiPrimarySmallStyle()
+                            .copyWith(color: 3.toWaterQualityColor),
+                      ),
+                      TextSpan(text: AppStrings.levelsOfTds.tr()),
+                    ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(text: "• 351 - 499: Indicates ", children: [
-                  TextSpan(
-                    text: 'Bad',
-                    style: semiPrimarySmallStyle()
-                        .copyWith(color: colorFromHexString('#FFC315')),
-                  ),
-                  TextSpan(text: ' levels of TDS.'),
-                ]),
+                TextSpan(
+                    text: "• ${AppStrings.tdsMeaningOfReadingsFourPrefix.tr()}",
+                    children: [
+                      TextSpan(
+                        text: 4.toWaterQualityName,
+                        style: semiPrimarySmallStyle()
+                            .copyWith(color: 4.toWaterQualityColor),
+                      ),
+                      TextSpan(text: AppStrings.levelsOfTds.tr()),
+                    ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(text: "• 500 -750: Indicates ", children: [
-                  TextSpan(
-                    text: 'Very Bad',
-                    style: semiPrimarySmallStyle()
-                        .copyWith(color: colorFromHexString('#FF6B00')),
-                  ),
-                  TextSpan(text: ' levels of TDS.'),
-                ]),
+                TextSpan(
+                    text: "• ${AppStrings.tdsMeaningOfReadingsFivePrefix.tr()}",
+                    children: [
+                      TextSpan(
+                        text: 5.toWaterQualityName,
+                        style: semiPrimarySmallStyle()
+                            .copyWith(color: 5.toWaterQualityColor),
+                      ),
+                      TextSpan(text: AppStrings.levelsOfTds.tr()),
+                    ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(text: "• 750 and more: Indicates ", children: [
-                  TextSpan(
-                    text: 'Dangerous',
-                    style:
-                        semiPrimarySmallStyle().copyWith(color: AppColors.red),
-                  ),
-                  TextSpan(text: ' levels of TDS.'),
-                ]),
+                TextSpan(
+                    text: "• ${AppStrings.tdsMeaningOfReadingsSixPrefix.tr()}",
+                    children: [
+                      TextSpan(
+                        text: 6.toWaterQualityName,
+                        style: semiPrimarySmallStyle()
+                            .copyWith(color: 6.toWaterQualityColor),
+                      ),
+                      TextSpan(text: AppStrings.levelsOfTds.tr()),
+                    ]),
                 style: regularBlackSmallStyle(),
               ),
             ],
           ),
           CustomSpacers.small(),
-          CustomDivider(),
+          const CustomDivider(),
           CustomSpacers.small(),
           ExpansionTile(
             backgroundColor: AppColors.pastelBlue,
-            title: Text("What is Temp?"),
-            childrenPadding: EdgeInsets.all(AppValues.small).r,
+            title: Text(AppStrings.whatIsTemp.tr()),
+            childrenPadding: const EdgeInsets.all(AppValues.small).r,
             children: [
               Text(
-                'Water temperature or temp for short, is a fundamental parameter that influences various aspects of aquatic ecosystems and water quality. It can impact the behavior of aquatic organisms and chemical processes in water.',
+                AppStrings.tempDefinition.tr(),
                 style: regularBlackSmallStyle(),
               ),
             ],
@@ -232,11 +274,11 @@ class FAQScreen extends StatelessWidget {
           CustomSpacers.small(),
           ExpansionTile(
             backgroundColor: AppColors.pastelBlue,
-            title: Text("Measuring Unit:"),
-            childrenPadding: EdgeInsets.all(AppValues.small).r,
+            title: Text(AppStrings.measuringUnit.tr()),
+            childrenPadding: const EdgeInsets.all(AppValues.small).r,
             children: [
               Text(
-                'Temperature is measured in degrees Celsius (°C) or degrees Fahrenheit (°F).',
+                AppStrings.tempMeasuringUnit.tr(),
                 style: regularBlackSmallStyle(),
               ),
             ],
@@ -244,73 +286,88 @@ class FAQScreen extends StatelessWidget {
           CustomSpacers.small(),
           ExpansionTile(
             backgroundColor: AppColors.pastelBlue,
-            title: Text("Meaning of Readings:"),
-            childrenPadding: EdgeInsets.all(AppValues.small).r,
+            title: Text(AppStrings.meaningOfReadings.tr()),
+            childrenPadding: const EdgeInsets.all(AppValues.small).r,
             expandedCrossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text.rich(
-                TextSpan(text: "• Below 0: Indicates ", children: [
-                  TextSpan(
-                    text: 'Average',
-                    style: semiPrimarySmallStyle()
-                        .copyWith(color: AppColors.blackText),
-                  ),
-                  TextSpan(text: ' temperature.'),
-                ]),
+                TextSpan(
+                    text: "• ${AppStrings.tempMeaningOfReadingsOnePrefix.tr()}",
+                    children: [
+                      TextSpan(
+                        text: 3.toWaterQualityName,
+                        style: semiPrimarySmallStyle()
+                            .copyWith(color: 3.toWaterQualityColor),
+                      ),
+                      TextSpan(text: AppStrings.temperature.tr()),
+                    ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(text: "• 0 - 10: Indicates ", children: [
-                  TextSpan(
-                    text: 'Good',
-                    style: semiPrimarySmallStyle()
-                        .copyWith(color: AppColors.green),
-                  ),
-                  TextSpan(text: ' temperature.'),
-                ]),
+                TextSpan(
+                    text: "• ${AppStrings.tempMeaningOfReadingsTwoPrefix.tr()}",
+                    children: [
+                      TextSpan(
+                        text: 2.toWaterQualityName,
+                        style: semiPrimarySmallStyle()
+                            .copyWith(color: 2.toWaterQualityColor),
+                      ),
+                      TextSpan(text: AppStrings.temperature.tr()),
+                    ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(text: "• 11 - 25: Indicates ", children: [
-                  TextSpan(text: 'Great', style: semiPrimarySmallStyle()),
-                  TextSpan(text: ' temperature.'),
-                ]),
+                TextSpan(
+                    text:
+                        "• ${AppStrings.tempMeaningOfReadingsThreePrefix.tr()}",
+                    children: [
+                      TextSpan(
+                          text: 1.toWaterQualityName,
+                          style: semiPrimarySmallStyle()),
+                      TextSpan(text: AppStrings.temperature.tr()),
+                    ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(text: "• 26 - 35: Indicates ", children: [
-                  TextSpan(
-                    text: 'Bad',
-                    style: semiPrimarySmallStyle()
-                        .copyWith(color: colorFromHexString('#FFC315')),
-                  ),
-                  TextSpan(text: ' temperature.'),
-                ]),
+                TextSpan(
+                    text:
+                        "• ${AppStrings.tempMeaningOfReadingsFourPrefix.tr()}",
+                    children: [
+                      TextSpan(
+                        text: 4.toWaterQualityName,
+                        style: semiPrimarySmallStyle()
+                            .copyWith(color: 4.toWaterQualityColor),
+                      ),
+                      TextSpan(text: AppStrings.temperature.tr()),
+                    ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(text: "• Above 50: Indicates ", children: [
-                  TextSpan(
-                    text: 'Very Bad',
-                    style: semiPrimarySmallStyle()
-                        .copyWith(color: colorFromHexString('#FF6B00')),
-                  ),
-                  TextSpan(text: ' temperature.'),
-                ]),
+                TextSpan(
+                    text:
+                        "• ${AppStrings.tempMeaningOfReadingsFivePrefix.tr()}",
+                    children: [
+                      TextSpan(
+                        text: 5.toWaterQualityName,
+                        style: semiPrimarySmallStyle()
+                            .copyWith(color: 5.toWaterQualityColor),
+                      ),
+                      TextSpan(text: AppStrings.temperature.tr()),
+                    ]),
                 style: regularBlackSmallStyle(),
               ),
             ],
           ),
           CustomSpacers.small(),
-          CustomDivider(),
+          const CustomDivider(),
           CustomSpacers.small(),
           ExpansionTile(
             backgroundColor: AppColors.pastelBlue,
-            title: Text("Water Quality Indicators"),
-            childrenPadding: EdgeInsets.all(AppValues.small).r,
+            title: Text(AppStrings.waterQualityIndicators.tr()),
+            childrenPadding: const EdgeInsets.all(AppValues.small).r,
             children: [
               Text(
-                'The water quality overview is represented by basic parameters to help you gain quick access to your water supply current quality.',
+                AppStrings.waterQualityIndicatorsContent.tr(),
                 style: regularBlackSmallStyle(),
               ),
             ],
@@ -318,81 +375,71 @@ class FAQScreen extends StatelessWidget {
           CustomSpacers.small(),
           ExpansionTile(
             backgroundColor: AppColors.pastelBlue,
-            title: Text("Meaning of Parameters:"),
-            childrenPadding: EdgeInsets.all(AppValues.small).r,
+            title: Text(AppStrings.meaningOfParameters.tr()),
+            childrenPadding: const EdgeInsets.all(AppValues.small).r,
             expandedCrossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text.rich(
-                TextSpan(children: [
-                  TextSpan(text: 'Great', style: semiPrimarySmallStyle()),
+                TextSpan(text: '• ', children: [
                   TextSpan(
-                      text:
-                          ': Water quality is in ideal condition and is perfect for drinking. '),
+                      text: 1.toWaterQualityName,
+                      style: semiPrimarySmallStyle()),
+                  TextSpan(text: AppStrings.meaningOfParametersOne.tr()),
                 ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(children: [
+                TextSpan(text: '• ', children: [
                   TextSpan(
-                    text: 'Good',
+                    text: 2.toWaterQualityName,
                     style: semiPrimarySmallStyle()
-                        .copyWith(color: AppColors.green),
+                        .copyWith(color: 2.toWaterQualityColor),
                   ),
-                  TextSpan(
-                      text:
-                          ': Water quality is in suitable condition and is good for drinking.'),
+                  TextSpan(text: AppStrings.meaningOfParametersTwo.tr()),
                 ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(children: [
+                TextSpan(text: '• ', children: [
                   TextSpan(
-                    text: 'Average',
+                    text: 3.toWaterQualityName,
                     style: semiPrimarySmallStyle()
-                        .copyWith(color: AppColors.blackText),
+                        .copyWith(color: 3.toWaterQualityColor),
                   ),
-                  TextSpan(
-                      text:
-                          ': Water quality is in ok condition and is still drinkable.'),
+                  TextSpan(text: AppStrings.meaningOfParametersThree.tr()),
                 ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(children: [
+                TextSpan(text: '• ', children: [
                   TextSpan(
-                    text: 'Bad',
+                    text: 4.toWaterQualityName,
                     style: semiPrimarySmallStyle()
-                        .copyWith(color: colorFromHexString('#FFC315')),
+                        .copyWith(color: 4.toWaterQualityColor),
                   ),
-                  TextSpan(
-                      text:
-                          ': Water quality is dropping and you should check your water supply.'),
+                  TextSpan(text: AppStrings.meaningOfParametersFour.tr()),
                 ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(children: [
+                TextSpan(text: '• ', children: [
                   TextSpan(
-                    text: 'Very Bad',
+                    text: 5.toWaterQualityName,
                     style: semiPrimarySmallStyle()
-                        .copyWith(color: colorFromHexString('#FF6B00')),
+                        .copyWith(color: 5.toWaterQualityColor),
                   ),
-                  TextSpan(
-                      text:
-                          ': Water quality is reaching critical levels and you should not use it.'),
+                  TextSpan(text: AppStrings.meaningOfParametersFive.tr()),
                 ]),
                 style: regularBlackSmallStyle(),
               ),
               Text.rich(
-                TextSpan(children: [
+                TextSpan(text: '• ', children: [
                   TextSpan(
-                    text: 'Dangerous',
-                    style:
-                        semiPrimarySmallStyle().copyWith(color: AppColors.red),
+                    text: 6.toWaterQualityName,
+                    style: semiPrimarySmallStyle()
+                        .copyWith(color: 6.toWaterQualityColor),
                   ),
-                  TextSpan(
-                      text:
-                          ': Water quality is in serious dangerous condition and it could cause serious harm'),
+                  TextSpan(text: AppStrings.meaningOfParametersSix.tr()),
                 ]),
                 style: regularBlackSmallStyle(),
               ),

@@ -293,8 +293,6 @@ class AppStrings {
   static const setupNow = 'setup_now';
   static const setupLater = 'setup_later';
 
-  static const faq = 'faq';
-
   static const setupYourDevice = 'setup_your_device';
   static const inOrderToConnectYourDevice = 'in_order_to_connect_your_device';
   static const back = 'back';
@@ -346,4 +344,70 @@ class AppStrings {
   static const saturday = 'saturday';
   static const sunday = 'sunday';
   static const week = 'week';
+
+  static const faq = 'faq';
+  static const whatIsPh = 'what_is_ph';
+  static const phDefinition = 'ph_definition';
+  static const measuringUnit = 'measuring_unit';
+  static const phMeasuringUnit = 'ph_measuring_unit';
+  static const meaningOfReadings = 'meaning_of_readings';
+  static const phMeaningOfReadingsOnePrefix =
+      'ph_meaning_of_readings_one_prefix';
+  static const phMeaningOfReadingsTwoPrefix =
+      'ph_meaning_of_readings_two_prefix';
+  static const levelsOfAcidity = 'levels_of_acidity';
+  static const phMeaningOfReadingsThreePrefix =
+      'ph_meaning_of_readings_three_prefix';
+  static const phMeaningOfReadingsFourPrefix =
+      'ph_meaning_of_readings_four_prefix';
+  static const levelsOfAcidityAndAlkalinity =
+      'levels_of_acidity_and_alkalinity';
+  static const phMeaningOfReadingsFivePrefix =
+      'ph_meaning_of_readings_five_prefix';
+  static const levelsOfAlkalinity = 'levels_of_alkalinity';
+  static const phMeaningOfReadingsSixPrefix =
+      'ph_meaning_of_readings_six_prefix';
+  static const phMeaningOfReadingsSevenPrefix =
+      'ph_meaning_of_readings_seven_prefix';
+  static const whatIsTds = 'what_is_tds';
+  static const tdsDefinition = 'tds_definition';
+  static const tdsMeasuringUnit = 'tds_measuring_unit';
+  static const tdsMeaningOfReadingsOnePrefix =
+      'tds_meaning_of_readings_one_prefix';
+  static const levelsOfTdsDrinkable = 'levels_of_tds_drinkable';
+  static const tdsMeaningOfReadingsTwoPrefix =
+      'tds_meaning_of_readings_two_prefix';
+  static const levelsOfTds = 'levels_of_tds';
+  static const tdsMeaningOfReadingsThreePrefix =
+      'tds_meaning_of_readings_three_prefix';
+  static const tdsMeaningOfReadingsFourPrefix =
+      'tds_meaning_of_readings_four_prefix';
+  static const tdsMeaningOfReadingsFivePrefix =
+      'tds_meaning_of_readings_five_prefix';
+  static const tdsMeaningOfReadingsSixPrefix =
+      'tds_meaning_of_readings_six_prefix';
+  static const whatIsTemp = 'what_is_temp';
+  static const tempDefinition = 'temp_definition';
+  static const tempMeasuringUnit = 'temp_measuring_unit';
+  static const tempMeaningOfReadingsOnePrefix =
+      'temp_meaning_of_readings_one_prefix';
+  static const temperature = 'temperature';
+  static const tempMeaningOfReadingsTwoPrefix =
+      'temp_meaning_of_readings_two_prefix';
+  static const tempMeaningOfReadingsThreePrefix =
+      'temp_meaning_of_readings_three_prefix';
+  static const tempMeaningOfReadingsFourPrefix =
+      'temp_meaning_of_readings_four_prefix';
+  static const tempMeaningOfReadingsFivePrefix =
+      'temp_meaning_of_readings_five_prefix';
+  static const waterQualityIndicators = 'water_quality_indicators';
+  static const waterQualityIndicatorsContent =
+      'water_quality_indicators_content';
+  static const meaningOfParameters = 'meaning_of_parameters';
+  static const meaningOfParametersOne = 'meaning_of_parameters_one';
+  static const meaningOfParametersTwo = 'meaning_of_parameters_two';
+  static const meaningOfParametersThree = 'meaning_of_parameters_three';
+  static const meaningOfParametersFour = 'meaning_of_parameters_four';
+  static const meaningOfParametersFive = 'meaning_of_parameters_five';
+  static const meaningOfParametersSix = 'meaning_of_parameters_six';
 }
