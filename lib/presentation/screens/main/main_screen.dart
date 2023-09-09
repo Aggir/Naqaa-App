@@ -66,7 +66,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     int currentIndex = _navBarItems
         .indexWhere((element) => element['path'] == widget.location.toString());
-    // todo: Refactor it
+
     return Scaffold(
       body: widget.child,
       floatingActionButton: FloatingActionButton(
@@ -184,15 +184,17 @@ class _MainScreenState extends State<MainScreen> {
                               currentIndex != 2 &&
                               snapshot.data! > 0) {
                             return Container(
-                              height: AppSizes.s14.r,
-                              width: AppSizes.s14.r,
+                              height: AppSizes.s16.r,
+                              width: AppSizes.s16.r,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(
                                     AppValues.circleRadius),
                                 color: AppColors.red,
                               ),
                               child: Text(
-                                snapshot.data.toString(),
+                                (snapshot.data ?? 0) > 9
+                                    ? '9+'
+                                    : snapshot.data.toString(),
                                 textHeightBehavior: const TextHeightBehavior(
                                     applyHeightToFirstAscent: false),
                                 textAlign: TextAlign.center,
