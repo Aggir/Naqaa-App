@@ -18,7 +18,7 @@ class StatisticsCubit extends Cubit<StatisticsState> {
       state.copyWith(
         selectedSensorType: SensorType.temp,
         selectedDeviceId: list[0].id,
-        selectedPeriodIndex: state.statistics?.length ?? 0,
+        selectedPeriodIndex: (state.statistics?.length ?? 1) - 1,
         selectedStatisticsDate: StatisticsDate.today,
       ),
     );

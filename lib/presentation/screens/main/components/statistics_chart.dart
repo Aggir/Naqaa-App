@@ -7,7 +7,6 @@ import 'package:naqaa/presentation/blocs/statistics/statistics_cubit.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_core/core.dart';
 import 'dart:ui' as ui;
 
 import 'package:naqaa/app/enums/statistics_cart_type_ui_enum.dart';
@@ -38,17 +37,15 @@ class _StatisticsChartState extends State<StatisticsChart> {
   @override
   Widget build(BuildContext context) {
     return SfCartesianChart(
-      enableMultiSelection: false,
-      selectionType: SelectionType.point,
       primaryYAxis: CategoryAxis(
         opposedPosition:
             Directionality.of(context) == ui.TextDirection.rtl ? true : false,
         labelAlignment: LabelAlignment.center,
         labelPlacement: LabelPlacement.onTicks,
         placeLabelsNearAxisLine: false,
-        desiredIntervals: 1,
+        // desiredIntervals: 1,
         interval: 1,
-        maximum: 6,
+        maximum: 7,
         minimum: 0,
         majorGridLines: const MajorGridLines(color: AppColors.pastelBlue),
         axisLabelFormatter: (AxisLabelRenderDetails args) {

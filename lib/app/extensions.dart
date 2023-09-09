@@ -58,8 +58,10 @@ extension WaterQualityExtension on int {
         return AppStrings.bad.tr();
       case 5:
         return AppStrings.veryBad.tr();
-      default:
+      case 6:
         return AppStrings.danger.tr();
+      default:
+        return '';
     }
   }
 }
