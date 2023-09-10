@@ -42,4 +42,8 @@ abstract class Repository {
   Future<Either<Failure, void>> seenNotifications();
 
   Future<Either<Failure, void>> readNotification(String notificationId);
+
+  Future<Either<Failure, void>> sendEmailVerification(String email);
+
+  Future<Either<Failure, bool>> checkEmailVerification(String email);
 }

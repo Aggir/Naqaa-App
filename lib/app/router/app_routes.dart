@@ -51,6 +51,15 @@ class AppRoutes {
     },
   );
 
+  static final verifyEmail = GoRoute(
+    redirect: _nonAuthenticatedRoute,
+    path: AppScreen.verifyEmail.toPath,
+    name: AppScreen.verifyEmail.toName,
+    builder: (BuildContext context, GoRouterState state) {
+      return const VerifyEmailScreen();
+    },
+  );
+
   static final forgotPassword = StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) => BlocProvider(
             create: (context) => ForgotPasswordCubit(),
@@ -260,6 +269,8 @@ class AppRoutes {
     final auth = instance<FirebaseAuth>();
     if (auth.currentUser == null) {
       return state.namedLocation(AppScreen.signIn.toName);
+    } else if (!auth.currentUser!.emailVerified) {
+      return state.namedLocation(AppScreen.verifyEmail.toName);
     } else {
       return null;
     }
@@ -268,8 +279,10 @@ class AppRoutes {
   static FutureOr<String?> _nonAuthenticatedRoute(
       BuildContext context, GoRouterState state) {
     final auth = instance<FirebaseAuth>();
-    if (auth.currentUser != null) {
+    if (auth.currentUser != null && auth.currentUser!.emailVerified) {
       return state.namedLocation(AppScreen.home.toName);
+    } else if (auth.currentUser != null && !auth.currentUser!.emailVerified) {
+      return state.namedLocation(AppScreen.verifyEmail.toName);
     } else {
       return null;
     }

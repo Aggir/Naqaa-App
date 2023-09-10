@@ -200,6 +200,7 @@ class FirebaseApi implements RemoteDataSource {
         ...userModel.toMap(),
         FirebaseConstants.tokens: FieldValue.arrayUnion([token])
       }, SetOptions(merge: true));
+      user?.sendEmailVerification();
       return FirebaseAuthResponse(Status.success, user: userModel);
     } on FirebaseAuthException catch (e) {
       return FirebaseAuthResponse(Status.failure,
@@ -453,6 +454,35 @@ class FirebaseApi implements RemoteDataSource {
           Status.failure, FirebaseAuthErrorHandler.getAuthErrorMessage(e));
     } catch (e) {
       return BasicResponse(Status.failure, e.toString());
+    }
+  }
+
+  @override
+  Future<BasicResponse> sendEmailVerification(email) async {
+    try {
+      _firebaseAuth.currentUser!.sendEmailVerification();
+      return BasicResponse(Status.success, 'Success');
+    } on FirebaseAuthException catch (e) {
+      return BasicResponse(
+          Status.failure, FirebaseAuthErrorHandler.getAuthErrorMessage(e));
+    } catch (e) {
+      return BasicResponse(Status.failure, e.toString());
+    }
+  }
+
+  @override
+  Future<EmailVerificationResponse> checkEmailVerification(email) async {
+    try {
+      final response = _firebaseAuth.currentUser?.emailVerified;
+      return EmailVerificationResponse(
+          status: Status.success, isEmailVerified: response);
+    } on FirebaseAuthException catch (e) {
+      return EmailVerificationResponse(
+          status: Status.failure,
+          message: FirebaseAuthErrorHandler.getAuthErrorMessage(e));
+    } catch (e) {
+      return EmailVerificationResponse(
+          status: Status.failure, message: e.toString());
     }
   }
 }

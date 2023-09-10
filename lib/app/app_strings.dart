@@ -412,4 +412,14 @@ class AppStrings {
   static const meaningOfParametersFour = 'meaning_of_parameters_four';
   static const meaningOfParametersFive = 'meaning_of_parameters_five';
   static const meaningOfParametersSix = 'meaning_of_parameters_six';
+
+  static const verifyYourEmail = 'verify_your_email';
+  static const yourEmail = 'your_email';
+  static const hasNotBeenVerifiedYet = 'has_not_been_verified_yet';
+  static const enteredWrongEmail = 'entered_wrong_email';
+  static const sendEmailVerificationSuccessMessage =
+      'send_email_verification_success_message';
+  static const iConfirmedMyEmail = 'i_confirmed_my_email';
+  static const yourAccountHasNotBeenConfirmedYet =
+      'your_account_has_not_been_confirmed_yet';
 }

@@ -19,6 +19,7 @@ enum AppScreen {
   setupDeviceAddDeviceName,
   deviceDetails,
   faq,
+  verifyEmail
 }
 
 extension AppScreenExtension on AppScreen {
@@ -62,10 +63,10 @@ extension AppScreenExtension on AppScreen {
         return "/setup-device/add-device-name";
       case AppScreen.deviceDetails:
         return "/device-details";
-         case AppScreen.faq:
-        return "/FAQ";
-      default:
-        return "/";
+      case AppScreen.faq:
+        return "/faq";
+      case AppScreen.verifyEmail:
+        return "/verify-email";
     }
   }
 
@@ -109,10 +110,10 @@ extension AppScreenExtension on AppScreen {
         return "SETUP DEVICE ADD DEVICE NAME";
       case AppScreen.deviceDetails:
         return "DEVICE DETAILS";
-         case AppScreen.faq:
+      case AppScreen.faq:
         return "FAQ";
-      default:
-        return "HOME";
+      case AppScreen.verifyEmail:
+        return "VERIFY EMAIL";
     }
   }
 

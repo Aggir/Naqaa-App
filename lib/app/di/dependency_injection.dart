@@ -10,6 +10,7 @@ import 'package:naqaa/data/repositories/repository_impl.dart';
 import 'package:naqaa/domain/repositories/repository.dart';
 import 'package:naqaa/domain/usecases/add_device_usecase.dart';
 import 'package:naqaa/domain/usecases/change_password_usecase.dart';
+import 'package:naqaa/domain/usecases/check_email_verification_usecase.dart';
 import 'package:naqaa/domain/usecases/delete_device_usecase.dart';
 import 'package:naqaa/domain/usecases/edit_device_name_usecase.dart';
 import 'package:naqaa/domain/usecases/edit_profile_usecase.dart';
@@ -21,6 +22,7 @@ import 'package:naqaa/domain/usecases/index.dart';
 import 'package:naqaa/domain/usecases/connect_with_google_usecase.dart';
 import 'package:naqaa/domain/usecases/is_signed_in_usecase.dart';
 import 'package:naqaa/domain/usecases/read_notification_usecase.dart';
+import 'package:naqaa/domain/usecases/send_email_verification_usecase.dart';
 import 'package:naqaa/domain/usecases/toggle_seen_notifications_usecase.dart';
 import 'package:naqaa/domain/usecases/sign_out_usecase.dart';
 import 'package:naqaa/presentation/blocs/user/user_cubit.dart';
@@ -188,5 +190,19 @@ void initGetStatistics() async {
   if (!GetIt.I.isRegistered<GetStatisticsUsecase>()) {
     instance.registerFactory<GetStatisticsUsecase>(
         () => GetStatisticsUsecase(instance<Repository>()));
+  }
+}
+
+void initSendEmailVerification() async {
+  if (!GetIt.I.isRegistered<SendEmailVerificationUsecase>()) {
+    instance.registerFactory<SendEmailVerificationUsecase>(
+        () => SendEmailVerificationUsecase(instance<Repository>()));
+  }
+}
+
+void initCheckEmailVerification() async {
+  if (!GetIt.I.isRegistered<CheckEmailVerificationUsecase>()) {
+    instance.registerFactory<CheckEmailVerificationUsecase>(
+        () => CheckEmailVerificationUsecase(instance<Repository>()));
   }
 }

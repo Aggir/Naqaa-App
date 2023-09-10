@@ -33,7 +33,7 @@
     "forgot_password": "نسيت كلمة المرور",
     "forgot_password_page_description": "أدخل عنوان البريد الإلكتروني الخاص بك وسنرسل لك تعليمات إعادة تعيين كلمة المرور.",
     "send_reset_instructions": "إرسال تعليمات إعادة التعيين",
-    "send_reset_instructions_success_message": "تم ارسال رابط استعادة كلمة العرور الى ",
+    "send_reset_instructions_success_message": "تم ارسال رابط استعادة كلمة المرور الى ",
     "we_have_sent_the_instructions_email_to": "لقد قمنا بإرسال بريد التعليمات إلى ",
     "having_a_problem": "هل تواجه مشكلة؟",
     "did_not_receive_instructions": "لم تتلقَ التعليمات؟ ",
@@ -309,5 +309,12 @@
     "meaning_of_parameters_three": ": جودة المياه في حالة جيدة ولا تزال صالحة للشرب.",
     "meaning_of_parameters_four": ": جودة المياه آخذة في الانخفاض ويجب عليك التحقق من إمدادات المياه الخاصة بك.",
     "meaning_of_parameters_five": ": جودة المياه تصل إلى مستويات حرجة ويجب ألا تستخدمها.",
-    "meaning_of_parameters_six": ": نوعية المياه في حالة خطيرة ويمكن أن تسبب أضرارا جسيمة."
+    "meaning_of_parameters_six": ": نوعية المياه في حالة خطيرة ويمكن أن تسبب أضرارا جسيمة.",
+    "verify_your_email": "قم بتأكيد بريدك الألكتروني",
+    "your_email": "بريدك الإلكتروني ",
+    "has_not_been_verified_yet": " لم يتم تأكيده بعد، تحقق من بريدك الإلكتروني للحصول على خطوات التأكيد.",
+    "entered_wrong_email": "ادخلت البريد الإلكتروني الخاطئ؟ ",
+    "send_email_verification_success_message": "تم ارسال رابط التأكيد الى ",
+    "i_confirmed_my_email": "لقد قمت بتأكيد البريد الإلكتروني",
+    "your_account_has_not_been_confirmed_yet": "لم يتم تأكيد بريدك الإلكتروني بعد، يرجى التحقق من بريدك الإلكتروني واتباع الرابط المرسل لتأكيد حسابك"
 }

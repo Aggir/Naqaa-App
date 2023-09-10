@@ -5,10 +5,12 @@ import 'package:equatable/equatable.dart';
 import 'package:naqaa/app/di/dependency_injection.dart';
 
 import 'package:naqaa/domain/entities/user.dart';
+import 'package:naqaa/domain/usecases/check_email_verification_usecase.dart';
 import 'package:naqaa/domain/usecases/connect_with_google_usecase.dart';
 import 'package:naqaa/domain/usecases/edit_profile_usecase.dart';
 import 'package:naqaa/domain/usecases/index.dart';
 import 'package:naqaa/domain/usecases/is_signed_in_usecase.dart';
+import 'package:naqaa/domain/usecases/send_email_verification_usecase.dart';
 import 'package:naqaa/domain/usecases/sign_out_usecase.dart';
 
 import '../../../app/enums/status_enum.dart';
@@ -88,6 +90,43 @@ class UserCubit extends Cubit<UserState> {
         ));
       },
     );
+  }
+
+  void sendEmailVerification() async {
+    if (state.user != null) {
+      emit(state.copyWith(sendEmailVerificationStatus: Status.loading));
+      initSendEmailVerification();
+      (await instance<SendEmailVerificationUsecase>()
+              .execute(state.user!.email))
+          .fold(
+        (failure) => emit(state.copyWith(
+          sendEmailVerificationStatus: Status.failure,
+          sendEmailVerificationErrorMessage: failure.message,
+        )),
+        (_) => emit(state.copyWith(
+          sendEmailVerificationStatus: Status.success,
+        )),
+      );
+    }
+  }
+
+  void checkEmailVerification() async {
+    if (state.user != null) {
+      emit(state.copyWith(checkEmailVerificationStatus: Status.loading));
+      initCheckEmailVerification();
+      (await instance<CheckEmailVerificationUsecase>()
+              .execute(state.user!.email))
+          .fold(
+        (failure) => emit(state.copyWith(
+          checkEmailVerificationStatus: Status.failure,
+          checkEmailVerificationErrorMessage: failure.message,
+        )),
+        (isEmailVerified) => emit(state.copyWith(
+          checkEmailVerificationStatus: Status.success,
+          isEmailVerified: isEmailVerified,
+        )),
+      );
+    }
   }
 
   void editProfile(UserEntity newUser, {File? pickedImage}) async {

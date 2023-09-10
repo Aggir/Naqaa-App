@@ -189,4 +189,24 @@ class RepositoryImpl implements Repository {
       return const Right(null);
     }
   }
+
+  @override
+  Future<Either<Failure, void>> sendEmailVerification(String email) async {
+    final response = await _remoteDataSource.sendEmailVerification(email);
+    if (response.status.isFailure) {
+      return Left(Failure(0, response.message!));
+    } else {
+      return const Right(null);
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> checkEmailVerification(String email) async {
+    final response = await _remoteDataSource.checkEmailVerification(email);
+    if (response.status.isFailure) {
+      return Left(Failure(0, response.message!));
+    } else {
+      return Right(response.isEmailVerified ?? false);
+    }
+  }
 }

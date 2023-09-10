@@ -74,3 +74,19 @@ class NotificationsResponse implements BaseResponse {
     this.notificationsStream,
   });
 }
+
+class EmailVerificationResponse implements BaseResponse {
+  @override
+  String? message;
+
+  @override
+  Status status;
+
+  bool? isEmailVerified;
+
+  EmailVerificationResponse({
+    this.message,
+    required this.status,
+    this.isEmailVerified,
+  });
+}

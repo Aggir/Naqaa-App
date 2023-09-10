@@ -42,6 +42,7 @@ class AppRouter {
           AppRoutes.setupDeviceSteps,
           AppRoutes.deviceDetails,
           AppRoutes.faq,
+          AppRoutes.verifyEmail,
         ],
         builder: (context, state, child) => BlocProvider(
           create: (context) => instance<UserCubit>()..onAppStart(),

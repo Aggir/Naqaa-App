@@ -308,5 +308,12 @@
     "meaning_of_parameters_three": ": Water quality is in ok condition and is still drinkable.",
     "meaning_of_parameters_four": ": Water quality is dropping and you should check your water supply",
     "meaning_of_parameters_five": ": Water quality is reaching critical levels and you should not use it.",
-    "meaning_of_parameters_six": ": Water quality is in serious dangerous condition and it could cause serious harm."
+    "meaning_of_parameters_six": ": Water quality is in serious dangerous condition and it could cause serious harm.",
+    "verify_your_email": "Verify Your Email",
+    "your_email": "Your email ",
+    "has_not_been_verified_yet": " has not been verified yet. Check your email for verification instructions.",
+    "entered_wrong_email": "Entered wrong email? ",
+    "send_email_verification_success_message": "An email verification link has been sent to ",
+    "i_confirmed_my_email": "I confirmed my email",
+    "your_account_has_not_been_confirmed_yet": "Your account has not been confirmed yet. Please check your email and follow the sent link to confirm your account."
 }

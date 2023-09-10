@@ -34,4 +34,8 @@ abstract class RemoteDataSource {
   Future<BasicResponse> seenNotifications();
 
   Future<BasicResponse> readNotification(notificationId);
+
+  Future<BasicResponse> sendEmailVerification(email);
+
+  Future<EmailVerificationResponse> checkEmailVerification(email);
 }
