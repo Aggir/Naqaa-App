@@ -4,7 +4,6 @@ import 'package:naqaa/app/failure.dart';
 import 'package:naqaa/domain/entities/statistic.dart';
 import 'package:naqaa/domain/repositories/repository.dart';
 import 'package:naqaa/domain/usecases/base_usecase.dart';
-import 'package:naqaa/presentation/theme/app_colors.dart';
 
 class GetStatisticsUsecase
     implements BaseUsecase<GetStatisticsUsecaseInput, List<StatisticEntity>> {

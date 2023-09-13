@@ -7,6 +7,8 @@ class SetupDeviceState extends Equatable {
   final String? connectErrorMessage;
   final Status addDeviceStatus;
   final String? addDeviceErrorMessage;
+  final PermissionStatus? locationPermissionStatus;
+  final ServiceStatus? locationServiceStatus;
 
   const SetupDeviceState({
     this.accessPoints,
@@ -15,6 +17,8 @@ class SetupDeviceState extends Equatable {
     this.connectErrorMessage,
     this.addDeviceStatus = Status.initial,
     this.addDeviceErrorMessage,
+    this.locationPermissionStatus,
+    this.locationServiceStatus,
   });
   @override
   List<Object?> get props => [
@@ -23,6 +27,8 @@ class SetupDeviceState extends Equatable {
         connectStatus,
         addDeviceStatus,
         addDeviceErrorMessage,
+        locationPermissionStatus,
+        locationServiceStatus
       ];
 
   SetupDeviceState copyWith({
@@ -32,6 +38,8 @@ class SetupDeviceState extends Equatable {
     String? connectErrorMessage,
     Status? addDeviceStatus,
     String? addDeviceErrorMessage,
+    PermissionStatus? locationPermissionStatus,
+    ServiceStatus? locationServiceStatus,
   }) {
     return SetupDeviceState(
       accessPoints: accessPoints ?? this.accessPoints,
@@ -41,6 +49,9 @@ class SetupDeviceState extends Equatable {
       addDeviceStatus: addDeviceStatus ?? this.addDeviceStatus,
       addDeviceErrorMessage:
           addDeviceErrorMessage ?? this.addDeviceErrorMessage,
+      locationPermissionStatus:
+          locationPermissionStatus ?? this.locationPermissionStatus,
+      locationServiceStatus: locationServiceStatus ?? this.locationServiceStatus,
     );
   }
 }

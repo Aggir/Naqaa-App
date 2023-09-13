@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,6 +16,8 @@ import 'package:naqaa/presentation/theme/app_theme.dart';
 import 'package:naqaa/presentation/theme/text_style_manager.dart';
 import 'package:naqaa/presentation/widgets/custom_spacers.dart';
 import 'package:naqaa/presentation/widgets/dialog_service.dart';
+import 'package:naqaa/presentation/widgets/primary_button.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:wifi_scan/wifi_scan.dart';
 
 import '../../../widgets/page_container.dart';
@@ -33,6 +36,12 @@ class _SetupDeviceSelectNetworkPageState
   void initState() {
     super.initState();
     BlocProvider.of<SetupDeviceCubit>(context).startListeningToScanResults();
+  }
+
+  void _appLocationPermissionButton(BuildContext context) {
+    AppSettings.openAppSettings(
+      type: AppSettingsType.location,
+    );
   }
 
   void openNetworkFormFunction(
@@ -83,6 +92,51 @@ class _SetupDeviceSelectNetworkPageState
             CustomSpacers.mediumLarge(),
             BlocBuilder<SetupDeviceCubit, SetupDeviceState>(
               builder: (context, state) {
+                if (state.locationPermissionStatus?.isDenied ?? false) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomSpacers.extraLarge(),
+                      Text(
+                        AppStrings.thisFeatureRequiresTheLocationPermission
+                            .tr(),
+                        style: boldBlackMediumStyle().copyWith(
+                            color: AppColors.lightRed.withOpacity(0.4)),
+                        textAlign: TextAlign.center,
+                      ),
+                      CustomSpacers.medium(),
+                      PrimaryButton(
+                        onPressed: () => _appLocationPermissionButton(context),
+                        child: Text(
+                          AppStrings.deviceLocationPermission
+                              .tr()
+                              .toUpperCase(),
+                        ),
+                      ),
+                    ],
+                  );
+                }
+                if ((state.locationServiceStatus?.isDisabled ?? false)) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomSpacers.extraLarge(),
+                      Text(
+                        AppStrings.pleaseActivateTheLocationServiceToScan.tr(),
+                        style: boldBlackMediumStyle().copyWith(
+                            color: AppColors.lightRed.withOpacity(0.4)),
+                        textAlign: TextAlign.center,
+                      ),
+                      CustomSpacers.medium(),
+                      PrimaryButton(
+                        onPressed: () => _appLocationPermissionButton(context),
+                        child: Text(
+                          AppStrings.turnOnLocation.tr().toUpperCase(),
+                        ),
+                      ),
+                    ],
+                  );
+                }
                 if (state.accessPoints?.isEmpty ?? true) {
                   return SizedBox(
                     width: double.infinity,

@@ -70,6 +70,12 @@ class AppStrings {
   static const clickToAddADevice = "click_to_add_a_device";
   static const yourDevicesAreWorkingHard = "your_devices_are_working_hard";
   static const noWifiNetworksAvailable = 'no_wifi_networks_available';
+  static const pleaseActivateTheLocationServiceToScan =
+      'please_activate_the_location_service_to_scan';
+  static const thisFeatureRequiresTheLocationPermission =
+      'this_feature_requires_the_location_permission';
+  static const deviceLocationPermission = 'device_location_permission';
+  static const turnOnLocation = 'turn_on_location';
   static const waterQuality = "water_quality";
   static const great = "great";
   static const good = "good";

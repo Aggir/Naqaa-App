@@ -9,6 +9,7 @@ import 'package:naqaa/app/app_strings.dart';
 import 'package:naqaa/app/di/dependency_injection.dart';
 import 'package:naqaa/app/enums/status_enum.dart';
 import 'package:naqaa/domain/usecases/add_device_usecase.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:wifi_scan/wifi_scan.dart';
 
 part 'setup_device_state.dart';
@@ -32,6 +33,8 @@ class SetupDeviceCubit extends Cubit<SetupDeviceState> {
   final WiFiScan _wiFiScan = instance<WiFiScan>();
 
   StreamSubscription<List<WiFiAccessPoint>>? subscription;
+  StreamSubscription<PermissionStatus>? locationPermissionSubscription;
+  StreamSubscription<ServiceStatus>? locationServiceSubscription;
 
   Future<bool> _canGetScannedResults() async {
     final can = await _wiFiScan.canGetScannedResults(askPermissions: true);
@@ -55,6 +58,30 @@ class SetupDeviceCubit extends Cubit<SetupDeviceState> {
   }
 
   Future<void> startListeningToScanResults() async {
+    final locationPermission = await Permission.location.request();
+    final locationServiceStatus = await Permission.location.serviceStatus;
+    emit(state.copyWith(
+        locationPermissionStatus: locationPermission,
+        locationServiceStatus: locationServiceStatus));
+
+    final permissionStatusStream =
+        Stream.periodic(const Duration(seconds: 2), (_) async {
+      return await Permission.location.request();
+    }).asyncMap((value) async => await value);
+    locationPermissionSubscription = permissionStatusStream.listen((event) {
+      if (state.locationPermissionStatus != event && !isDisposed) {
+        emit(state.copyWith(locationPermissionStatus: event));
+      }
+    });
+    final serviceStatusStream =
+        Stream.periodic(const Duration(seconds: 2), (_) async {
+      return await Permission.location.serviceStatus;
+    }).asyncMap((value) async => await value);
+    locationServiceSubscription = serviceStatusStream.listen((event) {
+      if (state.locationServiceStatus != event && !isDisposed) {
+        emit(state.copyWith(locationServiceStatus: event));
+      }
+    });
     if (await _canGetScannedResults()) {
       subscription = _wiFiScan.onScannedResultsAvailable.listen(
         (result) {
@@ -139,6 +166,8 @@ class SetupDeviceCubit extends Cubit<SetupDeviceState> {
   @override
   Future<void> close() {
     isDisposed = true;
+    locationServiceSubscription?.cancel();
+    locationPermissionSubscription?.cancel();
     stopListeningToScanResults();
     return super.close();
   }
