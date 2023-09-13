@@ -10,6 +10,8 @@
     "next": "Next",
     "skip": "Skip",
     "done": "Done",
+    "no_internet": "No Internet!",
+    "no_internet_screen_subtitle": "Something went wrong with your connection, please try again.",
     "get_started": "Get started",
     "login_screen_description": "To get the best out of our services please continue with an account",
     "connect_with_google": "Connect with Google",

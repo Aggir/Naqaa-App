@@ -59,4 +59,5 @@ class SvgAssets {
   static const String ph = '$_svgPath/ph.svg';
   static const String trash = '$_svgPath/trash.svg';
   static const String emptyStatistics = '$_svgPath/empty-statistics.svg';
+  static const String noConnection = '$_svgPath/no-connection.svg';
 }

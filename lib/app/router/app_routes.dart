@@ -263,6 +263,12 @@ class AppRoutes {
     },
   );
 
+  static final noInternetConnection = GoRoute(
+    path: AppScreen.noInternetConnection.toPath,
+    name: AppScreen.noInternetConnection.toName,
+    builder: (context, state) => const NoInternetConnectionScreen(),
+  );
+
   // Todo: Refactor redirect functions.
   static FutureOr<String?> _authenticatedRoute(
       BuildContext context, GoRouterState state) {

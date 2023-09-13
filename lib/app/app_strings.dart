@@ -12,6 +12,9 @@ class AppStrings {
   static const skip = "skip";
   static const done = "done";
 
+  static const noInternet = "no_internet";
+  static const noInternetScreenSubtitle = "no_internet_screen_subtitle";
+
   static const thisFieldIsRequired = "this_field_is_required";
   static const invalidEmail = "invalid_email";
   static const shortPassword = "short_password";

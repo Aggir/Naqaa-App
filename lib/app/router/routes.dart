@@ -19,7 +19,8 @@ enum AppScreen {
   setupDeviceAddDeviceName,
   deviceDetails,
   faq,
-  verifyEmail
+  verifyEmail,
+  noInternetConnection,
 }
 
 extension AppScreenExtension on AppScreen {
@@ -67,6 +68,8 @@ extension AppScreenExtension on AppScreen {
         return "/faq";
       case AppScreen.verifyEmail:
         return "/verify-email";
+      case AppScreen.noInternetConnection:
+        return "/no-internet-connection";
     }
   }
 
@@ -114,6 +117,8 @@ extension AppScreenExtension on AppScreen {
         return "FAQ";
       case AppScreen.verifyEmail:
         return "VERIFY EMAIL";
+      case AppScreen.noInternetConnection:
+        return "NO INTERNET CONNECTION";
     }
   }
 

@@ -22,3 +22,4 @@ export 'setup/pages/add_device_name_page.dart';
 export 'device_details/device_details_screen.dart';
 export 'faq/faq_screen.dart';
 export 'verify_email/verify_email_screen.dart';
+export 'no_internet_connection/no_internet_connection_screen.dart';

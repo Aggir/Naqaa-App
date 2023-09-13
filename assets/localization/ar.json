@@ -10,6 +10,8 @@
     "next": "التالي",
     "skip": "تخطى",
     "done": "تم",
+    "no_internet": "لا يوجد انترنت!",
+    "no_internet_screen_subtitle": "هناك خطأ ما في اتصالك بالانترنت، يرجى التأكد من إتصالك.",
     "get_started": "ابدأ",
     "login_screen_description": "للاستفادة الكاملة من خدماتنا، يرجى المتابعة بحسابك",
     "connect_with_google": "الاتصال بحساب Google",
