@@ -67,58 +67,69 @@ class _MainScreenState extends State<MainScreen> {
     int currentIndex = _navBarItems
         .indexWhere((element) => element['path'] == widget.location.toString());
 
-    return Scaffold(
-      body: widget.child,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _plusButtonFunction(context),
-        tooltip: AppStrings.clickToAddADevice.tr(),
-        backgroundColor: AppColors.primary,
-        elevation: 1.0,
-        child: SvgPicture.asset(
-          SvgAssets.plus,
-          height: AppSizes.s22.r,
-          width: AppSizes.s22.r,
+    return WillPopScope(
+      onWillPop: () async {
+        switch (currentIndex) {
+          case 1:
+          case 2:
+          case 3:
+            context.go(AppScreen.home.toPath);
+        }
+        return false;
+      },
+      child: Scaffold(
+        body: widget.child,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => _plusButtonFunction(context),
+          tooltip: AppStrings.clickToAddADevice.tr(),
+          backgroundColor: AppColors.primary,
+          elevation: 1.0,
+          child: SvgPicture.asset(
+            SvgAssets.plus,
+            height: AppSizes.s22.r,
+            width: AppSizes.s22.r,
+          ),
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: SizedBox(
-        height: AppSizes.s72.r,
-        child: BottomAppBar(
-          shape: const CircularNotchedRectangle(),
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                _navBar(
-                    label: _navBarItems[0]['label']!,
-                    filledSvgPath: _navBarItems[0]['filledSvgPath']!,
-                    svgPath: _navBarItems[0]['svgPath']!,
-                    index: 0,
-                    currentIndex: currentIndex,
-                    path: _navBarItems[0]['path']!),
-                _navBar(
-                    label: _navBarItems[1]['label']!,
-                    filledSvgPath: _navBarItems[1]['filledSvgPath']!,
-                    svgPath: _navBarItems[1]['svgPath']!,
-                    index: 1,
-                    currentIndex: currentIndex,
-                    path: _navBarItems[1]['path']!),
-                CustomSpacers.medium(),
-                _navBar(
-                    label: _navBarItems[2]['label']!,
-                    filledSvgPath: _navBarItems[2]['filledSvgPath']!,
-                    svgPath: _navBarItems[2]['svgPath']!,
-                    index: 2,
-                    currentIndex: currentIndex,
-                    path: _navBarItems[2]['path']!),
-                _navBar(
-                    label: _navBarItems[3]['label']!,
-                    filledSvgPath: _navBarItems[3]['filledSvgPath']!,
-                    svgPath: _navBarItems[3]['svgPath']!,
-                    index: 3,
-                    currentIndex: currentIndex,
-                    path: _navBarItems[3]['path']!),
-              ]),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: SizedBox(
+          height: AppSizes.s72.r,
+          child: BottomAppBar(
+            shape: const CircularNotchedRectangle(),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  _navBar(
+                      label: _navBarItems[0]['label']!,
+                      filledSvgPath: _navBarItems[0]['filledSvgPath']!,
+                      svgPath: _navBarItems[0]['svgPath']!,
+                      index: 0,
+                      currentIndex: currentIndex,
+                      path: _navBarItems[0]['path']!),
+                  _navBar(
+                      label: _navBarItems[1]['label']!,
+                      filledSvgPath: _navBarItems[1]['filledSvgPath']!,
+                      svgPath: _navBarItems[1]['svgPath']!,
+                      index: 1,
+                      currentIndex: currentIndex,
+                      path: _navBarItems[1]['path']!),
+                  CustomSpacers.medium(),
+                  _navBar(
+                      label: _navBarItems[2]['label']!,
+                      filledSvgPath: _navBarItems[2]['filledSvgPath']!,
+                      svgPath: _navBarItems[2]['svgPath']!,
+                      index: 2,
+                      currentIndex: currentIndex,
+                      path: _navBarItems[2]['path']!),
+                  _navBar(
+                      label: _navBarItems[3]['label']!,
+                      filledSvgPath: _navBarItems[3]['filledSvgPath']!,
+                      svgPath: _navBarItems[3]['svgPath']!,
+                      index: 3,
+                      currentIndex: currentIndex,
+                      path: _navBarItems[3]['path']!),
+                ]),
+          ),
         ),
       ),
     );

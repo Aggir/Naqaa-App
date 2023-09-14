@@ -61,9 +61,17 @@ class _SetupDeviceScreenState extends State<SetupDeviceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _appBar(),
-      body: widget.child,
+    return WillPopScope(
+      onWillPop: () async {
+        if (widget.child.currentIndex == 0) {
+          context.go(AppScreen.setupDeviceOnboarding.toPath, extra: 1);
+        }
+        return false;
+      },
+      child: Scaffold(
+        appBar: _appBar(),
+        body: widget.child,
+      ),
     );
   }
 }

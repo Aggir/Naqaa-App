@@ -62,89 +62,97 @@ class _SetupDeviceOnboardingScreenState
     }
   }
 
+  void _goBack() {
+    context.go(AppScreen.home.toPath);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar.basic(
-        title: Constants.empty,
-        backButton: () {
-          context.go(AppScreen.home.toPath);
-        },
-      ),
-      body: IntroSlider(
-        refFuncGoToTab: (function) {
-          navigateTo = function;
-          navigateTo(currentIndex);
-        },
-        onTabChangeCompleted: (index) {
-          currentIndex = index;
-        },
-        backgroundColorAllTabs: AppColors.cloudWhite,
-        scrollPhysics: const NeverScrollableScrollPhysics(),
-        listCustomTabs: [
-          OnboardingPage(
-            title: AppStrings.setupYourDevice,
-            subtitleWidget: Text.rich(
-              textAlign: TextAlign.center,
-              TextSpan(
-                text: AppStrings.inOrderToConnectYourDevice.tr(),
-                style: regularBluishGrayMediumStyle(),
-                children: [
-                  TextSpan(
-                    text: AppStrings.locationPermission.tr(),
-                    style: boldPrimaryMediumStyle(),
-                  )
-                ],
-              ),
-            ),
-            svgPath: SvgAssets.setupOnboardingOne,
-          ),
-          OnboardingPage(
-            title: AppStrings.setupYourDevice,
-            subtitleWidget: Text.rich(
-              textAlign: TextAlign.center,
-              TextSpan(
-                text: AppStrings.nowChooseYour.tr(),
-                style: regularBluishGrayMediumStyle(),
-                children: [
-                  TextSpan(
-                    text: AppStrings.network.tr(),
-                    style: boldPrimaryMediumStyle(),
-                  ),
-                  TextSpan(
-                    text: AppStrings.andEnterThe.tr(),
-                  ),
-                  TextSpan(
-                    text: AppStrings.password.tr(),
-                    style: boldPrimaryMediumStyle(),
-                  ),
-                  TextSpan(
-                    text: '${AppStrings.toConnectYourNaqaaDevice.tr()} 😁',
-                  ),
-                ],
-              ),
-            ),
-            svgPath: SvgAssets.setupOnboardingTwo,
-          ),
-          const OnboardingPage(
-            title: AppStrings.congratulations,
-            subtitle: AppStrings.everythingIsSetupAndYouAreReadyToGo,
-            svgPath: SvgAssets.setupOnboardingThree,
-          ),
-        ],
-        isShowSkipBtn: false,
-        isShowPrevBtn: true,
-        onDonePress: () => _onIntroEnd(context),
-        onNextPress: () => _onNext(context),
-        renderDoneBtn: Text(AppStrings.done.tr().toUpperCase()),
-        renderPrevBtn: Text(AppStrings.back.tr().toUpperCase()),
-        customNextBtn: TextButton(
-          child: Text(AppStrings.next.tr().toUpperCase()),
-          onPressed: () => _onNext(context),
+    return WillPopScope(
+      onWillPop: () async {
+        _goBack();
+        return false;
+      },
+      child: Scaffold(
+        appBar: CustomAppBar.basic(
+          title: Constants.empty,
+          backButton: () => _goBack(),
         ),
-        indicatorConfig: IndicatorConfig(
-          activeIndicatorWidget: _indicator(AppColors.primary),
-          indicatorWidget: _indicator(AppColors.pastelBlue),
+        body: IntroSlider(
+          refFuncGoToTab: (function) {
+            navigateTo = function;
+            navigateTo(currentIndex);
+          },
+          onTabChangeCompleted: (index) {
+            currentIndex = index;
+          },
+          backgroundColorAllTabs: AppColors.cloudWhite,
+          scrollPhysics: const NeverScrollableScrollPhysics(),
+          listCustomTabs: [
+            OnboardingPage(
+              title: AppStrings.setupYourDevice,
+              subtitleWidget: Text.rich(
+                textAlign: TextAlign.center,
+                TextSpan(
+                  text: AppStrings.inOrderToConnectYourDevice.tr(),
+                  style: regularBluishGrayMediumStyle(),
+                  children: [
+                    TextSpan(
+                      text: AppStrings.locationPermission.tr(),
+                      style: boldPrimaryMediumStyle(),
+                    )
+                  ],
+                ),
+              ),
+              svgPath: SvgAssets.setupOnboardingOne,
+            ),
+            OnboardingPage(
+              title: AppStrings.setupYourDevice,
+              subtitleWidget: Text.rich(
+                textAlign: TextAlign.center,
+                TextSpan(
+                  text: AppStrings.nowChooseYour.tr(),
+                  style: regularBluishGrayMediumStyle(),
+                  children: [
+                    TextSpan(
+                      text: AppStrings.network.tr(),
+                      style: boldPrimaryMediumStyle(),
+                    ),
+                    TextSpan(
+                      text: AppStrings.andEnterThe.tr(),
+                    ),
+                    TextSpan(
+                      text: AppStrings.password.tr(),
+                      style: boldPrimaryMediumStyle(),
+                    ),
+                    TextSpan(
+                      text: '${AppStrings.toConnectYourNaqaaDevice.tr()} 😁',
+                    ),
+                  ],
+                ),
+              ),
+              svgPath: SvgAssets.setupOnboardingTwo,
+            ),
+            const OnboardingPage(
+              title: AppStrings.congratulations,
+              subtitle: AppStrings.everythingIsSetupAndYouAreReadyToGo,
+              svgPath: SvgAssets.setupOnboardingThree,
+            ),
+          ],
+          isShowSkipBtn: false,
+          isShowPrevBtn: true,
+          onDonePress: () => _onIntroEnd(context),
+          onNextPress: () => _onNext(context),
+          renderDoneBtn: Text(AppStrings.done.tr().toUpperCase()),
+          renderPrevBtn: Text(AppStrings.back.tr().toUpperCase()),
+          customNextBtn: TextButton(
+            child: Text(AppStrings.next.tr().toUpperCase()),
+            onPressed: () => _onNext(context),
+          ),
+          indicatorConfig: IndicatorConfig(
+            activeIndicatorWidget: _indicator(AppColors.primary),
+            indicatorWidget: _indicator(AppColors.pastelBlue),
+          ),
         ),
       ),
     );
