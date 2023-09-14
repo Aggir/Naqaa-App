@@ -33,7 +33,17 @@ class DevicesCubit extends Cubit<DevicesState> {
             fetchDevicesStatus: Status.success, devicesStream: stream)));
 
     _devicesSubscription = state.devicesStream?.listen((devices) {
-      emit(state.copyWith(latestDevicesSnapshot: devices));
+      if (state.selectedDevice != null) {
+        final newSelectedDevice = devices.firstWhere(
+          (device) => state.selectedDevice?.id == device.id,
+        );
+        emit(state.copyWith(
+          latestDevicesSnapshot: devices,
+          selectedDevice: newSelectedDevice,
+        ));
+      } else {
+        emit(state.copyWith(latestDevicesSnapshot: devices));
+      }
     });
   }
 

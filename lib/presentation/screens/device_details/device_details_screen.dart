@@ -52,8 +52,10 @@ class _DeviceDetailsScreenState extends State<DeviceDetailsScreen> {
                       fit: BoxFit.scaleDown,
                       child: SvgPicture.asset(
                         SvgAssets.info,
-                        colorFilter:
-                            ColorFilter.mode(AppColors.black, BlendMode.srcIn),
+                        colorFilter: const ColorFilter.mode(
+                          AppColors.black,
+                          BlendMode.srcIn,
+                        ),
                         height: AppSizes.s20.r,
                         width: AppSizes.s20.r,
                       ),
