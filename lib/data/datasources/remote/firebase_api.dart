@@ -66,12 +66,13 @@ class FirebaseApi implements RemoteDataSource {
           .get();
       UserModel userModel = UserModel.fromMap(response.data());
       if (userModel.isNewUser == true) {
-        userModel = userModel.copyWith(isNewUser: false);
+        final newUserModel =
+            UserModel.fromMap(response.data()).copyWith(isNewUser: false);
         await _firebaseFirestore
             .collection(FirebaseConstants.user)
             .doc(user?.uid)
             .set({
-          ...userModel.toMap(),
+          ...newUserModel.toMap(),
           FirebaseConstants.tokens: FieldValue.arrayUnion([token])
         }, SetOptions(merge: true));
       } else {
@@ -82,7 +83,6 @@ class FirebaseApi implements RemoteDataSource {
           FirebaseConstants.tokens: FieldValue.arrayUnion([token])
         }, SetOptions(merge: true));
       }
-
       return FirebaseAuthResponse(Status.success, user: userModel);
     } on FirebaseAuthException catch (e) {
       return FirebaseAuthResponse(Status.failure,
@@ -120,7 +120,7 @@ class FirebaseApi implements RemoteDataSource {
               .collection(FirebaseConstants.user)
               .doc(user?.uid)
               .set({
-            ...userModel.toMap(),
+            ...userModel.copyWith(isNewUser: false).toMap(),
             FirebaseConstants.tokens: FieldValue.arrayUnion([token])
           }, SetOptions(merge: true));
         } else {
@@ -219,11 +219,14 @@ class FirebaseApi implements RemoteDataSource {
         .get();
     UserModel userModel = UserModel.fromMap(response.data());
     if (userModel.isNewUser == true) {
-      userModel = userModel.copyWith(isNewUser: false);
+      final newUserModel = userModel.copyWith(isNewUser: false);
       await _firebaseFirestore
           .collection(FirebaseConstants.user)
           .doc(user?.uid)
-          .set(userModel.toMap());
+          .set(
+            newUserModel.toMap(),
+            SetOptions(merge: true),
+          );
     }
 
     return FirebaseAuthResponse(

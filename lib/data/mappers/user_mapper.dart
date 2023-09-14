@@ -19,7 +19,7 @@ extension UserModelExtension on UserModel {
       modificationDate: modificationDate != null
           ? DateTime.fromMillisecondsSinceEpoch(modificationDate!)
           : null,
-      isNewUser: isSignedInWithGoogle ?? true,
+      isNewUser: isNewUser ?? false,
     );
   }
 }

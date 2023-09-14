@@ -52,6 +52,10 @@ class UserCubit extends Cubit<UserState> {
     );
   }
 
+  toggleIsNewUser() {
+    emit(state.copyWith(user: state.user?.copyWith(isNewUser: false)));
+  }
+
   void connectWithGoogle() async {
     emit(state.copyWith(authStatus: Status.loading));
     initConnectWithGoogle();

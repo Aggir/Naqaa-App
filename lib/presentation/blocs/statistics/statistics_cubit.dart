@@ -27,7 +27,6 @@ class StatisticsCubit extends Cubit<StatisticsState> {
 
   void selectSensorType(String sensorTypeString) {
     SensorType sensorType = sensorTypeString.toSensorType();
-    print(sensorType);
     emit(state.copyWith(selectedSensorType: sensorType));
   }
 
@@ -42,7 +41,6 @@ class StatisticsCubit extends Cubit<StatisticsState> {
   }
 
   void selectDevice(String deviceId) {
-    print(deviceId);
     emit(state.copyWith(selectedDeviceId: deviceId));
   }
 

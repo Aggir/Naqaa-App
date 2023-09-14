@@ -101,4 +101,9 @@ class UserModel extends Equatable {
 
   factory UserModel.fromJson(String source) =>
       UserModel.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'UserModel(name: $name, profilePictureUrl: $profilePictureUrl, email: $email, dateOfBirth: $dateOfBirth, genderId: $genderId, isSignedInWithGoogle: $isSignedInWithGoogle, modificationDate: $modificationDate, creationDate: $creationDate, isNewUser: $isNewUser, tokens: $tokens)';
+  }
 }

@@ -3,8 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:naqaa/app/di/dependency_injection.dart';
 import 'package:naqaa/app/router/app_router.dart';
 import 'package:naqaa/presentation/blocs/internet/internet_bloc.dart';
+import 'package:naqaa/presentation/blocs/user/user_cubit.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 
 import '../app/constants.dart';
@@ -30,8 +32,15 @@ class _MyAppState extends State<MyApp> {
     return ScreenUtilInit(
       designSize: const Size(360, 800),
       minTextAdapt: true,
-      builder: (context, child) => BlocProvider(
-        create: (context) => InternetBloc(),
+      builder: (context, child) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => InternetBloc(),
+          ),
+          BlocProvider(
+            create: (context) => instance<UserCubit>()..onAppStart(),
+          )
+        ],
         child: MaterialApp.router(
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,

@@ -47,45 +47,42 @@ class AppRouter {
           AppRoutes.verifyEmail,
           AppRoutes.noInternetConnection,
         ],
-        builder: (context, state, child) => BlocProvider(
-          create: (context) => instance<UserCubit>()..onAppStart(),
-          child: Builder(builder: (context) {
-            return BlocConsumer<InternetBloc, InternetState>(
-              listener: (context, state) {
-                if (state is DisconnectedState) {
-                  context.go(AppScreen.noInternetConnection.toPath);
-                } else if (state is ConnectedState) {
-                  context.go(AppScreen.signIn.toPath);
-                }
-              },
-              builder: (context, state) {
-                if (state is DisconnectedState) {
-                  return const NoInternetConnectionScreen();
-                } else if (state is ConnectedState) {
-                  return BlocListener<UserCubit, UserState>(
-                    listenWhen: (previous, current) =>
-                        previous.user != current.user &&
-                        previous.authStatus != current.authStatus,
-                    listener: (context, state) {
-                      if (state.user == null) {
-                        context.go(AppScreen.signIn.toPath);
-                      } else {
-                        context.go(AppScreen.home.toPath);
-                      }
-                    },
-                    child: child,
-                  );
-                } else {
-                  return const Scaffold(
-                    body: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                }
-              },
-            );
-          }),
-        ),
+        builder: (context, state, child) => Builder(builder: (context) {
+          return BlocConsumer<InternetBloc, InternetState>(
+            listener: (context, state) {
+              if (state is DisconnectedState) {
+                context.go(AppScreen.noInternetConnection.toPath);
+              } else if (state is ConnectedState) {
+                context.go(AppScreen.signIn.toPath);
+              }
+            },
+            builder: (context, state) {
+              if (state is DisconnectedState) {
+                return const NoInternetConnectionScreen();
+              } else if (state is ConnectedState) {
+                return BlocListener<UserCubit, UserState>(
+                  listenWhen: (previous, current) =>
+                      previous.user != current.user &&
+                      previous.authStatus != current.authStatus,
+                  listener: (context, state) {
+                    if (state.user == null) {
+                      context.go(AppScreen.signIn.toPath);
+                    } else {
+                      context.go(AppScreen.home.toPath);
+                    }
+                  },
+                  child: child,
+                );
+              } else {
+                return const Scaffold(
+                  body: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              }
+            },
+          );
+        }),
       )
     ],
   );
