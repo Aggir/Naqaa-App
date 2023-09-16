@@ -29,13 +29,23 @@ class StatisticModel {
     return StatisticModel(
       tempHighest: map[FirebaseConstants.tempHighest]?.toInt(),
       tempLowest: map[FirebaseConstants.tempLowest]?.toInt(),
-      tempAverage: map[FirebaseConstants.tempAverage]?.toDouble(),
+      tempAverage: map[FirebaseConstants.tempAverage] != null
+          ? double.parse(map[FirebaseConstants.tempAverage])
+          : null,
       tdsHighest: map[FirebaseConstants.tdsHighest]?.toInt(),
       tdsLowest: map[FirebaseConstants.tdsLowest]?.toInt(),
-      tdsAverage: map[FirebaseConstants.tdsAverage]?.toDouble(),
-      phHighest: map[FirebaseConstants.phHighest]?.toDouble(),
-      phLowest: map[FirebaseConstants.phLowest]?.toDouble(),
-      phAverage: map[FirebaseConstants.phAverage]?.toDouble(),
+      tdsAverage: map[FirebaseConstants.tdsAverage] != null
+          ? double.parse(map[FirebaseConstants.tdsAverage])
+          : null,
+      phHighest: map[FirebaseConstants.phHighest] != null
+          ? double.parse(map[FirebaseConstants.phHighest])
+          : null,
+      phLowest: map[FirebaseConstants.phLowest] != null
+          ? double.parse(map[FirebaseConstants.phLowest])
+          : null,
+      phAverage: map[FirebaseConstants.phAverage] != null
+          ? double.parse(map[FirebaseConstants.phAverage])
+          : null,
       waterQuality: map[FirebaseConstants.waterQuality]?.toInt(),
     );
   }
