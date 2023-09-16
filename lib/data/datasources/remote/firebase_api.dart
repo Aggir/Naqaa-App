@@ -493,7 +493,11 @@ class FirebaseApi implements RemoteDataSource {
   @override
   Future<StatisticsResponse> getStatistics(StatisticsRequest request) async {
     try {
-      final Dio dio = Dio(BaseOptions(baseUrl: FirebaseConstants.baseUrl));
+      final Dio dio = Dio(BaseOptions(
+        baseUrl: FirebaseConstants.baseUrl,
+        sendTimeout: const Duration(seconds: 15),
+        receiveTimeout: const Duration(seconds: 15),
+      ));
       final response = await dio.get(FirebaseConstants.getStatistics,
           queryParameters: request.toMap());
       return StatisticsResponse.fromMap(
