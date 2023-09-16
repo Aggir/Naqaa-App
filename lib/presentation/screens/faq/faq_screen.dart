@@ -19,7 +19,7 @@ class FAQScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar.basic(
-          title: AppStrings.faq, backButton: () => context.pop()),
+          title: AppStrings.faq.tr(), backButton: () => context.pop()),
       body: PageContainer(
           child: Column(
         children: [
