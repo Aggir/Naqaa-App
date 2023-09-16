@@ -86,3 +86,34 @@ extension WaterQualityExtension on int {
     }
   }
 }
+
+extension GetMonthNameExtension on int {
+  String get toMonthName {
+    switch (this) {
+      case 1:
+        return AppStrings.jan.tr();
+      case 2:
+        return AppStrings.feb.tr();
+      case 3:
+        return AppStrings.mar.tr();
+      case 4:
+        return AppStrings.apr.tr();
+      case 5:
+        return AppStrings.may.tr();
+      case 6:
+        return AppStrings.jun.tr();
+      case 7:
+        return AppStrings.jul.tr();
+      case 8:
+        return AppStrings.aug.tr();
+      case 9:
+        return AppStrings.sep.tr();
+      case 10:
+        return AppStrings.oct.tr();
+      case 11:
+        return AppStrings.nov.tr();
+      default:
+        return AppStrings.dec.tr();
+    }
+  }
+}

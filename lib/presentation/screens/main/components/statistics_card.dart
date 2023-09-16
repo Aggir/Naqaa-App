@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -59,7 +58,7 @@ class StatisticsCard extends StatelessWidget {
                 children: [
                   Text.rich(
                     TextSpan(
-                      text: '${statisticsCardTypeUi.name.tr()} ',
+                      text: '${statisticsCardTypeUi.toName} ',
                       style: semiGrayExtraSmallStyle(),
                       children: [
                         TextSpan(

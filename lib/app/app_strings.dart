@@ -347,6 +347,7 @@ class AppStrings {
   static const waterQualityHighlights = 'water_quality_highlights';
   static const highest = 'highest';
   static const lowest = 'lowest';
+  static const avg = 'avg';
   static const monday = 'monday';
   static const tuesday = 'tuesday';
   static const wednesday = 'wednesday';
@@ -355,6 +356,18 @@ class AppStrings {
   static const saturday = 'saturday';
   static const sunday = 'sunday';
   static const week = 'week';
+  static const jan = 'jan';
+  static const feb = 'feb';
+  static const mar = 'mar';
+  static const apr = 'apr';
+  static const may = 'may';
+  static const jun = 'jun';
+  static const jul = 'jul';
+  static const aug = 'aug';
+  static const sep = 'sep';
+  static const oct = 'oct';
+  static const nov = 'nov';
+  static const dec = 'dec';
 
   static const faq = 'faq';
   static const whatIsPh = 'what_is_ph';

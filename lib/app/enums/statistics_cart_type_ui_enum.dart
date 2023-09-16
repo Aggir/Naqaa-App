@@ -27,6 +27,17 @@ extension StatisticsCardTypeUiExtension on StatisticsCardTypeUi {
         return AppColors.primary;
     }
   }
+
+  String get toName {
+    switch (this) {
+      case StatisticsCardTypeUi.highest:
+        return AppStrings.highest.tr();
+      case StatisticsCardTypeUi.lowest:
+        return AppStrings.lowest.tr();
+      case StatisticsCardTypeUi.average:
+        return AppStrings.avg.tr();
+    }
+  }
 }
 
 extension IntToStatisticsCardTypeUi on int {
@@ -114,17 +125,17 @@ extension IntToStatisticsCardTypeUi on int {
         final DateTime dateTimeNow = DateTime.now();
         switch (this) {
           case 0:
-            return '${AppStrings.month.tr()} ${dateTimeNow.month - 5}';
+            return (dateTimeNow.month - 5).toMonthName;
           case 1:
-            return '${AppStrings.month.tr()} ${dateTimeNow.month - 4}';
+            return (dateTimeNow.month - 4).toMonthName;
           case 2:
-            return '${AppStrings.month.tr()} ${dateTimeNow.month - 3}';
+            return (dateTimeNow.month - 3).toMonthName;
           case 3:
-            return '${AppStrings.month.tr()} ${dateTimeNow.month - 2}';
+            return (dateTimeNow.month - 2).toMonthName;
           case 4:
-            return '${AppStrings.month.tr()} ${dateTimeNow.month - 1}';
+            return (dateTimeNow.month - 1).toMonthName;
           case 5:
-            return '${AppStrings.month.tr()} ${dateTimeNow.month}';
+            return (dateTimeNow.month).toMonthName;
           default:
             return '';
         }
