@@ -28,6 +28,37 @@ class DialogService {
     );
   }
 
+  static Future<void> loadLoading(BuildContext context,
+      {Color? backgroundColor, bool isDismissible = true}) async {
+    final Widget content = SizedBox(
+      height: AppSizes.s150.r,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: AppSizes.s30.r,
+            width: AppSizes.s30.r,
+            child: const CircularProgressIndicator(),
+          )
+        ],
+      ),
+    );
+    _current = CustomDialog(content: content, backgroundColor: backgroundColor);
+
+    await showDialog(
+      context: context,
+      barrierDismissible: isDismissible,
+      useSafeArea: false,
+      builder: (context) =>
+          _current ??
+          CustomDialog(
+            content: content,
+          ),
+    );
+  }
+
   static void dispose() {
     if (_current != null) {
       _current!.dismiss();

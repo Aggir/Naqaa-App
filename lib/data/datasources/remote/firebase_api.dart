@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
@@ -486,6 +487,21 @@ class FirebaseApi implements RemoteDataSource {
     } catch (e) {
       return EmailVerificationResponse(
           status: Status.failure, message: e.toString());
+    }
+  }
+
+  @override
+  Future<StatisticsResponse> getStatistics(StatisticsRequest request) async {
+    try {
+      final Dio dio = Dio(BaseOptions(baseUrl: FirebaseConstants.baseUrl));
+      final response = await dio.get(FirebaseConstants.getStatistics,
+          queryParameters: request.toMap());
+      return StatisticsResponse.fromMap(
+          {'status': Status.success, 'statistics': response.data['data']});
+    } on DioException catch (e) {
+      return StatisticsResponse(status: Status.failure, message: e.message);
+    } catch (e) {
+      return StatisticsResponse(status: Status.failure, message: e.toString());
     }
   }
 }

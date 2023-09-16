@@ -2,6 +2,7 @@ import 'package:naqaa/app/enums/status_enum.dart';
 import 'package:naqaa/data/models/device_details_model.dart';
 import 'package:naqaa/data/models/device_model.dart';
 import 'package:naqaa/data/models/notification_model.dart';
+import 'package:naqaa/data/models/statistic_model.dart';
 import 'package:naqaa/data/models/user.dart';
 import 'package:naqaa/data/responses/base_response.dart';
 
@@ -89,4 +90,31 @@ class EmailVerificationResponse implements BaseResponse {
     required this.status,
     this.isEmailVerified,
   });
+}
+
+class StatisticsResponse implements BaseResponse {
+  @override
+  String? message;
+
+  @override
+  Status status;
+
+  List<StatisticModel>? statistics;
+
+  StatisticsResponse({
+    this.message,
+    required this.status,
+    this.statistics,
+  });
+
+  factory StatisticsResponse.fromMap(Map<dynamic, dynamic> map) {
+    return StatisticsResponse(
+      message: map['message'],
+      status: map['status'],
+      statistics: map['statistics'] != null
+          ? List<StatisticModel>.from(
+              map['statistics']?.map((x) => StatisticModel.fromMap(x)))
+          : null,
+    );
+  }
 }

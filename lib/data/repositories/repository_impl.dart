@@ -5,10 +5,12 @@ import 'package:naqaa/data/datasources/remote_datasource.dart';
 import 'package:naqaa/data/mappers/device_details_mapper.dart';
 import 'package:naqaa/data/mappers/device_mapper.dart';
 import 'package:naqaa/data/mappers/notification_mapper.dart';
+import 'package:naqaa/data/mappers/statistic_mapper.dart';
 import 'package:naqaa/data/requests/requests.dart';
 import 'package:naqaa/domain/entities/device.dart';
 import 'package:naqaa/domain/entities/device_details.dart';
 import 'package:naqaa/domain/entities/notification.dart';
+import 'package:naqaa/domain/entities/statistic.dart';
 import 'package:naqaa/domain/entities/user.dart';
 import 'package:naqaa/domain/repositories/repository.dart';
 import 'package:naqaa/data/mappers/user_mapper.dart';
@@ -207,6 +209,18 @@ class RepositoryImpl implements Repository {
       return Left(Failure(0, response.message!));
     } else {
       return Right(response.isEmailVerified ?? false);
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<StatisticEntity>>> getStatistics(
+      StatisticsRequest request) async {
+    final response = await _remoteDataSource.getStatistics(request);
+    if (response.status.isFailure) {
+      return Left(Failure(0, response.message!));
+    } else {
+      return Right(
+          response.statistics?.map((e) => e.toDomain()).toList() ?? []);
     }
   }
 }

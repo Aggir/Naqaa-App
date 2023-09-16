@@ -4,6 +4,7 @@ import 'package:naqaa/data/requests/requests.dart';
 import 'package:naqaa/domain/entities/device.dart';
 import 'package:naqaa/domain/entities/device_details.dart';
 import 'package:naqaa/domain/entities/notification.dart';
+import 'package:naqaa/domain/entities/statistic.dart';
 
 import '../entities/user.dart';
 
@@ -46,4 +47,7 @@ abstract class Repository {
   Future<Either<Failure, void>> sendEmailVerification(String email);
 
   Future<Either<Failure, bool>> checkEmailVerification(String email);
+
+  Future<Either<Failure, List<StatisticEntity>>> getStatistics(
+      StatisticsRequest request);
 }

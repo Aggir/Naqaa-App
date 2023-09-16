@@ -3,12 +3,14 @@ class FirebaseConstants {
   static const String baseUrl =
       'https://europe-west1-naqaa-2023.cloudfunctions.net/expressFunction';
   static const String toggleIsRead = '/toggleIsSeen';
+  static const String getStatistics = '/statistics';
   // ################## Firestore ##################
 
   // ---------- Collections -----------
   static const String user = 'user';
   static const String device = 'device';
   static const String notification = 'notification';
+  static const String statistics = 'statistics';
   // ------------ Fields ---------------
   static const String name = 'name';
   static const String id = 'id';
@@ -30,6 +32,18 @@ class FirebaseConstants {
   static const String userId = 'user_id';
   static const String waterQualityName = 'water_quality_name';
   static const String waterQualityHex = 'water_quality_hex';
+  // Statistics:
+  static const String statisticsDate = 'statistics_date';
+  static const String tempHighest = 'temp_highest';
+  static const String tempLowest = 'temp_lowest';
+  static const String tempAverage = 'temp_average';
+  static const String tdsHighest = 'tds_highest';
+  static const String tdsLowest = 'tds_lowest';
+  static const String tdsAverage = 'tds_average';
+  static const String phHighest = 'ph_highest';
+  static const String phLowest = 'ph_lowest';
+  static const String phAverage = 'ph_average';
+  static const String waterQuality = 'water_quality';
   // ################## Firestroage ##################
   static const String profilePictures = 'profilePictures';
 

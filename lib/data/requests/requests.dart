@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:naqaa/app/enums/statistics_date_enum.dart';
 import 'package:naqaa/data/datasources/remote/firebase_constants.dart';
 import 'package:naqaa/domain/entities/user.dart';
 
@@ -79,6 +80,23 @@ class EditDeviceNameRequest implements BaseRequest {
     return {
       FirebaseConstants.id: id,
       FirebaseConstants.name: newName,
+    };
+  }
+}
+
+class StatisticsRequest implements BaseRequest {
+  final String deviceId;
+  final StatisticsDate statisticsDate;
+
+  StatisticsRequest({
+    required this.deviceId,
+    required this.statisticsDate,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      FirebaseConstants.deviceId: deviceId,
+      FirebaseConstants.statisticsDate: statisticsDate.toStringEnum,
     };
   }
 }

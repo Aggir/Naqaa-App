@@ -38,4 +38,6 @@ abstract class RemoteDataSource {
   Future<BasicResponse> sendEmailVerification(email);
 
   Future<EmailVerificationResponse> checkEmailVerification(email);
+
+  Future<StatisticsResponse> getStatistics(StatisticsRequest request);
 }

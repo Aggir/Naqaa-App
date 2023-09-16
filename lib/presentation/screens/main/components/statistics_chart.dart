@@ -13,7 +13,7 @@ import 'package:naqaa/app/enums/statistics_cart_type_ui_enum.dart';
 import 'package:naqaa/domain/entities/statistic.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';
 
-class StatisticsChart extends StatefulWidget {
+class StatisticsChart extends StatelessWidget {
   const StatisticsChart({
     Key? key,
     required this.statistics,
@@ -23,16 +23,6 @@ class StatisticsChart extends StatefulWidget {
   final List<StatisticEntity> statistics;
   final int selectedPeriodIndex;
   final StatisticsDate statisticsDate;
-
-  @override
-  State<StatisticsChart> createState() => _StatisticsChartState();
-}
-
-class _StatisticsChartState extends State<StatisticsChart> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,26 +50,24 @@ class _StatisticsChartState extends State<StatisticsChart> {
               Directionality.of(context) == ui.TextDirection.rtl ? true : false,
           axisLabelFormatter: (AxisLabelRenderDetails args) {
             final text = int.parse(args.text)
-                .toStatisticsCardTypeUiTitle(widget.statisticsDate);
+                .toStatisticsCardTypeUiTitle(statisticsDate);
             return ChartAxisLabel(text, regularGrayTinyStyle());
           }),
       series: <ChartSeries<ChartData, int>>[
         // Renders column chart
         ColumnSeries<ChartData, int>(
-          dataSource: datasource(widget.statistics),
+          dataSource: datasource(statistics),
           onPointTap: (pointInteractionDetails) =>
               BlocProvider.of<StatisticsCubit>(context).selectedPeriodIndex(
-                  pointInteractionDetails.pointIndex ??
-                      widget.statistics.length - 1),
+                  pointInteractionDetails.pointIndex ?? statistics.length - 1),
           color: AppColors.primary,
           borderRadius: BorderRadius.vertical(
               top: Radius.circular(AppValues.extraSmall.r)),
           xValueMapper: (ChartData data, _) => data.index,
           yValueMapper: (ChartData data, _) => data.waterQuality,
-          pointColorMapper: (datum, index) =>
-              index == widget.selectedPeriodIndex
-                  ? AppColors.primary
-                  : AppColors.pastelBlue,
+          pointColorMapper: (datum, index) => index == selectedPeriodIndex
+              ? AppColors.primary
+              : AppColors.pastelBlue,
         )
       ],
     );
@@ -90,7 +78,7 @@ class _StatisticsChartState extends State<StatisticsChart> {
     int index = 0;
     for (StatisticEntity statistic in statistics) {
       list.add(ChartData(
-          periodOfTimeIndex: widget.selectedPeriodIndex,
+          periodOfTimeIndex: selectedPeriodIndex,
           waterQuality: statistic.waterQuality,
           index: index));
       index++;

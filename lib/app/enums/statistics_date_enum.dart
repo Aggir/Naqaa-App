@@ -25,6 +25,19 @@ extension StatisticsDateExtension on StatisticsDate {
       return AppStrings.today.tr();
     }
   }
+
+  String get toStringEnum {
+    switch (this) {
+      case StatisticsDate.today:
+        return "TODAY";
+      case StatisticsDate.sevenDays:
+        return "SEVEN_DAYS";
+      case StatisticsDate.month:
+        return "MONTH";
+      case StatisticsDate.sixMonths:
+        return "SIX_MONTHS";
+    }
+  }
 }
 
 extension StringToStatisticsDate on String {
@@ -40,6 +53,19 @@ extension StringToStatisticsDate on String {
       return StatisticsDate.sixMonths;
     } else {
       return StatisticsDate.today;
+    }
+  }
+
+  StatisticsDate get statisticsDateFromStringEnum {
+    switch (this) {
+      case "SEVEN_DAYS":
+        return StatisticsDate.sevenDays;
+      case "MONTH":
+        return StatisticsDate.month;
+      case "SIX_MONTHS":
+        return StatisticsDate.sixMonths;
+      default:
+        return StatisticsDate.today;
     }
   }
 }

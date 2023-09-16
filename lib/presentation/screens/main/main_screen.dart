@@ -9,6 +9,7 @@ import 'package:naqaa/app/router/routes.dart';
 import 'package:naqaa/presentation/blocs/notifications/notifications_cubit.dart';
 import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/widgets/custom_spacers.dart';
+import 'package:naqaa/presentation/widgets/dialog_service.dart';
 
 import '../../../app/app_strings.dart';
 import '../../../app/assets_manager.dart';
@@ -146,6 +147,9 @@ class _MainScreenState extends State<MainScreen> {
     return InkWell(
       borderRadius: BorderRadius.circular(AppValues.circleRadius),
       onTap: () {
+        if (index == 1) {
+          DialogService.loadLoading(context);
+        }
         context.go(path);
       },
       child: SizedBox(

@@ -42,6 +42,7 @@ class StatisticsCubit extends Cubit<StatisticsState> {
 
   void selectDevice(String deviceId) {
     emit(state.copyWith(selectedDeviceId: deviceId));
+    getStatistics();
   }
 
   Future<void> getStatistics() async {
@@ -54,11 +55,12 @@ class StatisticsCubit extends Cubit<StatisticsState> {
           .fold(
               (failure) => emit(state.copyWith(
                   getStatisticsStatus: Status.failure,
-                  getStatisticsErrorMessage: failure.message)),
-              (statistics) => emit(state.copyWith(
-                  getStatisticsStatus: Status.success,
-                  statistics: statistics,
-                  selectedPeriodIndex: statistics.length - 1)));
+                  getStatisticsErrorMessage: failure.message)), (statistics) {
+        emit(state.copyWith(
+            getStatisticsStatus: Status.success,
+            statistics: statistics,
+            selectedPeriodIndex: statistics.length - 1));
+      });
     }
   }
 }
