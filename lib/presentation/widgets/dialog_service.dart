@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:naqaa/presentation/theme/app_colors.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 
 class DialogService {
@@ -45,7 +46,11 @@ class DialogService {
         ],
       ),
     );
-    _current = CustomDialog(content: content, backgroundColor: backgroundColor);
+    _current = CustomDialog(
+      content: content,
+      backgroundColor: backgroundColor,
+      removeBackground: true,
+    );
 
     await showDialog(
       context: context,
@@ -54,6 +59,7 @@ class DialogService {
       builder: (context) =>
           _current ??
           CustomDialog(
+            removeBackground: true,
             content: content,
           ),
     );
@@ -78,11 +84,16 @@ abstract class IDialog extends StatelessWidget with IDialogService {
 // ignore: must_be_immutable
 class CustomDialog extends IDialog {
   CustomDialog(
-      {required this.content, this.actions, this.backgroundColor, super.key});
+      {required this.content,
+      this.actions,
+      this.backgroundColor,
+      this.removeBackground = false,
+      super.key});
   Widget content;
   List<Widget>? actions;
   BuildContext? _context;
   Color? backgroundColor;
+  bool removeBackground;
 
   @override
   Widget build(BuildContext context) {
@@ -91,10 +102,14 @@ class CustomDialog extends IDialog {
       contentPadding: EdgeInsets.all(AppValues.mediumLarge.r),
       content: content,
       actions: actions,
-      backgroundColor: backgroundColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppValues.mediumRadius.r),
-      ),
+      backgroundColor:
+          removeBackground ? AppColors.transparent : backgroundColor,
+      elevation: removeBackground ? 0 : null,
+      shape: removeBackground
+          ? null
+          : RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppValues.mediumRadius.r),
+            ),
     );
   }
 

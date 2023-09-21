@@ -500,7 +500,6 @@ class FirebaseApi implements RemoteDataSource {
       ));
       final response = await dio.get(FirebaseConstants.getStatistics,
           queryParameters: request.toMap());
-      print(response.data['data'][3]['temp_highest'].runtimeType);
       return StatisticsResponse.fromMap(
           {'status': Status.success, 'statistics': response.data['data']});
     } on DioException catch (e) {
