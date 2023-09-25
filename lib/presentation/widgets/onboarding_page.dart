@@ -40,10 +40,12 @@ class OnboardingPage extends StatelessWidget {
               width: AppSizes.s330.r,
             ),
             _onboardingDivider(),
-            Text(
-              title,
-              style: boldBlackExtraLargeStyle(),
-            ).tr(),
+            FittedBox(
+              child: Text(
+                title,
+                style: boldBlackExtraLargeStyle(),
+              ).tr(),
+            ),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: AppValues.medium).r,

@@ -80,7 +80,8 @@ class _HomePageState extends State<HomePage> {
       body: PageContainer(
         child:
             BlocBuilder<DevicesCubit, DevicesState>(builder: (context, state) {
-          if (state.fetchDevicesStatus.isLoading) {
+          if (state.fetchDevicesStatus.isLoading &&
+              state.devicesStream == null) {
             return _loadingState();
           } else if (state.fetchDevicesStatus.isSuccess &&
               state.latestDevicesSnapshot != null &&

@@ -104,12 +104,15 @@ class DeviceListTile extends StatelessWidget {
                         previous.deleteDeviceStatus !=
                         current.deleteDeviceStatus,
                     listener: (context, state) {
+                      // print(state.deleteDeviceStatus);
                       if (state.deleteDeviceStatus.isFailure) {
                         CustomToast.error(
                             context, state.deleteDeviceErrorMessage!);
                       } else if (state.deleteDeviceStatus.isSuccess) {
+                        // print('EEEEE');
                         CustomToast.success(context,
                             AppStrings.removeDeviceSuccessMessage.tr());
+                        // BlocProvider.of<DevicesCubit>(context).getDevices();
                       }
                     },
                     child: BlocListener<DevicesCubit, DevicesState>(

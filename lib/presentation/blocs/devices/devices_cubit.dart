@@ -33,7 +33,7 @@ class DevicesCubit extends Cubit<DevicesState> {
             fetchDevicesStatus: Status.success, devicesStream: stream)));
 
     _devicesSubscription = state.devicesStream?.listen((devices) {
-      if (state.selectedDevice != null) {
+      if (state.selectedDevice != null && devices.isNotEmpty) {
         final newSelectedDevice = devices.firstWhere(
           (device) => state.selectedDevice?.id == device.id,
         );
@@ -116,6 +116,7 @@ class DevicesCubit extends Cubit<DevicesState> {
   deleteDevice() async {
     emit(state.copyWith(deleteDeviceStatus: Status.loading));
     initDeleteDevice();
+    emit(state.copyWith(deleteDeviceStatus: Status.success, isEditing: false));
     (await instance<DeleteDeviceUsecase>().execute(state.selectedDevice!.id))
         .fold(
             (failure) => emit(state.copyWith(
