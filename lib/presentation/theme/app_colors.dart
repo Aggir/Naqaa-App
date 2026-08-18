@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static Color transparent = Colors.transparent;
-  static Color white = const Color(0xFFFFFFFF);
-  static Color black = const Color(0xFF000000);
-  static Color blackShadow = const Color(0xFF000000).withOpacity(0.25);
-  static Color grey = const Color(0xFF5A5A5A);
-  static Color mediumGrey = const Color.fromARGB(255, 159, 159, 159);
-  static Color lightGrey = const Color(0xFFBDBDBD);
-  static Color greyWithOpacity0_75 = const Color(0xFF5A5A5A).withOpacity(0.25);
-  static Color green = const Color(0xFF4CAF50);
-  static Color red = const Color(0xFFF44336);
-  static Color yellow = const Color(0xFFFEC400);
-  static Color primary = const Color(0xFF0667CF);
-  static Color secondary = const Color(0xFFE79367);
-  static Color tertiary = const Color(0xFFECC76E);
-  static Color secondaryWithOpacity = const Color(0xFFE79367).withOpacity(0.75);
+  static const Color transparent = Colors.transparent;
+  static const Color primary = Color(0xFF0667CF);
+  static const Color cloudWhite = Color(0xFFF2F5FF);
+  static const Color skyBlue = Color(0xFF87D1FF);
+  static const Color pastelBlue = Color(0xFFCDDEFF);
+  static const Color snowWhite = Color(0xFFFFFFFF);
+  static const Color bluishGray = Color(0xFF5C6880);
+  static const Color mediumGray = Color(0xFF868686);
+  static const Color darkGray = Color(0xFF39393F);
+  static const Color darkBlue = Color(0xFF1B1B4E);
+  static const Color black = Color(0xFF000000);
+  static const Color red = Color(0xFFFF0F0F);
+  static const Color lightRed = Color(0xFFFC4343);
+  static const Color green = Color(0xFF22A45D);
 
-  static Color componentsBackgroundColor = white;
-  static Color pageBackgroundColor = const Color(0xFFF5F5F5);
+  static const Color blackText = Color(0xFF010F07);
+  static const Color darkGrayText = darkGray;
+  static const Color whiteText = Colors.white; // todo: change color
+  static const Color hintText = mediumGray; // todo: change color
 }

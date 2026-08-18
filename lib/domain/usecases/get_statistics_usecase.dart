@@ -1,0 +1,333 @@
+import 'package:dartz/dartz.dart';
+import 'package:naqaa/app/enums/statistics_date_enum.dart';
+import 'package:naqaa/app/failure.dart';
+import 'package:naqaa/data/requests/requests.dart';
+import 'package:naqaa/domain/entities/statistic.dart';
+import 'package:naqaa/domain/repositories/repository.dart';
+import 'package:naqaa/domain/usecases/base_usecase.dart';
+
+class GetStatisticsUsecase
+    implements BaseUsecase<GetStatisticsUsecaseInput, List<StatisticEntity>> {
+  final Repository _repository;
+  GetStatisticsUsecase(this._repository);
+
+  @override
+  Future<Either<Failure, List<StatisticEntity>>> execute(
+      GetStatisticsUsecaseInput input) async {
+    return await _repository.getStatistics(StatisticsRequest(
+      deviceId: input.deviceId,
+      statisticsDate: input.statisticsDate,
+    ));
+    // switch (input.statisticsDate) {
+    //   case StatisticsDate.today:
+    //     return const Right([
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 1,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 11,
+    //         tempLowest: 8,
+    //         tempAverage: 9,
+    //         tdsHighest: 400,
+    //         tdsLowest: 2,
+    //         tdsAverage: 100,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 3,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 3,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 5,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 2,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 1,
+    //       ),
+    //     ]);
+    //   case StatisticsDate.sevenDays:
+    //     return const Right([
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 2,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 11,
+    //         tempLowest: 8,
+    //         tempAverage: 9,
+    //         tdsHighest: 400,
+    //         tdsLowest: 2,
+    //         tdsAverage: 100,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 1,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 4,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 3,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 4,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 2,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 3,
+    //       ),
+    //     ]);
+    //   case StatisticsDate.month:
+    //     return const Right([
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 3,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 11,
+    //         tempLowest: 8,
+    //         tempAverage: 9,
+    //         tdsHighest: 400,
+    //         tdsLowest: 2,
+    //         tdsAverage: 100,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 2,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 1,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 5,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 2,
+    //       ),
+    //     ]);
+    //   case StatisticsDate.sixMonths:
+    //     return const Right([
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 1,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 11,
+    //         tempLowest: 8,
+    //         tempAverage: 9,
+    //         tdsHighest: 400,
+    //         tdsLowest: 2,
+    //         tdsAverage: 100,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 1,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 3,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 2,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 4,
+    //       ),
+    //       StatisticEntity(
+    //         tempHighest: 34,
+    //         tempLowest: 12,
+    //         tempAverage: 22,
+    //         tdsHighest: 829,
+    //         tdsLowest: 239,
+    //         tdsAverage: 400,
+    //         phHighest: 11,
+    //         phLowest: 5.5,
+    //         phAverage: 6.7,
+    //         waterQuality: 2,
+    //       ),
+    //     ]);
+    // }
+  }
+}
+
+class GetStatisticsUsecaseInput {
+  final StatisticsDate statisticsDate;
+  final String deviceId;
+  GetStatisticsUsecaseInput({
+    required this.statisticsDate,
+    required this.deviceId,
+  });
+}

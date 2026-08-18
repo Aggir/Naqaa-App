@@ -1,15 +1,56 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:naqaa/presentation/app_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:naqaa/app/di/dependency_injection.dart';
+import 'package:naqaa/app/router/app_router.dart';
+import 'package:naqaa/presentation/blocs/internet/internet_bloc.dart';
+import 'package:naqaa/presentation/blocs/user/user_cubit.dart';
 import 'package:naqaa/presentation/theme/app_theme.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+import '../app/constants.dart';
+
+class MyApp extends StatefulWidget {
+  const MyApp._internal({Key? key}) : super(key: key);
+
+  static const MyApp _instance = MyApp._internal();
+  factory MyApp() => _instance;
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  _setFirebaseAuthLanguage(BuildContext context) async {
+    await FirebaseAuth.instance.setLanguageCode(context.locale.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      theme: appThemeData(),
-      routerConfig: AppRouter.appRouter,
+    _setFirebaseAuthLanguage(context);
+    return ScreenUtilInit(
+      designSize: const Size(360, 800),
+      minTextAdapt: true,
+      builder: (context, child) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => InternetBloc(),
+          ),
+          BlocProvider(
+            create: (context) => instance<UserCubit>()..onAppStart(),
+          )
+        ],
+        child: MaterialApp.router(
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          title: Constants.appName,
+          debugShowCheckedModeBanner: false,
+          theme: appThemeData(),
+          routerConfig: AppRouter.appRouter,
+        ),
+      ),
     );
   }
 }

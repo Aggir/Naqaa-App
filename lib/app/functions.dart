@@ -1,3 +1,41 @@
+import 'package:flutter/material.dart';
+
+String capitalizeAllWord(String value) {
+  var result = value[0].toUpperCase();
+  for (int i = 1; i < value.length; i++) {
+    if (value[i - 1] == " ") {
+      result = result + value[i].toUpperCase();
+    } else {
+      result = result + value[i];
+    }
+  }
+  return result;
+}
+
+Color? colorFromHexString(String hexString) {
+  if (hexString.isEmpty) {
+    return null;
+  }
+  final buffer = StringBuffer();
+  if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
+  buffer.write(hexString.replaceFirst('#', ''));
+  return Color(int.parse(buffer.toString(), radix: 16));
+}
+
+bool olderThanXSeconds(int? millisecondsSinceEpoch, secondsDifference) {
+  if (millisecondsSinceEpoch != null) {
+    DateTime dateTime =
+        DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch * 1000);
+    DateTime dateTimeNow = DateTime.now();
+    if (dateTimeNow.difference(dateTime).inSeconds > secondsDifference) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  return true;
+}
+
 
 // import 'package:flutter/material.dart';
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>498611243368-50iqtiv6fchcl26hu8d2k6j3sjr4t7ke.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.498611243368-50iqtiv6fchcl26hu8d2k6j3sjr4t7ke</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBAoyuHPTSedjvXQGca89DarMxLs86P3Ck</string>
+	<key>GCM_SENDER_ID</key>
+	<string>498611243368</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.naqaa.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>naqaa-2023</string>
+	<key>STORAGE_BUCKET</key>
+	<string>naqaa-2023.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:498611243368:ios:16f6a48fc31272dba46edd</string>
+	<key>DATABASE_URL</key>
+	<string>https://naqaa-2023-default-rtdb.europe-west1.firebasedatabase.app</string>
+</dict>
+</plist>

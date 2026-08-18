@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "498611243368",
+    "firebase_url": "https://naqaa-2023-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "naqaa-2023",
+    "storage_bucket": "naqaa-2023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:498611243368:android:7de1a5b0f795ea39a46edd",
+        "android_client_info": {
+          "package_name": "com.example.naqaa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "498611243368-42mvj3gn8rsa0dftduabpigvq94q8r26.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXzDYfCViC9NbwoZL50ut-oGQTH3QGq4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "498611243368-1s8tl222ao5kjsq8s8blqjlnuna4hn4c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "498611243368-50iqtiv6fchcl26hu8d2k6j3sjr4t7ke.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.naqaa.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
