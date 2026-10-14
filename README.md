@@ -186,8 +186,8 @@ Install the following before running the application:
 Clone the repository and open the mobile application directory:
 
 ```bash
-git clone https://github.com/<your-username>/<your-repository>.git
-cd <your-repository>
+git clone https://github.com/Aggir/Naqaa-App.git
+cd Naqaa-App
 flutter pub get
 ```
 
